@@ -1,0 +1,590 @@
+LINUX COMMANDS
+
+KEYBOARD SHORTCUTS
+    • CTRL+ C – kill process running in terminal
+    • CTRL + Z – stop the current process ( process can be resume in backgroung using bg and in foreground using fg )
+    • CTRL + W – cut one word before the cursor and add it to clipboard
+    • CTRL + U – cut part of line before the cursor and add it to the clipboard
+    • CTRL + K -  cut part of line after the curesor and add it to the clipboard
+    • CTRL + Y -  paste from the clipboard
+    • CTRL + R -  recall the last command that matches the provided characters
+    • CTRL + O -  run the previously recalled command
+    • CTRL +G – exit command history without running a command
+    • clear – clear the terminal screen
+    • !! - Run the last command again
+    • exit – log out of the current session
+
+FILE AND DIRECTORY COMMANDS
+    • mkdir – create a new directory
+          syntax - $mkdir folder_name
+          example - $mkdir beryl
+                      a new directory beryl is created
+          options:
+            ▪ -p – used to create two or more folders in an heirarchy based order
+                       Eg: mkdir -p legal/contract
+		op: ./folder1:
+			folder2
+
+			./folder1/folder2:
+			./legal:
+			contract
+			./legal/contract:
+    • rm – remove a file
+          syntax - $rm file_name
+          example - $rm beryl
+                     	directory beryl is removed
+          options:
+            ▪ -r – remove a directory recursively
+            ▪ -f – forceful removal of the directory without confirmation
+            ▪ -rf – remove a directory recursively without requiring congirmation
+    • mv – move or rename a directory/file 
+          syntax - $mv file_name1 folder_name
+          example - $mv abc.txt beryl
+                        moves the file abc.txt to folder beryl
+    • cp – copy contents of one file/ directory to another file / directory
+          syntax - $cp file_name1 file_name 2
+          example - $mkdir abc.txt beryl
+                        copied the file abc.txt to folder beryl
+          options:
+            ▪ -r – recursively copy a directory to a second directory
+    • cd – allows to open/change directory
+          syntax - $cd file_name
+          example - $cd beryl
+                        opens the directory beryl
+          options:
+            ▪ cd- - takes to previous directory
+            ▪ cd – takes to home directory
+            ▪ cd ~username – takes to this new users home directory
+            ▪ cd .. - exits the current directory 
+            ▪ cd ../../.. - the “/” represents no of directories to comeback from(can be repeated  any no of the times )
+    • pwd – print the path of current directory
+              syntax - $pwd folder_name
+              example - $pwd beryl
+              op - /home/beryl
+    • rmdir – used to remove directory(directory will only be removed if it does not cantain anything)
+              syntax - $rmdir folder_name
+              example - $rmdie beryl
+                         removes the directory beryl
+    • ls – lists the files and folders present in a directory
+              syntax - $ls folder_name
+              example - $ls home
+              op -  a2.txt	     abc.txt	bare.txt     	redirected.txt
+          options:
+            ▪ -l – displays detailed information about files and directories
+            ▪ -h – displays files with their size in human readable format
+            ▪ -a – displays all files(including the hidden ones) present inside the directory
+            ▪ -s – sorts files by size(largest one first)
+            ▪ -R – displays all the forlders and files present in a diretory in recursive manner
+            ▪ -r -  displays files in reverse order
+            ▪ -t – sorts file in order of modification time(displays the recent one first)
+            ▪ -i – displays the inode number of each file (An inode is a data structure that stores metadata about a file or directory. Each file or directory has a unique inode number assigned to it. It contain information such as permissions, ownership, timestamps, and pointers to data blocks. )
+            ▪ -g – displays group ownership of files instead of owner
+    • touch – create an empty file inside the directory
+              syntax - $touch file_name
+              example - $touch yz
+                        creates a new file named yz
+    • cat – shows the contents present inside a file
+              syntax - $cat file_name
+              example - $cat abc.txt
+              op -  Beryl Systems, with over **10 years of industry experience**, has carved a niche in **Ruby on Rails Web Development**. Handpicking highly skilled Ruby and Rails developers in India, Beryl Systems thrives on innovation and creativity.
+    • echo – used to create a new text file
+              syntax - $echo “content”>file_name
+              example - $echo “this is file”> file.txt
+              op -  creates a file with content “this is file”
+    • find – used to find a specific file in a specific location
+              syntax - $find file_name
+              example - $find abc.txt
+              op -  abc.txt
+    • gcc – used to compile C and C++ programs
+              syntax - $gcc file_name
+              example - $gcc abc.c
+              op -  abc.o
+          Options:
+            ▪ -c – compiles the file and give output as .o file
+            ▪ -c Werror – compiles the file and displays warning if any error found
+            ▪ -c Wall – gives all warnings including errors found
+            ▪ -E – to get preprocessed output
+            ▪ -S – generates file containing assembly code
+            ▪ -o – to give specific name to the output file
+            ▪ -v – to create verbose file(check internal working while the file is being compiled)
+    • less – displays the context of a file page by page(i.e. one screen at a time).It accesses file page by page, which is a faster and more efficient method.
+              syntax - $less file_name
+              example - $less abc.txt
+              op -  Beryl Systems continues to make waves in the web and mobile development landscape, driven by its passion for technology and commitment to excellence.
+          Options:
+            ▪ -E – automatically exits the file upon reaching the end of file
+            ▪ -f – forces non regular file to be opened.
+            ▪ -F – exit if entire file can be displayed on one page
+            ▪ -g – highlights string found by the last search command
+            ▪ -G – suppress highlighting of search matches
+            ▪ -i – ignore case when searching
+            ▪ -n – suppress line numbers
+            ▪ -p pattern – starts at first occurence of specific pattern in a file
+
+DATA MANIPULATION COMMANDS
+    • cut – to cut bytes/characters
+              syntax - $cut file_name
+              example - $cut -b 4 beryl.txt
+              op -      e
+y
+d
+t
+s
+t
+e
+          Options:
+            ▪ -b  n -  to cut “n” byte
+            ▪ -b -n – to cut till “n” bytes
+            ▪ -c n – to cut “n” charcters
+            ▪ -d “n” - specifiying the delimeter after which there needs to be a cut
+            ▪ -f n – without using delimeter it cuts fields separated by the delimeter ‘,’
+            ▪ --complement – complements the output
+    • wc – used to show number of lines,words and characters present in the file
+              syntax - $wc file_name
+              example - $wc beryl.txt
+              op -    8 14 99 beryl.txt
+          Options:
+            ▪ -l – shows number of line(when 2 files given then it will show number of lines in both separately as well as combined total) 
+            ▪ -c – shows number of bytes/charcters
+            ▪ -w – shows number of words
+              
+    • grep – used to search for words in a text file( case sensitive by default)
+              syntax - $grep file_name
+              example - $grep -i “aarzoo” aarzoo.txt
+              op -     aarzoo
+Aarzoo
+AArzoo
+AaRzoo
+AarZoo
+          option:
+            ▪ -i – make the search case insensitive
+            ▪ -v – gives lines that doesn’t contain the specified words
+            ▪ -w – match whole words rather than partials matches
+            ▪ -c – count number of matching lines instead of displaying them
+            ▪ -e – specify multiple patterns to search for
+            ▪ -l – specifies the lines that contain and character of the specified word
+            ▪ “s/name1/name2” - here “s” denotes the occurence of name1 where you want to change it to name2.
+            ▪ “^n” - denotes all enteries starting with the character “n”
+            ▪ “n$” - denotes all enteries ending with the character “n”
+            ▪ “[^n]” - denotes all enteries not starting with the character “n”
+            ▪ -An – displays n number of lines after the resultant line
+            ▪ -Bn – displays n number of lines before the resultant line
+            ▪ -Cn – displays n number of lines before and after the resultant line
+    • sort – used to sort the data present in a file
+              syntax - $sort file_name
+              example - $sort -n number.txt
+              op – 1
+                    2
+                    3
+          option:
+            ▪ -n – sorts the data numerically
+            ▪ -kn – sort the data based on column “n”
+            ▪ -u – gives unique lines only
+            ▪ -r – sorts in reverse order
+            ▪ -nr – sorts in numerially reverse order
+            ▪ -o – creates a seprate output file for the operation done on some file
+    • head/tail – used to display fixed number of lines of a test file (default value=10)
+              syntax - $head file_name
+              example - $head 5 beryl.txt
+              op -      Marely Maynard
+Allyson Savage
+London Smith
+Payten Holden
+Bryson Chapman
+              syntax - $tail file_name
+              example - $tail 5 beryl.txt
+              op -     Payten Holden
+Bryson Chapman
+Colten Bass
+Mireya Dodson
+    • split – used to break the file into pieces(you need to mention the prefix for the files that will be created after spitting)
+              syntax - $split file_name
+              example - $split -l 5 beryl.txt
+              op – new file “xaa” and “xab” are formed after splitting the file
+          options:
+            ▪ -l n – will split the file such that each file contains “n” lines
+            ▪ -b n – will split the file such that each file contains “n” bytes of data
+            ▪ -a n – will define “n” number for character in suffix of file name created
+            ▪ -e – avoid zero size split files
+            ▪ -n m – will split the main file into “m” equal parts
+            ▪ -d – will change the suffix type from alphabetic to numerical
+    • shred – overwrites the context of file with random data, making it more difficult to recover data after deletion also
+              syntax - $shred file_name
+              example - $shred xaa
+              op - �S��3�/�k��BI#y�8Rʯ�v��W����8[#�#GG�nh<`q�`6����Pئ
+                                                  ɕZ��+#��I�#0��k4�{��#�*#����#+��ir#
+r�,(�Q�3�#�Nh�U��s�8K)�###_#r.'���x��ڑ���Q�����
+                                               ^���#0r�,#��!y����U#x��#so��c���A6���i�\�8���{�#	��#������
+]���1z�h�����:O�N�#�D�� HVo���#����@#\(�P+���f9�q�X�a*���˕P�ح�l����
+                                                                   -#{g##����A���#`#7xa�
+                   �D�tB#�M�1�#��#XWx�8�8��#@І��� �pJ��.#r�q����
+    • sed – used to manipulate data
+              syntax - $sed file_name
+              example - $sed “s/Payten/Aarzoo”xaa
+              op -     Marely Maynard
+Allyson Savage
+London Smith
+Aarzoo Holden
+Bryson Chapman
+          option:
+            ▪ “ns/a/b” - substitutes “a” with “b” in line n
+            ▪ “s/a/b/g” - substitutes all occurences of “a” with “b” in the line
+            ▪ “np” - print/view nth line
+            ▪ “$d” - delete last line
+            ▪ “nd” - delete nth line 
+            ▪ “|n|d” - delete the line that matches with the pattern “n”
+    • awk – used to programmaticaly manipulate data
+              syntax - $awk file_name
+              example - $awk “{print $1}” xaa
+              op – Mareley Manared
+          option:
+            ▪ “{print $0}” – displays all the data present in a file
+            ▪ “{print $n}” - displays nth column
+            ▪ “{print NR$0}” - displays line numbers when reading data
+            ▪ “{print $n,NF}” - to display nth column from last 
+            ▪ “NR==n,NR==m{print $0}” - displays rows from row number “n” to “m”
+            ▪ “$n==x{print $0}” - displays rows which has the value of column “n” = “x”(to combine two such conditions we can use “&&” i.e. AND operator)
+            ▪ “|n|{print $0}” - t print all rows where the particular value “n” is present
+            ▪ “{sum+= $n}END {printsum}” - prints sum of the row “n”
+              
+FILE PERMISSION COMMANDS
+      Permissions 
+Accessors
+      r – read (numerically represented as 4)
+u – user
+          w – write (numerically represented as 2)
+g – group
+          x – execute (numerically represented as 1)
+o – other
+
+a – all
+      
+    • chmod – used to change permissions/ mode of access of a file
+              syntax - $chmod ugo file_name
+              example - $chmod 777 a2.txt
+              op - -rwxrwxrwx 1  1001 beryl   32 Feb 26 16:41 a2.txt
+          option:
+            ▪ = - assign permission
+            ▪ + - grant permission
+            ▪ -  - revoke permission
+    • chown – used to change the owner of the file
+              syntax - $chown user_name file_name
+              example - $sudo chown aarzoo a2.txt
+              op - -rwxrwxrwx 1 aarzoo beryl   32 Feb 26 16:41 a2.txt
+    • chgrp – used to change the group ownership of the file
+              syntax - $chgrp grp_name file_name
+              example - $sudo chgrp tablet a2.txt
+              op - -rwxrwxrwx 1 aarzoo tablet   32 Feb 26 16:41 a2.txt
+FILE COMPRESSION AND ARCHIVING COMMANDS
+    • tar – used to archive files by converting them to tar files
+              syntax - $tar  tar_file_name  file_name1 file_name2
+              example - $ tar cvf yess.tar a2.txt abc.txt
+              op - makes a tar file by combining the two files a2.txt and abc.txt
+          option:
+            ▪ -c – to create archive file
+            ▪ -v – coverts to verbose mode(here verbose mode helps to know what exactly is happening during the archiving process)
+            ▪ -f – specifies the archive file name
+            ▪ -x – extracts the tar file
+            ▪ -z – compressed file with gzip
+    • zip/unzip – creates compressed zip archives or extract them
+              syntax - $zip  zip_file_name  file_name1 file_name2
+              example - $ zip cvf yess.zip a2.txt abc.txt
+              op - makes a zip file by combining the two files a2.txt and abc.txt
+          option:
+            ▪ -r – zips a directory recursively
+            ▪ -v - coverts to verbose mode
+            ▪ -u – updates a particular file in the zip file
+            ▪ -d – deletes a particular file from the zip file
+            ▪ -m – deletes the original files after ziping them
+    • gzip – creates a compressed files and delete orginal files
+              syntax - $gzip  gzip_file_name  file_name1 file_name2
+              example - $ gzip cvf yess.gzip a2.txt abc.txt
+              op - makes a gzip file by combining the two files a2.txt and abc.txt
+          option:
+            ▪ -d – decompresses a file
+            ▪ -K – creates a compressed file while keeping the originals
+            ▪ -n – determines the level to which you want to compress a file(here “n” can range from 1[least compression and takes least time among others] to 9[highest level of compression but takes a lot of time] )
+            ▪ -l - displays information about the compressed files, including their original sizes, compressed sizes, and compression ratios.
+
+PROCESS MANAGEMENT COMMANDS
+    • ps – displays running processes
+              syntax - $ps
+              op -    PID TTY          TIME        CMD
+ 5708 pts/0    00:00:00       bash
+10811 pts/0    00:00:00       ps
+    • top – displays a dynamic view of system processes and their resource usage
+              syntax - $top
+              op -     top - 14:31:20 up 19:20,  1 user,  load average: 0.46, 0.61, 0.63
+Tasks: 294 total,   1 running, 238 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  7.4 us,  2.7 sy,  0.0 ni, 89.7 id,  0.1 wa,  0.0 hi,  0.1 si,  0.0 st
+KiB Mem :  8080024 total,  2020196 free,  3326296 used,  2733532 buff/cache
+KiB Swap:  2097148 total,  2097148 free,        0 used.  3926664 avail Mem 
+
+  PID USER      PR        NI              VIRT            RES             SHR S           %CPU           %MEM              TIME+ COMMAND                                                                   
+ 1459 beryl        20          0             988272          87684         57928 S             9.6                  1.1                     7:36.99 Xorg                                                                      
+ 1931 beryl        20          0             4737364        624772     208872 S             8.6                   7.7                    29:02.72 firefox                                                                   
+ 1607 beryl        20          0             4107356        380464       82260 S             7.6                   4.7                    8:19.64 gnome-shell                                                               
+10425 beryl       20          0             2691668        178916     106276 S             7.6                   2.2                    0:41.97 Isolated Web Co                                                           
+ 5699 beryl        20          0             750036          44816         32376 S             4.6                   0.6                    0:27.25 gnome-terminal-                                                           
+  747 root           20          0             269700           5832            5084 S             1.0                   0.1                    1:49.36 iio-sensor-prox                                                           
+ 1633 beryl         9         -11            2907284        18892         14844 S             1.0                    0.2                    4:38.67 pulseaudio                                                                
+10212 beryl        20         0             2886636        218608     106876 S              0.7                   2.7                     0:16.89 Isolated Web Co                                                           
+    • kill  - terminate a process with particular id
+              syntax - $kill process_id
+              example - $ kill 5708
+              op -  terminates the process with id 5708
+          option:
+            ▪ -9 – forcefully kill a process
+    • pkill – terminate processes having a specified name “p”
+              syntax - $pkill process_name
+              example - $ pkill bash
+              op – terminates the process named bash
+    • pgrep – list all processes having a specified name “p”
+              syntax - $pgrep process_name
+              example - $ pgrep  bash
+              op – 5708
+
+SYSTEM INFORMATION COMMANDS
+    • uname – print system information
+              syntax - $uname
+              op - Linux
+          option:
+            ▪ -a – displays all system information
+    • whoami – displays current username
+              syntax - $whoami
+              op - beryl
+    • du – shows disk usage summary
+              syntax - $du
+              op -     4	./Videos
+4	./Desktop
+4	./beryl
+608	./Downloads
+36	./Documents
+          option:
+            ▪ -k – shows disk usage in kilobytes
+            ▪ -m – shows disk usage in megabytes
+            ▪ -h – shows disk usage in human readable format
+            ▪ -i – shows used and free inodes
+            ▪ -a – shows disk usage of all files and directories
+    • df – shows disk free summary
+              syntax - $df
+              op -    Filesystem     1K-blocks     Used Available Use% Mounted on
+udev             4013952        0   4013952   0% /dev
+tmpfs             808004     3420    804584   1% /run
+/dev/sda1      306549688 13324960 277579852   5% /
+tmpfs            4040012        0   4040012   0% /dev/shm
+tmpfs               5120        4      5116   1% /run/lock
+          option:
+            ▪ -k – shows disk free in kilobytes
+            ▪ -m – show disk free in megabytes
+            ▪ -h – shows disk free in human readable format
+            ▪ -i – shows used and free inodes
+    • free – display memory usage information
+              syntax - $free
+              op -                     total        used              free           shared     buff/cache   available
+Mem:  8080024     3371568     1975152      497312     2733304     3905940
+Swap:  2097148           0           2097148
+          option:
+            ▪ -h – display in human readable format
+    • uptime – shows the current sytem uptime
+              syntax - $uptime
+              op -     14:54:55 up 19:44,  1 user,  load average: 0.72, 0.77, 0.73
+    • lspci – list PCI(Peripheral Component Interconnect) devices
+              syntax - $lspci
+              op -     00:00.0 Host bridge: Intel Corporation 2nd Generation Core Processor Family DRAM Controller (rev 09)
+00:02.0 VGA compatible controller: Intel Corporation 2nd Generation Core Processor Family Integrated Graphics Controller (rev 09)
+00:16.0 Communication controller: Intel Corporation 6 Series/C200 Series Chipset Family MEI Controller #1 (rev 04)
+00:19.0 Ethernet controller: Intel Corporation 82579V Gigabit Network Connection (rev 04)
+    • lsusb – list USB devices
+              syntax - $lsusb
+              op -     Bus 002 Device 003: ID 1bcf:2805 Sunplus Innovation Technology Inc. 
+Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 003: ID 138a:003c Validity Sensors, Inc. VFS471 Fingerprint Reader
+Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+NETWORKING COMMANDS
+    • ifconfig – displays network interface information
+              syntax - $ifconfig
+              example - 
+              op -             enp0s25: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether ac:16:2d:58:bf:f5  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 20  memory 0xd4700000-d4720000  
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+    
+wlp36s0b1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.11  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 2401:4900:1c68:7217:8c78:e879:6a32:c24c  prefixlen 64  scopeid 0x0<global>
+        inet6 2401:4900:1c68:7217:73cf:e1e7:595c:b6a6  prefixlen 64  scopeid 0x0<global>
+    • ping – send ICMP echo request to host
+              syntax - $ping host_name
+              example - $ping googl.com
+              op -    PING google.com(del12s02-in-x0e.1e100.net (2404:6800:4002:81f::200e)) 56 data bytes
+64 bytes from del12s02-in-x0e.1e100.net (2404:6800:4002:81f::200e): icmp_seq=1 ttl=59 time=9.69 ms
+64 bytes from del12s02-in-x0e.1e100.net (2404:6800:4002:81f::200e): icmp_seq=2 ttl=59 time=9.54 ms
+64 bytes from del12s02-in-x0e.1e100.net (2404:6800:4002:81f::200e): icmp_seq=3 ttl=59 time=9.36 ms
+    • netstat – display network connections and statistics
+              syntax - $netstat
+              op -    Active Internet connections (w/o servers)
+Proto           Recv-Q              Send-Q                 Local Address                              Foreign Address                               State      
+tcp                   0                         0                beryl-HP-ProBook-:34628              ec2-52-200-35-231:https               TIME_WAIT  
+tcp                   0                         0                beryl-HP-ProBook-:42446               lb-140-82-114-26-:https               ESTABLISHED
+tcp                   0                         0                beryl-HP-ProBook-:51912               ec2-3-7-13-58.ap-:https                ESTABLISHED
+tcp                   0                         0                beryl-HP-ProBook-:56862               93.243.107.34.bc.:https                ESTABLISHED
+    • ss – display network socket information
+              syntax - $ss
+              op -    Netid          State              Recv-Q           Send-Q                                                     Local Address:Port                             Peer Address:Port                      
+u_str          ESTAB              0                0                                                                      * 93418                                               * 90650                     
+u_str          ESTAB              0                0                                                                      * 91565                                               * 91566                     
+u_str          ESTAB              0                0                                            /run/systemd/journal/stdout 38069                                * 36194                     
+u_str          ESTAB              0                0                                            /run/systemd/journal/stdout 33144                                * 32461                     
+u_str          ESTAB              0                0                                                                      * 34200                                                * 32438                     
+u_str          ESTAB              0                0                                                                      * 22402                                                * 21170                     
+u_str          ESTAB              0                0                                            /run/systemd/journal/stdout 50953                                * 52774                              
+    • ssh – securely connect to a remote server
+              syntax - $ssh host_name@hostIPaddress
+              example - $ssh tester@192.168.209.1
+              op -    the remort desktop will be opened in command line
+    • scp – securely copy files between hosts
+              syntax - $scp hostname@hostIPaddress:full_path_of_file
+              example - $scp tester@192.168.209.1:/home/tester/abc.txt .
+              op -    abc.txt file will be copied from remote desktop to the local machine
+    • wget – download files from web
+              syntax - $wget host_name
+              example - $wget google.com
+              op -    --2024-02-29 10:59:55--  http://google.com/
+Resolving google.com (google.com)... 2404:6800:4002:81e::200e, 142.250.194.46
+Connecting to google.com (google.com)|2404:6800:4002:81e::200e|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: http://www.google.com/ [following]
+--2024-02-29 10:59:55--  http://www.google.com/
+Resolving www.google.com (www.google.com)... 2404:6800:4002:815::2004, 142.250.206.100
+Connecting to www.google.com (www.google.com)|2404:6800:4002:815::2004|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘index.html’
+
+index.html              [ <=>                ]  21.22K  --.-KB/s    in 0.03s   
+
+2024-02-29 10:59:56 (801 KB/s) - ‘index.html’ saved [21733]
+
+I/O REDIRECTION COMMANDS
+    • cmd > file - redirects stdout to a file(overwriting its context if folder exists)
+              syntax - $cmd > file_name
+              example - $cut -b -5 abc.txt > a1.txt
+    • cmd>> file - redirects stdout to a file(appending to its context if the file already exists)
+              syntax - $cmd >> file_name
+              example - $cut -b -5 abc.txt >>a1.txt
+    • cmd < file – stdin for command is taken from file
+              syntax - $cmd<< file_name
+              example - $cut -b -5 abc.txt < a1.txt
+    • cmd < cmd2 – stdout of cmd2 acts as stdin for cmd
+              syntax - $cmd< cmd2
+              example - $cut -b -5 abc.txt > $cut -b -20 abc.txt 
+    • cmd > /dev/null – discards stdout of cmd by sending it to null device
+              syntax - $cmd>dev/null
+              example - $cut -b -5 abc.txt > dev/null
+
+USER MANAGEMENT COMMANDS
+    • who – who is currently logged in
+              syntax - $who
+              op -    beryl    :0           2024-02-27 19:11 (:0)
+    • useradd – used to add new user
+              syntax - $useradd username
+              op -    adds user 
+    • finger – displays information of all the user currently logged into the system(is a specific name is mention them the details of that particular user will be showcased
+              syntax - $finger
+              op -    Login     Name                 Tty      Idle   Login Time             Office     Office Phone
+			beryl     Beryl Systems  *:0                 Feb 27 19:11 (:0)
+    • deluser – used to delete a user(id a specific user name andgroup name is mentioned, then the particular user will be deleted from the specified group)
+              syntax - $deluser username
+              op -    deletes user
+    • su – switch to another user account with the user’s envirenment
+              syntax - $su username
+              op -    switches to another user
+    • usermod -a -G - add an existing user to the specified group without removing them from their current groups
+              syntax - $usermod -a -G grpname
+              op -    
+    • passwd – to set password for the user
+              syntax - $passwd username
+              op -    new passwd:
+    • groupadd – to add a new group
+              syntax - $groupadd groupname
+              op -    adds a new group
+
+EDITORS AND THEIR COMMANDS
+    • vi editor – used to create a new file
+              syntax - $vi abc.txt
+              op -   creates a file abc.txt and opens it to add data
+          commands:
+            ▪ yy – copies current line
+            ▪ dd – deletes current line
+            ▪ cw – change current word
+            ▪ R – enter replace mode
+            ▪ o – insert a line below the current line
+            ▪ u – undo the last change
+            ▪ s – substitute the character under the cursor
+            ▪ D – delete from cursor position to the end of the line
+            ▪ ndw – delete next “n” words from the cursor position
+    • vim editor – used to create a new file
+              syntax - $vim abc.txt
+              op -    creates a file abc.txt and opens it to add data
+          commands:
+            ▪ i – insert mode
+            ▪ x – delete character under the cursor
+            ▪ dd – delete current line
+            ▪ yy – copy current line
+            ▪ p – paste copied or deleted text below the current line
+            ▪ u – undo the last change
+            ▪ Ctrl – redo the last undo
+    • nano editor – used to create a new file
+              syntax - $nano abc.txt
+              op -    creates a file abc.txt and opens it to add data
+          option:
+            ▪ Ctrl + O – save the file
+            ▪ Ctrl + X – exit nano
+            ▪ Ctrl + R – read a file into the current buffer
+            ▪ Ctrl + J – justify the current paragraph
+
+JOB SCHEDULING COMMANDS
+    • crontab – used to set or edit the schedule on command line
+              syntax - $<MIN><HOUR><DAY><WEEK><MONTH>  $job_address
+              example - $ 5  10  *  *  *  $home/myjob
+              op -   the job will be executed everyday at 10:05 (it follows a 24 hour format)
+          option:
+            ▪ -l – to view a complete list of cron jobs that are currently scheduled for the current user
+            ▪ -e – to edit crontab scripts
+      special characters:
+            ▪ * : represents all field values
+            ▪ , : help specify multiple field values
+            ▪ - : used to designate a field’s possible values in a range
+            ▪ / : to specify field’s interval 
+    • at – allows to perform a task only once
+              syntax - $at 21:30
+              op -   the task will be executes at 21:30
+      
+SHUTDOWN COMMAND
+can be done if you have appropriate permissions, if you dont - use “sudo”
+
+    • shutdown – used to shut the server off
+              syntax - $sudo shutdown
+          option:
+            ▪ now – shutsdown immediately
+            ▪ 09:00 – can specify a 24 hour format
+            ▪ +n – shutdown after n minutes
+            ▪ -r – reboot 
+            ▪ -c – cancel a scheduled shutdown
+    • poweroff – power off the system
+              syntax - $sudo poweroff
+    • halt – used to halt the system
+              syntax - $sudo halt
+
+

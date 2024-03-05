@@ -1,0 +1,363 @@
+GIT COMMANDS
+
+
+DEFINITION 
+It is a distributed version control system(DVCS) designed to handle everything form to small to very large projects with speed and efficiency.It allows multiple developers to collaborate on project simultaneously. 
+
+DVCS 
+It is a type of version control system where the complete datebase, including its full version history, is mirrored on every developer’s computer who all are  participating in builiding that project.
+
+BASIC TERMINOLOGY
+    • Repository(Repo) – a project that contains your project files along with the modification history.
+    • Commit – snapshot of your repository at a specific point of time(represents the set of changes made to a file in your project).
+    • Branch –  It is a parallel version of repository,allows you to work on new features or fixes issolated form the main codebase (It helps diverge from main line of development and continue to work without effecting the main line.
+    • Merge – it is a process of combining changes from one branch into other(typically used to intigate the feature branch back into the main branch).
+    • Pull Request(PR) – it is a way to propose changes to a repository(allows other developers to review and discuss  the changes before they are merged into the main codebase).
+
+CONCEPTS
+    • The Three Tree Architecture - 
+      There are three stages for git i.e. working, staging index, repository. When we add a new file to the repository we first add it, after adding the file is transfered to the staged index level. To send the file to the repository, we need to commit it.
+    • Hash Value – 
+      It is a chechsum value generated for each commit in order to help us idetify each commit. This SHA1 value is unique for every commit, even if we do commit on a file that exist in repository but has been edited and need to be commit again
+    • Pointers - 
+      There are two pointers i.e. master and HEAD. Master is the reference of the end of the default branch created when we initialize a git repository while HEAD refers to the the parent of next commit and points tothe new commit as soon as the commit happens. 
+    • Adding a file - 
+      When we add a file the file goes to the staged level and not the repository directly, so in order to send it to the repo, we need to commit it
+    • Editing a file - 
+      When we edit a file ,that is already present in the repo, in the local machine, we need to again add it and commit in order for the changes to be stored in the repo 
+    • Deleting files -
+      There are two ways of deleting a file,manually or by using commands.In the manual method, we directly delete the file from the local machine. By usinng commands, we first use rm to remove the file from the local machine and then we need to commit in order for it to be removed from the repository too. 
+    • Moving and renaming files – can be done by two ways either manualy or by using mv command. Here moving and renaming refer to same thing, if you want to rename a file then write $git mv old_name new_name
+    • Multiline commit messages – refers to long or multiline messages written when a commit is performed
+    • Atomic commits – make commits with similar topic /changes related to similar topics so that it is easier to manage these changes later on
+    • .gitignore files – these are the files whose changes will not be tracked by the system/git
+    • Track empty directories  - as git does not track empty directories then in order to track them we can make a blank file in it
+    • Merge conflicts – conflicts may arise while merging two different files,you need to manuaaly correct them.
+    • Stashing – refers to a temporary storage to keep the staged changes without commiting them and also clearing the staged area.
+    • Squashing commits – used to combine n number of commits into a kind of package for cleaner code.
+    • Fork - A fork is a copy of a repository that allows you to make your own changes without impacting the original project.Diff bw fork and clone: A fork differs from a cloned copy in that it doesn't allow for direct collaboration with the root using local commands like git push and git pull.
+
+SET UP REPOSITORY
+    1. open the project directory and type - $git init (initiliazes repository)
+    2. Add files present in directory to the staged area
+    3. Commit the staged area files
+    4. Edit them as needed and repeate the process
+       
+COMMANDS
+
+INSTALLATION COMMAND - $sudo apt install git-all
+
+BASICS
+    • init – initializes a repository
+              syntax - $get init repo_name
+              example - $get init
+              op - Initialized empty Git repository in /home/beryl/git/project1/.git/
+    • add – used to add changes to the repository
+              syntax - $git add file_name
+              example - $git add .
+              op – adds the changes to the repo
+    • commit – to commit the changes made to the repo
+              syntax - $git commit -m “Initial Commit”
+              op -      [master (root-commit) b1c9aed] Initail Commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 new 1.txt
+	      options - 
+        ◦ -m – to add a message
+        ◦ -a – commits all changes directly to repository without firstly adding the files to staged area
+        ◦ -all – same as -a
+    • log – used view all the commits made
+              syntax - $git commit -m “Initial Commit”
+              op -      [master (root-commit) b1c9aed] Initail Commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 new 1.txt
+ 		options - 
+        ◦ -n 5 – to limit the number of logs to be displayed
+        ◦ --since = “time” – displays the logs commited after that “time”
+        ◦ -p – displays the full diff of each commit
+        ◦ --until  = “time” – displays until that time
+        ◦ --author – displays the commits commited by a particular author(even a part of name will do)
+        ◦ --grep – searches for that string(write patter to be searched in “”)
+        ◦ --oneline – gives only the 1st line of each commit message
+        ◦ <since>..<until> - diplays the commits commited during specific time period
+        ◦ --<file> - dissplays commit that contain particular file
+        ◦ --stat - used to show statistics about the changes in each commit. It includes information such as the number of files changed, the number of 			lines added or deleted, and a summary of the changes made in each file.
+        ◦ --graph --decorate - --graph draws a text based graph of commits on the left side of commit msgs. --decorate adds names of branches oe tags to 					commit shown
+                                      syntax - $git log --graph --decorate
+                                      op -    * commit 7f4fe0d9a0ead06ecd64ac569b3d9e353988fd67 (HEAD)
+| Author: aarzoo <aarzoo@berylsystems.com>
+| Date:   Fri Mar 1 17:47:04 2024 +0530
+| 
+|     Revert "Revert "Initialize""
+|     
+|     This reverts commit 46892176100a1227525899ead7ba83293dac1149.
+| 
+* commit 46892176100a1227525899ead7ba83293dac1149
+| Author: aarzoo <aarzoo@berylsystems.com>
+| Date:   Fri Mar 1 17:40:14 2024 +0530
+| 
+|     Revert "Initialize"
+|     
+|     This reverts commit aa8f989ec1cb1999bde58082a624d724f9ab172c.
+| 
+* commit aa8f989ec1cb1999bde58082a624d724f9ab172c
+  Author: aarzoo <aarzoo@berylsystems.com>
+  Date:   Fri Mar 1 12:36:37 2024 +0530
+  
+      Initialize
+    • rm – used delete the file
+              syntax - $git rm file.txt
+              op -      removes the file from the local machine,need to use comit command afterwords in order for the file to be deleted from repo 
+    • status – used to display the status of the local machine files i.e. staged,unstaged and untracked file
+              syntax - $git status
+              op -      displays the status of files on local machine
+    • diff – used to show the difference between the file stored in the repo and the same local file but with some editing present in it. 
+              syntax - $git diff file.txt
+              op -      diff --git a/new1.txt b/new1.txt
+index efbc80b..b2f6d72 100644
+--- a/new1.txt
++++ b/new1.txt
+@@ -1 +1,3 @@
+ this is my first file
++
++i love working at beryl
+		option:
+        ◦ --staged – hows the difference berween the newly edited file that has been edited to the staged index and the original version of the same file present at the the repo 
+                  syntax - $git diff – staged file.txt
+                  op -          diff --git a/new 1.txt b/new 1.txt
+deleted file mode 100644
+index efbc80b..0000000
+--- a/new 1.txt 
++++ /dev/null
+@@ -1 +0,0 @@
+-this is my first file
+diff --git a/new1.txt b/new1.txt
+index efbc80b..b2f6d72 100644
+--- a/new1.txt
++++ b/new1.txt
+@@ -1 +1,3 @@
+ this is my first file
++
++i love working at beryl
+        ◦ --color-words – shows only the words that are different instead of whole line
+                  syntax - $git diff --color-words
+                  op - 
+        ◦ --cached – shows difference between staged and last commit
+                  syntax - $git diff --cached
+                  op - 
+
+GIT CONFIG
+    • username – used to set the name of the default repository user
+                  syntax - $git config --global user.name <name>
+    • usermail – used to set default user’s mail
+                  syntax -  $ git config --global user.mail <mail>
+    • alias – used to add shortcuts for commands
+                  syntax - $git config --global alais.<short_name> <command>
+                  example - $git config --global alias.co commit
+                  op – now instead of writing git commit again you can directly write git co
+    • default editor – used to set default editor 
+                  syntax -  $git config --global core.editor "LibreOffice Writter"
+                  option – 
+                    ◦ --global – set the default setting to be showed to everyone/set up a piblic profile
+                    ◦ --edit – used to open the global configuration file in text editor for manual editing
+                    ◦ color.ui – used to set the editor to show proper color for syntax typed in editor
+                              syntax -   $git config --global color.ui true
+    • To check config set - $git config –list
+				op - user.name=aarzoo
+				        user.email=aarzoo@berylsystems.com 
+				        core.editor=LibreOffice Writter
+				        color.ui=true
+
+REWRITING 
+    • revert – creates a new commit that undoes all the changes made in the <commit> and then apply it to the current branch
+              syntax - $git revert <commit>
+              example - $git revert 062ac
+              op -      [detached HEAD d0b1086] Revert "4314 to 4315"
+                       10 files changed, 12 insertions(+), 13 deletions(-)
+    • commit --amend – replaces the last commit with the staged changes and the last commit (when nothing in staged, used to edit the last commit’s msg)
+              syntax - $git commit --amend
+              op -      [detached HEAD 0abd327] stash
+ Date: Mon Mar 4 14:42:29 2024 +0530
+ 10 files changed, 12 insertions(+), 12 deletions(-)
+    • reset – unstages the stages file without overwritng the changes in the current directory.
+              syntax - $git reset <file>
+              op -    Unstaged changes after reset:
+			M	resources.html
+options - 
+        ◦ --hard – to limit the number of logs to be displayed
+        ◦ <commit> - move the current branch tip to <commit>,reset the staging area to match, but leave the working directory alone
+        ◦ --hard <commit> - resets both the staging area and the working directory to match (deleted uncommitted changes and all commits after <commit>
+    • clean – used remove untracked files from the working directory
+              syntax - $git clean -f 
+              op -      Removing hi
+options - 
+                    ◦ -n/--dry-run – performs a dry run, which means it shows a list of untracked files that would be removed by the command without actually removing them. 
+                    ◦ --force/-f – actually performs the cleanup by forcefully removing the untracked files without asking for confirmation. 
+                    ◦ -d – removes untracked directories as well as untracked files
+                    ◦ -x – removes untracked files,directories as well as files present in .gitignore file
+                    ◦ -X – removes only .ignorefiles
+                    ◦ -e/--exclude = <pattern> - allows the pattern of files to be excluded from cleaning up
+    • reflog – shows a log of changes to the local repository’s HEAD
+              syntax - $git reflog
+              op -     0abd327 (HEAD) HEAD@{0}: commit (amend): stash
+94d7bf8 HEAD@{1}: commit: stash
+d0b1086 HEAD@{2}: revert: Revert "4314 to 4315"
+062ac15 HEAD@{3}: commit: 4314 to 4315
+7f4fe0d HEAD@{4}: revert: Revert "Revert "Initialize""
+4689217 HEAD@{5}: revert: Revert "Initialize"
+aa8f989 HEAD@{6}: checkout: moving from master to aa8f989ec1cb1999bde58082a624d724f9ab172c
+options - 
+                    ◦ --realtive-data – shows date info
+                    ◦ --all – shows all information 
+
+REMOTE REPOSITORY
+    • clone – used to clone the remote repository on the local machine
+              syntax - $git clone <remote_url>
+              op -      in.git
+Cloning into 'main'...
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 9 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (9/9), done.
+    • remote add – creates a new connection to a remote repo(<name> can be used as shortcut for repo at <url>) .when we clone a repo it already has remote(origin) but when we create a project in our local machine and then we init it we have to add a remote origin in order to push to github. 
+              syntax - $git remote add <name> <url>
+              op -      creates a connection with the remote repo
+    • fetch –  used to fetch a specific branch <name> from the repo(<remote> helps to set a nickname for the repo)(only copy changes)
+              syntax - $git fetch <remote> <branch>
+              op -     remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/Aarzoo-Beryl/main
+ * branch            main       -> FETCH_HEAD
+   1019e6b..8878be0  main       -> origin/main
+    • pull – fetch the specific remote’s copy of the current branch and immediately merge into the local copy
+              syntax - $git pull <branch>
+op -      remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/Aarzoo-Beryl/main
+ * branch            main       -> FETCH_HEAD
+   636ba05..7967c6f  main       -> origin/main
+Updating 636ba05..7967c6f
+Fast-forward
+ new1.txt | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 new1.txt
+		options - 
+                    ◦ --rebase – fetch the remote’s copy of the current branch and rebase it into the local copy(used in place of merge)
+                                  syntax - $git pull --rebase <remote>
+                                  example - $git pull --rebase origin
+                                  op - remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/Aarzoo-Beryl/main
+   7967c6f..dc4e899  main       -> origin/main
+Updating 7967c6f..dc4e899
+Fast-forward
+ new2.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 new2.txt
+Current branch main is up to date.
+    • push – pushes the branch to <remote>,along with necessary commits and objects.(creates the <name> branch in the remote repo if it doesn’t exists)
+              syntax - $git push <remote> <name>
+              example - $git push origin main
+              op -      Username for 'https://github.com': Aarzoo-Beryl
+Password for 'https://Aarzoo-Beryl@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 265 bytes | 265.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/Aarzoo-Beryl/main.git
+   dc4e899..1019e6b  main -> main
+		options - 
+                    ◦ --force – forces the push even if the result is a non-fast-forward merge(careful)
+                              syntax - $git push --force origin main
+                              op -     Counting objects: 18, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (18/18), 4.71 KiB | 1.18 MiB/s, done.
+Total 18 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas: 100% (3/3), done.
+To https://github.com/Aarzoo-Beryl/main.git
+ + ebf4ee2...1019e6b main -> main (forced update)
+                    ◦ --all – pushes all of your local branches to the specified remote
+                    ◦ --tags – sends all of your local tags to the remote repo
+    • stash  – it acts as a temporary storage where we can store our uncommitted changes for later use (can retrieve data by push /pop)
+              syntax - $git add .
+			  $git stash(to add to stash)
+                       op - Saved working directory and index state WIP on main: 1019e6b arora file added
+                       syntax -  $git stash pop (to call back from stash)
+		op -      On branch main
+Your branch is up to date with 'origin/main'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+	new file:   123
+Dropped refs/stash@{0} (d6f224445f8a984adbc6faab5628fb63704d1e5e)
+		syntax -  $git stash clear (to clear the stash)
+    • cherry-pick – used to add a commit from another branch to our branch(used when we want to commit some action again and again so rather than commiting it again and again we can add it directly)
+              syntax - $git cherry-pick <hash>
+              op -      
+
+GIT BRANCHES
+    • branch – lists all the branches in your repository
+              syntax - $git branch
+              op -    * hello
+                       iphone
+              option - 
+                    ◦ -M <newname> – to rename a branch
+                    ◦ -d <name> – to delete <name> branch(cant delete the branch you are on)
+    • checkout -b – creates and checkout a new branch “name” (-b used to checkout an existing branch)
+              syntax - $git checkout -b <name>
+              example - $git checkout iphone
+              op -      Switched to branch 'iphone'
+                      Your branch is up to date with 'new/iphone'.
+    • merge – merges <name> into the current branch
+              syntax - $git merge <name>
+              example - $git merge hello
+              op -      Updating 284611b..a21c578
+Fast-forward
+ abc | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 abc
+    • diff – shows the difference between the specified branch and the current branch
+              syntax - $git diff <name>
+              example - $git diff mouse..hello
+              op -    diff --git a/new1.txt b/new1.txt
+index de83a14..389cb13 100644
+--- a/new1.txt
++++ b/new1.txt
+@@ -10,4 +10,4 @@ i love working at beryl
+ 
+ 
+ 
+-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
++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
+diff --git a/xyz b/xyz
+new file mode 100644
+index 0000000..011c2e7
+--- /dev/null
++++ b/xyz
+@@ -0,0 +1,2 @@
++hello im here again
++
+
+
+
+
+
+
+
+
+
+
+
+Personal Access token - 
+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
