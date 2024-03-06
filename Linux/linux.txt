@@ -384,9 +384,9 @@
 
     • ps – displays running processes
               syntax - $ps
-              op -    PID TTY          TIME        CMD
- 5708 pts/0    00:00:00       bash
-10811 pts/0    00:00:00       ps
+              op -        PID TTY         TIME        CMD
+			 5708 pts/0    00:00:00       bash
+			10811 pts/0    00:00:00       ps
     • top – displays a dynamic view of system processes and their resource usage
               syntax - $top
               op -      top - 14:31:20 up 19:20,  1 user,  load average: 0.46, 0.61, 0.63
