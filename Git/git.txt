@@ -317,7 +317,7 @@ BASICS
 						    hello file added
 
         		◦ --stat - used to show statistics about the changes in each commit. It includes information such as the number of files changed, 				   the number of lines added or deleted, and a summary of the changes made in each file.
-                                      syntax - $git log --graph --decorate
+                                      syntax - $git log --stat
                                       op -      commit 8466f62a296712fcef4250d58f81267c4fa87c89 (HEAD -> main)
 						Author: aarzoo <aarzoo@berylsystems.com>
 						Date:   Tue Mar 5 11:56:09 2024 +0530
