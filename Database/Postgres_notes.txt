@@ -1,0 +1,216 @@
+---------------------------------------------------------------------POSTGRES-----------------------------------------------------------------
+
+
+
+DEFINITON
+	- It is an open source object relational database system.It allows yout to store,process and retrieve data successfully.It was developed by world wide team of volunteers.
+
+KEY FEATURES 
+	- free to download 
+	- supports various os
+	- highly secure and reliable
+	- compatible with several data types
+	- supports MVCC
+	- supports text,image,sounds and videos
+
+MVCC 
+	- Stands for Multiverse Concurrency Control
+	- keeps our data safe and organaized, allowing multiple people to use same database without creating chaos
+	- features snapshot(when a transaction begins it takes snapshot of the database of how it looked at that particular moment,this snapshot remains consistant throughout the transaction, even if people are making changes to some data) and isolation(it states that each transaction gets its own snapshot ensuring that writing of one doesn't effect the reading of other,i.e. reading doesn't block writing and writing doesn't block reading)
+
+INSTALLATION COMMANDS
+
+	- $sudo apt-get install postgresql postgresql-contrib
+
+PSQL COMMANDS 
+
+	- $psql - opens psql mode
+	- $sudo su postgres - used to switch between different users
+	- $sudo -i -u postgres - will change user to postgres through it we can enter psql mode  
+	- \l - used to list the databases present in the system
+		op -                              List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+-----------+----------+----------+---------+-------+-----------------------
+ new       | postgres | UTF8     | en_IN   | en_IN | 
+ postgres  | postgres | UTF8     | en_IN   | en_IN | 
+ sql_demo  | postgres | UTF8     | en_IN   | en_IN | 
+ template0 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+(5 rows)
+
+	- \du - lists all the users present in the system
+		o/p -                                    List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ user1     | Superuser                                                  | {}
+
+	- \q - to quit psql mode
+	- \c - to got inside a database
+		o/p - You are now connected to database "sql_demo" as user "postgres".
+	- select version() - displays the version of the postgresql
+		o/p -                                                                version                                                                
+--------------------------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 10.23 (Ubuntu 10.23-0ubuntu0.18.04.2) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+(1 row)
+
+
+	- help - to seek help
+	- \d table_name - describe the contents/columns of the table specified
+		syntax - #\d movies
+		o/p -                          Table "public.movies"
+    Column    |         Type          | Collation | Nullable | Default 
+--------------+-----------------------+-----------+----------+---------
+ movie_id     | integer               |           |          | 
+ movie_name   | character varying(40) |           |          | 
+ movie_genre  | character varying(30) |           |          | 
+ imdb_ratings | real                  |           |          | 
+
+
+SQL COMMANDS
+
+	- CREATE DATABASE - used to create a new database
+			syntax - #CREATE DATABASE sql_demo
+			o/p - CREATE DATABASE (tells that the database has been successfully created )
+        - DROP DATABASE - used to delete a databse along with its structure(you can't delete the database you currently are on)
+			synatx - DROP DATABSE [IF EXISTS] database_name
+			example - DROP DATABSE [IF EXISTS] new
+			o/p - DROP DATABASE
+        - CREATE TABLE - used to create a new table in the database
+			synatx -CREATE TABLE table_name(
+   column1 datatype,
+   column2 datatype,
+   column3 datatype,
+   .....
+   columnN datatype,
+   PRIMARY KEY( one or more columns )
+); 
+			example - CREATE TABLE persons (
+  id SERIAL,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  dob DATE,
+  email VARCHAR(255),
+  PRIMARY KEY (id)
+);
+
+			o/p - CREATE TABLE 
+        - DROP TABLE -  used to delete the table along with its structure
+			syntax - DROP TABLE table_name
+			example - DROP TABLE person
+			o/p - DROP TABLE
+        - INSERT QUERY - used to insert data into the table
+			syntax - INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)
+VALUES (value1, value2, value3,...valueN);
+			example - INSERT INTO Employee (Emp_id, Emp_name, Emp_mail, Emp_gender, Emp_department, Emp_address, Emp_salary)
+VALUES
+	(101, 'John Doe', 'john.doe@example.com', 'Male', 'IT', '123 Main St, City', 75000.00),
+    (102, 'Jane Smith', 'jane.smith@example.com', 'Female', 'HR', '456 Elm Ave, Town', 60000.00),
+    (103, 'Michael Johnson', 'michael.johnson@example.com', 'Male', 'Finance', '789 Oak Rd, Village', 80000.00),
+    (104, 'Emily Brown', 'emily.brown@example.com', 'Female', 'Marketing', '987 Maple Ln, Suburb', 65000.00),
+    (105, 'David Lee', 'david.lee@example.com', 'Male', 'Sales', '654 Pine Blvd, County', 70000.00),
+    (106, 'Alex Turner', 'alex.turner@example.com', 'Male', 'Sales', '789 Elm St, City', 72000.00),
+    (107, 'Sophia White', 'sophia.white@example.com', 'Female', 'IT', '234 Oak Ave, Town', 68000.00),
+    (108, 'Daniel Harris', 'daniel.harris@example.com', 'Male', 'Finance', '567 Maple Rd, Village', 85000.00),
+    (109, 'Olivia Martin', 'olivia.martin@example.com', 'Female', 'HR', '876 Pine Ln, Suburb', 62000.00),
+    (110, 'William Clark', 'william.clark@example.com', 'Male', 'Marketing', '345 Cedar Blvd, County', 71000.00),
+    (155, 'Emma Rodriguez', 'emma.rodriguez@example.com', 'Female', 'IT', '123 Elm St, City', 70000.00),
+    (156, 'Liam Walker', 'liam.walker@example.com', 'Male', 'Sales', '456 Oak Ave, Town', 63000.00),
+    (157, 'Ava Scott', 'ava.scott@example.com', 'Female', 'Finance', '789 Maple Rd, Village', 78000.00),
+    (158, 'Noah Hall', 'noah.hall@example.com', 'Male', 'HR', '987 Pine Ln, Suburb', 67000.00),
+    (159, 'Isabella Young', 'isabella.young@example.com', 'Female', 'Marketing', '654 Cedar Blvd, County', 74000.00);
+
+        - SELECT QUERY - used to display specific data froma table
+			syntax - SELECT * FROM table_name
+			example - SELECT * FROM movies
+			o/p -  movie_id |        movie_name        |  movie_genre   | imdb_ratings 
+----------+--------------------------+----------------+--------------
+      101 | Vertigo                  | Mystry,Romance |          8.3
+      102 | The Shawshank Redemption | Crime,Friction |          9.3
+      104 | The Dark Knight          | Action         |            9
+      105 | The Matrix               | Sci-fic        |          8.7
+      106 | Se7en                    | Crime          |          8.6
+      107 | Interstellar             | Adventure      |          8.6
+      103 | 12 Angry Men             | Drama,Crime    |            9
+(7 rows)
+
+        - WHERE CLAUSE - used to specify conditions while running a command
+			syntax - SELECT * FROM table_name
+				 WHERE (condition)
+			example - SELECT * FROM movies
+				  WHERE imdb_ratings > 8.7
+			o/p -  movie_id |        movie_name        |  movie_genre   | imdb_ratings 
+----------+--------------------------+----------------+--------------
+      102 | The Shawshank Redemption | Crime,Friction |          9.3
+      104 | The Dark Knight          | Action         |            9
+      103 | 12 Angry Men             | Drama,Crime    |            9
+(3 rows)
+ 
+        - AND CLAUSE - used t conbine to two condition where both conditions needs to be fullfilled
+			syntax - SELECT * FROM movies
+                                 WHERE condition1 AND condition2
+			exapmle - SELECT * FROM movies
+                                  WHERE imdb_ratings > 8.7 and movie_genre='Action'
+			o/p -  movie_id |   movie_name    | movie_genre | imdb_ratings 
+----------+-----------------+-------------+--------------
+      104 | The Dark Knight | Action      |            9
+(1 row)
+
+        - OR CLAUSE - used to specify multiple condition where it displays result even if 1 cndition of them is true
+                       syntax - SELECT * FROM movies
+                                 WHERE condition1 OR condition2
+                       exapmle - SELECT * FROM movies
+                                 WHERE imdb_ratings > 8.7 OR movie_genre='Action'
+                       o/p -   movie_id |        movie_name        |  movie_genre   | imdb_ratings 
+----------+--------------------------+----------------+--------------
+      102 | The Shawshank Redemption | Crime,Friction |          9.3
+      104 | The Dark Knight          | Action         |            9
+      103 | 12 Angry Men             | Drama,Crime    |            9
+(3 rows)
+
+
+        - UPDATE QUERY - 
+			 syntax - UPDATE table_name
+				  SET column1 = value1, column2 = value2...., columnN = valueN
+				  WHERE [condition];
+                         example - UPDATE movies
+				   SET imdb_ratings = 8.7
+				   WHERE imdb_ratings = 8.6;
+                         o/p - UPDATE TABLE
+        - DELETE QUERY - used to delete a table or particular enteries of the table
+			syntax - DELETE FROM table_name
+				 WHERE [condition];
+			example - DELETE FROM movies
+				  WHERE imdb_ratings=8.6;
+			o/p - DELETE 2
+        - LIKE CLAUSE - used to  provide an approx idea of what a user is trying to search and results in all the matching patterns
+			synatx - SELECT * FROM table_name
+				 WHERE column LIKE 'pattern'
+			example - SELECT * FROM movies
+				  WHERE movie_name LIKE 'THE%';
+			o/p -  movie_id |        movie_name        |  movie_genre   | imdb_ratings 
+----------+--------------------------+----------------+--------------
+      102 | The Shawshank Redemption | Crime,Friction |          9.3
+      104 | The Dark Knight          | Action         |            9
+      105 | The Matrix               | Sci-fic        |          8.7
+(3 rows)
+
+        - SCHEMA - used to describe the structure of the table to be made
+			syntax - create schema myschema;
+				 o/p - CREATE SCHEMA
+			syntax - create table myschema.company(
+   ID   INT              NOT NULL,
+   NAME VARCHAR (20)     NOT NULL,
+   AGE  INT              NOT NULL,
+   ADDRESS  CHAR (25),
+   SALARY   DECIMAL (18, 2),
+   PRIMARY KEY (ID)
+);
+			o/p - CREATE TABLE
+        - 
+        - 
+        - 
+        - 
+        - 
