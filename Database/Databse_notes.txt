@@ -18,8 +18,33 @@ ARCHITECTURE - follows a three schema architecture in order for  multiple users 
             Physical/internal level - describes how data is stored 
             Logical/cenceptual level - describes what data is stored and what relationship exists among them
             View/external lvel - describes the databse part that aparticular user has asked for or is intrested in
+           
+DATABASE LANGUAGE - 
+        DDL - used to define the schema of the database
+        DML - used to manipulate data(insert,delete,update,etc)
 
-DATA MODELS - provides a way to describe the design of the database at the logical level
+DATABASE ADMINISTRATION - person who controls both data and the programs that access those data
+
+DATA MODELS - provides a way to describe the design of the database at the logical level.It is a collection of cenceptual tools for describing data, data reltionships,data semantics and constraints
               Eg - er model, relational model,object-oriented model, object relational dete model,etc.
-              
+   
+
+ER MODEL - it is a high level data model based on real world perception that consists of real object called entities and relationships among them
+            grapghical representation  - ER DIAGRAM which acts as blueprint of the database
+
+ENTITY - object that has physical existance in the real world and such that each of them can be identified uniquely
+            Strong Entity - can be uniquely identified
+            Weak Entity - can't be uniquekt identified , depends on someother strong entity for its existance
+
+ENTITY SET - set of entities that contain similar or common Attributes
+ATTRIBUTES - an entity is represented in the form of Attributes
+            can be simple(can't be decomposed further), composite(made up of several other attributes),single-valued(can have only one value),mlti-valued(has more than one value for single entity),derived(can be obtained from other attributes) and null(when an entity doesn't have value for one entity)
+RELATIONSHIPS - refers to association between two or more entities
+            can be strong(between two independent entities) and weak(between weak entity and its owner/strong entity)
+            can be unary(where only one entity participates),binary(where two identited take part) and nary(where n no of entites take part)
+RELATIONSHIP CONSTRAINTS - 
+            cardinality ratio/mapping cardinality - number of entities to which another entity can be associated via a relationship(can be one to one, many to one, one to many and many to many)
+            participation constrains - how well entities of different set are involved into the relationship (can be total or partial)
+
+     
 
