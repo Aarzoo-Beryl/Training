@@ -253,42 +253,42 @@ SQL COMMANDS
                         synatx - SELECT * FROM table_name ORDER BY colmn_name [ASC|DESC];
                         example -  SELECT * FROM store ORDER BY store_name ASC;
                         o/p -    store_id |    store_name    | product | quantity | cost 
-								----------+------------------+---------+----------+------
-										5 | Ambala           | Iphone  |       95 |  975
-										5 | Ambala           | Macbook |       70 | 1150
-										5 | Ambala           | Iwatch  |       45 | 1725
-										3 | Ambience         | Iphone  |       80 | 1100
-										3 | Ambience         | Macbook |       60 |  950
-										3 | Ambience         | Iwatch  |       40 | 1650
-										6 | Chandigarh       | Iphone  |      130 | 1400
-										6 | Chandigarh       | Iwatch  |       70 | 1250
-										6 | Chandigarh       | Macbook |      100 |  800
-										7 | Delhi            | Macbook |       55 | 1200
-										7 | Delhi            | Iphone  |       75 | 1025
-										4 | Faridabad        | Macbook |       85 |  775
-										4 | Faridabad        | Iphone  |      110 | 1325
-										4 | Faridabad        | Iwatch  |       55 | 1475
-										1 | NIT              | Iphone  |      100 | 1050
-										1 | NIT              | Iwatch  |       50 | 1500
-										1 | NIT              | Macbook |       75 |  825
-										2 | Select City Walk | Iwatch  |       60 | 1800
-										2 | Select City Walk | Macbook |       90 | 1000
-										2 | Select City Walk | Iphone  |      120 | 1275
-								(20 rows)
- 
+				----------+------------------+---------+----------+------
+					5 | Ambala           | Iphone  |       95 |  975
+					5 | Ambala           | Macbook |       70 | 1150
+					5 | Ambala           | Iwatch  |       45 | 1725
+					3 | Ambience         | Iphone  |       80 | 1100
+					3 | Ambience         | Macbook |       60 |  950
+					3 | Ambience         | Iwatch  |       40 | 1650
+					6 | Chandigarh       | Iphone  |      130 | 1400
+					6 | Chandigarh       | Iwatch  |       70 | 1250
+					6 | Chandigarh       | Macbook |      100 |  800
+					7 | Delhi            | Macbook |       55 | 1200
+					7 | Delhi            | Iphone  |       75 | 1025
+					4 | Faridabad        | Macbook |       85 |  775
+					4 | Faridabad        | Iphone  |      110 | 1325
+					4 | Faridabad        | Iwatch  |       55 | 1475
+					1 | NIT              | Iphone  |      100 | 1050
+					1 | NIT              | Iwatch  |       50 | 1500
+					1 | NIT              | Macbook |       75 |  825
+					2 | Select City Walk | Iwatch  |       60 | 1800
+					2 | Select City Walk | Macbook |       90 | 1000
+					2 | Select City Walk | Iphone  |      120 | 1275
+				(20 rows)
+
         - GROUP BY - used to group data having identical contents
 					syntax - SELECT * FROM table_name GROUP BY column_name;
 					example -   SELECT store_id, store_name, SUM(quantity) AS total_quantity, SUM(cost) AS total_cost
 								FROM store GROUP BY store_id, store_name;
 					o/p -    store_id |    store_name    | total_quantity | total_cost 
-							----------+------------------+----------------+------------
-									4 | Faridabad        |            250 |       3575
-									7 | Delhi            |            130 |       2225
-									6 | Chandigarh       |            300 |       3450
-									2 | Select City Walk |            270 |       4075
-									1 | NIT              |            225 |       3375
-									5 | Ambala           |            210 |       3850
-									3 | Ambience         |            180 |       3700
+						----------+------------------+----------------+------------
+							4 | Faridabad        |            250 |       3575
+							7 | Delhi            |            130 |       2225
+							6 | Chandigarh       |            300 |       3450
+							2 | Select City Walk |            270 |       4075
+							1 | NIT              |            225 |       3375
+							5 | Ambala           |            210 |       3850
+							3 | Ambience         |            180 |       3700
 							(7 rows)
         - 
 OPERATORS
