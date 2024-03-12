@@ -1,0 +1,25 @@
+---------------------------------------------------DATABASE------------------------------------------------------
+
+
+DEFINITION - it is an electronic place/system where data is stored in a way that it can easily be accessed,managed and updated
+
+DBMS - Database Management system
+        it is a collection of interrelated data and a set of programs to access those data.Its primary goal is to provide a way to store and retrieve database information that is both efficient and convinient.
+        it is used to perform CRUD operations on the database
+
+        C- create
+        R- read
+        U- update
+        D- delete 
+
+
+ARCHITECTURE - follows a three schema architecture in order for  multiple users to access the same data at same time and to provide the user with abstract view of the data(system hides certain detail of how the datat is stored or maintained)
+
+            Physical/internal level - describes how data is stored 
+            Logical/cenceptual level - describes what data is stored and what relationship exists among them
+            View/external lvel - describes the databse part that aparticular user has asked for or is intrested in
+
+DATA MODELS - provides a way to describe the design of the database at the logical level
+              Eg - er model, relational model,object-oriented model, object relational dete model,etc.
+              
+

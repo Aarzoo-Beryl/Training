@@ -290,7 +290,13 @@ SQL COMMANDS
 							5 | Ambala           |            210 |       3850
 							3 | Ambience         |            180 |       3700
 							(7 rows)
-        - 
+        - WITH CLAUSE - used to write subquery and main query in more appropriate/readable manner
+					syntax - WITH AS (SELECT -----)
+							 SELECT * FROM -----,----
+					example - WITH average_salary AS 
+					o/p - 
+
+
 OPERATORS
 
 	- Arithmatic Operators - used to do arithmatic operations
