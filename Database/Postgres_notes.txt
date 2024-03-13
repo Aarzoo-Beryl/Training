@@ -290,12 +290,48 @@ SQL COMMANDS
 							5 | Ambala           |            210 |       3850
 							3 | Ambience         |            180 |       3700
 							(7 rows)
-        - WITH CLAUSE - used to write subquery and main query in more appropriate/readable manner
-					syntax - WITH AS (SELECT -----)
-							 SELECT * FROM -----,----
-					example - WITH average_salary AS 
-					o/p - 
 
+        - WITH CLAUSE - used to write subquery and main query in more appropriate/readable manner
+					syntax - WITH ___ AS ____ (SELECT -----)
+							 SELECT * FROM -----,----
+					example -   with average_rating as (select AVG(imdb_ratings) as avg from movies)
+								select * from movies as e, average_rating as av
+								where e.imdb_ratings > av.avg; 
+					o/p -  movie_id |        movie_name        |  movie_genre   | imdb_ratings |       avg        
+						  ----------+--------------------------+----------------+--------------+------------------
+								102 | The Shawshank Redemption | Crime,Friction |          9.3 | 8.78571442195347
+								104 | The Dark Knight          | Action         |            9 | 8.78571442195347
+								103 | 12 Angry Men             | Drama,Crime    |            9 | 8.78571442195347
+							(3 rows)
+		- HAVING CLAUSE - it allows us to pick out particular rows where the function's result meets some condition.Always placed after group by clause.
+						  The WHERE clause places conditions on the selected columns, whereas the HAVING clause places conditions on groups created by the GROUP BY clause.
+					syntax -    SELECT column1, column2
+								FROM table1, table2
+								WHERE [ conditions ]
+								GROUP BY column1, column2
+								HAVING [ conditions ]
+								ORDER BY column1, column2
+					example -   SELECT name FROM employees
+								GROUP BY name
+								HAVING COUNT(name)>1;
+					o/p -    name  
+							-------
+							James
+							Paul
+							(2 rows)
+		-DISTINCT KEYWORD - is it used with select statement in order to remove duplicate data and fetching only unique data 
+					syntax -    SELECT DISTINCT col_name FROM table_name;
+					example -   SELECT DISTINCT name FROM employees;
+					o/p -    name  
+							-------
+							Mark
+							Teddy
+							Allen
+							James
+							David
+							Paul
+							Kim
+							(7 rows)
 
 OPERATORS
 
