@@ -32,19 +32,60 @@ DATA MODELS - provides a way to describe the design of the database at the logic
 ER MODEL - it is a high level data model based on real world perception that consists of real object called entities and relationships among them
             grapghical representation  - ER DIAGRAM which acts as blueprint of the database
 
-ENTITY - object that has physical existance in the real world and such that each of them can be identified uniquely
-            Strong Entity - can be uniquely identified
-            Weak Entity - can't be uniquekt identified , depends on someother strong entity for its existance
+        ENTITY - object that has physical existance in the real world and such that each of them can be identified uniquely
+                Strong Entity - can be uniquely identified
+                Weak Entity - can't be uniquekt identified , depends on someother strong entity for its existance
+        ENTITY SET - set of entities that contain similar or common Attributes
+        ATTRIBUTES - an entity is represented in the form of Attributes
+                can be simple(can't be decomposed further), composite(made up of several other attributes),single-valued(can have only one value),mlti-valued(has more than one value for single entity),derived(can be obtained from other attributes) and null(when an entity doesn't have value for one entity)
+        RELATIONSHIPS - refers to association between two or more entities
+                can be strong(between two independent entities) and weak(between weak entity and its owner/strong entity)
+                can be unary(where only one entity participates),binary(where two identited take part) and nary(where n no of entites take part)
+        RELATIONSHIP CONSTRAINTS - 
+                cardinality ratio/mapping cardinality - number of entities to which another entity can be associated via a relationship(can be one to one, many to one, one to many and many to many)
+                participation constrains - how well entities of different set are involved into the relationship (can be total or partial)
 
-ENTITY SET - set of entities that contain similar or common Attributes
-ATTRIBUTES - an entity is represented in the form of Attributes
-            can be simple(can't be decomposed further), composite(made up of several other attributes),single-valued(can have only one value),mlti-valued(has more than one value for single entity),derived(can be obtained from other attributes) and null(when an entity doesn't have value for one entity)
-RELATIONSHIPS - refers to association between two or more entities
-            can be strong(between two independent entities) and weak(between weak entity and its owner/strong entity)
-            can be unary(where only one entity participates),binary(where two identited take part) and nary(where n no of entites take part)
-RELATIONSHIP CONSTRAINTS - 
-            cardinality ratio/mapping cardinality - number of entities to which another entity can be associated via a relationship(can be one to one, many to one, one to many and many to many)
-            participation constrains - how well entities of different set are involved into the relationship (can be total or partial)
+EXTENDED ER FRATURES - 
+        SPECIALIZATION - it refers to the spliting up of the entity set into further sub entity sets on the bases of their functionaltiy,specialities andd features.
+                         It is a top down approach. the superclass and sub class have a "is-a" relationship depicted by inverted triangle.
+                         It is used to show the distinctive features of the sub entities and help to refine the blue print of the database.
+        GENERALIZATION - it is reverse of specialization and is used to group the common features into a super class.
+                         It contains "is-a" relationship between sub class and superclass and is depicted by triangle.
+                         It is a bottom-up approach and is used to make databse simpler and helps in grouping common attributes so that they are not repated.
+        ATTRIBUTE INHERITANCE - both generalization and specialization has attribute inheritance, in this the attributes of higher level entity sets are inherited by lower level entity sets
+        PARTICIPATION INHERITANCE - if a parent entity set paricipates in a relationship then its child entity sets will also participate in that relationship
+        AGGREGATION -   it helps us understand how different pieces fit together to make something bigger.
+                        Aggregation is shown by connecting the main thing (like a cake or a car) with the smaller things (like ingredients or parts) using a diamond-shaped symbol. 
+                        This connection tells us that the smaller things belong to or are part of the main thing.
 
-     
+
+STEPS TO MAKE ENTITY RELATIONSHIP DIAGRAM - 
+        - identify entity sets
+        - identify attributes and their types
+        - identify relationship and constraints (mapping and participation)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ref: posts.user_id > users.id // many-to-one
+
+Ref: users.id < follows.following_user_id
+
+Ref: users.id < follows.followed_user_id
+
+
+
+
+
+
 
