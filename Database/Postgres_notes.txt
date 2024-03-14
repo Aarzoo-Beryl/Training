@@ -344,28 +344,28 @@ OPERATORS
 			  /			Division
 			  %			Modulus
 			  ^			Exponentiation
-			  |/			Squate root
-			  ||/			Cube root
+			  |/		Squate root
+			  ||/		Cube root
 			  !			Factorial
-			  !!			Factorial(Prefix operator)
+			  !!		Factorial(Prefix operator)
 
 	- Comparison Operators - used to do comaprison between similar terms
 
 			Operator		Function
 			  =			checks if a is equal to b
-			  !=			checks if a is not equal to b
-			  <>			checks is value of a and b are equal or not(if not equal cndition is true)
+			  !=		checks if a is not equal to b
+			  <>		checks is value of a and b are equal or not(if not equal cndition is true)
 			  >			checks if left operand is greater than right operand
 			  <			checks if right operand is greater than left operand
-			  >=			checks if value of left operand is greater than or equal to the value of right operand
-			  <=			checks if value of right operand is greater than or equal to the value of left operand
+			  >=		checks if value of left operand is greater than or equal to the value of right operand
+			  <=		checks if value of right operand is greater than or equal to the value of left operand
 
 	- Logical Operators - used to define different logics between multiple conditions
 
 			Operator		Function
-			  AND			specifies that bothe the conditions mentioned should be true then only the result will be true
-			  NOT			it is used to reverse the meaning of the logical operator and is used as prefix
-			  OR			specifies than the result will be true even if a single cinditon from the mentioned ones is true
+			  AND		specifies that bothe the conditions mentioned should be true then only the result will be true
+			  NOT		it is used to reverse the meaning of the logical operator and is used as prefix
+			  OR		specifies than the result will be true even if a single cinditon from the mentioned ones is true
 
 	- Bit Operators - these works on bits and performs bit-by-bit operations
 
@@ -373,7 +373,37 @@ OPERATORS
 			  &			works as AND operator and copies a bit to the redult only if it exists in both operands
 			  |			works as OR and copies a bit if it exists in either operand
 			  ~			works as ones complement and has effect of flippinf bits
-			  <<			works as left shift operator and moves left operands value to the left by the number of digits specified
-			  >>			works as right shift operator and moves the the bits to right by the numbers of digits specified
+			  <<		works as left shift operator and moves left operands value to the left by the number of digits specified
+			  >>		works as right shift operator and moves the the bits to right by the numbers of digits specified
 			 \#			works as bitwise XOR and if bits same on both operand then resultant bit 0 otherwise 1
 
+
+CONSTRAINTS - 
+		these are the rules enforced on data columns of the table and help us prevent invalid data from being entered into the database.
+		can be applied at two levels i.e. Table level(apllied to whole table) and column level (applied to specific columns of the table)
+
+		- NOT NULL - by default a column can hold null values and by applying this constraint specifies that no part of the column can be left null.
+					 it is a column level constraint.(null is not same as no data it reperesents unknown data)
+					 syntax - CREATE TABLE employees(
+								id PRIMARY KEY NOT NULL
+							 );
+		- UNIQUE - this prevents two records from having identical values in a particulaar column
+					 syntax - CREATE TABLE employees(
+								age int NOT NULL UNIQUE
+					 		  ); 
+		- PRIMARY KEY - uniquely identifies each record in a database table,there can be more than one unique columns but only one primary key.
+						the column wth primary key constraint cant contain null values and are used as foreign key when we link two tables
+						syntax - CREATE TABLE employees(
+									id int PRIMARY KEY
+								) ;
+		- FOREIGN KEY - these specify that the values in a column must match the values appearing in some row of another table.it maintains a refrential identity between two related tables and are also called refrencing keys
+						syntax - CREATE TABLE employees(
+									department_id int refrences department(dept_id)
+								);
+		- CHECK - this costraint enables condition to check the values being entered into the record, if condition evaluates to false , the record violates the constraint and is not entred into the table
+				  syntax - CREATE TABLE employees(
+								salary real CHECK(salary>0)
+							);
+		- EXCLUSION - it ensures that if any two rows are compared on the specified columns or expressions using the specified operators , at least one of these operator comparison will return false or null.
+					  it helps maintain data integrity by enforcing rules that prevent conflicting or invalid data from being entered into the database.
+					  syntax - 
