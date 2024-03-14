@@ -549,3 +549,33 @@ UNION ALL - works same as union in combining the sets but doesnt removes the dup
 				2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
 				(11 rows)
 
+
+TRIGGERS - these are databse callback functions, whcih are automatically performed/invoked when a specifies database event occurs
+			We can specify the moment when a trigger is to be invoked (before,after or inplace of the query performed)
+			-a trigger marked for each row is called once for every row that the operation modifies.
+			-a trigger marked for each statemnt execute once for any given operation , regardless of how many rows it modifies
+			syntax - CREATE TRIGGER trigger_name trigger_time trigger_event
+					 ON table_name FOR EACH ROW 
+					 BEGIN
+					 .....
+					 END;
+									#here trigger_time-> BEFORE,AFTER |trigger_event-> INSERT,UPDATE,DELETE
+			example -   CREATE TRIGGER orders_history_trigger
+						AFTER INSERT ON orders
+						FOR EACH ROW
+						EXECUTE FUNCTION log_order_history();
+					 
+
+
+
+INDEXES - these are special look up tables that the database search engine can use to speed up data retrieval
+			ineasy terms it s a pointer to data in a table
+		- these are special look up tables that database engine looks upto to speed up database retrieval
+		- can only be used in table in which it fetches and for updation / insertion the headover increases
+		- can created or dropped with no effect on actual data 
+		syntax - CREATE INDEX index_name ON table_name (column1, column2, ...);
+		example - CREATE INDEX idx_customer_id ON customers (customer_id);
+
+
+
+
