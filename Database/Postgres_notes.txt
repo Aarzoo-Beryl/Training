@@ -407,3 +407,95 @@ CONSTRAINTS -
 		- EXCLUSION - it ensures that if any two rows are compared on the specified columns or expressions using the specified operators , at least one of these operator comparison will return false or null.
 					  it helps maintain data integrity by enforcing rules that prevent conflicting or invalid data from being entered into the database.
 					  syntax - 
+
+
+
+
+JOINS CLAUSE - used to combine records from two or more tables in a database, it refers for combining fields from two tables by using values common to each.
+	
+	Types of joins - 
+
+		- CROSS JOIN - it matches every row of the first table with every row of the second table(id table1 contains x column and table2 contains y columns then cross join will contain x+y columns)
+						it has the capability to generate extremely large tables
+						syntax - SELECT .... FROM table1 CROSS JOIN table2;
+						example - SELECT * FROM employee CROSS JOIN department;
+						o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
+							  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
+								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
+								3 | Teddy |  23 | Norway     |  20000 |            |  1 | IT Billing                                         |      1
+								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  1 | IT Billing                                         |      1
+								5 | David |  27 | Texas      |  85000 | 2007-12-13 |  1 | IT Billing                                         |      1
+								2 | Allen |  25 | Texas      |        | 2007-12-13 |  1 | IT Billing                                         |      1
+								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  1 | IT Billing                                         |      1
+								9 | James |  44 | Norway     |   5000 | 2005-07-13 |  1 | IT Billing                                         |      1
+								10 | James |  45 | Texas      |   5000 | 2005-07-13 |  1 | IT Billing                                         |      1
+								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  2 | Engineering                                        |      2
+								3 | Teddy |  23 | Norway     |  20000 |            |  2 | Engineering                                        |      2
+								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  2 | Engineering                                        |      2
+								5 | David |  27 | Texas      |  85000 | 2007-12-13 |  2 | Engineering                                        |      2
+								2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
+								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  2 | Engineering                                        |      2
+								9 | James |  44 | Norway     |   5000 | 2005-07-13 |  2 | Engineering                                        |      2
+								10 | James |  45 | Texas      |   5000 | 2005-07-13 |  2 | Engineering                                        |      2
+								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  3 | Finance                                            |      7
+								3 | Teddy |  23 | Norway     |  20000 |            |  3 | Finance                                            |      7
+								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  3 | Finance                                            |      7
+								5 | David |  27 | Texas      |  85000 | 2007-12-13 |  3 | Finance                                            |      7
+								2 | Allen |  25 | Texas      |        | 2007-12-13 |  3 | Finance                                            |      7
+								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  3 | Finance                                            |      7
+								9 | James |  44 | Norway     |   5000 | 2005-07-13 |  3 | Finance                                            |      7
+								10 | James |  45 | Texas      |   5000 | 2005-07-13 |  3 | Finance                                            |      7
+								(24 rows)
+
+		- INNER JOIN - to combine rows from two or more tables based on a related column between them. The term "inner" refers to the fact that it selects only the rows that have matching values in both tables.
+						brings together related information from different tables, showing only the data where there's a match between the tables based on a specified condition.
+						syntax - SELECT .... FROM table1 INNER JOIN table2 ON table1.col_name =table2.col_name;
+						example - SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+						o/p -   id | name  | age |  address   | salary | join_date  | id |     dept       | emp_id 
+							   ----+-------+-----+------------+--------+------------+----+----------------+--------
+								 1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing     |    1
+							     2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering    |    2
+								(2 rows)
+
+		- THE LEFT OUTER JOIN - fetches all the records from the left table and only the matching records from the right table based on a specified condition, filling in NULL values for the columns from the right table where there's no match.
+						syntax - SELECT .... FROM table1 LEFT OUTER JOIN table2 ON table1.col_name=table2.col_name;
+						example - SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+						o/p -   id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
+						      ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
+								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
+								2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
+								10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
+								5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
+								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
+								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
+								3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
+								9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
+								(8 rows)
+
+		- THE RIGHT OUTER JOIN - fetches all the records from the right table and only the matching records from the left table based on a specified condition, filling in NULL values for the columns from the left table where there's no match.
+						syntax - SELECT .... FROM table1 RIGHT OUTER JOIN table2 ON table1.col_name=table2.col_name;
+						example - SELECT * FROM employee AS e RIGHT OUTER JOIN department AS d  ON e.id =d.emp_id ;
+						o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
+							  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
+								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
+								2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
+							      |       |     |            |        |            |  3 | Finance                                            |      7
+								(3 rows)
+
+		- THE FULL OUTER JOIN - fetches all the records from both tables, combining them based on a specified condition. It ensures that no data is left out, including both matching and non-matching records from both tables, with NULL values filling in where there are no matches.
+						syntax -  SELECT .... FROM table1 FULL OUTER JOIN table2 ON table1.col_name=table2.col_name;
+						example - SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id ;
+						o/p -      id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
+								  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
+									1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
+									2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
+								      |       |     |            |        |            |  3 | Finance                                            |      7
+									10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
+									5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
+									8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
+									4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
+									3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
+									9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
+									(9 rows)
+
+
