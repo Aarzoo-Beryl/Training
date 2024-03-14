@@ -185,13 +185,15 @@ SQL COMMANDS
                          example - UPDATE movies
 				   SET imdb_ratings = 8.7
 				   WHERE imdb_ratings = 8.6;
-                         o/p - UPDATE TABLE
+             o/p - UPDATE TABLE
+
         - DELETE QUERY - used to delete a table or particular enteries of the table
 			syntax - DELETE FROM table_name
 				 WHERE [condition];
 			example - DELETE FROM movies
 				  WHERE imdb_ratings=8.6;
 			o/p - DELETE 2
+
         - LIKE CLAUSE - used to  provide an approx idea of what a user is trying to search and results in all the matching patterns
 			synatx - SELECT * FROM table_name
 				 WHERE column LIKE 'pattern'
@@ -303,6 +305,7 @@ SQL COMMANDS
 								104 | The Dark Knight          | Action         |            9 | 8.78571442195347
 								103 | 12 Angry Men             | Drama,Crime    |            9 | 8.78571442195347
 							(3 rows)
+
 		- HAVING CLAUSE - it allows us to pick out particular rows where the function's result meets some condition.Always placed after group by clause.
 						  The WHERE clause places conditions on the selected columns, whereas the HAVING clause places conditions on groups created by the GROUP BY clause.
 					syntax -    SELECT column1, column2
@@ -319,6 +322,7 @@ SQL COMMANDS
 							James
 							Paul
 							(2 rows)
+
 		-DISTINCT KEYWORD - is it used with select statement in order to remove duplicate data and fetching only unique data 
 					syntax -    SELECT DISTINCT col_name FROM table_name;
 					example -   SELECT DISTINCT name FROM employees;
@@ -332,6 +336,10 @@ SQL COMMANDS
 							Paul
 							Kim
 							(7 rows)
+		
+		- NULL - used to represent a missing value, different from a column containing value 0 (just a concept)
+		- ALIAS - used to rename a column or table temporarily by giving it other name (just for a particular query)
+				  AS is used 
 
 OPERATORS
 
@@ -498,4 +506,46 @@ JOINS CLAUSE - used to combine records from two or more tables in a database, it
 									9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
 									(9 rows)
 
+
+UNION - is used to combine the results of multiple SELECT statements into a single result set, ensuring compatibility between the columns and removing duplicates while preserving the order of the first SELECT statement.
+		syntax -    SELECT statement 1
+					UNION 
+					SELECT statement 2
+		example -   SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id 
+					UNION
+					SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+		o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
+			  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
+				4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
+				10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
+				  |       |     |            |        |            |  3 | Finance                                            |      7
+				1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
+				2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
+				8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
+				5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
+				9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
+				3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
+				(9 rows)
+
+UNION ALL - works same as union in combining the sets but doesnt removes the duplicate rows (difference)
+		syntax -    SELECT statement 1
+					UNION 
+					SELECT statement 2
+		example -   SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id 
+					UNION ALL
+					SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+		o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
+			  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
+				1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
+				2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
+				  |       |     |            |        |            |  3 | Finance                                            |      7
+				10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
+				5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
+				8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
+				4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
+				3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
+				9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
+				1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
+				2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
+				(11 rows)
 
