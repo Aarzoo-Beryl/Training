@@ -81,33 +81,40 @@ SQL COMMANDS
 	- CREATE DATABASE - used to create a new database
 			syntax - #CREATE DATABASE sql_demo
 			o/p - CREATE DATABASE (tells that the database has been successfully created )
+
         - DROP DATABASE - used to delete a databse along with its structure(you can't delete the database you currently are on)
 			synatx - DROP DATABSE [IF EXISTS] database_name
 			example - DROP DATABSE [IF EXISTS] new
 			o/p - DROP DATABASE
+
         - CREATE TABLE - used to create a new table in the database
 			synatx - CREATE TABLE table_name(
-				   column1 datatype,
-				   column2 datatype,
-				   column3 datatype,
-				   .....
-				   columnN datatype,
-				   PRIMARY KEY( one or more columns )
-				); 
+						column1 datatype,
+						column2 datatype,
+						column3 datatype,
+						.....
+						columnN datatype,
+						PRIMARY KEY( one or more columns )
+					); 
 			example - CREATE TABLE persons (
-				  id SERIAL,
-				  first_name VARCHAR(50),
-				  last_name VARCHAR(50),
-				  dob DATE,
-				  email VARCHAR(255),
-				  PRIMARY KEY (id)
-				);
+						id SERIAL,
+						first_name VARCHAR(50),
+						last_name VARCHAR(50),
+						dob DATE,
+						email VARCHAR(255),
+						PRIMARY KEY (id)
+					);
 
 			o/p - CREATE TABLE 
+
+		- TRUNCATE TABLE - used to delete the data of a table without deleting its structure
+			syntax - TRUNCATE TABLE table_name
+
         - DROP TABLE -  used to delete the table along with its structure
 			syntax - DROP TABLE table_name
 			example - DROP TABLE person
 			o/p - DROP TABLE
+
         - INSERT QUERY - used to insert data into the table
 			syntax - INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)
 				VALUES (value1, value2, value3,...valueN);
@@ -564,17 +571,62 @@ TRIGGERS - these are databse callback functions, whcih are automatically perform
 						AFTER INSERT ON orders
 						FOR EACH ROW
 						EXECUTE FUNCTION log_order_history();
-					 
+			(to be understood later in breif)		 
 
 
 
 INDEXES - these are special look up tables that the database search engine can use to speed up data retrieval
-			ineasy terms it s a pointer to data in a table
+		- in easy terms it s a pointer to data in a table and i generally made on the column/s on which you search frequently
 		- these are special look up tables that database engine looks upto to speed up database retrieval
 		- can only be used in table in which it fetches and for updation / insertion the headover increases
 		- can created or dropped with no effect on actual data 
-		syntax - CREATE INDEX index_name ON table_name (column1, column2, ...);
-		example - CREATE INDEX idx_customer_id ON customers (customer_id);
+		syntax - CREATE INDEX index_name 
+				 ON table_name (column1, column2, ...);
+		example - CREATE INDEX idx_customer_id 
+				  ON customers (customer_id);
+
+		Types of INDEXES - 
+			- SINGLE-COLUMN INDEXES - created based on one table column
+						syntax - CREATE INDEX index_name
+								 ON table_name (column);
+
+			- MULTI-COLUMN INDEXES - created on more than one column of a table
+						syntax - CREATE INDEX index_name
+								 ON table_name(col1,col2,...coln);
+
+			- UNIQUE INDEXES - used not only for performance but also for data integrity , this doesn't allow any duplicate values to be inserted into the table
+						syntax - CREATE UNIQUE INDEX index_name
+								 ON table_name (column);
+
+			- PARTIAL INDEXES - it is a index built over a subset of a table; the subset is defined by the conditional expression, the index contains value of only those table rows that satisfy the predicate
+						syntax - CREATE INDEX index_name
+								 ON table_name(conditional_expression);
+
+			- IMPLICIT INDEXES - indexes automatically created by database server when an object is created such as for primary key?unique key constraints
+						syntax - #CREATE INDEX salary_index ON company(salary)
+						to list down all the indexes present ->   \d company
+						to list down indexes of entire databse ->    \di
+
+			- DROP INDEX - used to drop an existing index
+						syntax - # DROP INDEX salary_index;
+
+		DONT'S of INDEX - 
+			- not to be used on small table
+			- not to be used on tables that have large update or insert operations
+			- not to be used on columns that have high no of null values
+			- no to be used on columns that are frequently manipulated 
+
+
+
+ALTER TABLE COMMAND - used to add , delete, modify columns, add/drop constraints in a table 
+			syntax - ALTER TABLE table_name ADD column_name datatype;
+
+			DROP COLUMN - ALTER TABLE table_name DROP COLUMN column_name;
+			CHANGE DATA TYPE - ALTER TABLE table_name ALTER COLUMN col_name datatype datatype_name
+			ADD UNIQUE CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyUniqueConstraint UNIQUE(column_name)
+			ADD PRIMARY KEY CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyPrimaryKey PRIMARY KEY(colmn_name);
+			DROP CONSTRAINT - ALTER TABLE table_name DROP CONSTRAINT Constraint_name;
+
 
 
 
