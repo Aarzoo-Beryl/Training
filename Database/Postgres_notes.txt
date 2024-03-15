@@ -699,6 +699,24 @@ SUBQUERY - also known as inner query or nested query is a query within another q
 
 
 AUTO INCREMENT - 
+		SERIAL COLUMNS - it is a datatype when used which some column creates special columns used to automatically generate unique numbers, often used as identifiers for rows in a table.
+						Three sizes - 
+						- smallserial is for smaller numbers.
+						- serial is for regular-sized numbers.
+						- bigserial is for really big numbers.
+				syntax - CREATE TABLE table_name(
+							colname SERIAL
+						)
+				example - CREATE TABLE COMPANY(
+							ID SERIAL PRIMARY KEY,
+							NAME TEXT NOT NULL,
+							AGE INT NOT NULL,
+							ADDRESS CHAR(50),
+							SALARY REAL
+						  );
+						  # now whenever you add data into the table you dont need to add data for column id , it will automatically be generated 
+						  
+
 
 
 
