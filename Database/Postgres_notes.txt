@@ -83,12 +83,12 @@ SQL COMMANDS
 			o/p - CREATE DATABASE (tells that the database has been successfully created )
 
         - DROP DATABASE - used to delete a databse along with its structure(you can't delete the database you currently are on)
-			synatx - DROP DATABSE [IF EXISTS] database_name
+			 syntax - DROP DATABSE [IF EXISTS] database_name
 			example - DROP DATABSE [IF EXISTS] new
 			o/p - DROP DATABASE
 
         - CREATE TABLE - used to create a new table in the database
-			synatx - CREATE TABLE table_name(
+			 syntax - CREATE TABLE table_name(
 						column1 datatype,
 						column2 datatype,
 						column3 datatype,
@@ -108,7 +108,7 @@ SQL COMMANDS
 			o/p - CREATE TABLE 
 
 		- TRUNCATE TABLE - used to delete the data of a table without deleting its structure
-			syntax - TRUNCATE TABLE table_name
+			syntax - TRUNCATE TABLE table_name;
 
         - DROP TABLE -  used to delete the table along with its structure
 			syntax - DROP TABLE table_name
@@ -202,7 +202,7 @@ SQL COMMANDS
 			o/p - DELETE 2
 
         - LIKE CLAUSE - used to  provide an approx idea of what a user is trying to search and results in all the matching patterns
-			synatx - SELECT * FROM table_name
+			 syntax - SELECT * FROM table_name
 				 WHERE column LIKE 'pattern'
 			example - SELECT * FROM movies
 				  WHERE movie_name LIKE 'THE%';
@@ -259,7 +259,7 @@ SQL COMMANDS
 				(5 rows)
 
         - ORDER BY - used to order the table aescending/descending based on a certain column of the table
-                        synatx - SELECT * FROM table_name ORDER BY colmn_name [ASC|DESC];
+                         syntax - SELECT * FROM table_name ORDER BY colmn_name [ASC|DESC];
                         example -  SELECT * FROM store ORDER BY store_name ASC;
                         o/p -    store_id |    store_name    | product | quantity | cost 
 				----------+------------------+---------+----------+------
@@ -626,6 +626,87 @@ ALTER TABLE COMMAND - used to add , delete, modify columns, add/drop constraints
 			ADD UNIQUE CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyUniqueConstraint UNIQUE(column_name)
 			ADD PRIMARY KEY CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyPrimaryKey PRIMARY KEY(colmn_name);
 			DROP CONSTRAINT - ALTER TABLE table_name DROP CONSTRAINT Constraint_name;
+
+
+
+
+VIEW - these are pseudo tables i.e. they are not real tables but still appear as table to the select statement
+	 - it represents a subset of a real table , selecting certain columns or certain rows from the real table
+	 - it can also represent joined tables 
+	 - as views are assigned certain permissions, you can use them to restrict access to the table so that the user see only specific field or data of the column
+
+	 Permissions granter to users by view - 
+	 				- data can be structured in a way that users or classes of users find natural or intuitive
+					- restrict access to table by allowing them to see only specific column/data
+					- summarize data from various tables(can be used to generate reports)
+
+	 Creating VIEW - view can be created from a table, multiple table or from another view
+	 		syntax - CREATE [TEMP|TEMPORARY] VIEW view_name AS 
+					 SELECT .......
+					# multiple select statements can be used ,    temp is used we want to keep the view only in the current session
+					#fetched same way as a normal table
+
+	 Drop VIEW - used to delete view
+	 		syntax - DROP VIEW view_name
+
+
+TRANSACTIONS - it is a unit of work performed on a database 
+			 - it can be a unit or sequence of work accompalished in logical order, either manually or automatically.
+			 - it is important to control transaction to ensure high data integrity and to handle database errors
+
+	Properties of transaction - 
+			Atomicity - ensures that all operations within the work unit are completed successfully ;if not then the transaction is aborted at the time of failure and the previous operations are rolled back to their former state
+			Consistency - ensures that the database properly changes state upon successfully complition of transaction
+			Isolation - enables transactions to operate independently and tranparently
+			Durabilty - ensures that the result or effect of a committed transaction persists in case of a system failure
+
+
+	Transaction Control Commands - only used with the DML commands
+			BEGIN TRANSACTION - used to start a transaction
+						syntax - BEGIN | BEGIN TRANSACTION
+
+			COMMIT - used to save changes after the last commit or rollback(you can use END TRANSACTION COMMAND)
+						syntax - COMMIT | END TRANSACTION
+
+			ROLLBACK - used to rollback to the last commit
+						syntax - ROLLBACK;
+
+LOCKS - these prevent users from modifying a row or entire table preventing other users from changing the row until the transaction is either committed or rolled back
+		the only time when the use must wait for the other user is when they are trying to modify the same row(if modifying different row no need to wait,select query never have to wait)
+		generally databse performs locking automatically,in certain cases, locking must be controlled manuallyby using lock command
+	syntax - LOCK [table] name IN lock_mode
+		# name - refers to the existing table we want to lock(if ONLY is specified before lock then only that table will be locked otherwise thta table and all its decendant tables will be locked)
+		# lock_mode - specifies which locks this lock conflicts with(if no lock mode is specified then the most restrictive mode -ACCESS EXCLUSIVE is used)
+						other possible values -  ACCESS SHARE, ROW SHARE, ROW EXCLUSIVE,SHARE UPDATE EXCLUSIVE,SHARE,SHARE RW EXCLUSIVE.
+				EXCLUSIVE LOCKING - it means they're the only one allowed to make changes to it until they're finished.
+
+	DEADLOCKS - it occurs when two transactions are waiting for each other to finish 
+
+	ADVISORY LOCKS - these are locks not strong as others but help provide with an advisory warning(faster than flags and are automatically cleaned up at te end of the session)
+
+
+SUBQUERY - also known as inner query or nested query is a query within another query nested inside the where clause
+			it returns data that will be used as a condition to further restrict the data to be retrieved by the main query
+			these can be used with dml command along with different comparison operators
+
+		Rules for subquery - 
+		 - must be enclosed withtin()
+		 - can have only one column in the select clause unless multiple columns are there in the main query to be compared with
+		 - order by can't be used 
+		 - subquery that return more than one row cannot use multiple value operator such as in, exists,not in,any/some,all operator
+		 - between operator cannot be used with the subquery but can be used within in
+		 - can be used with SELECT, INSERT,UPDATE AND DELETE COMMANDS 
+
+
+AUTO INCREMENT - 
+
+
+
+
+
+FUNCTIONS - stored procedures allowing us to do task that require multiple queries to execute a task
+
+
 
 
 
