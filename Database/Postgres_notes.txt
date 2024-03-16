@@ -779,12 +779,49 @@ DATE/TIME FUNCTIONS AND OPERATORS -
 							result - 
 
 							
-				- CURRENT DATE/TIME - 
-				- DATE_PART() - 
-				- EXTRACT - 
-				- ISFINITE() - 
-				- JUSTIFY - 				
+				- CURRENT DATE/TIME - there are number of functions that return values related to current data and time
 
+							Function 						Description
+							CURRENT_DATE					delivers current date
+							CURRENT_TIME					delivers value with time zone
+							CURRENT_TIMESTAMP				delivers value with time zone
+							CURRENT_TIME(precision)			optionally takes a precision parameter which causes the result to be rounded to that many fractional digit in the second fields
+							CURRENT_TIMESTAMP(precision)	same as above
+							LOCALTIME						delivers value without time zone
+							LOCALTIMESTAMP 					delivers value without time zone
+							LOCALTIME(precision)			optionally takes a precision parameter which causes the result to be rounded to that many fractional digit in the second fields
+							LOCALTIMESTAMP(precision)		optionally takes a precision parameter which causes the result to be rounded to that many fractional digit in the second fields
+
+							transaction_timestamp()			equivalent to CURRENT_TIMESTAMP
+							statement_timestamp()			returns start time of the current statement
+							clock_timestamp() 				returns the actual current time and its value changes even withtin asingle sql command
+							timeofday()						returns actaul current time ,but as a formatted text string rather than a timestamp with time zone value
+							now()							equivalent to transaction_timestamp
+
+				- DATE_PART() - 
+
+							Function 						Description
+							DATE_PART('field',source)		here the field parameter needs to be a string value not a name
+							DATE_TRUNC('field',source)		similar to trunc for numbers
+				- EXTRACT - 
+
+							Function 						Description
+							EXTRACT('feild' from timestamp) used to extract subfields from date/time values
+							EXTRACT('field' from interval)  used to extract from source value
+
+				- ISFINITE() - 
+
+							Function 						Description
+							ISFINITE(date)					tests for finite date
+							ISFINITE(timestamp)				tests for finite timestamp
+							ISFINITE(interval)				tests for finite interval
+
+				- JUSTIFY - 
+
+							Function 						Description
+							JUSTIFY_DAYS(interval)			adjusts interval so 30-days interval is shown as months,return  the interval types
+							JUSTIFY_HOURS(interval)			adjusts interval so 24-hours interval is shown as days,return  the interval types
+							JUSTIFY_INTERVAL(interval)		adjusts days using JUSTIFY_HOURS and JUSTIFY_DAYS,with additional sign adjustments
 
 
 
