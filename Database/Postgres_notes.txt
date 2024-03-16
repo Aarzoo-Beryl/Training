@@ -824,9 +824,28 @@ DATE/TIME FUNCTIONS AND OPERATORS -
 							JUSTIFY_INTERVAL(interval)		adjusts days using JUSTIFY_HOURS and JUSTIFY_DAYS,with additional sign adjustments
 
 
-
-
 FUNCTIONS - stored procedures allowing us to do task that require multiple queries to execute a task
+			it allows database reuse as other applications can interact directly with your stored procedures instead of middle-tier or duplicating compared
+			syntax - CREATE [OR REPLACE] FUNCTION function_name (argument)
+					 RETURNS return_datatype AS $variable_name$
+					 DECLARE 
+					 	declaration;
+						[...]
+					 BEGIN 
+					 <function body>
+					 [......]
+					 RETURN {variable_name |value }
+					 END ; LANGUAGE plpgsql;
+
+		 Useful built-in functions - 
+					- COUNT - counts the occurance of an object
+					- MAX - identifies the max value
+					- MIN - identifies the min value 
+					- AVG - calculates the average value of the the column
+					- SUM - calculates the overall sum 
+					- ARRAY - puts input values,including nulls,concatenated into an array
+					- NUMERIC - required to manipulate numbers in sql
+					- STRING - required to manipulate string
 
 
 
