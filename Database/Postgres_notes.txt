@@ -711,11 +711,16 @@ AUTO INCREMENT -
 							ID SERIAL PRIMARY KEY,
 							NAME TEXT NOT NULL,
 							AGE INT NOT NULL,
-							ADDRESS CHAR(50),
 							SALARY REAL
 						  );
 						  # now whenever you add data into the table you dont need to add data for column id , it will automatically be generated 
-						  
+				o/p-   id |   name   | age | salary 
+					  ----+----------+-----+--------
+						1 | aarzoo   |  21 |  10000
+						2 | abhishek |  21 |  17000
+						3 | sunita   |  22 |  35000
+						4 | tanya    |  21 |  15000
+					  (4 rows)
 
 PRIVILEDGE - it refers to the permissions a person have to manipulate or view or do anything related to a database
 			 wheneveran object is created in a database,an owner is assigned to it which is usuallt the one who executes the create statement

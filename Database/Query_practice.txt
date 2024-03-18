@@ -236,6 +236,207 @@ tables -
 
 
 
+11. Find the top 5 customers who spent the most money on their bills.
+
+        query - SELECT c.customer_id,name,bill_id,total_bill 
+                FROM bill b JOIN customer c 
+                ON b.customer_id = c.customer_id
+                ORDER BY total_bill DESC
+                LIMIT 5;
+
+        result -      customer_id |      name      | bill_id | total_bill 
+                     -------------+----------------+---------+------------
+                                1 | Alice Johnson  |       1 |       2150
+                                3 | Carol Williams |       3 |       2000
+                               15 | Penny Garcia   |      15 |       1600
+                               10 | Jack White     |      10 |        730
+                               11 | Kate Anderson  |      11 |        420
+                        (5 rows)
+
+
+
+12. Show the names of products that have been reviewed by more than 3 customers.
+
+        query - 
+
+13. Display the top 3 most expensive products for each brand.
+
+        query - 
+
+14. Find the total number of customers.
+
+        query - SELECT COUNT(customer_id) AS total_customers FROM customer;
+
+        result -  total_customers 
+                 -----------------
+                                6
+                (1 row)
+
+
+15. Find the average number of products ordered per bill.
+
+
+16. List all products along with their descriptions and brands.
+
+        query - SELECT p.name,p.description,b.title 
+                FROM product p JOIN brand b
+                ON p.brand_id = b.brand_id;
+
+        result -       name         |                     description                     |     title     
+               ---------------------+-----------------------------------------------------+---------------
+                Laptop              | 15-inch laptop with Intel Core i7 processor         | Apple
+                Desk                | Wooden desk with built-in drawers                   | Apple
+                Camera              | Mirrorless camera with interchangeable lenses       | Herman Miller
+                Headphones          | Wireless headphones with noise cancellation feature | Sony
+                TV                  | 55-inch smart TV with 4K resolution                 | LG
+                Printer             | Color inkjet printer with Wi-Fi connectivity        | HP
+                Smartphone          | Latest model with 6.5-inch display and dual cameras | IKEA
+                Chair               | Ergonomic chair with adjustable armrests            | Herman Miller
+                Watch               | Smartwatch with heart rate monitor and GPS          | Apple
+                Gaming Console      | Next-gen gaming console with 4K gaming support      | Microsoft
+                External Hard Drive | 1TB portable hard drive with USB 3.0 interface      | Seagate
+                Speaker             | Bluetooth speaker with 20 hours of battery life     | Bose
+                Router              | Dual-band router with gigabit Ethernet ports        | TP-Link
+                Monitor             | 24-inch monitor with IPS panel                      | Dell
+                Tablet              | 10-inch tablet with quad-core processor             | Lenovo
+                (15 rows)
+
+
+17. Update the total bill amount for each bill acoording to the products in it.
+
+        query - UPDATE bill
+                SET total_bill = (
+                        SELECT SUM(p.price) FROM order_summary o JOIN product p
+                        ON o.product_id = p.product_id
+                        WHERE o.bill_id=bill.bill_id
+                )
+                WHERE bill_id IN (1,3,7,10,11,15);
+
+        result -  bill_id |    date    |        shipping_address        | total_bill | customer_id 
+                 ---------+------------+--------------------------------+------------+-------------
+                        1 | 2024-03-14 | 123 Main St, Cityville, CA     |       2150 |           1
+                        3 | 2024-03-14 | 789 Oak St, Villagetown, TX    |       2000 |           3
+                        7 | 2024-03-14 | 404 Birch St, Hilltown, PA     |        400 |           7
+                       10 | 2024-03-14 | 707 Cherry St, Orchardtown, MI |        730 |          10
+                       11 | 2024-03-14 | 808 Peach St, Beachside, CA    |        420 |          11
+                       15 | 2024-03-14 | 1212 Orange St, Orangetown, TX |       1600 |          15
+                (6 rows)
+
+18. Show the customers who have not made any payments.
+
+        query - SELECT c.name 
+                FROM customer c LEFT JOIN payment p
+                ON c.customer_id = p.payment_id
+                WHERE p.payment_id IS NULL;
+
+        result -      name     
+                --------------
+                Jack White
+                Penny Garcia
+                Aarzoo
+                (3 rows)
+
+
+19. Show the types of payment along with their descriptions.
+        query - SELECT title,description 
+                FROM payment_type;
+
+        result -     title       |            description             
+               ------------------+------------------------------------
+                Credit Card      | Payment made using a credit card
+                Debit Card       | Payment made using a debit card
+                PayPal           | Payment made using PayPal account
+                Cash on Delivery | Payment made in cash upon delivery
+                Bank Transfer    | Payment made via bank transfer
+                Cryptocurrency   | Payment made using cryptocurrency
+                Gift Card        | Payment made using a gift card
+                (7 rows)
+
+
+20. List all products with their corresponding seller information (name and email).
+
+        query - SELECT p.name as product, p.price as product_price,s.name as seller,s.phone_number as seller_phnno,s.email as seller_mail
+                FROM product p JOIN seller s
+                ON p.seller_id = s.seller_id;
+
+        result -      product       | product_price |      seller      | seller_phnno |      seller_mail      
+               ---------------------+---------------+------------------+--------------+-----------------------
+                Laptop              |          1200 | Jane Smith       |   9876543210 | jane@example.com
+                Desk                |           200 | David Lee        |   4444444444 | david@example.com
+                Camera              |          1000 | Sarah Wilson     |   6666666666 | sarah@example.com
+                Headphones          |           150 | James Garcia     |   7777777777 | james@example.com
+                TV                  |          1500 | Jane Smith       |   9876543210 | jane@example.com
+                Printer             |           300 | Emma Martinez    |   8888888888 | emma@example.com
+                Smartphone          |           800 | Emily Brown      |   3333333333 | emily@example.com
+                Chair               |           100 | Sarah Wilson     |   6666666666 | sarah@example.com
+                Watch               |           400 | Olivia Hernandez |   2222222222 | olivia@example.com
+                Gaming Console      |           400 | Sophia Gonzalez  |   7778889999 | sophia@example.com
+                External Hard Drive |           120 | Mason Flores     |   5554443333 | mason@example.com
+                Speaker             |           250 | Alexander Smith  |   1111111111 | alexander@example.com
+                Router              |            80 | William Perez    |   3332221111 | william@example.com
+                Monitor             |           300 | Isabella Torres  |   4443332222 | isabella@example.com
+                Tablet              |           500 | Daniel Rodriguez |   9999999999 | daniel@example.com
+                (15 rows)
+
+
+
+21. Find the number of products in each category.
+
+        query - SELECT c.category_id,c.title , COUNT(p.product_id) as total_products
+                FROM category c JOIN product p
+                ON c.category_id = p.category_id
+                GROUP BY c.category_id
+                ORDER BY c.category_id;
+
+        result -      category_id |        title        | total_products 
+                     -------------+---------------------+----------------
+                                2 | Mobile Phones       |              2
+                                4 | Furniture           |              3
+                                5 | Home Appliances     |              1
+                                6 | Cameras             |              1
+                                8 | Printers & Scanners |              1
+                                9 | Tablets             |              1
+                               10 | Wearables           |              1
+                               11 | Gaming              |              1
+                               12 | Networking          |              1
+                               13 | Monitors            |              1
+                               14 | Storage             |              1
+                               15 | Accessories         |              1
+                      (12 rows)
+
+
+22. Show the total number of reviews for each product.
+
+
+23. Display the names and addresses of all customers along with their corresponding pin codes.
+
+
+24. List all products with their prices sorted in descending order.
+
+
+25. Show the total number of bills for each customer.
+
+
+26. Display the names and descriptions of all products along with their corresponding categories.
+
+
+27. Find the average price of all products.
+
+
+28. Show the names of products along with their corresponding sellers and brands.
+
+
+29. List all customers who have made payments along with the payment types they used.
+
+
+30. Display the names and descriptions of all brands along with the number of products they have.
+
+
+
+
+
+
+
 
 
 
