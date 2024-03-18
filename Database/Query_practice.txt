@@ -202,13 +202,39 @@ tables -
 
 8. find number of orders placed each month
 
-    query - 
-    result - 
+    query - SELECT 
+                EXTRACT(MONTH FROM TO_DATE(date, 'YYYY-MM-DD')) AS month,
+                EXTRACT(YEAR FROM TO_DATE(date, 'YYYY-MM-DD')) AS year,
+                COUNT(*) AS num_orders
+            FROM 
+                bill
+            GROUP BY 
+                EXTRACT(MONTH FROM TO_DATE(date, 'YYYY-MM-DD')), 
+                EXTRACT(YEAR FROM TO_DATE(date, 'YYYY-MM-DD'))
+            ORDER BY 
+                year, month;
+
+                #EXTRACT(MONTH FROM TO_DATE(date, 'YYYY-MM-DD'))- extracts the month and TO_DATEspecifies the date format added to the column
+        result -    month | year | num_orders 
+                    ------+------+------------
+                        8 | 2021 |          1
+                        8 | 2022 |          2
+                        8 | 2023 |          1
+                        3 | 2024 |          2
+                        (4 rows)
+
 
 9. retrieve order that were placed before jan 1,2023
 
-    query - 
-    result - 
+    query - SELECT * FROM bill
+            WHERE date<'2023-01-01';
+    result -      bill_id |    date    |        shipping_address        | total_bill | customer_id 
+                 ---------+------------+--------------------------------+------------+-------------
+                        1 | 2022-08-27 | 123 Main St, Cityville, CA     |       2150 |           1
+                        7 | 2022-08-27 | 404 Birch St, Hilltown, PA     |        400 |           7
+                       10 | 2021-08-29 | 707 Cherry St, Orchardtown, MI |        730 |          10
+                (3 rows)
+
 
 10. calculate the total quantity and revenue for each product category
 
@@ -255,13 +281,59 @@ tables -
 
 
 
-12. Show the names of products that have been reviewed by more than 3 customers.
+12. Show the names of products that have been reviewed by more than or equal to 2 customers.
 
-        query - 
+        query - WITH reviews AS (
+                SELECT p.name AS product_name ,COUNT(r.review_id) AS total_reviews 
+                FROM product p JOIN review r 
+                ON p.product_id = r.product_id
+                GROUP BY p.name )
+                SELECT product_name ,total_reviews
+                FROM reviews 
+                WHERE total_reviews>=2;
+
+        result -        product_name | total_reviews 
+                       --------------+---------------
+                        Smartphone   |             2
+                        Laptop       |             3
+                        (2 rows)
+
+
 
 13. Display the top 3 most expensive products for each brand.
 
-        query - 
+        query - SELECT brand.title AS brand_name, product.name AS product_name, product.price AS product_price
+                FROM (
+                SELECT brand_id, name, price, 
+                        ROW_NUMBER() OVER (PARTITION BY brand_id ORDER BY price DESC) AS rn
+                FROM product
+                ) AS product
+                JOIN brand ON product.brand_id = brand.brand_id
+                WHERE product.rn <= 3;
+
+        result -         brand_name   |    product_name     | product_price 
+                       ---------------+---------------------+---------------
+                        Apple         | Desk                |           200
+                        Apple         | Laptop              |          1200
+                        Apple         | Watch               |           400
+                        Bose          | Speaker             |           250
+                        Dell          | Monitor             |           300
+                        Herman Miller | Chair               |           100
+                        Herman Miller | Camera              |          1000
+                        HP            | Printer             |           300
+                        IKEA          | Smartphone          |           800
+                        Lenovo        | Tablet              |           500
+                        LG            | TV                  |          1500
+                        Microsoft     | Gaming Console      |           400
+                        Seagate       | External Hard Drive |           120
+                        Sony          | Headphones          |           150
+                        TP-Link       | Router              |            80
+                        (15 rows)
+
+                #ROW_NUMBER(): This is a window function that assigns a unique sequential integer to each row within the partition. It starts from 1 for the first row in each partition and increments by 1 for each subsequent row.
+                #OVER(): This clause defines the window within which the window function operates by specifying the partitioning and ordering of the rows within that window.
+                #PARTITION BY brand_id: it groups rows with the same brand_id into separate partitions.
+                #ORDER BY price DESC: This part of the statement specifies the order in which the rows are processed within each partition. 
 
 14. Find the total number of customers.
 
@@ -274,6 +346,19 @@ tables -
 
 
 15. Find the average number of products ordered per bill.
+
+        query - WITH products AS (
+                        SELECT COUNT(product_id) as total_products
+                        FROM order_summary
+                        GROUP BY bill_id
+                )
+                SELECT AVG(total_products) AS avg_products_ordered
+                FROM products;
+
+        result -        avg_products_ordered 
+                        ----------------------
+                        2.5000000000000000
+                        (1 row)
 
 
 16. List all products along with their descriptions and brands.
@@ -596,12 +681,100 @@ tables -
 
 
 
+# in this difficult questions were 9th and 13th
+
+
+
 ------------------------------------------------ADVANCE CONCEPT PRACTICE ---------------------------------------------------
 
 
 
+FUNCTION - 
+        
+        BASIC SYNTAX -  CREATE OR REPLACE FUNCTION func_name(input datatype)
+                        RETURNS return_datatype AS $$
+                        DECLARE 
+                                ----varables declared
+                        BEGIN 
+                                ----function logic;
+                        END;
+                        $$LANGUAGE plpgsql;
+
+        QUESTION - FUNCTION THAT GIVES ALL INFORMATION ABOUT THE CUSTOMER INCLUDING ADDRESS
+
+        QUERY - 
+                CREATE OR REPLACE FUNCTION customer_info(id_input integer)
+                RETURNS TABLE(name varchar,phone_number bigint, email varchar, address text)
+                BEGIN
+                        SELECT c.name,c.phone_number, CONCAT_WS(',',a.house_number,a.sector,a.city,a.state,a.country,a.pincode)
+                        FROM customer c
+                        JOIN address a
+                        ON c.address_id = a.address_id
+                        WHERE c.customer_id = id_input;
+                END;
+                $$ LANGUAGE plpgsql;
+
+        TO FETCH - SELECT * FROM customer_info(1)
+
+        RESULT -      name      | phone_number |       email       |                     address                      
+                 ---------------+--------------+-------------------+--------------------------------------------------
+                  Alice Johnson |   1234567890 | alice@example.com | 123, Sector A, Cityville, California, USA, 12345
+                 (1 row)
 
 
+TRIGGER - 
+
+        BASIC SYNTAX -  FIRST CREATE FUNCTION
+                        CREATE TRIGGER trigger_name
+                        {AFTER|BEFORE|INSTEAD OF} {EVENT}
+                        FOR EACH ROW | STATEMENT
+                        EXECUTE PRODCEDURE name_of_function_to_be_executed();
+
+        QUESTION - AUTOMATICALLY UPDATES THE TOTAL BILL WHEN NEW ENTRY /UPDATION/DELETION IN ORDER_SUMMARY
+
+        QUERY - CREATE OR REPLACE FUNCTION update_bill()
+                RETURNS TRIGGER AS $$
+                BEGIN 
+                        UPDATE bill
+                        SET total_bill = (
+                                SELECT SUM(p.price)
+                                FROM order_summary o JOIN product p
+                                ON o.product_id = p.product_id
+                                WHERE o.bill_id = NEW.bill_id)
+                                WHERE bill_id = NEW.bill_id;
+                        RETURN NEW ;
+                END;
+                $$ LANGUAGE plpgsql;
+                CREATE TRIGGER update_bill_trigger
+                AFTER INSERT OR UPDATE OR DELETE ON order_summary
+                FOR EACH ROW
+                EXECUTE PROCEDURE update_bill();
+
+        FETCH - insert into order_summary(bill_id,product_id)
+                values (11,7);
+
+
+        RESULT - 
+                Before -  bill_id |    date    |        shipping_address        | total_bill | customer_id 
+                         ---------+------------+--------------------------------+------------+-------------
+                               11 | 2024-03-14 | 808 Peach St, Beachside, CA    |        420 |          11
+                               15 | 2024-03-14 | 1212 Orange St, Orangetown, TX |       1600 |          15
+                                1 | 2022-08-27 | 123 Main St, Cityville, CA     |       2150 |           1
+                                7 | 2022-08-27 | 404 Birch St, Hilltown, PA     |        400 |           7
+                                3 | 2023-08-27 | 789 Oak St, Villagetown, TX    |       2000 |           3
+                               10 | 2021-08-29 | 707 Cherry St, Orchardtown, MI |        730 |          10
+                        (6 rows)
+
+
+                After -  bill_id |    date    |        shipping_address        | total_bill | customer_id 
+                        ---------+------------+--------------------------------+------------+-------------
+                              15 | 2024-03-14 | 1212 Orange St, Orangetown, TX |       1600 |          15
+                               1 | 2022-08-27 | 123 Main St, Cityville, CA     |       2150 |           1
+                               7 | 2022-08-27 | 404 Birch St, Hilltown, PA     |        400 |           7
+                               3 | 2023-08-27 | 789 Oak St, Villagetown, TX    |       2000 |           3
+                              10 | 2021-08-29 | 707 Cherry St, Orchardtown, MI |        730 |          10
+                              11 | 2024-03-14 | 808 Peach St, Beachside, CA    |       1420 |          11
+                        (6 rows)
 
 
 
