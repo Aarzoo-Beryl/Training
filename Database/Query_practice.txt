@@ -26,7 +26,6 @@ tables -
                     brand_id integer [not null , ref: >brand.brand_id]
                     seller_id integer [not null , ref: >seller.seller_id]
                     category_id integer [not null, ref: > category.category_id]
-                    review_id integer [ref: >review.review_id]
 
         - address - 
                     address_id integer [primary key, not null]
@@ -64,6 +63,7 @@ tables -
         - review -
                     review_id integer [primary key, not null]
                     description text [not null]
+                    product_id integer [not null , ref: > product.product_id]
                     customer_id integer [not null , ref: > customer.customer_id]
 
         - bill-   
@@ -73,7 +73,7 @@ tables -
                     shipping_address varchar [not null]
                     total_bill integer [not null]
 
----------------------------practice--------------------
+-----------------------------------------------BASIC CONCEPT PRACTICE-------------------------------------------------------------
 
 
 
@@ -407,35 +407,196 @@ tables -
 
 22. Show the total number of reviews for each product.
 
+        query - SELECT p.name, count(r.review_id) AS total_reviews
+                FROM product p JOIN review r
+                ON p.product_id = r.product_id
+                GROUP BY p.name;
+
+        result -       name         | total_reviews 
+               ---------------------+---------------
+                Smartphone          |             2
+                Camera              |             1
+                Chair               |             1
+                Desk                |             1
+                External Hard Drive |             1
+                Router              |             1
+                Gaming Console      |             1
+                Laptop              |             3
+                (8 rows)
+
+
 
 23. Display the names and addresses of all customers along with their corresponding pin codes.
+
+        query - SELECT c.name,a.house_number,a.sector,a.city,a.state,a.country,a.pincode
+                FROM customer c JOIN address a
+                ON c.address_id = a.address_id; 
+
+        result -             name      | house_number |  sector  |    city     |    state     | country | pincode 
+                       ----------------+--------------+----------+-------------+--------------+---------+---------
+                        Alice Johnson  | 123          | Sector A | Cityville   | California   | USA     |   12345
+                        Carol Williams | 789          | Sector C | Villagetown | Texas        | USA     |   34567
+                        Aarzoo         | 404          | Sector G | Hilltown    | Pennsylvania | USA     |   78901
+                        Grace Miller   | 404          | Sector G | Hilltown    | Pennsylvania | USA     |   78901
+                        Jack White     | 707          | Sector J | Orchardtown | Michigan     | USA     |    1234
+                        Kate Anderson  | 808          | Sector K | Beachside   | California   | USA     |   12340
+                        Penny Garcia   | 1212         | Sector O | Orangetown  | Texas        | USA     |   56789
+                        (7 rows)
 
 
 24. List all products with their prices sorted in descending order.
 
+        query - SELECT name, price
+                FROM product
+                ORDER BY price DESC;
+
+        result -               name         | price 
+                       ---------------------+-------
+                        TV                  |  1500
+                        Laptop              |  1200
+                        Camera              |  1000
+                        Smartphone          |   800
+                        Tablet              |   500
+                        Watch               |   400
+                        Gaming Console      |   400
+                        Printer             |   300
+                        Monitor             |   300
+                        Speaker             |   250
+                        Desk                |   200
+                        Headphones          |   150
+                        External Hard Drive |   120
+                        Chair               |   100
+                        Router              |    80
+                        (15 rows)
+
 
 25. Show the total number of bills for each customer.
 
+        query - SELECT c.name, count(b.bill_id)
+                FROM customer c LEFT JOIN bill b 
+                ON c.customer_id = b.customer_id
+                GROUP BY c.name;
 
-26. Display the names and descriptions of all products along with their corresponding categories.
+        result -             name      | count 
+                       ----------------+-------
+                        Carol Williams |     1
+                        Aarzoo         |     0
+                        Penny Garcia   |     1
+                        Alice Johnson  |     1
+                        Grace Miller   |     1
+                        Kate Anderson  |     1
+                        Jack White     |     1
+                        (7 rows)
+
+
+26. Display the names and descriptions of all products along with their corresponding brand.
+
+        query - SELECT p.name,p.description,b.title
+                FROM product p JOIN brand b
+                ON p.brand_id = b.brand_id;
+
+        result -               name         |                     description                     |     title     
+                       ---------------------+-----------------------------------------------------+---------------
+                        Laptop              | 15-inch laptop with Intel Core i7 processor         | Apple
+                        Desk                | Wooden desk with built-in drawers                   | Apple
+                        Camera              | Mirrorless camera with interchangeable lenses       | Herman Miller
+                        Headphones          | Wireless headphones with noise cancellation feature | Sony
+                        TV                  | 55-inch smart TV with 4K resolution                 | LG
+                        Printer             | Color inkjet printer with Wi-Fi connectivity        | HP
+                        Smartphone          | Latest model with 6.5-inch display and dual cameras | IKEA
+                        Chair               | Ergonomic chair with adjustable armrests            | Herman Miller
+                        Watch               | Smartwatch with heart rate monitor and GPS          | Apple
+                        Gaming Console      | Next-gen gaming console with 4K gaming support      | Microsoft
+                        External Hard Drive | 1TB portable hard drive with USB 3.0 interface      | Seagate
+                        Speaker             | Bluetooth speaker with 20 hours of battery life     | Bose
+                        Router              | Dual-band router with gigabit Ethernet ports        | TP-Link
+                        Monitor             | 24-inch monitor with IPS panel                      | Dell
+                        Tablet              | 10-inch tablet with quad-core processor             | Lenovo
+                        (15 rows)
 
 
 27. Find the average price of all products.
 
+        query - SELECT AVG(price) FROM product;
+
+        result -        avg        
+                ------------------
+                486.666666666667
+                (1 row)
+
 
 28. Show the names of products along with their corresponding sellers and brands.
+
+        query - SELECT p.name,c.title,b.title
+                FROM product p 
+                JOIN brand b ON p.brand_id = b.brand_id
+                JOIN category c ON p.category_id = c.category_id;
+
+        result -               name         |        title        |     title     
+                       ---------------------+---------------------+---------------
+                        Laptop              | Furniture           | Apple
+                        Desk                | Furniture           | Apple
+                        Camera              | Furniture           | Herman Miller
+                        Headphones          | Mobile Phones       | Sony
+                        TV                  | Cameras             | LG
+                        Printer             | Printers & Scanners | HP
+                        Smartphone          | Mobile Phones       | IKEA
+                        Chair               | Home Appliances     | Herman Miller
+                        Watch               | Wearables           | Apple
+                        Gaming Console      | Networking          | Microsoft
+                        External Hard Drive | Accessories         | Seagate
+                        Speaker             | Gaming              | Bose
+                        Router              | Monitors            | TP-Link
+                        Monitor             | Storage             | Dell
+                        Tablet              | Tablets             | Lenovo
+                        (15 rows)
 
 
 29. List all customers who have made payments along with the payment types they used.
 
+        query - SELECT c.name AS customer_name,p.payment_id , pt.title AS payment_type
+                FROM payment p 
+                JOIN customer c ON p.customer_id = c.customer_id
+                JOIN payment_type pt ON p.type_id = pt.type_id;
+
+        result -        customer_name  | payment_id |   payment_type   
+                       ----------------+------------+------------------
+                        Alice Johnson  |          1 | Credit Card
+                        Alice Johnson  |          3 | PayPal
+                        Kate Anderson  |          7 | Gift Card
+                        Carol Williams |         10 | PayPal
+                        Grace Miller   |         11 | Cash on Delivery
+                        Alice Johnson  |         15 | Credit Card
+                        (6 rows)
+
 
 30. Display the names and descriptions of all brands along with the number of products they have.
 
+        query - SELECT b.title,b.description,count(p.product_id) AS total_products
+                FROM brand b JOIN product p
+                ON b.brand_id = p.brand_id
+                GROUP BY b.title,b.description;
+
+        result -            title     |                         description                         | total_products 
+                       ---------------+-------------------------------------------------------------+----------------
+                        Apple         | Manufacturer of iPhones, iPads, and MacBooks                |              2
+                        Sony          | Manufacturer of audio devices, cameras, and gaming consoles |              1
+                        Herman Miller | Designer and manufacturer of ergonomic chairs and furniture |              2
+                        IKEA          | Furniture retailer known for its modern designs             |              1
+                        Lenovo        | Manufacturer of laptops, desktops, and tablets              |              1
+                        LG            | Manufacturer of TVs, home appliances, and mobile devices    |              1
+                        Apple         | Manufacturer of smartwatches and accessories                |              1
+                        Microsoft     | Manufacturer of Xbox gaming consoles and software           |              1
+                        HP            | Manufacturer of printers, laptops, and desktops             |              1
+                        Bose          | Manufacturer of audio equipment and speakers                |              1
+                        Dell          | Manufacturer of computers, monitors, and peripherals        |              1
+                        TP-Link       | Manufacturer of networking equipment and devices            |              1
+                        Seagate       | Manufacturer of hard drives and storage solutions           |              1
+                        (13 rows)
 
 
 
-
-
+------------------------------------------------ADVANCE CONCEPT PRACTICE ---------------------------------------------------
 
 
 
