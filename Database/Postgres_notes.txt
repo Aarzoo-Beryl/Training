@@ -307,14 +307,14 @@ SQL COMMANDS
 								select * from movies as e, average_rating as av
 								where e.imdb_ratings > av.avg; 
 					o/p -  movie_id |        movie_name        |  movie_genre   | imdb_ratings |       avg        
-						  ----------+--------------------------+----------------+--------------+------------------
-								102 | The Shawshank Redemption | Crime,Friction |          9.3 | 8.78571442195347
-								104 | The Dark Knight          | Action         |            9 | 8.78571442195347
-								103 | 12 Angry Men             | Drama,Crime    |            9 | 8.78571442195347
-							(3 rows)
+					      ----------+--------------------------+----------------+--------------+------------------
+						    102 | The Shawshank Redemption | Crime,Friction |          9.3 | 8.78571442195347
+						    104 | The Dark Knight          | Action         |            9 | 8.78571442195347
+						    103 | 12 Angry Men             | Drama,Crime    |            9 | 8.78571442195347
+					    (3 rows)
 
-		- HAVING CLAUSE - it allows us to pick out particular rows where the function's result meets some condition.Always placed after group by clause.
-						  The WHERE clause places conditions on the selected columns, whereas the HAVING clause places conditions on groups created by the GROUP BY clause.
+	- HAVING CLAUSE - it allows us to pick out particular rows where the function's result meets some condition.Always placed after group by clause.
+			  The WHERE clause places conditions on the selected columns, whereas the HAVING clause places conditions on groups created by the 			  GROUP BY clause.
 					syntax -    SELECT column1, column2
 								FROM table1, table2
 								WHERE [ conditions ]
@@ -398,30 +398,34 @@ CONSTRAINTS -
 		can be applied at two levels i.e. Table level(apllied to whole table) and column level (applied to specific columns of the table)
 
 		- NOT NULL - by default a column can hold null values and by applying this constraint specifies that no part of the column can be left null.
-					 it is a column level constraint.(null is not same as no data it reperesents unknown data)
-					 syntax - CREATE TABLE employees(
-								id PRIMARY KEY NOT NULL
-							 );
+			     it is a column level constraint.(null is not same as no data it reperesents unknown data)
+				 syntax - CREATE TABLE employees(
+							id PRIMARY KEY NOT NULL
+						 );
 		- UNIQUE - this prevents two records from having identical values in a particulaar column
-					 syntax - CREATE TABLE employees(
-								age int NOT NULL UNIQUE
-					 		  ); 
+				 syntax - CREATE TABLE employees(
+							age int NOT NULL UNIQUE
+						  ); 
 		- PRIMARY KEY - uniquely identifies each record in a database table,there can be more than one unique columns but only one primary key.
-						the column wth primary key constraint cant contain null values and are used as foreign key when we link two tables
-						syntax - CREATE TABLE employees(
-									id int PRIMARY KEY
-								) ;
-		- FOREIGN KEY - these specify that the values in a column must match the values appearing in some row of another table.it maintains a refrential identity between two related tables and are also called refrencing keys
-						syntax - CREATE TABLE employees(
-									department_id int refrences department(dept_id)
-								);
-		- CHECK - this costraint enables condition to check the values being entered into the record, if condition evaluates to false , the record violates the constraint and is not entred into the table
-				  syntax - CREATE TABLE employees(
-								salary real CHECK(salary>0)
-							);
-		- EXCLUSION - it ensures that if any two rows are compared on the specified columns or expressions using the specified operators , at least one of these operator comparison will return false or null.
-					  it helps maintain data integrity by enforcing rules that prevent conflicting or invalid data from being entered into the database.
-					  syntax - 
+				the column wth primary key constraint cant contain null values and are used as foreign key when we link two tables
+				syntax - CREATE TABLE employees(
+						id int PRIMARY KEY
+					) ;
+		- FOREIGN KEY - these specify that the values in a column must match the values appearing in some row of another table.it maintains a 					refrential identity between two related tables and are also called refrencing keys
+				syntax - CREATE TABLE employees(
+						department_id int refrences department(dept_id)
+					);
+		- CHECK - this costraint enables condition to check the values being entered into the record, if condition evaluates to false , the record 				violates the constraint and is not entred into the table
+				syntax - CREATE TABLE employees(
+						salary real CHECK(salary>0)
+					);
+		- EXCLUSION - it ensures that if any two rows are compared on the specified columns or expressions using the specified operators , at least 				one of these operator comparison will return false or null.it helps maintain data integrity by enforcing rules that prevent 				conflicting or invalid data from being entered into the database.
+				syntax - CREATE TABLE table_name (
+					    column1 data_type,
+					    column2 data_type,
+					    ...,
+					    EXCLUDE USING gist (column_name WITH operator)
+					);
 
 
 
@@ -430,202 +434,201 @@ JOINS CLAUSE - used to combine records from two or more tables in a database, it
 	
 	Types of joins - 
 
-		- CROSS JOIN - it matches every row of the first table with every row of the second table(id table1 contains x column and table2 contains y columns then cross join will contain x+y columns)
-						it has the capability to generate extremely large tables
-						syntax - SELECT .... FROM table1 CROSS JOIN table2;
-						example - SELECT * FROM employee CROSS JOIN department;
-						o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
-							  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
-								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
-								3 | Teddy |  23 | Norway     |  20000 |            |  1 | IT Billing                                         |      1
-								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  1 | IT Billing                                         |      1
-								5 | David |  27 | Texas      |  85000 | 2007-12-13 |  1 | IT Billing                                         |      1
-								2 | Allen |  25 | Texas      |        | 2007-12-13 |  1 | IT Billing                                         |      1
-								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  1 | IT Billing                                         |      1
-								9 | James |  44 | Norway     |   5000 | 2005-07-13 |  1 | IT Billing                                         |      1
-								10 | James |  45 | Texas      |   5000 | 2005-07-13 |  1 | IT Billing                                         |      1
-								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  2 | Engineering                                        |      2
-								3 | Teddy |  23 | Norway     |  20000 |            |  2 | Engineering                                        |      2
-								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  2 | Engineering                                        |      2
-								5 | David |  27 | Texas      |  85000 | 2007-12-13 |  2 | Engineering                                        |      2
-								2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
-								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  2 | Engineering                                        |      2
-								9 | James |  44 | Norway     |   5000 | 2005-07-13 |  2 | Engineering                                        |      2
-								10 | James |  45 | Texas      |   5000 | 2005-07-13 |  2 | Engineering                                        |      2
-								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  3 | Finance                                            |      7
-								3 | Teddy |  23 | Norway     |  20000 |            |  3 | Finance                                            |      7
-								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  3 | Finance                                            |      7
-								5 | David |  27 | Texas      |  85000 | 2007-12-13 |  3 | Finance                                            |      7
-								2 | Allen |  25 | Texas      |        | 2007-12-13 |  3 | Finance                                            |      7
-								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  3 | Finance                                            |      7
-								9 | James |  44 | Norway     |   5000 | 2005-07-13 |  3 | Finance                                            |      7
-								10 | James |  45 | Texas      |   5000 | 2005-07-13 |  3 | Finance                                            |      7
-								(24 rows)
+		- CROSS JOIN - it matches every row of the first table with every row of the second table(id table1 contains x column and table2 contains y 				columns then cross join will contain x+y columns)
+				it has the capability to generate extremely large tables
+				syntax - SELECT .... FROM table1 CROSS JOIN table2;
+				example - SELECT * FROM employee CROSS JOIN department;
+				o/p -  id | name  | age |  address   | salary | join_date  | id |        dept           | emp_id 
+				      ----+-------+-----+------------+--------+------------+----+-----------------------+--------
+					1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing            |      1
+					3 | Teddy |  23 | Norway     |  20000 |            |  1 | IT Billing            |      1
+					4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  1 | IT Billing            |      1
+					5 | David |  27 | Texas      |  85000 | 2007-12-13 |  1 | IT Billing            |      1
+					2 | Allen |  25 | Texas      |        | 2007-12-13 |  1 | IT Billing            |      1
+					8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  1 | IT Billing            |      1
+					9 | James |  44 | Norway     |   5000 | 2005-07-13 |  1 | IT Billing            |      1
+				       10 | James |  45 | Texas      |   5000 | 2005-07-13 |  1 | IT Billing            |      1
+					1 | Paul  |  32 | California |  20000 | 2001-07-13 |  2 | Engineering           |      2
+					3 | Teddy |  23 | Norway     |  20000 |            |  2 | Engineering           |      2
+					4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  2 | Engineering           |      2
+					5 | David |  27 | Texas      |  85000 | 2007-12-13 |  2 | Engineering           |      2
+					2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering           |      2
+					8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  2 | Engineering           |      2
+					9 | James |  44 | Norway     |   5000 | 2005-07-13 |  2 | Engineering           |      2
+				       10 | James |  45 | Texas      |   5000 | 2005-07-13 |  2 | Engineering           |      2
+					1 | Paul  |  32 | California |  20000 | 2001-07-13 |  3 | Finance               |      7
+					3 | Teddy |  23 | Norway     |  20000 |            |  3 | Finance               |      7
+					4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |  3 | Finance               |      7
+					5 | David |  27 | Texas      |  85000 | 2007-12-13 |  3 | Finance               |      7
+					2 | Allen |  25 | Texas      |        | 2007-12-13 |  3 | Finance               |      7
+					8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |  3 | Finance               |      7
+					9 | James |  44 | Norway     |   5000 | 2005-07-13 |  3 | Finance               |      7
+				       10 | James |  45 | Texas      |   5000 | 2005-07-13 |  3 | Finance               |      7
+				(24 rows)
+		- INNER JOIN - to combine rows from two or more tables based on a related column between them. The term "inner" refers to the fact that it 				selects only the rows that have matching values in both tables.brings together related information from different tables, 				showing only the data where there's a match between the tables based on a specified condition.
+				syntax - SELECT .... FROM table1 INNER JOIN table2 ON table1.col_name =table2.col_name;
+				example - SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+				o/p -    id | name  | age |  address   | salary | join_date  | id |     dept       | emp_id 
+					----+-------+-----+------------+--------+------------+----+----------------+--------
+					  1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing     |    1
+					  2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering    |    2
+					(2 rows)
 
-		- INNER JOIN - to combine rows from two or more tables based on a related column between them. The term "inner" refers to the fact that it selects only the rows that have matching values in both tables.
-						brings together related information from different tables, showing only the data where there's a match between the tables based on a specified condition.
-						syntax - SELECT .... FROM table1 INNER JOIN table2 ON table1.col_name =table2.col_name;
-						example - SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
-						o/p -   id | name  | age |  address   | salary | join_date  | id |     dept       | emp_id 
-							   ----+-------+-----+------------+--------+------------+----+----------------+--------
-								 1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing     |    1
-							     2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering    |    2
-								(2 rows)
+		- THE LEFT OUTER JOIN - fetches all the records from the left table and only the matching records from the right table based on a specified 				condition, filling in NULL values for the columns from the right table where there's no match.
+				syntax - SELECT .... FROM table1 LEFT OUTER JOIN table2 ON table1.col_name=table2.col_name;
+				example - SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+				o/p -   id | name  | age |  address   | salary | join_date  | id |           dept             | emp_id 
+				      ----+-------+-----+------------+--------+------------+----+-----------------------------+--------
+					1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                  |      1
+					2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                 |      2
+				       10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                             |       
+					5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                             |       
+					8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                             |       
+					4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                             |       
+					3 | Teddy |  23 | Norway     |  20000 |            |    |                             |       
+					9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                             |       
+					(8 rows)
 
-		- THE LEFT OUTER JOIN - fetches all the records from the left table and only the matching records from the right table based on a specified condition, filling in NULL values for the columns from the right table where there's no match.
-						syntax - SELECT .... FROM table1 LEFT OUTER JOIN table2 ON table1.col_name=table2.col_name;
-						example - SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
-						o/p -   id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
-						      ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
-								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
-								2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
-								10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
-								5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
-								8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
-								4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
-								3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
-								9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
-								(8 rows)
+		- THE RIGHT OUTER JOIN - fetches all the records from the right table and only the matching records from the left table based on a specified 				condition, filling in NULL values for the columns from the left table where there's no match.
+				syntax - SELECT .... FROM table1 RIGHT OUTER JOIN table2 ON table1.col_name=table2.col_name;
+				example - SELECT * FROM employee AS e RIGHT OUTER JOIN department AS d  ON e.id =d.emp_id ;
+				o/p -  id | name  | age |  address   | salary | join_date  | id |             dept            | emp_id 
+				      ----+-------+-----+------------+--------+------------+----+-----------------------------+--------
+					1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                  |      1
+					2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                 |      2
+				          |       |     |            |        |            |  3 | Finance                     |      7
+				  (3 rows)
 
-		- THE RIGHT OUTER JOIN - fetches all the records from the right table and only the matching records from the left table based on a specified condition, filling in NULL values for the columns from the left table where there's no match.
-						syntax - SELECT .... FROM table1 RIGHT OUTER JOIN table2 ON table1.col_name=table2.col_name;
-						example - SELECT * FROM employee AS e RIGHT OUTER JOIN department AS d  ON e.id =d.emp_id ;
-						o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
-							  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
-								1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
-								2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
-							      |       |     |            |        |            |  3 | Finance                                            |      7
-								(3 rows)
-
-		- THE FULL OUTER JOIN - fetches all the records from both tables, combining them based on a specified condition. It ensures that no data is left out, including both matching and non-matching records from both tables, with NULL values filling in where there are no matches.
-						syntax -  SELECT .... FROM table1 FULL OUTER JOIN table2 ON table1.col_name=table2.col_name;
-						example - SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id ;
-						o/p -      id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
-								  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
-									1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
-									2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
-								      |       |     |            |        |            |  3 | Finance                                            |      7
-									10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
-									5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
-									8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
-									4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
-									3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
-									9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
-									(9 rows)
+		- THE FULL OUTER JOIN - fetches all the records from both tables, combining them based on a specified condition. It ensures that no data is 				left out, including both matching and non-matching records from both tables, with NULL values filling in where there are no matches.
+				syntax -  SELECT .... FROM table1 FULL OUTER JOIN table2 ON table1.col_name=table2.col_name;
+				example - SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id ;
+				o/p -      id | name  | age |  address   | salary | join_date  | id |      dept          | emp_id 
+				          ----+-------+-----+------------+--------+------------+----+--------------------+--------
+					1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing             |      1
+					2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering            |      2
+				          |       |     |            |        |            |  3 | Finance                |      7
+				       10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                        |       
+					5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                        |       
+					8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                        |       
+					4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                        |       
+					3 | Teddy |  23 | Norway     |  20000 |            |    |                        |       
+					9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                        |       
+					(9 rows)
 
 
-UNION - is used to combine the results of multiple SELECT statements into a single result set, ensuring compatibility between the columns and removing duplicates while preserving the order of the first SELECT statement.
-		syntax -    SELECT statement 1
-					UNION 
-					SELECT statement 2
-		example -   SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id 
-					UNION
-					SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
-		o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
-			  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
-				4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
-				10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
-				  |       |     |            |        |            |  3 | Finance                                            |      7
-				1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
-				2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
-				8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
-				5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
-				9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
-				3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
-				(9 rows)
+UNION - is used to combine the results of multiple SELECT statements into a single result set, ensuring compatibility between the columns and removing 		duplicates while preserving the order of the first SELECT statement.
+	syntax -    SELECT statement 1
+		    UNION 
+		    SELECT statement 2
+	example -   SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id 
+		    UNION
+		    SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+	o/p -  id | name  | age |  address   | salary | join_date  | id |           dept        | emp_id 
+	      ----+-------+-----+------------+--------+------------+----+-----------------------+--------
+		4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                       |       
+	       10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                       |       
+		  |       |     |            |        |            |  3 | Finance               |      7
+		1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing            |      1
+		2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering           |      2
+		8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                       |       
+		5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                       |       
+		9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                       |       
+		3 | Teddy |  23 | Norway     |  20000 |            |    |                       |       
+		(9 rows)
 
 UNION ALL - works same as union in combining the sets but doesnt removes the duplicate rows (difference)
-		syntax -    SELECT statement 1
-					UNION 
-					SELECT statement 2
-		example -   SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id 
-					UNION ALL
-					SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
-		o/p -  id | name  | age |  address   | salary | join_date  | id |                        dept                        | emp_id 
-			  ----+-------+-----+------------+--------+------------+----+----------------------------------------------------+--------
-				1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
-				2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
-				  |       |     |            |        |            |  3 | Finance                                            |      7
-				10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                                                    |       
-				5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                                                    |       
-				8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                                                    |       
-				4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                                                    |       
-				3 | Teddy |  23 | Norway     |  20000 |            |    |                                                    |       
-				9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                                                    |       
-				1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                                         |      1
-				2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                                        |      2
-				(11 rows)
+	syntax -    SELECT statement 1
+		    UNION 
+		    SELECT statement 2
+	example -   SELECT * FROM employee AS e FULL OUTER JOIN department AS d  ON e.id =d.emp_id 
+		    UNION ALL
+		    SELECT * FROM employee AS e INNER JOIN department AS d  ON e.id =d.emp_id ;
+	o/p -  id | name  | age |  address   | salary | join_date  | id |              dept            | emp_id 
+	      ----+-------+-----+------------+--------+------------+----+------------------------------+--------
+		1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                   |      1
+		2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                  |      2
+		  |       |     |            |        |            |  3 | Finance                      |      7
+	       10 | James |  45 | Texas      |   5000 | 2005-07-13 |    |                              |       
+		5 | David |  27 | Texas      |  85000 | 2007-12-13 |    |                              |       
+		8 | Paul  |  24 | Houston    |  20000 | 2005-07-13 |    |                              |       
+		4 | Mark  |  25 | Rich-Mond  |  65000 | 2007-12-13 |    |                              |       
+		3 | Teddy |  23 | Norway     |  20000 |            |    |                              |       
+		9 | James |  44 | Norway     |   5000 | 2005-07-13 |    |                              |       
+		1 | Paul  |  32 | California |  20000 | 2001-07-13 |  1 | IT Billing                   |      1
+		2 | Allen |  25 | Texas      |        | 2007-12-13 |  2 | Engineering                  |      2
+		(11 rows)
 
 
 TRIGGERS - these are databse callback functions, whcih are automatically performed/invoked when a specifies database event occurs
-			We can specify the moment when a trigger is to be invoked (before,after or inplace of the query performed)
-			-a trigger marked for each row is called once for every row that the operation modifies.
-			-a trigger marked for each statemnt execute once for any given operation , regardless of how many rows it modifies
-			syntax - CREATE TRIGGER trigger_name trigger_time trigger_event
-					 ON table_name FOR EACH ROW 
-					 BEGIN
-					 .....
-					 END;
-									#here trigger_time-> BEFORE,AFTER |trigger_event-> INSERT,UPDATE,DELETE
-			example -   CREATE TRIGGER orders_history_trigger
-						AFTER INSERT ON orders
-						FOR EACH ROW
-						EXECUTE FUNCTION log_order_history();
-			(to be understood later in breif)		 
+	We can specify the moment when a trigger is to be invoked (before,after or inplace of the query performed)
+	-a trigger marked for each row is called once for every row that the operation modifies.
+	-a trigger marked for each statemnt execute once for any given operation , regardless of how many rows it modifies
+	syntax - CREATE TRIGGER trigger_name trigger_time trigger_event
+		 ON table_name FOR EACH ROW 
+		 BEGIN
+		 .....
+		 END;
+			#here trigger_time-> BEFORE,AFTER |trigger_event-> INSERT,UPDATE,DELETE
+	example -   CREATE TRIGGER orders_history_trigger
+		    AFTER INSERT ON orders
+		    FOR EACH ROW
+	            EXECUTE FUNCTION log_order_history();
+			 
 
 
 
 INDEXES - these are special look up tables that the database search engine can use to speed up data retrieval
-		- in easy terms it s a pointer to data in a table and i generally made on the column/s on which you search frequently
-		- these are special look up tables that database engine looks upto to speed up database retrieval
-		- can only be used in table in which it fetches and for updation / insertion the headover increases
-		- can created or dropped with no effect on actual data 
-		syntax - CREATE INDEX index_name 
-				 ON table_name (column1, column2, ...);
-		example - CREATE INDEX idx_customer_id 
-				  ON customers (customer_id);
+	- in easy terms it s a pointer to data in a table and i generally made on the column/s on which you search frequently
+	- these are special look up tables that database engine looks upto to speed up database retrieval
+	- can only be used in table in which it fetches and for updation / insertion the headover increases
+	- can created or dropped with no effect on actual data 
+	syntax - CREATE INDEX index_name 
+		ON table_name (column1, column2, ...);
+	example - CREATE INDEX idx_customer_id 
+		  ON customers (customer_id);
 
-		Types of INDEXES - 
-			- SINGLE-COLUMN INDEXES - created based on one table column
-						syntax - CREATE INDEX index_name
-								 ON table_name (column);
+	Types of INDEXES - 
+		- SINGLE-COLUMN INDEXES - created based on one table column
+				syntax - CREATE INDEX index_name
+					 ON table_name (column);
 
-			- MULTI-COLUMN INDEXES - created on more than one column of a table
-						syntax - CREATE INDEX index_name
-								 ON table_name(col1,col2,...coln);
+		- MULTI-COLUMN INDEXES - created on more than one column of a table
+				syntax - CREATE INDEX index_name
+					 ON table_name(col1,col2,...coln);
 
-			- UNIQUE INDEXES - used not only for performance but also for data integrity , this doesn't allow any duplicate values to be inserted into the table
-						syntax - CREATE UNIQUE INDEX index_name
-								 ON table_name (column);
+		- UNIQUE INDEXES - used not only for performance but also for data integrity , this doesn't allow any duplicate values to be inserted into 				   the table
+				syntax - CREATE UNIQUE INDEX index_name
+					 ON table_name (column);
 
-			- PARTIAL INDEXES - it is a index built over a subset of a table; the subset is defined by the conditional expression, the index contains value of only those table rows that satisfy the predicate
-						syntax - CREATE INDEX index_name
-								 ON table_name(conditional_expression);
+		- PARTIAL INDEXES - it is a index built over a subset of a table; the subset is defined by the conditional expression, the index contains 
+                                    value of only those table rows that satisfy the predicate
+				syntax - CREATE INDEX index_name
+					 ON table_name(conditional_expression);
 
-			- IMPLICIT INDEXES - indexes automatically created by database server when an object is created such as for primary key?unique key constraints
-						syntax - #CREATE INDEX salary_index ON company(salary)
-						to list down all the indexes present ->   \d company
-						to list down indexes of entire databse ->    \di
+		- IMPLICIT INDEXES - indexes automatically created by database server when an object is created such as for primary key?unique key constraints
+				syntax - #CREATE INDEX salary_index ON company(salary)
+				to list down all the indexes present ->   \d company
+				to list down indexes of entire databse ->    \di
 
-			- DROP INDEX - used to drop an existing index
-						syntax - # DROP INDEX salary_index;
+		- DROP INDEX - used to drop an existing index
+				syntax - # DROP INDEX salary_index;
 
-		DONT'S of INDEX - 
-			- not to be used on small table
-			- not to be used on tables that have large update or insert operations
-			- not to be used on columns that have high no of null values
-			- no to be used on columns that are frequently manipulated 
+	DONT'S of INDEX - 
+		- not to be used on small table
+		- not to be used on tables that have large update or insert operations
+		- not to be used on columns that have high no of null values
+		- no to be used on columns that are frequently manipulated 
 
 
 
 ALTER TABLE COMMAND - used to add , delete, modify columns, add/drop constraints in a table 
-			syntax - ALTER TABLE table_name ADD column_name datatype;
+		syntax - ALTER TABLE table_name ADD column_name datatype;
 
-			DROP COLUMN - ALTER TABLE table_name DROP COLUMN column_name;
-			CHANGE DATA TYPE - ALTER TABLE table_name ALTER COLUMN col_name datatype datatype_name
-			ADD UNIQUE CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyUniqueConstraint UNIQUE(column_name)
-			ADD PRIMARY KEY CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyPrimaryKey PRIMARY KEY(colmn_name);
-			DROP CONSTRAINT - ALTER TABLE table_name DROP CONSTRAINT Constraint_name;
+		DROP COLUMN - ALTER TABLE table_name DROP COLUMN column_name;
+		CHANGE DATA TYPE - ALTER TABLE table_name ALTER COLUMN col_name datatype datatype_name
+		ADD UNIQUE CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyUniqueConstraint UNIQUE(column_name)
+		ADD PRIMARY KEY CONSTRAINT - ALTER TABLE table_name ADD CONSTRAINT MyPrimaryKey PRIMARY KEY(colmn_name);
+		DROP CONSTRAINT - ALTER TABLE table_name DROP CONSTRAINT Constraint_name;
 
 
 
@@ -633,7 +636,7 @@ ALTER TABLE COMMAND - used to add , delete, modify columns, add/drop constraints
 VIEW - these are pseudo tables i.e. they are not real tables but still appear as table to the select statement
 	 - it represents a subset of a real table , selecting certain columns or certain rows from the real table
 	 - it can also represent joined tables 
-	 - as views are assigned certain permissions, you can use them to restrict access to the table so that the user see only specific field or data of the column
+	 - as views are assigned certain permissions, you can use them to restrict access to the table so that the user see only specific field or data of 	   the column
 
 	 Permissions granter to users by view - 
 	 				- data can be structured in a way that users or classes of users find natural or intuitive
@@ -642,9 +645,9 @@ VIEW - these are pseudo tables i.e. they are not real tables but still appear as
 
 	 Creating VIEW - view can be created from a table, multiple table or from another view
 	 		syntax - CREATE [TEMP|TEMPORARY] VIEW view_name AS 
-					 SELECT .......
-					# multiple select statements can be used ,    temp is used we want to keep the view only in the current session
-					#fetched same way as a normal table
+				 SELECT .......
+				# multiple select statements can be used ,    temp is used we want to keep the view only in the current session
+				#fetched same way as a normal table
 
 	 Drop VIEW - used to delete view
 	 		syntax - DROP VIEW view_name
@@ -655,7 +658,7 @@ TRANSACTIONS - it is a unit of work performed on a database
 			 - it is important to control transaction to ensure high data integrity and to handle database errors
 
 	Properties of transaction - 
-			Atomicity - ensures that all operations within the work unit are completed successfully ;if not then the transaction is aborted at the time of failure and the previous operations are rolled back to their former state
+			Atomicity - ensures that all operations within the work unit are completed successfully ;if not then the transaction is aborted at 				    the time of failure and the previous operations are rolled back to their former state
 			Consistency - ensures that the database properly changes state upon successfully complition of transaction
 			Isolation - enables transactions to operate independently and tranparently
 			Durabilty - ensures that the result or effect of a committed transaction persists in case of a system failure
@@ -663,26 +666,25 @@ TRANSACTIONS - it is a unit of work performed on a database
 
 	Transaction Control Commands - only used with the DML commands
 			BEGIN TRANSACTION - used to start a transaction
-						syntax - BEGIN | BEGIN TRANSACTION
+					syntax - BEGIN | BEGIN TRANSACTION
 
 			COMMIT - used to save changes after the last commit or rollback(you can use END TRANSACTION COMMAND)
-						syntax - COMMIT | END TRANSACTION
+					syntax - COMMIT | END TRANSACTION
 
 			ROLLBACK - used to rollback to the last commit
-						syntax - ROLLBACK;
+					syntax - ROLLBACK;
 
-LOCKS - these prevent users from modifying a row or entire table preventing other users from changing the row until the transaction is either committed or rolled back
-		the only time when the use must wait for the other user is when they are trying to modify the same row(if modifying different row no need to wait,select query never have to wait)
-		generally databse performs locking automatically,in certain cases, locking must be controlled manuallyby using lock command
+LOCKS - these prevent users from modifying a row or entire table preventing other users from changing the row until the transaction is either committed or 	rolled back , the only time when the use must wait for the other user is when they are trying to modify the same row(if modifying different row no 	need to wait,select query never have to wait),generally databse performs locking automatically,in certain cases, locking must be controlled 		manuallyby using lock command
 	syntax - LOCK [table] name IN lock_mode
-		# name - refers to the existing table we want to lock(if ONLY is specified before lock then only that table will be locked otherwise thta table and all its decendant tables will be locked)
-		# lock_mode - specifies which locks this lock conflicts with(if no lock mode is specified then the most restrictive mode -ACCESS EXCLUSIVE is used)
-						other possible values -  ACCESS SHARE, ROW SHARE, ROW EXCLUSIVE,SHARE UPDATE EXCLUSIVE,SHARE,SHARE RW EXCLUSIVE.
-				EXCLUSIVE LOCKING - it means they're the only one allowed to make changes to it until they're finished.
+		# name - refers to the existing table we want to lock(if ONLY is specified before lock then only that table will be locked otherwise thta 			table and all its decendant tables will be locked)
+		# lock_mode - specifies which locks this lock conflicts with(if no lock mode is specified then the most restrictive mode -ACCESS EXCLUSIVE is 			used)other possible values -  ACCESS SHARE, ROW SHARE, ROW EXCLUSIVE,SHARE UPDATE EXCLUSIVE,SHARE,SHARE RW EXCLUSIVE.
+	EXCLUSIVE LOCKING - it means they're the only one allowed to make changes to it until they're finished.
 
 	DEADLOCKS - it occurs when two transactions are waiting for each other to finish 
 
-	ADVISORY LOCKS - these are locks not strong as others but help provide with an advisory warning(faster than flags and are automatically cleaned up at te end of the session)
+	ADVISORY LOCKS - these are locks not strong as others but help provide with an advisory warning(faster than flags and are automatically cleaned up at 		te end of the session)
+
+
 
 
 SUBQUERY - also known as inner query or nested query is a query within another query nested inside the where clause
@@ -699,23 +701,23 @@ SUBQUERY - also known as inner query or nested query is a query within another q
 
 
 AUTO INCREMENT - 
-		SERIAL COLUMNS - it is a datatype when used which some column creates special columns used to automatically generate unique numbers, often used as identifiers for rows in a table.
-						Three sizes - 
-						- smallserial is for smaller numbers.
-						- serial is for regular-sized numbers.
-						- bigserial is for really big numbers.
+		SERIAL COLUMNS - it is a datatype when used which some column creates special columns used to automatically generate unique numbers, often 				used as identifiers for rows in a table.
+				Three sizes - 
+				- smallserial is for smaller numbers.
+				- serial is for regular-sized numbers.
+				- bigserial is for really big numbers.
 				syntax - CREATE TABLE table_name(
-							colname SERIAL
+						colname SERIAL
 						)
 				example - CREATE TABLE COMPANY(
-							ID SERIAL PRIMARY KEY,
-							NAME TEXT NOT NULL,
-							AGE INT NOT NULL,
-							SALARY REAL
+						ID SERIAL PRIMARY KEY,
+						NAME TEXT NOT NULL,
+						AGE INT NOT NULL,
+						SALARY REAL
 						  );
-						  # now whenever you add data into the table you dont need to add data for column id , it will automatically be generated 
-				o/p-   id |   name   | age | salary 
-					  ----+----------+-----+--------
+				 # now whenever you add data into the table you dont need to add data for column id , it will automatically be generated 
+				o/p-           id |   name   | age | salary 
+					      ----+----------+-----+--------
 						1 | aarzoo   |  21 |  10000
 						2 | abhishek |  21 |  17000
 						3 | sunita   |  22 |  35000
@@ -723,134 +725,136 @@ AUTO INCREMENT -
 					  (4 rows)
 
 PRIVILEDGE - it refers to the permissions a person have to manipulate or view or do anything related to a database
-			 wheneveran object is created in a database,an owner is assigned to it which is usuallt the one who executes the create statement
-			 to allow other users to use it, priviledges or permission must be granted
+	     wheneveran object is created in a database,an owner is assigned to it which is usuallt the one who executes the create statement
+	     to allow other users to use it, priviledges or permission must be granted
 
-		Priviledges - select
-					  insert
-					  update
-					  delete
-					  truncate 
-					  refrences
-					  trigger
-					  create 
-					  connect
-					  temporary 
-					  execute
-					  usage
+	Priviledges - select
+				  insert
+				  update
+				  delete
+				  truncate 
+				  refrences
+				  trigger
+				  create 
+				  connect
+				  temporary 
+				  execute
+				  usage
 
-		GRANT - allowing other user some priviledge
-				syntax - GRANT priviledge[,....]
-						 ON object [,...]
-						 TO { PUBLIC | GROUP group | username }
-						 # priviledges could be the values mentioned above
-						 # object can be table,view,sequence
-						 # PUBLIC refers to all users
-						 # GROUP group refers to the group you want to grant priviledge to
-						 # username when you want to provide priviledge to particular person only
+	GRANT - allowing other user some priviledge
+			syntax - GRANT priviledge[,....]
+				 ON object [,...]
+				 TO { PUBLIC | GROUP group | username }
+				 # priviledges could be the values mentioned above
+				 # object can be table,view,sequence
+				 # PUBLIC refers to all users
+				 # GROUP group refers to the group you want to grant priviledge to
+				 # username when you want to provide priviledge to particular person only
 
-		REVOKE - removing / revoking priviledge provided to someone
-				syntax - GRANT priviledge[,....]
-						 ON object [,...]
-						 TO { PUBLIC | GROUP group | username }
-						 
+	REVOKE - removing / revoking priviledge provided to someone
+			syntax - GRANT priviledge[,....]
+				 ON object [,...]
+				 TO { PUBLIC | GROUP group | username }
+
+
+
+
 
 DATE/TIME FUNCTIONS AND OPERATORS - 
 
 		OPERATOR - 
 				- '+' - used to add different elements based on real scenario
-						           example                                              result
-						date '2001-09-28' + integer '7'      	                 date '2001-10-05'
-						date '2001-09-28' + interval'1 hour'					 timestamp'2001-09-28  01:00:00'
-						date '2001-09-28' + time '03:00'						 timestamp '2001-09-28 03:00:00'
-						interval'1 day' + interval '1 hour'			  			 interval '1 day 01:00:00'
+					   example                                              result
+				date '2001-09-28' + integer '7'      	                 date '2001-10-05'
+				date '2001-09-28' + interval'1 hour'			 timestamp'2001-09-28  01:00:00'
+				date '2001-09-28' + time '03:00'			 timestamp '2001-09-28 03:00:00'
+				interval'1 day' + interval '1 hour'			 interval '1 day 01:00:00'
+
 				- '-' - used to do the subtraction  the same way
+
 				- '*' - used to multiply the time / interwal with integer
-									example												result
-						900 * interval '1 second'								 interval '00:15:00'
-						21 * interval '1 day'									 interval '21 days'
+					  example						result
+				900 * interval '1 second'				 interval '00:15:00'
+				21 * interval '1 day'					 interval '21 days'
+
 				- '/' - used to divide with the integer 
-									example												result
-						interval '1 hour' / double precision '1.5'				 interval '00:40:00'
+					  example						result
+				interval '1 hour' / double precision '1.5'		 interval '00:40:00'
 
-		IMPORTANT DATE TIME FUNCTIONS -
-				- AGE() -  used to calculate the age by using the time difference between either two time stamp or by using the time stamp and the current date
-							syntax - AGE(timestamp,timestamp)
-							example - AGE(timestamp'2002-08-09', timestamp '2023-08-09')
-							result - 
 
-							syntax - AGE(timestamp)
-							example - AGE(timestamp '2002-08-09')
-							result - 
+	IMPORTANT DATE TIME FUNCTIONS -
+		- AGE() -  used to calculate the age by using the time difference between either two time stamp or by using the time stamp and the current 			   date
+			syntax - AGE(timestamp,timestamp)
 
-							
-				- CURRENT DATE/TIME - there are number of functions that return values related to current data and time
+			syntax - AGE(timestamp)
 
-							Function 						Description
-							CURRENT_DATE					delivers current date
-							CURRENT_TIME					delivers value with time zone
-							CURRENT_TIMESTAMP				delivers value with time zone
-							CURRENT_TIME(precision)			optionally takes a precision parameter which causes the result to be rounded to that many fractional digit in the second fields
-							CURRENT_TIMESTAMP(precision)	same as above
-							LOCALTIME						delivers value without time zone
-							LOCALTIMESTAMP 					delivers value without time zone
-							LOCALTIME(precision)			optionally takes a precision parameter which causes the result to be rounded to that many fractional digit in the second fields
-							LOCALTIMESTAMP(precision)		optionally takes a precision parameter which causes the result to be rounded to that many fractional digit in the second fields
+					
+		- CURRENT DATE/TIME - there are number of functions that return values related to current data and time
 
-							transaction_timestamp()			equivalent to CURRENT_TIMESTAMP
-							statement_timestamp()			returns start time of the current statement
-							clock_timestamp() 				returns the actual current time and its value changes even withtin asingle sql command
-							timeofday()						returns actaul current time ,but as a formatted text string rather than a timestamp with time zone value
-							now()							equivalent to transaction_timestamp
+			Function 						Description
+			CURRENT_DATE					delivers current date
+			CURRENT_TIME					delivers value with time zone
+			CURRENT_TIMESTAMP				delivers value with time zone
+			CURRENT_TIME(precision)				optionally takes a precision parameter which causes the result to be rounded to that 									many fractional digit in the second fields
+			CURRENT_TIMESTAMP(precision)			same as above
+			LOCALTIME					delivers value without time zone
+			LOCALTIMESTAMP 					delivers value without time zone
+			LOCALTIME(precision)				optionally takes a precision parameter which causes the result to be rounded to that 									many fractional digit in the second fields
+			LOCALTIMESTAMP(precision)			optionally takes a precision parameter which causes the result to be rounded to that 									many fractional digit in the second fields
+			transaction_timestamp()				equivalent to CURRENT_TIMESTAMP
+			statement_timestamp()				returns start time of the current statement
+			clock_timestamp() 				returns the actual current time and its value changes even withtin asingle sql command
+			timeofday()					returns actaul current time ,but as a formatted text string rather than a timestamp 									with time zone value
+			now()						equivalent to transaction_timestamp
 
-				- DATE_PART() - 
+		- DATE_PART() - 
 
-							Function 						Description
-							DATE_PART('field',source)		here the field parameter needs to be a string value not a name
-							DATE_TRUNC('field',source)		similar to trunc for numbers
-				- EXTRACT - 
+			Function 						Description
+			DATE_PART('field',source)			here the field parameter needs to be a string value not a name
+			DATE_TRUNC('field',source)			similar to trunc for numbers
+		- EXTRACT - 
 
-							Function 						Description
-							EXTRACT('feild' from timestamp) used to extract subfields from date/time values
-							EXTRACT('field' from interval)  used to extract from source value
+			Function 						Description
+			EXTRACT('feild' from timestamp)			 used to extract subfields from date/time values
+			EXTRACT('field' from interval) 			 used to extract from source value
 
-				- ISFINITE() - 
+		- ISFINITE() - 
 
-							Function 						Description
-							ISFINITE(date)					tests for finite date
-							ISFINITE(timestamp)				tests for finite timestamp
-							ISFINITE(interval)				tests for finite interval
+			Function 						Description
+			ISFINITE(date)					tests for finite date
+			ISFINITE(timestamp)				tests for finite timestamp
+			ISFINITE(interval)				tests for finite interval
 
-				- JUSTIFY - 
+		- JUSTIFY - 
 
-							Function 						Description
-							JUSTIFY_DAYS(interval)			adjusts interval so 30-days interval is shown as months,return  the interval types
-							JUSTIFY_HOURS(interval)			adjusts interval so 24-hours interval is shown as days,return  the interval types
-							JUSTIFY_INTERVAL(interval)		adjusts days using JUSTIFY_HOURS and JUSTIFY_DAYS,with additional sign adjustments
+			Function 						Description
+			JUSTIFY_DAYS(interval)				adjusts interval so 30-days interval is shown as months,return  the interval types
+			JUSTIFY_HOURS(interval)				adjusts interval so 24-hours interval is shown as days,return  the interval types
+			JUSTIFY_INTERVAL(interval)			adjusts days using JUSTIFY_HOURS and JUSTIFY_DAYS,with additional sign adjustments
 
 
 FUNCTIONS - stored procedures allowing us to do task that require multiple queries to execute a task
-			it allows database reuse as other applications can interact directly with your stored procedures instead of middle-tier or duplicating compared
-			syntax - CREATE [OR REPLACE] FUNCTION function_name (argument)
-					 RETURNS return_datatype AS $variable_name$
-					 DECLARE 
-					 	declaration;
-						[...]
-					 BEGIN 
-					 <function body>
-					 [......]
-					 RETURN {variable_name |value }
-					 END ; LANGUAGE plpgsql;
+	    it allows database reuse as other applications can interact directly with your stored procedures instead of middle-tier or duplicating compared
+	    syntax -     CREATE [OR REPLACE] FUNCTION function_name (argument)
+			 RETURNS return_datatype AS $variable_name$
+			 DECLARE 
+				declaration;
+				[...]
+			 BEGIN 
+			 <function body>
+			 [......]
+			 RETURN {variable_name |value }
+			 END ; LANGUAGE plpgsql;
 
-		 Useful built-in functions - 
-					- COUNT - counts the occurance of an object
-					- MAX - identifies the max value
-					- MIN - identifies the min value 
-					- AVG - calculates the average value of the the column
-					- SUM - calculates the overall sum 
-					- ARRAY - puts input values,including nulls,concatenated into an array
-					- NUMERIC - required to manipulate numbers in sql
-					- STRING - required to manipulate string
+	 Useful built-in functions - 
+				- COUNT - counts the occurance of an object
+				- MAX - identifies the max value
+				- MIN - identifies the min value 
+				- AVG - calculates the average value of the the column
+				- SUM - calculates the overall sum 
+				- ARRAY - puts input values,including nulls,concatenated into an array
+				- NUMERIC - required to manipulate numbers in sql
+				- STRING - required to manipulate string
 
 
 

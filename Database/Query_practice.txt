@@ -1,4 +1,4 @@
--------------------database is of online retail system -------------------------------------
+----------------------------------------------------------DATABASE - ONLINE RETAIL STORE (ORS)----------------------------------------------------------------
 
 
 tables - 
@@ -73,7 +73,7 @@ tables -
                     shipping_address varchar [not null]
                     total_bill integer [not null]
 
------------------------------------------------BASIC CONCEPT PRACTICE-------------------------------------------------------------
+--------------------------------------------------------------BASIC CONCEPT PRACTICE--------------------------------------------------------------------------
 
 
 
@@ -330,8 +330,8 @@ tables -
                         TP-Link       | Router              |            80
                         (15 rows)
 
-                #ROW_NUMBER(): This is a window function that assigns a unique sequential integer to each row within the partition. It starts from 1 for the first row in each partition and increments by 1 for each subsequent row.
-                #OVER(): This clause defines the window within which the window function operates by specifying the partitioning and ordering of the rows within that window.
+                #ROW_NUMBER(): This is a window function that assigns a unique sequential integer to each row within the partition. It starts from 1 for the                                 first row in each partition and increments by 1 for each subsequent row.
+                #OVER(): This clause defines the window within which the window function operates by specifying the partitioning and ordering of the rows                                 within that window.
                 #PARTITION BY brand_id: it groups rows with the same brand_id into separate partitions.
                 #ORDER BY price DESC: This part of the statement specifies the order in which the rows are processed within each partition. 
 
@@ -685,7 +685,7 @@ tables -
 
 
 
-------------------------------------------------ADVANCE CONCEPT PRACTICE ---------------------------------------------------
+-----------------------------------------------------------------ADVANCE CONCEPT PRACTICE -------------------------------------------------------------------
 
 
 
