@@ -1,0 +1,211 @@
+---------------------------------------SOLUTIONS OF THE ASSIGNMENT--------------------------------------
+
+DATABASE - 
+
+    TABLE FLIGHT - 
+        
+         fl_no |      from      |       to       | distance | departs  | arrives  | price 
+        -------+----------------+----------------+----------+----------+----------+-------
+             1 | New York       | Los Angeles    |      500 | 08:00:00 | 10:00:00 |  2000
+             2 | London         | Paris          |      600 | 09:00:00 | 11:00:00 |  2500
+             3 | Tokyo          | Sydney         |      700 | 10:00:00 | 12:00:00 |  3000
+             4 | Dubai          | Singapore      |      800 | 11:00:00 | 13:00:00 |  3500
+             5 | Moscow         | Beijing        |      900 | 12:00:00 | 14:00:00 |  4000
+             6 | Rio de Janeiro | Buenos Aires   |     1000 | 13:00:00 | 15:00:00 |  4500
+             7 | Toronto        | Mexico City    |     1100 | 14:00:00 | 16:00:00 |  5000
+             8 | Berlin         | Rome           |     1200 | 15:00:00 | 17:00:00 |  5500
+             9 | Cairo          | Cape Town      |     1300 | 16:00:00 | 18:00:00 |  6000
+            10 | Sydney         | Auckland       |     1400 | 17:00:00 | 19:00:00 |  6500
+            11 | New Delhi      | Bangkok        |     1500 | 18:00:00 | 20:00:00 |  7000
+            12 | Singapore      | Hong Kong      |     1600 | 19:00:00 | 21:00:00 |  7500
+            13 | San Francisco  | Seattle        |     1700 | 20:00:00 | 22:00:00 |  8000
+            14 | Los Angeles    | Chicago        |     1800 | 21:00:00 | 23:00:00 |  8500
+            15 | Sao Paulo      | Brasilia       |     1900 | 22:00:00 | 00:00:00 |  9000
+            16 | Paris          | Madrid         |     2000 | 23:00:00 | 01:00:00 |  9500
+            17 | Beijing        | Shanghai       |     2100 | 00:00:00 | 02:00:00 | 10000
+            18 | Tokyo          | Seoul          |     2200 | 01:00:00 | 03:00:00 | 10500
+            19 | Moscow         | St. Petersburg |     2300 | 02:00:00 | 04:00:00 | 11000
+            20 | London         | Dublin         |     2400 | 03:00:00 | 05:00:00 | 11500
+        (20 rows)
+
+    TABLE AIRCRAFT - 
+
+         a_id |       name        | cruising_range 
+        ------+-------------------+----------------
+            1 | Boeing 737        |           5000
+            2 | Airbus A320       |           4500
+            3 | Boeing 747        |          10000
+            4 | Embraer E190      |           3000
+            5 | Bombardier CRJ900 |           2500
+            6 | Airbus A380       |          12000
+            7 | Boeing 777        |          11000
+            8 | Boeing 787        |           9000
+            9 | Airbus A330       |          10000
+           10 | Boeing 757        |           6500
+           11 | Airbus A340       |          10500
+           12 | Embraer E175      |           2800
+           13 | Boeing 767        |           8000
+           14 | Bombardier CRJ700 |           2300
+           15 | Airbus A310       |           9500
+           16 | Boeing 727        |           4000
+           17 | Embraer E195      |           3200
+           18 | Airbus A300       |           9000
+           19 | Boeing 737 MAX    |           6000
+           20 | Airbus A319       |           5000
+        (20 rows)
+
+    TABLE EMPLOYEE - 
+
+             e_id |        name        | salary 
+            ------+--------------------+--------
+                1 | John Smith         |  60000
+                2 | Jane Doe           |  65000
+                3 | Michael Johnson    |  70000
+                4 | Emily Brown        |  85000
+                5 | Christopher Wilson |  62000
+                6 | Jessica Martinez   |  67000
+                7 | David Anderson     |  58000
+                8 | Sarah Taylor       |  83000
+                9 | Daniel Thomas      |  59000
+               10 | Linda Garcia       |  68000
+               11 | James Hernandez    |  81000
+               12 | Maria Martinez     |  64000
+               13 | Matthew Davis      |  57000
+               14 | Patricia Rodriguez |  69000
+               15 | Richard Lopez      |  56000
+               16 | Jennifer Lee       |  81000
+               17 | Joshua Gonzales    |  54000
+               18 | Susan Perez        |  72000
+               19 | William Sanchez    |  53000
+               20 | Karen Rivera       |  87000
+            (20 rows)
+
+
+    TABLE CERTIFIED - 
+
+             e_id | a_id 
+            ------+------
+                1 |    5
+                2 |    1
+                3 |   19
+                4 |   11
+                5 |   20
+                6 |    5
+                7 |    9
+                8 |    5
+                9 |   20
+               10 |   15
+               11 |   10
+               12 |   19
+               13 |    6
+               14 |    1
+               15 |    8
+               16 |    2
+               17 |   14
+               18 |    4
+               19 |    4
+               20 |    6
+            (20 rows)
+
+
+
+------------------------------------------------SOLUTIONS-----------------------------------------
+
+a. Find the names of aircraft such that all pilots certified to operate them earn more than $80,000.
+
+
+
+b. For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which she or he is certified.
+
+    QUERY - 
+
+    RESULT - 
+
+
+c. Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
+
+    QUERY - 
+
+    RESULT - 
+
+
+d. For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.
+
+    QUERY - 
+
+    RESULT - 
+
+
+e. Find the names of pilots certified for some Boeing aircraft.
+
+    QUERY - 
+
+    RESULT - 
+
+
+f. Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago.
+
+    QUERY - 
+
+    RESULT - 
+
+
+g. Identify the routes that can be piloted by every pilot who makes more than $100,000.
+
+    QUERY - 
+
+    RESULT - 
+
+
+h. Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing aircraft.
+
+    QUERY - 
+
+    RESULT - 
+
+
+i. A customer wants to travel from Madison to New York with no more than two changes of flight. List the choice of departure times from Madison if the customer wants to arrive in New York by 6 p.m.
+
+    QUERY - 
+
+    RESULT - 
+
+
+j. Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
+
+    QUERY - 
+
+    RESULT - 
+
+
+k. Print the name and salary of every nonpilot whose salary is more than the average salary for pilots.
+
+    QUERY - 
+
+    RESULT - 
+
+
+l. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.m. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts.
+
+    QUERY - 
+
+    RESULT - 
+
+
+n. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft.
+
+    QUERY - 
+
+    RESULT - 
+
+
+
+
+
+
+
+
+
+
+
+
