@@ -1,0 +1,25 @@
+----------------------------------------RVM-----------------------------------------------
+
+FULL FORM - RUBY VERSION CONTROL
+
+USAGE - to install multiple version of ruby on same machine
+
+--------------------------------------MAIN COMMANDS-----------------------------------------------
+
+INSTALLATION - 
+
+    - fetch - to download ruby's specified version
+    - install - used to install ruby interpreter
+    - list - used to list all the versions of the ruby present on the system
+    - list known - lists available interpreter
+    - remove - removes ruby along with its download source
+    - uninstall - removes ruby while keeping its download source
+    - upgrade - used to upgrade to another ruby version
+
+
+RUNNING DIFFERENT VERSION - 
+
+    - current - prints name of current version
+    - do - runs command against specified/all ruby versions
+    - use <version> - used to switch to the version specifies
+    - use default - used to switvh to default version
