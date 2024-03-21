@@ -1,0 +1,32 @@
+----------------------------------------------------RUBY---------------------------------------------------
+
+VERSION - 3.1.2
+
+GENERAL DETAILS - 
+
+    - scripting language designed by Martz(Yukihiro Matsumoto) in 1993 in Japan
+    - pure object oriented programming language
+    - has features similar to Python,Perl and Smalltalk
+    - open-source and general purpose interpreted programming language
+    - can be used to write CGI scripts
+    - can be embedded into html
+    - very scalable, big programs can be easily managed
+    - supports GUI tools and can be easily connected to SQL servers
+    - contains rich set of built-in functions
+
+IRB - stands for interactive ruby, opens space to write code
+
+WHITESPACES - 
+    - generally ignored (except in case of string)
+    - used to interpret unambiguous statements (will produce warning if -w is used)
+    - a+b(here a is a local varial and will result in (a+b))
+    - a +b (here a acts as a method call and the result will be in the form a(+b))
+
+ENDING - 
+    - END - ; or nextline character
+    - CONTINUE - + or - or \
+
+IDENTIFIERS - are the name of variables,constants and methods
+    - case sensitive in ruby(i.e Ram and RAM are different)
+    - can consist of alphanumeric character and underscore (_)
+    
