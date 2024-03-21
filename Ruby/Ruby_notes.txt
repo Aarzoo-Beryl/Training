@@ -71,11 +71,132 @@ RESERVED WORDS -
     - while - Begins a loop that continues while a condition is true.
     - yield - Passes control and arguments to a block. 
 
+HERE DOCUMENT - 
+    - used to define multiline string in ruby code,often used when embedding of large portion of text is required
+    - allows you to easilt specify a block of text without needing to worry about their formatting
+    syntax - 
+            <<-DELIMETER
+                line1
+                line2...
+            DELIMETER
+        #here <<- indicates the start of the here document
+        #DELIMETER specifies after which the document begins and where is ends
+        #operators/mathematical expresions can be specifies into the main text by using "#" before it,it maked them treat like a code of ruby
+
+    different ways of writing delimeter -
+        - DELIMETER and "DELIMETER" - treats the content in it as string
+            example - print <<beryl
+                        its a good company
+                        i like woking here
+                      beryl
+                OR 
+            example - print <<"beryl"
+                        its a good company
+                        i like working here
+                      beryl
+
+            o/p -   its a good company
+                    i like woking here
+                    => nil
+
+
+        - `DELIMETER` - treats the content in it as code and is used to execute COMMANDS
+            example -   print <<`beryl`
+                        echo how are you?
+                        echo i'm good
+                        beryl
+
+            o/p -   hello
+                    how are you
+                    => nil
+
+
+        - <<"DELIMETER" <<"delimeter" - used to stack documents
+            example -   print <<-beryl, <<`beryl`
+                            i love this company
+                        beryl
+                            echo hello
+                            echo how are you
+                        beryl
+
+            o/p -   i love this company
+                    hello
+                    how are you
+                    => nil
 
 
 
+CLASSES AND OBJECTS - 
+    - CLASS is a blueprint from which individual OBJECTS are created
 
+    DEFINING CLASS
+        syntax - class class_name
+                end
+        example - 
+                    class Customer
+                        @@no_of_customers = 0
 
+                        def initialize(id, name, addr)
+                            @cust_id = id
+                            @cust_name = name
+                            @cust_addr = addr
+                        end
+                    end
 
+    VARIABLES IN RUBY CLASS - 
+        - LOCAL VARIABLE - defined inside a method and are not available outside a method,begins with lower case letter or _
+                
 
+        - INSTANCE VARIABLE - these variables are accessible across different methods but only for a particular instance or object,they change from object to object
+                syntax - @variable_name
 
+        - CLASS VARIABLE - available across different objects ,it belogs to a class and is a characterstick of it
+                syntax - @@variable_name
+
+        - GLOBAL VARIABLE - available acress different classes 
+                syntax - $variable_name
+
+    CREATING OBJECTS - 
+        syntax - object_name = class_name.new(parameters)
+
+    MEMBER FUNCTION - also known as mothods or functions, always assigned inside a class and starts with "def" and the name is always sprecified in lowercase letters and ends with "end"
+        syntax - class class_name
+                    def function_name
+                        statement1
+                        statement2
+                    end
+                 end
+
+    CASE STUDY - 
+
+            Code - 
+                    class Customer
+                        @@no_of_customers = 0
+
+                        def initialize(id, name, addr)
+                            @cust_id = id
+                            @cust_name = name
+                            @cust_addr = addr
+                        end
+
+                        def display_details()
+                            puts "Customer_id = #@cust_id"
+                            puts "Customer name = #@cust_name"
+                            puts "Customer address = #@cust_addr"
+                        end
+
+                        def total_no_of_customers()
+                            @@no_of_customers += 1
+                            puts "Total number of customers = #@@no_of_customers"
+                        end
+                    end
+
+        instances - cust1 = Customer.new("1", "aarzoo", "faridabad")
+                    cust2 = Customer.new("2", "abhishek", "fatehabad")
+
+        execution - cust1.display_details()
+
+        result -    Customer_id = 1
+                    Customer name = aarzoo
+                    Customer address = faridabad
+                    => nil
