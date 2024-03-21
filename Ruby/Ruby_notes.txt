@@ -29,4 +29,53 @@ ENDING -
 IDENTIFIERS - are the name of variables,constants and methods
     - case sensitive in ruby(i.e Ram and RAM are different)
     - can consist of alphanumeric character and underscore (_)
-    
+
+RESERVED WORDS - 
+
+    - BEGIN - Defines code to be executed when a Ruby script begins.
+    - END - Defines code to be executed when a Ruby script ends.
+    - alias - Creates an alias for a method or global variable.
+    - and - Logical operator similar to &&.
+    - begin - Starts a block of code for exception handling.
+    - break - Exits a loop or a block of code.
+    - case - Defines a case statement for conditional branching.
+    - class - Defines a class in Ruby.
+    - def - Defines a method.
+    - defined? - Checks if a variable, method, or expression is defined.
+    - do - Begins a block of code.
+    - else - Part of the conditional branching structure.
+    - elsif - Part of the conditional branching structure, similar to else if.
+    - end - Marks the end of a block of code.
+    - ensure - Defines a block of code to be executed regardless of whether an exception is raised or not.
+    - false - Boolean value representing false.
+    - for - Begins a loop.
+    - if - Begins a conditional statement.
+    - in - Used in iterations to specify the range or collection.
+    - module - Defines a module in Ruby.
+    - next - Skips to the next iteration in a loop.
+    - nil - Represents absence of a value.
+    - not - Logical negation operator.
+    - or - Logical operator similar to ||.
+    - redo - Restarts a loop or iteration from the beginning.
+    - rescue - Handles exceptions in Ruby.
+    - retry - Retries a block of code.
+    - return - Exits a method and returns a value.
+    - self - Refers to the current object or context.
+    - super - Calls a method from a superclass.
+    - then - Part of the conditional branching structure.
+    - true - Boolean value representing true.
+    - undef - Removes a method definition.
+    - unless - Part of the conditional branching structure, similar to if not.
+    - until - Begins a loop that continues until a condition is true.
+    - when - Part of the case statement.
+    - while - Begins a loop that continues while a condition is true.
+    - yield - Passes control and arguments to a block. 
+
+
+
+
+
+
+
+
+
