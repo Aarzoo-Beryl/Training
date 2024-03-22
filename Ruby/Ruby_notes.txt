@@ -262,3 +262,122 @@ SHEBANG/HASHBANG - #!/usr/bin/ruby
                  - in this "#!" is the shebang and the rest is the absolute address for the interpreter
 
 
+OPERATORS - 
+
+    TYPES OF OPERATORS - 
+
+            ARITHMETIC - 
+
+                        OPERATOR                FUNCTION
+                            +                   addition
+                            -                   subtraction
+                            *                   multiplication
+                            /                   division
+                            %                   modulus
+                            **                  exponent                            
+
+            COMPARISON - 
+
+                        OPERATOR                FUNCTION
+                            ==                  a equal to b
+                            !=                  a not equal to b
+                            >                   a greater than b
+                            <                   a smaller than b
+                            >=                  a greater than or equal to b
+                            <=                  a smaller than or equal to b
+                            <=>                 combined comparison equator(returns 0 if a=b, 1 if a>b, -1 if a<b)
+                            ===                 used to check equality in when clause( (1...10)===5 tells if 5 lies in the range mentioned)
+                           .eql?                true only if the datatype and values both are equal (1==1.0 is true but 1.eql?(1.0) is false)
+                           equal?               checks if the object is same as itself or are stored in the same memory location (a.equa?aObj is true but a.equal?bObj is false even if aObj==bObj)
+
+
+            ASSIGNMENT - 
+
+                        OPERATOR                FUNCTION
+                            =                   simple assignment operator
+                            +=                  addition and assignment
+                            -=                  subtraction and assignment
+                            *=                  multiplication and assignment
+                            /=                  division and assignment
+                            %=                  modulus and assignment
+                           **=                  exponent and assignment
+
+
+            PARALLEL ASSIGNMENT - allows assigning data to multiple variable in single statement
+
+                        OPERATOR                FUNCTION
+                        a,b=20,30               a=20,b=30
+
+
+            BITWISE - 
+
+                        OPERATOR                FUNCTION
+                            &                   copies bit to result if exists in both
+                            |                   copies bit ot result if exists in either
+                            ^                   copies bit if exists in one of the two and not both
+                            ~                   flips bits
+                            <<                  shifts the bits left no of times mentioned
+                            >>                  shifts the bits right no f times mentioned
+
+
+            LOGICAL - 
+
+                        OPERATOR                FUNCTION
+                            and                 if both true,result true
+                            or                  if either true, reult true
+                            &&                  same as and
+                            ||                  same as or
+                            !                   reverses the logical state of its operand
+                            not                 saame as above
+
+
+            TERNARY - 
+
+                        OPERATOR                FUNCTION
+                            ?:                  if condition true ? then x otherwise y
+
+
+            RANGE - 
+
+                        OPERATOR                FUNCTION
+                           ..                   (1..10)creates a range from 1 to 10
+                           ...                  (1...10)creates a range from 1 to 9
+
+
+            DEFINED? - 
+
+                        OPERATOR                FUNCTION
+                        defined?                defined?a is true if a was initialized(a can ve variable/method/method that can be called from super class)
+
+
+            DOT AND DOUBLE COLON - 
+
+                        OPERATOR                FUNCTION
+                            .                   To call a method defined within a module(module_name.method_name)
+                            ::                  used to call variable from main object/module/class (object/module/class name :: variable name(if no value specified before :: then by defualt accesses from global/mai obejct))
+
+
+    OPERATOR PRECEDANCE - 
+
+        order - 
+            (1) :: (Constant Resolution Operator)
+            (2) [] and []= (Element Reference and Element Set) 
+            (3) ** (Exponentiation) 
+            (4) !, ~, +, - (Not, Complement, Unary Plus, and Minus) 
+            (5) *, /, % (Multiply, Divide, and Modulo) 
+            (6) +, - (Addition and Subtraction)
+            (7) >> and << (Right and Left Bitwise Shift)
+            (8) & (Bitwise 'AND')
+            (9) ^ and | (Bitwise Exclusive OR and Regular OR)
+            (10) <=, <, >, >= (Comparison Operators)
+            (11) <=>, ==, ===, !=, =, ! (Equality and Pattern Match Operators)
+            (12) && (Logical 'AND')
+            (13) || (Logical 'OR')
+            (14) .. and ... (Range)
+            (15) ? : (Ternary If-Then-Else)
+            (16) **=, %=, {, /=, -=, +=, |=, &=, >>=, <<=, *=, &&=, ||=, = (Assignment)
+            (17) defined?
+            (18) not
+            (19) or , and
+
+
