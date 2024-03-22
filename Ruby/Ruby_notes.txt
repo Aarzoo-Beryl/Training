@@ -375,9 +375,49 @@ OPERATORS -
             (13) || (Logical 'OR')
             (14) .. and ... (Range)
             (15) ? : (Ternary If-Then-Else)
-            (16) **=, %=, {, /=, -=, +=, |=, &=, >>=, <<=, *=, &&=, ||=, = (Assignment)
+            (16) **=, %=, { , /=, -=, +=, |=, &=, >>=, <<=, *=, &&=, ||=, = (Assignment)
             (17) defined?
             (18) not
             (19) or , and
 
 
+COMMENTS - 
+
+    SINGLE LINE - #
+
+    MULTI LINE - =begin
+                    line1
+                    line2
+                 =end
+
+
+IF..ELSE - used for conditional execution, the values false and nil are false and everything else is true
+         - the code is executed if the condition in if is true , id not the code wirtten in else clause is executed
+         - this block of code is seperated from other by reserved word/newline/semicolon
+         - in ruby, "elsif" is written in place of "else if"
+        - syntax - unless (condition)
+                        code
+                    else
+                        code
+                    end
+        - modifier syntax - code if condition
+
+UNLESS  - code is executed if the condition mentioned is false, if true else clause is executed
+        - syntax - unless (condition)
+                        code
+                    else
+                        code
+                    end
+        - modifier syntax - code unless condition
+
+CASE - uses "when" statement with containns ranges or multiple expression when expresseion true the code inside it is executed
+     - the expression use === to compare scenarios
+     - syntax - case variable_name
+                when exp1,exp2
+                    code
+                when exp 3
+                    code
+                else
+                    code
+                end
+     
