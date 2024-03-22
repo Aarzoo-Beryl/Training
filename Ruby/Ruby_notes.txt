@@ -143,18 +143,24 @@ CLASSES AND OBJECTS -
                         end
                     end
 
-    VARIABLES IN RUBY CLASS - 
-        - LOCAL VARIABLE - defined inside a method and are not available outside a method,begins with lower case letter or _
-                
+    FEATURES OF OOPS LANGUAGE - 
+        
+        DATA ENCAPSULATION - refers to the bundeling of data and the methods that operate on data into the single unit(object)
+                           - done by classes(ecapsulate bothe data and behaviour)
+                           - helps hide unnecessary details and display only the required ones
 
-        - INSTANCE VARIABLE - these variables are accessible across different methods but only for a particular instance or object,they change from object to object
-                syntax - @variable_name
+        DATA ABSTRACTION - refers to hiding unnecessary details and showing only required ones
+                         - done basically by encapsulation , by defining public methods that act as ine\terface to manipulate internal state of object
+                         - allows user to interact with the objects in simplified manner without needing the understanding of the implimentation details 
 
-        - CLASS VARIABLE - available across different objects ,it belogs to a class and is a characterstick of it
-                syntax - @@variable_name
+        POLYMORPHISM - allows objects of different classes to be treaated as object of same uper class
+                     - achieved through method overriding(allowing subclasses to their own implementationof method difined in the super class) and overloading(allows method with same name but different parameters to coexist within a class or its subclasses)
+                     - this flexibility enables objects to exibit different behaviour based on their specific types 
 
-        - GLOBAL VARIABLE - available acress different classes 
-                syntax - $variable_name
+        INHERITANCE - allows subclasses to inherit attributes from superclass/parent class
+                    - implemented using "<" and then the name or the superclass in the class definition
+                    - this helps inherit all the instance variable, methods, and behaviour allowing them to reuse code and extend functionality
+                    - creates a hierarical relationship between classes, where specialized inherit from general ones
 
     CREATING OBJECTS - 
         syntax - object_name = class_name.new(parameters)
@@ -167,36 +173,92 @@ CLASSES AND OBJECTS -
                     end
                  end
 
-    CASE STUDY - 
 
-            Code - 
-                    class Customer
-                        @@no_of_customers = 0
 
-                        def initialize(id, name, addr)
-                            @cust_id = id
-                            @cust_name = name
-                            @cust_addr = addr
-                        end
+CASE STUDY - 
 
-                        def display_details()
-                            puts "Customer_id = #@cust_id"
-                            puts "Customer name = #@cust_name"
-                            puts "Customer address = #@cust_addr"
-                        end
+    Code - 
+            class Customer
+                @@no_of_customers = 0
 
-                        def total_no_of_customers()
-                            @@no_of_customers += 1
-                            puts "Total number of customers = #@@no_of_customers"
-                        end
-                    end
+                def initialize(id, name, addr)
+                    @@no_of_customers += 1
+                    @cust_id = id
+                    @cust_name = name
+                    @cust_addr = addr
+                end
 
-        instances - cust1 = Customer.new("1", "aarzoo", "faridabad")
-                    cust2 = Customer.new("2", "abhishek", "fatehabad")
+                def display_details()
+                    puts "Customer_id = #@cust_id"
+                    puts "Customer name = #@cust_name"
+                    puts "Customer address = #@cust_addr"
+                end
 
-        execution - cust1.display_details()
+                def total_no_of_customers()
+                    @@no_of_customers += 1
+                    puts "Total number of customers = #@@no_of_customers"
+                end
+            end
 
-        result -    Customer_id = 1
-                    Customer name = aarzoo
-                    Customer address = faridabad
-                    => nil
+    instances - cust1 = Customer.new("1", "aarzoo", "faridabad")
+                cust2 = Customer.new("2", "abhishek", "fatehabad")
+
+    execution - cust1.display_details()
+
+    result -    Customer_id = 1
+                Customer name = aarzoo
+                Customer address = faridabad
+                => nil
+
+
+
+
+VARIABLES IN RUBY CLASS - 
+
+        - LOCAL VARIABLE - defined inside a method and are not available outside a method,begins with lower case letter or _
+                
+        - INSTANCE VARIABLE - these variables are accessible across different methods but only for a particular instance or object,they change from object to object
+                syntax - @variable_name
+
+        - CLASS VARIABLE - available across different objects ,it belogs to a class and is a characterstick of it
+                syntax - @@variable_name
+
+        - GLOBAL VARIABLE - available acress different classes 
+                syntax - $variable_name
+
+    PSEUDO-VARIABLES - special variables that have the appearance of local variable but act as constant(no value can be assigned to them)
+
+        - self - the reciever object for the current method
+
+        - true - vaue representing true 
+
+        - false - value representing false
+
+        - nil - values representing undefined
+
+        - _FILE_ - name of the current source file
+
+        - _LINE_ - the current line number in hte source file 
+
+    CONSTANTS - begins with upercase letter 
+              - the ones defined inside a class or module are acessed within it and the ones defined outside the class/module can be accessed globally
+              - example => VAR1 = 200
+              - to access => #{VAR1}
+
+
+
+BACKSLASH NOTATIONS -
+
+    - \n - newline
+    - \r - carriage return
+    - \b - backspace
+    - \e - escape
+    - \s - space
+    - \x - character x
+
+
+SHEBANG/HASHBANG - #!/usr/bin/ruby
+                 - used to tell the computer which interpretor should be used to execute the file and should be the first line written in any ruby file
+                 - in this "#!" is the shebang and the rest is the absolute address for the interpreter
+
+
