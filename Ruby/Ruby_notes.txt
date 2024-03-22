@@ -421,3 +421,39 @@ CASE - uses "when" statement with containns ranges or multiple expression when e
                     code
                 end
      
+
+WHILE - executes the same condition untill the while condition is true 
+      - while loop's condition is seperated by reserved word do/newline/backslash"\"/or a semicolon
+      - syntax - while {condition} do
+                    code
+                 end
+      - modifier syntax - code while {condition} 
+                            OR
+                          begin
+                            code
+                          end while {condition}
+
+
+UNTIL - the same loop is executed while th condition is false and till the until statement is returned true
+      - syntax - until condition [do]
+                    code
+                 end
+      - modifier syntax - code until {condition} 
+                            OR
+                          begin
+                            code
+                          end until {condition}
+
+
+FOR - the same loop is executed while the condition is true for each variable once
+      - syntax - for variable in [expression] [do]
+                    code
+                 end
+      - modifier syntax - code for variable in [expression]
+                            OR
+                          begin
+                            code
+                          end for variable in [expression]
+
+
+
