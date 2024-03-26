@@ -498,10 +498,31 @@ METHODS - used to bundle one or more repeatable statements into a single unit
                 - syntax - undef method_name
 
 
+BLOCKS - basically a chunk of code that can be assigned a name and can be invoked later
+       - typicaaly written inside "{}" or "do----end"
+       - syntax - blockname{
+                        statement1
+                        statement2
+                   }
 
+       - YIELD - You can pass parameters to a block using the yield statement followed by the parameters
+               - you specify variables to accept these parameters using vertical lines "||"
+               - syntax - yield var1,var2
+               - invoked - test{|i| puts "#{i}"}
 
+        - BLOCK AND METHOD - can be invoked inside a method either by yield or by th following method
+               - syntax - def abc(&name)
+                            name.call
+                          end
+                          abc{puts "hello"}
 
+        - BEGIN BLOCK - code wittrn inside is executed before the execution of any other code
+                      - syntax - BEGIN {
+                                 }
 
+        - END BLOCK - code written in this block will be executed at last
+                    - syntax - END{
+                               }
 
 
 
