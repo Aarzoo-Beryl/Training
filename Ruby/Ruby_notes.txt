@@ -391,84 +391,117 @@ COMMENTS -
                  =end
 
 
-IF..ELSE - used for conditional execution, the values false and nil are false and everything else is true
-         - the code is executed if the condition in if is true , id not the code wirtten in else clause is executed
-         - this block of code is seperated from other by reserved word/newline/semicolon
-         - in ruby, "elsif" is written in place of "else if"
-        - syntax - unless (condition)
+LOOPS - 
+
+    IF..ELSE - used for conditional execution, the values false and nil are false and everything else is true
+            - the code is executed if the condition in if is true , id not the code wirtten in else clause is executed
+            - this block of code is seperated from other by reserved word/newline/semicolon
+            - in ruby, "elsif" is written in place of "else if"
+            - syntax - unless (condition)
+                            code
+                        else
+                            code
+                        end
+            - modifier syntax - code if condition
+
+    UNLESS  - code is executed if the condition mentioned is false, if true else clause is executed
+            - syntax - unless (condition)
+                            code
+                        else
+                            code
+                        end
+            - modifier syntax - code unless condition
+
+    CASE - uses "when" statement with containns ranges or multiple expression when expresseion true the code inside it is executed
+        - the expression use === to compare scenarios
+        - syntax - case variable_name
+                    when exp1,exp2
+                        code
+                    when exp 3
                         code
                     else
                         code
                     end
-        - modifier syntax - code if condition
+        
 
-UNLESS  - code is executed if the condition mentioned is false, if true else clause is executed
-        - syntax - unless (condition)
+    WHILE - executes the same condition untill the while condition is true 
+          - while loop's condition is seperated by reserved word do/newline/backslash"\"/or a semicolon
+          - syntax - while {condition} do
                         code
-                    else
+                     end
+          - modifier syntax - code while {condition} 
+                                OR
+                              begin
+                                code
+                              end while {condition}
+
+
+    UNTIL - the same loop is executed while th condition is false and till the until statement is returned true
+          - syntax - until condition [do]
                         code
                     end
-        - modifier syntax - code unless condition
-
-CASE - uses "when" statement with containns ranges or multiple expression when expresseion true the code inside it is executed
-     - the expression use === to compare scenarios
-     - syntax - case variable_name
-                when exp1,exp2
-                    code
-                when exp 3
-                    code
-                else
-                    code
-                end
-     
-
-WHILE - executes the same condition untill the while condition is true 
-      - while loop's condition is seperated by reserved word do/newline/backslash"\"/or a semicolon
-      - syntax - while {condition} do
-                    code
-                 end
-      - modifier syntax - code while {condition} 
-                            OR
-                          begin
-                            code
-                          end while {condition}
+          - modifier syntax - code until {condition} 
+                                OR
+                            begin
+                                code
+                            end until {condition}
 
 
-UNTIL - the same loop is executed while th condition is false and till the until statement is returned true
-      - syntax - until condition [do]
-                    code
-                 end
-      - modifier syntax - code until {condition} 
-                            OR
-                          begin
-                            code
-                          end until {condition}
+    FOR - the same loop is executed while the condition is true for each variable once
+        - syntax - for variable in [expression] [do]
+                        code
+                    end
+        - modifier syntax - (expression).each do |variable[, variable...]| code end
 
 
-FOR - the same loop is executed while the condition is true for each variable once
-      - syntax - for variable in [expression] [do]
-                    code
-                 end
-      - modifier syntax - (expression).each do |variable[, variable...]| code end
+    BREAK - terminates the block of code inside which its called(terminates only the most recent method)
+        - syntax - break
+
+    NEXT - used to jump on to the next iteration of the most internal loop,terminates execution of a block if called within a block
+
+    REDO - restarts the iteration of the most internal loop,without checking the loop conditionof the block its called inside
+        - syntax - redo
+
+    RETRY - used to restart the execution of a block, iterator, or loop from the beginning , particularlly helpful in error handling scenarios or when you want to reattempt an operation under certain conditions.
+        - syntax - retry
 
 
-BREAK - terminates the block of code inside which its called(terminates only the most recent method)
-      - syntax - break
+METHODS - used to bundle one or more repeatable statements into a single unit
+        - method's name should begin in lowercase
+        - needs to be defined before calling them,otherwise exception may be raised
+        - syntax - def method_name(arguments...)
+                        expresions
+                   end
+            #arguments is option and also can be multiple, default is defined by (arg_name=value)
 
-NEXT - used to jump on to the next iteration of the most internal loop,terminates execution of a block if called within a block
+        - RETURN - used to return variables from the method
+                 - syntax - return [expression]
 
-REDO - restarts the iteration of the most internal loop,without checking the loop conditionof the block its called inside
-     - syntax - redo
+        - VARIABLE NUMBER OF PARAMETERS - allows to add variable into the method based on the choics of the user
+                 - syntax - def method_name(*var)
+        
+        - CLASS METHODS - these are the method that belong to a class itself rather than any instance of that class and is mentioned in the definition of the class
+                        - can be accessedeasily without intializing any instant of that
+                        - syntax - class Accounts
+                                        def self.return_date
+                                            # class method definition
+                                        end
+                                   end
+                        - access by - Accounts.return_date
+        
+        - ALIAS - refers to providing an alternative name for method/variable
+                - syntax - alias method_new_name method_old_name
+                                    OR
+                           alias global_variable_new_name global_variable_old_name
 
-RETRY - used to restart the execution of a block, iterator, or loop from the beginning , particularlly helpful in error handling scenarios or when you want to reattempt an operation under certain conditions.
-      - syntax - retry
-
-
-
-
+        - UNDEF - this cancels a methods definition and cannot appear in method body
+                - syntax - undef method_name
 
 
 
 
 
-      
+
+
+
+
