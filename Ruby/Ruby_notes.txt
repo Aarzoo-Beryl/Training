@@ -525,4 +525,36 @@ BLOCKS - basically a chunk of code that can be assigned a name and can be invoke
                                }
 
 
+MODULES - it is a way of grouping together methods,classes and constants
+        - provides a namespace and prevent name clashes
+        - implements the mixin facility
+        - named similarly to constants with initial letter capital
+        - defined similarly to class methods module_name.method_name
+        - syntax - module Moral
+                      VERY_BAD = 0
+                      BAD = 1
+                      def Moral.sin(badness)
+                        # ...
+                      end
+                   end
+
+        - REQUIRE - similar to import statement in Java, used to include any other module in the current one
+                  - not required to mention .rb with the file name
+                  - syntax - require file_name
+
+        $LOAD_PATH<<'.' - used to make ruby aware that files to be searched are from the current directory
+
+        INCLUDE - used to embed a module into a class
+                - if the file to be included is from some other file them first it needs to be imported using required statement
+                - syntax - include module_name
+                
+
+
+
+        
+
+
+
+
+
 
