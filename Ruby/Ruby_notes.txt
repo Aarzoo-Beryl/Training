@@ -449,11 +449,26 @@ FOR - the same loop is executed while the condition is true for each variable on
       - syntax - for variable in [expression] [do]
                     code
                  end
-      - modifier syntax - code for variable in [expression]
-                            OR
-                          begin
-                            code
-                          end for variable in [expression]
+      - modifier syntax - (expression).each do |variable[, variable...]| code end
+
+
+BREAK - terminates the block of code inside which its called(terminates only the most recent method)
+      - syntax - break
+
+NEXT - used to jump on to the next iteration of the most internal loop,terminates execution of a block if called within a block
+
+REDO - restarts the iteration of the most internal loop,without checking the loop conditionof the block its called inside
+     - syntax - redo
+
+RETRY - used to restart the execution of a block, iterator, or loop from the beginning , particularlly helpful in error handling scenarios or when you want to reattempt an operation under certain conditions.
+      - syntax - retry
 
 
 
+
+
+
+
+
+
+      
