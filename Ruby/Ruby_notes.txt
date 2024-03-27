@@ -542,12 +542,18 @@ MODULES - it is a way of grouping together methods,classes and constants
                   - not required to mention .rb with the file name
                   - syntax - require file_name
 
-        $LOAD_PATH<<'.' - used to make ruby aware that files to be searched are from the current directory
+        - $LOAD_PATH<<'.' - used to make ruby aware that files to be searched are from the current directory
 
-        INCLUDE - used to embed a module into a class
+        - INCLUDE - used to embed a module into a class
                 - if the file to be included is from some other file them first it needs to be imported using required statement
                 - syntax - include module_name
                 
+        - MIXINS - in ruby direct multiple inheritance is not possible so concept of mixin is used
+                 - Mixins are implemented using modules, which are collections of methods and constants. 
+                 - Modules in Ruby serve as containers for methods and can be included in classes to extend their functionality.
+                 - When a module is included in a class, all the methods defined within that module become available to instances of that class.
+
+
 
 
 
