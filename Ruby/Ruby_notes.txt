@@ -554,10 +554,146 @@ MODULES - it is a way of grouping together methods,classes and constants
                  - When a module is included in a class, all the methods defined within that module become available to instances of that class.
 
 
-
-
-
+Strings - enclosed inside single inverted commas ''
+        - for the special character to behave as character in the string use '\' before it
+        - specific character can eb accessed by is position using []
         
+        - EXPRESSION SUBSTITUTION - refers to embeding the value of any ruby expression into a strig using "#{x}"
+        
+        - GENERAL DELIMITED STRINGS - string can be created using the pair ot matching arbitrary delimeter characters like !,(,{,<,ecapsulate
+                                    - these are preceeded by percentage character(%)
+                                    - here Q is used to create a single-quoted string where characters inside the string are not interpolated
+                                    - here x is used for executing shell commands
+                                    - here q is same as Q but allows for different delimiters, such as parentheses, square brackets, braces, or any non-alphanumeric, non-whitespace character. 
+
+        - ESCAPE CHARACTERS - 
+                    NOTATIONS                   DESCRIPTION
+                       \a                       allert
+                       \b                       backspace
+                       \e                       escape
+                       \n                       newline
+                       \s                       space
+                       \t                       tab
+                       \v                       vertical tab
+                       \x                       character x
+
+        - CHARACTER ENCODING - allows us to use different character sets of different characters
+                             - syntax - $KCODE = 'u'
+                    NOTATION                    DESCRIPTION
+                        a                       ASCII(default)
+                        e                       EUC 
+                        n                       NONE (same as ASCII)
+                        u                       UTF-8
+        
+        - BUILT-IN METHODS - applied on instance of the string class
+                    METHOD                              DESCRIPTION
+                str%arg                             used to do modulus(arg must be array)
+                str*arg                             repeats string integer times
+                str+other_str                       concatenates strings
+                str << obj	                        Concatenates an object to str
+                str <=> other_str	                Compares str with other_str, returning -1 (less than), 0 (equal), or 1 (greater than) [The comparison is case-sensitive.]
+                str == obj	                        Tests str and obj for equality. If obj is a String, returns true,otherwise false.
+                str =~ obj	                        Matches str against a regular expression pattern obj. Returns the position where the match starts; otherwise, false.
+                str.b                               returns a copy of self that has ASCII-8BIT encoding
+                str.bytes                           returns the ASCII bits for each character
+                str.bytesize                        returns the total number of bytes in the string
+                str.byteslice(x)                    returns the byte present at the xth position
+                str.byteslice(x,n)                  returns n characters from the postion of the xth
+                str.bytesplice(x,n,'a')             replaces what the above returned with 'a'
+                str.byteindex('character')          returns the position of the character mentioned
+                str.byterindex('char',x)            returns the postion where the character occurs for xth time 
+                str.capitalize	                    Capitalizes a string.
+                str.capitalize!	                    Same as capitalize, but changes are made in place.
+                str.casecmp	                        Makes a case-insensitive comparison of strings.
+                str.chars                           returns the arrays of individual characters present in the string
+                str.center(size,pad string=' ')     Centers a string within the size mention wth of character mentioned in pad string
+                str.chomp	                        Removes the record separator ($/)[if exists], usually \n, from the end of a string.
+                str.chomp!	                        Same as chomp, but changes are made in place.
+                str.chop	                        Removes the last character in str.
+                str.chop!	                        Same as chop, but changes are made in place.
+                str.clear                           clear the string (removes content)
+                str.concat(other_str)	            Concatenates other_str to str.
+                str.count(x)	                    returns total number of characters present in the string same as the one in command
+                str.crypt(other_str)	            Applies a one-way cryptographic hash to str. The argument is the salt string, which should be two characters long, each character in the range a..z, A..Z, 0..9, . or /.
+                str.delete(x)	                    Returns a copy of str with all characters specified deleted
+                str.delete!(x)	                    Same as delete, but changes are made in place.
+                str.delete_prefix(prefix)           removed the prefix mentioned and displays the remaining content of the string
+                str.delete_prefix!(prefix)          does same as above if the prefix exists otherwise returns nil
+                str.delete_sufix(sufix)             removed the sufix mentioned and displays the remaining content of the string
+                str.delete_sufix!(sufix)            does same as above if the sufix exists otherwise returns nil
+                str.downcase	                    Returns a copy of str with all uppercase letters replaced with lowercase.
+                str.downcase!	                    Same as downcase, but changes are made in actual string.
+                str.dump	                        Returns a version of str with all nonprinting characters replaced by \nnn notation and all special characters escaped.
+                str.empty?	                        Returns true if str is empty (has a zero length).
+                str.eql?('string')	                checks if str is equal ro the string mentioned int he bracket
+                str.each_byte{|byte|print byte,' '} gives ASCII code for each character in the string along with the string
+                str.each_char{|c|print c,' '}       Calls the given block with each successive character from self; returns self
+                str.encoding                        Returns the Encoding object that represents the encoding of obj.
+                str.end_with?('a')                  Returns whether self ends with any of the given 'a'
+                str.force_encoding(type)            changes the encoding of the string to type mentioned
+                str.freeze                          used to make string immutable
+                str.getbyte(index)                  Returns the byte at zero-based index as an ASCII value, or nil if index is out of range
+                str.hex                             used to interpret the leading substring of a string as a string of hexadecimal digits (characters 0-9 and A-F, case-insensitive)
+                str.include?                        Returns true if self contains other_string, false otherwise
+                str.index (substring, offset = 0)   Returns the integer index of the first match for the given argument, or nil if none found;begins at position offset (in characters)
+                str.initialize_copy(other_string)   Replaces the contents of self with the contents of other_string
+                str.insert (index,other_string)     Inserts the given other_string into self
+                str.inspect                         Returns a printable version of self, enclosed in double-quotes, and with special characters escaped.
+                str.intern                          Returns the Symbol corresponding to str, creating the symbol if it did not previously exist.
+                str.length                          Returns the count of characters (not bytes) in self.
+                str.ljust(size,pad_string=' ')      Returns a left-justified copy of self by the size mentioned and with the hellp of pad size mentioned.
+                str.lstrip                          Returns a copy of self with whitespace at left removed.
+                str.lstrip!                         if modification made returns self otherwise nil
+                str.next                            returns successor to self (calculated by incrementing the characters)
+                str.next!                           returns the modification in the self itself
+                str.oct                             reutrns the octal value and then converting to decimal again
+                str.ord                             Returns the integer ordinal of the first character of self.
+                str.partition(string_or_regexp)     Returns a 3-element array of substrings of self→ [head, match, tail]
+                str.prepend('a','b')                firstly writes the strings mentioned then appends self
+                str.reverses                        reverses the String
+                str.reverse!                        modification made to self
+                str.rjust(size,pad size='')         justifies from right (opposite og ljust)
+                str.rpartition(sep)                 partitions[head, match, tail] 
+                str.rstrip                          Returns a copy of the receiver with trailing whitespace removed.
+                str.rstrip!                         Returs self and same functionality as rstrip.
+                str.scan (string or regex)          Matches a pattern against self.
+                str.setbyte(index,integer)          Sets the byte at zero-based index to integer; returns integer.
+                str.size                            Returns the count of characters (not bytes) in self.
+                str.slice (a)                       Returns the substring of self specified by a(can be integer or rangeor start,length or substring)
+                str.slice!(*args)                   Removes and returns the substring of self specified by the arguments.
+                str.squeeze(*) :                    Adjacent repeatative character is squeezed down to a single character.
+                str.squeeze!()                      modification done to self
+                str.start_with?(a)                  Returns whether self starts with any of the given string_or_regexp.
+                str.strip                           return self with leading and tailing whitespaces removed
+                str.strip!                          modifies actual string
+                str.sub(pattern | replacement)      Returns a copy of self with only the first occurrence (not all occurrences) of the given pattern replaced.
+                str.sub(pattern | replacement)      Returns a copy of self with only the first occurrence (not all occurrences) of the given pattern replaced.
+                str.sum(n=16)                       Computes a basic checksum of the characters in the string
+                str.swapcase(*options)              reverses cases of characters sof string
+                str.swapcase!(*options)             modifies the actual string
+                str.to_c                            returns the complex denoting the string form
+                str.to_f                            Returns the result of interpreting leading characters in self as a Float
+                str.to_i(base=10)                   Returns the result of interpreting leading characters in self as an integer in the given base.
+                str.to_r                            Returns the result of interpreting leading characters in str as a rational.
+                str.to_s                            Returns self if self is a String, or self converted to a String if self is a subclass of String.
+                str.tr(selector,replacement)        changes the specified to the corresponding character in string replacements
+                str.tr!(selector,replacement)       modifies the actual string
+                str.tr_s(selector,replacement)      modifies like .tr command and also combines squeezing command
+                str.tr_s!(selector,replacement)     modifies actual string
+                str.undump                          returns an unescaped version of self
+                str.upcase(*options)                modifies the case of string to uppercase
+                str.upcase!(*options)               modifies in actual string
+                str.upto(other_string,exclusive 
+                            =false){|string|...}    used to iterate through successive string values, starting from the receiver string up to (and including, by default) the specified other_string
+                str.valid_encoding?                 Returns true if self is encoded correctly, false otherwise.
+                str.gsub!                           performs modification on the self
+                str.gsub(pattern,replacement)
+                    [or]
+                str.gsub(pattern){|match|block}     Returns a copy of str with all occurrences of pattern replaced with either replacement or the value of the block.
+                str.match(pattern)                  used to search a string for a match against a specified regular expression pattern.
+                str.hash                            returns a hash based on strings lenth and content
+                new                                 used to create instance of string class
+                str.try_convert(type)               used to convert the string to specified type if possible
 
 
 
