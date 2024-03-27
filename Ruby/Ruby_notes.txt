@@ -696,6 +696,62 @@ Strings - enclosed inside single inverted commas ''
                 str.try_convert(type)               used to convert the string to specified type if possible
 
 
+Array - in ruby, arrays are ordered,integer-indexed collections of objects
+      - each element in an array is referred to or associated with an index
+      - index starts at 0 and the -ve one starts from last element
+      - can hold objects such as strings,integer,fixnum,hash,symbol, and even other array objects
+      - ruby array grow automatically while adding elements to it
+      
+      - CREATING ARRAYS - arr=Array.new(size){expression} OR arr=[1,2,3,4]
+
+      - Adding items in array -
+            - push - at the end of an array
+            - unshift - front of array
+            - insert(position,element) - it adds the element and shift elements rather than replacing the element
+            - we can add multiple elements at a time too.
+
+      - Remove items from array 
+            - pop - from end of an array
+            - shift   - From start of an array
+            - delete(element)  - Delete from anywhere in an array.
+
+      - BUILT-IN METHODS - applied on instance of the array class
+                    METHOD                              DESCRIPTION
+                arr.length                              gives the length/size of array
+                arr.at(index)                           to access element at a particular position
+                arr.fetch(index,"default_value")        if the index is within the range then it will show arr[index],otherwise default value specified
+                arr.try_convert(array)                  attempts to convert the specified object into an array
+                arr1 & arr2                             concatenatesthe two arraysdisplays the elements presenr in both arrays
+                arr1*n                                  displays the whole array n number of times in one single array
+                arr1 + arr2                             displays firstly elements of arr1 then elements of arr2
+                arr1 - arr2                             displays elements from arr1 than are not in arr2
+                arr1 <=> arr2                           returns -1 if arr1<aar2,0 if equal and 1 if arr1>arr2
+                arr1 == arr2                            checks if both are equal (results in true/false)
+                arr[index]                              if index in range then result in object otherwise nil
+                arr[start,length]                       displays elements from index position to the length specified
+                arr[range]                              displays elements at range of index sprecified
+                arr[index] = object                     assign object to specified index
+                arr[start, length] = object             assign object from start till the length
+                arr[range] = object                     assign object within the range of index
+                arr.all?                                Returns true if all elements of self meet a given criterion(results in true/false)
+                arr.any?                                returns true if any element of self meet a given criteria
+                arr.append(obj) OR arr.push(obj)        adds obj to the last of the array
+                arr.assoc(object)                       method is used to search through an array of arrays and find the first sub-array whose first element matches the specified object
+                arr.at(index)                           returns the object at the index specified
+                arr.bsearch {|element|...}              Returns an element from self selected by a binary search.
+                arr.bsearch_index {|element| ... }      Searches self as described at method bsearch, but returns the index of the found element instead of the element itself.
+                arr.clear                               removes all element from array
+                arr.collect or map                      Calls the block, if given, with each element of self
+                arr,collect! or map!                    Return self with modified values.
+                arr.combination(n) {|element| ... }     Calls the block, if given, with combinations of elements of self; returns self.
+                arr.compact                             Returns a new Array containing all non-nil elements from self
+                arr.compact!                            return self with modifications.
+                arr.concat(arr2)                        concatenates arr2 into arr
+                arr.count(Integer)                      counts the elements specified
+                arr.
+
+
+
 
 
 
