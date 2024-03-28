@@ -748,7 +748,89 @@ Array - in ruby, arrays are ordered,integer-indexed collections of objects
                 arr.compact!                            return self with modifications.
                 arr.concat(arr2)                        concatenates arr2 into arr
                 arr.count(Integer)                      counts the elements specified
-                arr.
+                arr. arr.cycle(n){|x| print x,','}      repeats the whole array likw a cycle for n times
+                arr.delete(object)                      deletes the obejct
+                arr.delete_at(index)                    deletes the object at the index mentioned
+                arr.delete_if{|element|condition..}     deletes elements if it satisfies the condition mentioned
+                arr.difference(other_array/s)           return array from the actual array containing only those elements that where not in the other_array
+                arr.drop(n)                             deletes first n elements
+                arr.dig(index)                          finds the object/nested list present at index
+                arr.drop_while{|element|condition..}    deletes the objects that satisfies the condition
+                arr.each{|element|condition..}          iterates over each element in the array that satisfies the condition and print each in seperate line
+                arr.each_index{|element|condition..}    same as above diff- iterates over index and not object
+                arr.empty?                              checks if array is empty,true if yes
+                arr.eql?arr2                            checks if both array equal(true if yes)
+                arr.fetch(index)                        returns the object at particular index
+                arr.fill(obj)                           [OR]
+                arr.fill(obj, start)                    [OR]
+                arr.fill(obj, start, length)            [OR]
+                arr.fill(obj, range)                    [OR]
+                arr.fill {|index| ... }                 [OR]
+                arr.fill(start) {|index| ... }          [OR]
+                arr.fill(start, length) {|index| ... }  [OR]
+                arr.fill(range) {|index| ... }          replaces specified elements in self with specified objects
+                arr.filter{|element|condition..}        [OR]
+                arr.select{|element|condition..}        filters out the objects based on the condition
+                arr.filter!{|element|condition..}       [OR]
+                arr.select!{|element|condition..}       modification done in actual array
+                arr.find_index(element)                 [OR]
+                arr.index(element)                      returns the index of the element specified
+                arr.first(n)                            returns the first n elements
+                arr.flatten(level)                      converts the multi-array array into simple array
+                arr.flatten!(level)                     modification done to actual array
+                arr.hash                                returns the integer hash value for the array
+                arr.include?(object)                    checks if the array includes that element
+                arr.initialize_copy(arr2)               [OR]
+                arr.replace(arr2)                       replaces the content of arr1 with that of arr2
+                arr.insert(index,objects)               inserts the specified objects at the specified index
+                arr.inspect                             calls inspect method on every element in the array
+                arr.intersection(arr2,..)               returns a new array containing elements from all the arrays mentioned
+                arr.intersect?(arr2)                    return true if bothe the arrays have atleast one element in column
+                arr.join(seperator=x)                   returns dtring by joining the elements of array seperatd by seperator mention(if mentioned)
+                arr.keep_if{|element|condition..}       returns those elements for which the condition returns true value
+                arr.last(n)                             displays last n elements of the array
+                arr.length [OR] arr.size                returns the number of elements in array
+                arr.max(n){|element|condition..}        returns max element(if condition present,max element is based on condition)
+                arr.min(n){|element|condition..}        returns min element(if condition mentioned,min is calculated based on condition)
+                arr.minmax{|element|condition..}        returns [min,max] elements (condition applied if mentioned)
+                arr.none?{|element|condition..}         checks if no element is present in the array(condition applied if mentioned)(searches for obj if mentioned)
+                arr.one?(obj) || arr.one?{|x|..}        Returns true if exactly one element of self meets a given criterion.
+                arr.permutation(n) {|element| ... }     used to generate all possible permutations of the elements in an array
+                arr.pop(n)                              removes elements from array from last(n specifies number of elements to be removed)
+                arr.prepent(elements)                   adds elements to the staring of the array
+                arr.product(arr2,arr3...)               Computes and returns or yields all combinations of elements from all the Arrays, including both self and other_arrays.
+                arr.rassoc(obj)                         Returns the first element in self that is an Array whose second element == obj
+                arr.reject{|element|...}                Returns array with elements for which the block returns false or nil
+                arr.reject!{|element|...}               modifies the actual array
+                arr.repeated_combination(n){|x|..}      Calls the block with each repeated combination of length n of the elements of the array
+                arr.reverse                             reverses the order of elements in the array
+                arr.reverse!                            modification done to the array itself
+                arr.reverse_each{|x|...}                iterates backward over array elements
+                arr.rindex(object){|x|...}              return the last index for which obj==element
+                arr.rotate(n)                           elements of array are rotated clockwise n number of times
+                arr.rotate!(n)                          modification made in actual array
+                arr.sample(n)                           returns n number of random elementa from the array
+                arr.shift(n)                            removes elements from the front and return the leading elements
+                arr.shuffle                             shuffles the elements of the array
+                arr.shuffle!                            modification done to actual array
+                arr.slice                               alias for []
+                arr.slice!(n)||(start,length)||(range)  modifies in actual array
+                arr.sort{|a,b|..}                       sorts an array
+                arr.sort!                               modification done to actual array
+                arr.sort_by!{|x|..}                     used the order mentioned and directly adds it to the actual array
+                arr.sum(init=0){|element|...}           It gives the sum of elements from an array.   
+                arr.take(n)                             returns a new array containing first n elements of the array
+                arr.take_while{|element|...}            same as above just applies the condition on selection of elements
+                arr.to_h{|x|..}                         returns a new hash formed on array
+                arr.to_s                                returns new string by calling methodof the whole array itself
+                arr.transpose                           transposses the rows and columns in an array of arrays(nested arrays must be of same size)
+                arr.union(arr2,..)                      returns a union of all the arrays, mentioned(duplicates removed,order preserved using eql?)
+                arr.uniq{|x|..}                         returns array by removing duplicate values
+                arr.values_at(indexes)                  returns new array containing elements at mentioned indexes
+                arr.zip(arr2,..){|x|..}                 returns new array containing nested arrays of mentioned arrays 
+                arr | arr2                              returns the union of both arrays removing duplicates and preserving order
+
+
 
 
 
