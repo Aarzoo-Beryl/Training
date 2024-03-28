@@ -554,7 +554,7 @@ MODULES - it is a way of grouping together methods,classes and constants
                  - When a module is included in a class, all the methods defined within that module become available to instances of that class.
 
 
-Strings - enclosed inside single inverted commas ''
+STRINGS - enclosed inside single inverted commas ''
         - for the special character to behave as character in the string use '\' before it
         - specific character can eb accessed by is position using []
         
@@ -696,7 +696,7 @@ Strings - enclosed inside single inverted commas ''
                 str.try_convert(type)               used to convert the string to specified type if possible
 
 
-Array - in ruby, arrays are ordered,integer-indexed collections of objects
+ARRAY - in ruby, arrays are ordered,integer-indexed collections of objects
       - each element in an array is referred to or associated with an index
       - index starts at 0 and the -ve one starts from last element
       - can hold objects such as strings,integer,fixnum,hash,symbol, and even other array objects
@@ -831,6 +831,85 @@ Array - in ruby, arrays are ordered,integer-indexed collections of objects
                 arr | arr2                              returns the union of both arrays removing duplicates and preserving order
 
 
+HASH - it is a collection of data pairs ,where each pair consist of a key and a value(eg - employee=>salary)
+     - similar to array, diff - insex is not integer rathe object(than can be string,numbersor something even more complex)
+     - data stored in unknown order
+     - is using hash with a key that doesnt exist -> returns nil
+     
+    - CREATING HASHES - 
+            - month=Hash.new("value") or month=Hash.new"value"  (if value not specifies then nil)
+            - month=Hash.new["a" => 100,"b" = 200]
+            - [key = 1, name ="value"]=> "value"
+            - Hash[[key=>|,"value"]*]
+
+    - ACCESSING HASHES - 
+            - #{month[key]}
+            - to access keys - month.keys
+
+    - BUILT-IN METHODS -  applied on instance of the hash
+                    METHOD                              DESCRIPTION
+                hash[]                                  creates empty hash
+                hash.try_convert(obj)                   if object is hash object returns object
+                hash<other_hash                         returns true if hash is proper subset of other_hash
+                hash<=other_hash                        returns true if hash is subset of other_hash
+                hash==other_hash                        if keys and vlues are equal for bothe the hashes returns true
+                hash[key]                               returns value associated with given key (if found)
+                hash[key]=value                         associates the value to the given key
+                hash.any?{[key,value]}                  returns true if the condition satisfies
+                hash.assoc(key)                         if key found,returns [key,value]
+                hash.clear                              removes all hash enteries
+                hash.compact                            returns a copy of hash with all nil enteries removed
+                hash.compact!                           modification done to array itself
+                hash.compare_by_identity                used to configure a hash so that it considers only the identity of objects when comparing keys(two keys will only be considered same (while keys is same)if they have same objects as value)
+                hash.compare_by_identity?               returns true if compare_by_identity called
+                hash.default=value                      used to set default value
+                hash.default(key)                       returns the default value set for that key
+                hash.delete(key){|key|...}              deletes the entry for the given key and returns its associate value
+                hash.delete_if{|key,value|...}          deletes all enteeries for which the condition block satisfies
+                hash.dig(key,identifiers)               returns objects in nested objects that is specified by key and identifiers
+                hash.each{|key,value|...}               [OR]
+                hash.each_pair{|key,value|..}           calls every key value pair that either satisfy the condition or in the condition mentioned
+                hash.each_key{|key|..}                  does the same ,but just calls for keys
+                hash.each_value{|key|..}                does same for values
+                hash.empty?                             returns true if there are no enteries in the hash
+                hash.eql?object                         Returns true if hash and object have same keys regardless of order
+                hash.except(keys)                       returns a new hash with all keys except the one specified
+                hash.fetch(key){|key|..}                returns the value of given key if found
+                hash.fetch_values(*keys){|key|..}       returns a new array containing values associated with the given keys
+                hash.filter [OR] hash.select            returns new hash with vlues that satisfy the conditional block
+                hash.filter! [OR] hash.select!          modifies the actual hash
+                hash.flatten(level)                     returns a new array ,removing the nested hash
+                hash.has_keys?(keys) [OR] 
+                hash.key?(keys) [OR]
+                hash.member?(keys) [OR] 
+                hash.include?(keys)                     returns true if key mentioned is present as key in hash
+                hash.has_value(value) [OR]
+                hash.value?(value)                      returns true if the value mentioned exist as a value to any key in the hash
+                h1.hash                                 returns integer hash code for the hash
+                hash.initialize_copy(hash2) [OR]
+                hash.replace(hash2)                     replaces the entire content of hash with that of hash2
+                hash.inspect [OR]
+                hash.to_s                               returns a string containing the hash enteries
+                hash.inverted                           returns the new hash as key=>value pairs inverted as value=>key pairs
+                hash.keep_if{|key,value|..}             returns the hash containing key-value pair that satisfies the block
+                hash.key(value)                         finds the first key that has that particular value
+                hash.keys                               returns an array containing all the keeys in hash
+                hash.length [OR] hash.size              return the count of enteries in the hash
+                hash.merge(hash2){|key,value|..}        returns the enteries after merging the enteries of both the hashes
+                hash.merge!                             modification mode to actual hash
+                hash.rassoc(value)                      Returns a new 2-element Array consisting of the key and value of the first-found entry whose value is == to value 
+                hash.rehash                             rebuilds the hash table by recomputing the hash for each key
+                hash.reject{|key,value|..}              retuns all key-value pairs except the ones satisfing the condition,they are rejected
+                hash.reject!                            modification made to actual hash
+                hash.shift                              removes the first key value pairs of the hash
+                hash.slice(keys)                        returns a new hash cntaining key-value pairs of the given keys only
+                hash.store(key,value)                   associates the given value with the given key
+                hash.total_no_of_customers              returns a nested array, where each element is nested and containf the key-value pairs
+                hash.to_h{|key,value|..}                tries to convert the array/object into a hash based on the condition specified
+                hash.transform_keys {|key| ... }        used to modify keys(eg-converting keys which were nor sting originally to string)
+                hash.transform_values{|value|..}        similaary used to tensform key values
+                hash.values                             returns an array containing all values of the hash
+                hash.values_at(keys)                    returns an array with the values of the specified keys
 
 
 
