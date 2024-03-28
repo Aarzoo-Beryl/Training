@@ -912,6 +912,25 @@ HASH - it is a collection of data pairs ,where each pair consist of a key and a 
                 hash.values_at(keys)                    returns an array with the values of the specified keys
 
 
+DATE/TIME/DATE-TIME - ruby has mainly 3 classes related to date and time (Date,DateTime,Time)
+                    - 
+
+
+RANGES - ranges can be utilized in following ways-
+
+       - RANGES AS SEQUENCE -
+                    - a sequesnce has a start point , end point and a way to produce successive values in between
+                    - created using ".."(creates inclusive range) and "..."(creates exclusive range)
+                    - can convert range to list using "to_a" method
+
+       - RANGES AS CONDITIONS - 
+                    - conditional statements can use ranges for difining the code to be executed for different conditions
+                    - here each condition will have different range
+
+       - RANGES AS INTERVALS - 
+                    - ranges as also be used to check if some value lies between the interval represented by the range
+                    - ususally done using '===' operator
+
 
 
 
