@@ -931,6 +931,22 @@ RANGES - ranges can be utilized in following ways-
                     - ranges as also be used to check if some value lies between the interval represented by the range
                     - ususally done using '===' operator
 
+ITERATORS - these are methods supported by collections
+          - these are the objects that store a group of data members
+          - iterators return all the element of a collection,one after another
+
+          - EACH ITERATOR - returns all elements of an array or hash
+                          - executes code for each statement in collection
+                          - collectionn could be array or hash
+                          - always associated with a block (returns each value of the array to the block one-by-one)
+                          - the value is then stored in a variable and then displayed on the screen
+
+          -COLLECT ITERATOR - returns all the elements of a collection
+                            - need not always be associated with block
+                            - returns the entire collection regardless of whether it is an array or hash
+                            - it is not the right method to do the copying between the array(clone should be used)
+                            - generally used when somethig is to be done on each value of the array to get a new array
+
 
 
 
