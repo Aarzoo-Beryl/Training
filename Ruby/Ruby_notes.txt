@@ -646,7 +646,7 @@ STRINGS - enclosed inside single inverted commas ''
                 str.lstrip!                         if modification made returns self otherwise nil
                 str.next                            returns successor to self (calculated by incrementing the characters)
                 str.next!                           returns the modification in the self itself
-                str.oct                             reutrns the octal value and then converting to decimal again
+                str.oct                             returns the octal value and then converting to decimal again
                 str.ord                             Returns the integer ordinal of the first character of self.
                 str.partition(string_or_regexp)     Returns a 3-element array of substrings of self→ [head, match, tail]
                 str.prepend('a','b')                firstly writes the strings mentioned then appends self
@@ -913,7 +913,106 @@ HASH - it is a collection of data pairs ,where each pair consist of a key and a 
 
 
 DATE/TIME/DATE-TIME - ruby has mainly 3 classes related to date and time (Date,DateTime,Time)
-                    - 
+    - TIME CLASS IN-BUILT METHODS -
+                    METHOD                              DESCRIPTION 
+                time.new                                makes an instance of current time
+                time.now                                alias for time.new
+                time.year                               extracts year from current time
+                time.month                              extracts month from current date
+                time.day                                extracts current day of the month
+                time.wday                               extracts the day of week
+                time.yday                               extract the day of year
+                time.hour                               extracts the hour
+                time.min                                extracts the minute
+                time.sec                                extracts the second
+                time.usec                               extracts microsecond
+                time.zone                               extracts the time zone
+                time.local(y,m,d,h,min,sec)             formats the time according to local timezone
+                time.utc(y,m,d,h,min,sec)               used to format date and time in utc format(Coordinated Universal Time)
+                time.gm(y,m,d,h,min,sec)                alias for utc (gm-Greenwich Mean Time)
+                Time.now.strftime("%Y-%m-%d %H-%M-%S")  used to format time in given manner
+                time.utc?                               checks if the format of the time instance is in utc format
+                time.localtime                          converts to local timezone
+                time.gmtime                             converts back to utc format
+                time.getlocal                           returna a new time object in local zone
+                time.getutc                             returns a new time object in utc
+
+    - DATE CLASS IN-BUILT METHODS -
+                    METHOD                              DESCRIPTION
+                date.new(year,month,day)                creates a new object of date class
+                date.httpdate                           used to parse a date/time string in the format specified by the HTTP-date format
+                date._httpdate                          returns the hash value parsed from above string
+                date.iso8601                            used to parse a date/time string in the format specified by the ISO 8601 date format
+                date._iso8601                           returns the hash value parsed from above string
+                date.jisx0301                           used to parse a date/time string in the format specified by the JIS X 0301 date format
+                date._jisx0301                          returns the value pased by above string
+                date._parse(string)                     returns a hash of values parsed from string(here string is in the form 'yyyy-mm-dd' )
+                date.parse(string)                      returns a new Date object with values parsed from string
+                date.rfc2822(string)                    used to parse a date/time string in the format specified by the RFC 2822 date format
+                date._rfc2822(string)                   returns a hash of values parsed from the above string
+                date.rfc3339(string)                    used to parse a date/time string in the format specified by the RFC 3339 date format
+                date._rfc3339(string)                   returns a hash of values parsed from the above string
+                date.strptime(string,format = '%F')     returns a new Date object with values parsed from string in the format specified
+                date._strptime(string,format = '%F')    returns a hash value of the above string
+                date.xmlschema(string)                  used to parse a date/time string in the format specified by the XML date format
+                date._xmlschema(string)                 returns a hash of values parsed from the above string
+                date.commercial(yyyy,mm,dd)             returns a new Date object constructed from the arguments according to the (cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) format
+                date.gregorian_leap?(year) [OR]
+                date.leap?(year)                        returns true if the mentioned year ia a leap year
+                date.jd(days)                           used to create a Date object based on the Julian Day Number (JD)(a continuous count of days since the beginning of the Julian Period which is from 1st Jan,4713BC)
+                date.julian_leap?(year)                 checks if the mentioned year is leap year according to julian days
+                date.ordinal(year,ydate)                returns a new Date object formed fom the arguments
+                date.today                              returns a new Date object formed fom the present date
+                date.valid_civil?(yyyy,mm,,dd) [OR]
+                date.valid_date?(yyyy,mm,,dd)           checks if hte mentioned date is valid or not
+                date.valid_commercial?
+                                (cwyear,cweek,cwday)    returns id the date mentioned is valid commercial date
+                date.valif_jd?(days)                    returns true unless days are invali(i.e not numeric)
+                date.valid_oridinal?(year,yday)         returns if the date mentioned is valid ordinal date
+                date+days                               returns the date after adding number or days mentioned
+                date-days                               returns the date after subtraction the number of days mentioned
+                date<<n                                 returns a new date object representing the date n months earliear(nshould be numeric)
+                date1 <=> date2                         returns -1 if date1<date2,0 id date1=date2,1 if date1>date2
+                date1 === date2                         checks if both the dates are equal
+                date>>n                                 returns the date representing the date n months later
+                date.adj                                returns the juliad day number for that particular date
+                date.amjd                               returns the astronomical modified julian day number
+                date.asctime [OR] date.ctime            equivalent to strftime with argument '%a %b %e %T %Y' (or its shorthand form '%c')
+                date.cwday                              returns the commercial-date weekday index for date(1is for monday)
+                date.cweek                              returns commercial date week index for date(week refers to week of the year)
+                date.cwyear                             returns commercial date year for date
+                date.day [OR] date.mday                 returns the day of month in the range(1..31)
+                date.friday?                            returns true id the day of the mentioned day is friday
+                date.gregorian?                         is used to determine if a given date falls within the Gregorian calendar system
+                date.inspect                            returns a string representation of the current date
+                date.jd                                 returns the julia day number
+                date.julian?                            checks if the date falls within the julian calender or not
+                date.ld                                 returns the Lilian day number, which is the number of days since the beginning of the Gregorian calendar, October 15, 1582
+                date.mjd                                returns the modified julian day number
+                date.month [OR] day.mon                 returns the month mentioned in the date, ranges from(1..12)
+                date.next [OR] date.succ                returns a new day representing the following day
+                date.next_day [OR] date.next_month [OR] 
+                date.next_year                          returns a copy of self with increment in respective terms.
+                date.prev_day [OR] date.prev_month [OR] 
+                date.prev_year                          returns a copy of self with one decrement in respective terms.
+                date.step(limit,step=1){|date|...}      returns the dates that satisfies the condition
+                date.to_date                            return the date
+                date.to_datetime                        returns datetime whose value is same as the mentioned date
+                date.to_s                               returns date as string
+                date.to_time                            returns a new time object with same value as date
+                date.wday                               returns the day of week,range(0..6 where 0 is sunday)
+                date.yday                               returns the day of the year(range 1..366)
+                date.year                               returns the year from the date
+                
+
+
+
+
+
+
+
+
+
 
 
 RANGES - ranges can be utilized in following ways-
