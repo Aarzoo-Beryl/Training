@@ -558,7 +558,7 @@ STRINGS - enclosed inside single inverted commas ''
         - for the special character to behave as character in the string use '\' before it
         - specific character can eb accessed by is position using []
         
-        - EXPRESSION SUBSTITUTION - refers to embeding the value of any ruby expression into a strig using "#{x}"
+        - EXPRESSION SUBSTITUTION - refers to embeding the value of any ruby expression into a string using "#{x}"
         
         - GENERAL DELIMITED STRINGS - string can be created using the pair ot matching arbitrary delimeter characters like !,(,{,<,ecapsulate
                                     - these are preceeded by percentage character(%)
@@ -897,7 +897,7 @@ HASH - it is a collection of data pairs ,where each pair consist of a key and a 
                 hash.length [OR] hash.size              return the count of enteries in the hash
                 hash.merge(hash2){|key,value|..}        returns the enteries after merging the enteries of both the hashes
                 hash.merge!                             modification mode to actual hash
-                hash.rassoc(value)                      Returns a new 2-element Array consisting of the key and value of the first-found entry whose value is == to value 
+                hash.rassoc(value)                      Returns a new 2-element Array consistring of the key and value of the first-found entry whose value is == to value 
                 hash.rehash                             rebuilds the hash table by recomputing the hash for each key
                 hash.reject{|key,value|..}              retuns all key-value pairs except the ones satisfing the condition,they are rejected
                 hash.reject!                            modification made to actual hash
@@ -906,7 +906,7 @@ HASH - it is a collection of data pairs ,where each pair consist of a key and a 
                 hash.store(key,value)                   associates the given value with the given key
                 hash.total_no_of_customers              returns a nested array, where each element is nested and containf the key-value pairs
                 hash.to_h{|key,value|..}                tries to convert the array/object into a hash based on the condition specified
-                hash.transform_keys {|key| ... }        used to modify keys(eg-converting keys which were nor sting originally to string)
+                hash.transform_keys {|key| ... }        used to modify keys(eg-converting keys which were nor string originally to string)
                 hash.transform_values{|value|..}        similaary used to tensform key values
                 hash.values                             returns an array containing all values of the hash
                 hash.values_at(keys)                    returns an array with the values of the specified keys
@@ -1003,15 +1003,42 @@ DATE/TIME/DATE-TIME - ruby has mainly 3 classes related to date and time (Date,D
                 date.wday                               returns the day of week,range(0..6 where 0 is sunday)
                 date.yday                               returns the day of the year(range 1..366)
                 date.year                               returns the year from the date
-                
 
+    - DATETIME CLASS BUILT-IN METHODS - 
+                    METHOD                                              DESCRIPTION
+                DateTime.new                                            returns new date time object
+                DateTime.strptime(string[,format='%FT%T%z'])            parses the given DateTime with the given format
+                DateTime._strptime(string[,format='%FT%T%z'])           returns the hash of above statement
+                DateTime.commercial([cwyear=-4712[,cweek=1[,
+                        cwday=1[,hour=0[,minute=0[,second=0[,
+                        offset=0[,start=Date::ITALY]]]]]]]])            creates a DateTime object denoting the given week date
+                DateTime.httpdate(string)                               creates a new DateTime object by parsing from a string according to some RFC 2616 format
+                DateTime.iso8601(string)                                creates a new DateTime object by parsing from a string according to some ISO 8601 format
+                DateTime.jd(days)                                       created a new DateTime object denoting the jullian day number
+                DateTime.jisx0301(string)                               creates a new DateTime object by parsing from a string according to some JIS X 0301 format
+                DateTime.now                                            creates a new DateTime object denoting present time
+                DateTime.ordinal(yyyy,dd)                               creates a new DateTime object denoting the given ordinal data
+                DateTime.parse(datetime)                                parses the given representation of given date and time
+                DateTime.rfc2822(string)                                creates a new DateTime object denoting the RFC 2822 format based on the string given
+                DateTime.rfc3339(string)                                creates a new DateTime object denoting the RFC 3339 format based on the provided string
+                DateTime.(string)
+                dt.hour                                                 returns the hour in range(0..23)
+                dt.iso8601(n) [OR] dt.xmlschema                         alias for strftime,n refers to fractional seconds
+                dt.jisx0301(n)                                          returns a string in a JIS X 0301 format,n same as above
+                dt.min [OR] dt.minute                                   returns minute in the range(0..59)
+                dt.new_offset(string)                                   duplicates dt and resets its offset to the one mentioned in the string
+                dt.offset                                               returns the ofset of dt
+                dt.rfc3339(n)                                           returns a string in the RFC 3339 format
+                dt.sec [OR] dt.second                                   returns the second
+                dt.sec_fraction [OR] dt.second_fraction                 returns the fractional seconds
+                dt.strftime(format)                                     returns the string of dt formatted according to the given format
+                dt.to_date                                              returns a date object that denotes dt
+                dt.to_s                                                 returns a string in ISO 8601 format
+                dt.to_time                                              returns a string object that denotes dt
+                dt.zone                                                 returns the timezone
 
-
-
-
-
-
-
+        IMP NOTE: strftime in date and class method is used to convert time/date class to string where as 
+                  strptime in date and parse in time class is used to convert string to respective class.
 
 
 
