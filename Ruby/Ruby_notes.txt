@@ -1075,6 +1075,104 @@ ITERATORS - these are methods supported by collections
 
 
 
+FILE I/O - ruby provides a whole range of input and output method inplemented in the kernel module
+         - these method are derived from the IO class
+
+    -STATEMENTS - 
+                  STATEMENT                         DESCRIPTION
+                puts statement                      instructs the program to display the vlue stored in the variable(also adds a new line at the end)
+                gets statement                      used to take input from the user from standard screen calles STDIN
+                putc statement                      used to output one character at a time
+                print statement                     same as puts statement(but doesn't add a new line at the end)
+
+    - METHODS -
+
+            - FILE -  
+                    METHOD                          DESCRIPTION
+                file.new                            used to create a file object
+                file.close                          used to cloase that file
+                file.open("filename","mode") *      same as .new method(difference - .open can be assigned with some block of code)
+                file.sysread(n)                     reads first n charaters from the file specified
+                file.syswrite("x")                  writes the x into the file
+                file.each_byte{|x|..}               describes the condition or function to be performed on each byte present in the file
+                IO.readlines("filename")            returns the content of file line by line(basically returns an array)
+                IO.foreach("filename"){|x|..}       same as above (but allows to put some condition or block,also doesnt result in an array)
+                file.rename("old_name","new_name")  allows to rename a file
+                file.delete("file_name")            deletes the particular file
+                file::exists?("filename")           verifies if the file exists or not
+                file.file?("file_name")             checks if the file mentioned is really a file
+                file::directory("filename")         checks if the mentioned file is actually a directory or not
+                file.readable?("filename")          checks if the given file is readable or not
+                file.writeable?("filename")         checks if the given file is writeavle or not
+                file.executable("filename")         checks if the given file is executable or not
+                file.zero?("filename")              checks if the mentioned file has zero size or not
+                file::ftype("filename")             checks the file type of the mentioned file
+                file::ctime("filename")             gives the time at which the file was created
+                file::mtime("filename")             gives the time at which the file was modified
+                file::atime("filename")             gives the time the file was last accessed
+                file.chmod(permission)              used to change the ownership of the file
+                tempfile.new('filename')            helps to create a temporary file(require to use 'require tmpdir' as not available by default)
+                File::dirname( path)                returns the directory portion of path, without the final filename.
+                File::executable?( path)            returns true if path is executable
+                File::grpowned?( path)              returns true if path is owned by the user's group.
+                File::join( item...)                returns a string consisting of the specified items joined together with File::Separator separating each item.
+                File::link( old, new)               creates a hard link to file old.
+                File::size( path)                   returns the file size of path
+                file.chown(owner,group)             changes group and owner of the file
+
+                - FILE OPEN MODES (*)- 
+                            MODE            DESCRIPTION
+                            r               read mode only(pointer at the begining of the file)
+                            r+              read and write mode(pointer at the beginning of the file)
+                            w               write mode only(overwrites the file if exist,if dont exist creates new file for writing)
+                            w+              read and write mode(overwrites the file if exist,if dont exist creates new file for writing)
+                            a               append/write mode only(pointer at the end for the file(opened in append mode))
+                            a+              read and write/append mode(pointer at the end for the file(opened in append mode))
+
+                    - FILE MODE AND OWNERSHIP -   
+                            MODE            DESCRIPTION
+                            0700            rwx mask for owner
+                            0400            r for owner
+                            0200            w for owner
+                            0100            x for owner
+                            0070            rwx mask for group
+                            0040            r for group
+                            0020            w for group	
+                            0010            x for group
+                            0007            rwx mask for other
+                            0004            r for other
+                            0002            w for other
+                            0001            x for other
+                            4000            Set user ID on execution
+                            2000            Set group ID on execution
+                            1000            Save swapped text, even after use
+
+
+            - DIRECTORIES -  
+                    METHOD                          DESCRIPTION
+                dir.chdir("dir_path")               used to change directory to the mentioned one
+                dir.pwd                             prints the current working directory
+                Dir::getwd                          same as above
+                dir.enteries("dir_path").join('')   gets a list of files and directoried within a specific directories(returns an array)
+                dir.foreach("dir_path")             same feature just allows to add block
+                dir['dir_path"]                     same feature
+                dir.mkdir("dir_path")               creates new directory
+                dir.mkdir("dir_path",mode=xxxx)     same + allows to add permission for ugo
+                dir.delete("dir_path")              deletes the directory
+                dir.tmpdir                          used to create temporary directory(require to use 'require tmpdir' as not available by default)
+                Dir::chdir( path)                   changes the current directory
+                Dir::chroot( path)                  changes the root directory (only allowed by super user)
+                Dir::delete( path)                  deletes the directory specified by path. The directory must be empty
+                Dir::rmdir( path)                   same as above
+                Dir::unlink( path)                  same as above
+                d.close                             closes the directory stream
+                d.each{|f|..}                       executes block for each entry in directory(once)
+                d.pos [OR] d.tell                   returns the curreent position in directory
+                d.read                              returns the next entry from directory
+                d.rewind                            moves position in d to the first entry
+                
+
+
 
 
 
