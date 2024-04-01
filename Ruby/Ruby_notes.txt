@@ -1170,7 +1170,107 @@ FILE I/O - ruby provides a whole range of input and output method inplemented in
                 d.pos [OR] d.tell                   returns the curreent position in directory
                 d.read                              returns the next entry from directory
                 d.rewind                            moves position in d to the first entry
-                
+
+
+EXCEPTIONS - programs stops if an exception occurs
+           - these are used to handle various types of errors,which may occur during a program execution and take appropriate action instead of halting
+           - in ruby we enclose the code that could raise an exception in a begin/end block and use rescue clause to tell ruby types of execution we want to handle
+           - syntax -   begin  
+                        # -  
+                        rescue OneTypeOfException  
+                        # -  
+                        rescue AnotherTypeOfException  
+                        # -  
+                        else  
+                        # Other exceptions
+                        ensure
+                        # Always will be executed
+                        end
+                ##if some error or exception occurs during the execution of this block of code,control is passed to the block between rescue and end clause
+            - for each rescue in the exception block,ruby compares the raised exception against each of the parameters in turn
+            - the match will succeed if the exception named named in rescue clause is the same as the type of current thrown exception or is the superclass of that exception
+            - if the exceprion does not match with any of the specified(we can use end clause at the end after ll the rescue clauses)
+    
+    
+    - USING RETRY STATEMENT - used to capture an exception using the rescue block and then retry statement can be used to execute the begin block from begining
+            - syntax -  begin
+                            #statements
+                        rescue
+                            #statements
+                            retry #statements
+                        end
+            - here is the retry satament is also shows exception then this block will keep on executing infinitely 
+
+    - USING RAISE STATEMENT - used to raise an exception whenever it is called
+            - syntax -  raise       (simply re-raises the current exception ,if no exception - RuntimeError)
+                            [OR]
+                        raise "message"     (creates a new RuntimeError exception , setting a message to be displayed)
+                            [OR]
+                        raise Exceptiontype,"message"       (first creates an exception and then displays the message mentioned if tat exception occurs)
+                            [OR]
+                        raise Exceptiontype,"message",condition         (same as above, just allows you to add further conditions to the execution)
+
+    - USING ENSURE STATEMENT - used when after a block of code some processing is to be done regardless exception was raised or not
+            - ensure goes after the rescue clause and contained the chunk of code that will be executed as the code terminates
+            - for ensure it doesn't matter if the block exits normally, or some known exception or may be sme unknown exception
+            - syntax -  begin
+                            #statements
+                        rescue
+                            #statements
+                        ensure
+                            #statements
+                        end
+    - USING ELSE CLAUSE - body of else clause is executed only if no exceptions are raised by the main body of code
+            - syntax -  begin
+                            #statements
+                        rescue
+                            #statements
+                        else
+                            #else block
+                        ensure
+                            #statements
+                        end
+
+    - CATCH AND THROW - catch and throw provide a way to control program flow by exiting out of nested blocks of code
+            - typically used when needed to break out of deeply nested loopsor control structure without using exceptions
+            - WORKING - 
+                    THROW - it is used to signal that some condition has been met and the current execution need to be terminated and the control should be transfered to a corresponding catch block
+                          - when using throw, a symbol/object is to be provided as an identifiers
+                    CATCH - it is used to define the block within which you catch the thrown object
+                          - takes the symbol/object as an argument to match the one provided in the thrown statement
+                          - when a throw block is encountered, it searches up the call stack for the nearest enclosing catch block with the matching symbol to transfer the control to that block
+            - syntax -  throw :lablename
+                        #.. this will not be executed
+                        catch :lablename do
+                        #.. matching catch will be executed after a throw is encountered.
+                        end
+
+                        OR
+
+                        throw :lablename condition
+                        #.. this will not be executed
+                        catch :lablename do
+                        #.. matching catch will be executed after a throw is encountered.
+                        end
+
+    - CLASS EXCEPTION - Ruby's standard exceptions are organized into a hierarchy, with the Exception class at the top
+            - Below Exception, there are several types of exceptions, including:
+                    1. Interrupt: Represents interruptions, such as when a user presses Ctrl+C to stop a program
+                    2. NoMemoryError: Indicates that Ruby has run out of memory
+                    3. SignalException: Represents exceptions generated by external signals
+                    4. ScriptError: Indicates errors in the Ruby script, such as syntax errors or errors in loading files
+                    5. StandardError: The base class for all standard exceptions that occur during the execution of a Ruby program
+                    6. SystemExit: Indicates that the program is exiting
+                    7. Additionally, there is one more exception, Fatal, but it's primarily used internally by the Ruby interpreter
+            - Custom Exception Classes - used to create new/ custome exception classes when the standard exception classes provided by Ruby are unable fully capture the specific nature of an error in your program
+                    - syntax - class Error_name < StandardError      (here error_name is the name of the error we are specifying and it states that it inherits from the StandardError exception class)
+                                    attr_reader :reason         (this method is used to define a getter method for the 'reason' attribute, allowing us to access the reason for the error)
+
+                                    def initialize(reason)      ('initialize' is defined to initialize the instances of the 'error_name' with a reason for the error)
+                                        @reason = reason
+                                    end
+                                end
+
 
 
 
