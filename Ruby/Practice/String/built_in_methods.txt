@@ -1,0 +1,580 @@
+#this file contains all the practice of built-in methods of strings
+
+
+
+1.   str % arg  : Used to do modulus (arg must be an array).
+
+        3.1.2 :007 > s = "my name is %s"
+        => "my name is %s" 
+        3.1.2 :008 > name = "Aarzoo"
+        => "Aarzoo" 
+        3.1.2 :009 > output = s % name
+        => "my name is Aarzoo" 
+
+2.   str * arg  : Repeats the string integer times.
+
+        3.1.2 :010 > output*2
+        => "my name is Aarzoomy name is Aarzoo" 
+
+3.   str + other_str  : Concatenates strings.
+
+        3.1.2 :011 > output + formatted_string
+         => "my name is AarzooHello, Alice!" 
+
+4.   str << obj  : Concatenates an object to str.
+
+        3.1.2 :012 > output << " Choudhary"
+        => "my name is Aarzoo Choudhary" 
+
+5.   str <=> other_str  : Compares str with other_str, returning -1 (less than), 0 (equal), or 1 (greater than) [The comparison is case-sensitive.].
+
+        3.1.2 :013 > output <=> formatted_string
+         => 1 
+
+6.   str == obj  : Tests str and obj for equality. If obj is a String, returns true; otherwise, false.
+
+        3.1.2 :014 > "Aarzoo" == "aarzoo"
+         => false 
+
+7.   str =~ obj  : Matches str against a regular expression pattern obj. Returns the position where the match starts; otherwise, false.
+
+        3.1.2 :015 > output =~ /o/
+        => 15 
+        3.1.2 :016 > output =~ /a/
+        => 4 
+        3.1.2 :017 > output =~ /A/
+        => 11 
+
+8.   str.b  : Returns a copy of self that has ASCII-8BIT encoding.
+
+        3.1.2 :018 > output.b
+         => "my name is Aarzoo Choudhary" 
+
+9.   str.bytes  : Returns the ASCII bits for each character.
+
+        3.1.2 :019 > name.bytes
+         => [65, 97, 114, 122, 111, 111] 
+
+10.  str.bytesize  : Returns the total number of bytes in the string.
+
+        3.1.2 :020 > name.bytesize
+         => 6 
+11.  str.byteslice(x)  : Returns the byte present at the xth position.
+
+        3.1.2 :022 > name.byteslice(4)
+         => "o" 
+
+12.  str.byteslice(x,n)  : Returns n characters from the position of the xth.
+
+        3.1.2 :023 > name.byteslice(1,3)
+         => "arz" 
+
+13.  str.bytesplice(x,n,'a')  : Replaces what the above returned with 'a'.
+
+        3.2.2 :001 > name="Aarzoo"
+        => "Aarzoo" 
+        3.2.2 :002 > name.bytesplice(2,2,"aaa")
+        => "Aaaaaoo" 
+
+14.  str.byteindex('character')  : Returns the position of the character mentioned.
+
+        3.2.2 :003 > name.byteindex("aaa")
+         => 1 
+
+
+15.  str.byterindex('char',x)  : Returns the position where the character occurs for the xth time.
+
+        3.2.2 :004 > name.byteindex("a",4)
+         => 4 
+
+16.  str.capitalize  : Capitalizes a string.
+
+        3.1.2 :004 > s="hEllO"
+        => "hEllO" 
+        3.1.2 :005 > s.capitalize
+        => "Hello" 
+
+17.  str.capitalize!  : Same as capitalize, but changes are made in place.
+
+        3.1.2 :006 > s.capitalize!
+        => "Hello" 
+        3.1.2 :007 > s
+        => "Hello" 
+
+18.  str.casecmp  : Makes a case-insensitive comparison of strings.
+
+        3.2.2 :006 > name = "Abhishek"
+        => "Abhishek" 
+        3.2.2 :007 > name.casecmp("abhishek")
+        => 0 
+
+19.  str.chars  : Returns the arrays of individual characters present in the string.
+
+        3.2.2 :008 > name.chars
+         => ["A", "b", "h", "i", "s", "h", "e", "k"] 
+
+20.  str.center(size,pad string=' ')  : Centers a string within the size mention with of character mentioned in pad string.
+
+        3.2.2 :010 > name.center(20,pad ="*")
+         => "******Abhishek******" 
+21.  str.chomp  : Removes the record separator ($/)[if exists], usually \n, from the end of a string.
+
+        3.2.2 :011 > name.chomp("k")
+         => "Abhishe" 
+
+22.  str.chomp!  : Same as chomp, but changes are made in place.
+
+        3.2.2 :012 > name.chomp!("k")
+        => "Abhishe" 
+        3.2.2 :013 > name
+        => "Abhishe" 
+
+23.  str.chop  : Removes the last character in str.
+
+        3.2.2 :014 > name.chop
+         => "Abhish" 
+24.  str.chop!  : Same as chop, but changes are made in place.
+
+        3.2.2 :015 > name.chop!
+         => "Abhish" 
+
+25.  str.clear  : Clears the string (removes content).
+
+        3.2.2 :016 > name.clear
+         => "" 
+
+26.  str.concat(other_str)  : Concatenates other_str to str.
+
+        3.2.2 :017 > a="hello"
+        => "hello" 
+        3.2.2 :018 > b="friends"
+        => "friends" 
+        3.2.2 :019 > a.concat(b)
+        => "hellofriends" 
+
+27.  str.count(x)  : Returns the total number of characters present in the string same as the one in command.
+
+        3.2.2 :026 > a.count("l")
+        => 2 
+
+
+
+28.  str.crypt(other_str)  : Applies a one-way cryptographic hash to str. The argument is the salt string, which should be two characters long, each character in the range a..z, A..Z, 0..9, . or /.
+
+        3.2.2 :027 > a.crypt(b)
+        => "fr0ldHkUh5vWs" 
+            
+29.  str.delete(x)  : Returns a copy of str with all characters specified deleted.
+
+        3.2.2 :028 > a.delete("e")
+         => "hllo" 
+30.  str.delete!(x)  : Same as delete, but changes are made in place.
+
+        3.2.2 :029 > a.delete!("e")
+         => "hllo" 
+31.  str.delete_prefix(prefix)  : Removed the prefix mentioned and displays the remaining content of the string.
+
+        3.2.2 :031 > a.delete_prefix("hel")
+        => "lo" 
+
+32.  str.delete_prefix!(prefix)  : Does the same as above if the prefix exists otherwise returns nil.
+
+        3.2.2 :032 > a.delete_prefix!("hel")
+        => "lo" 
+
+33.  str.delete_sufix(sufix)  : Removed the suffix mentioned and displays the remaining content of the string.
+
+        3.2.2 :033 > a.delete_suffix("lo")
+        => "hel" 
+
+34.  str.delete_sufix!(sufix)  : Does the same as above if the suffix exists otherwise returns nil.
+
+        3.2.2 :034 > a.delete_suffix!("lo")
+        => "hel" 
+
+35.  str.downcase  : Returns a copy of str with all uppercase letters replaced with lowercase.
+
+        3.2.2 :034 > a.downcase
+         => "hello" 
+
+36.  str.downcase!  : Same as downcase, but changes are made in actual string.
+
+        3.2.2 :035 > a.downcase!
+        => "hello" 
+
+37.  str.dump  : Returns a version of str with all nonprinting characters replaced by \nnn notation and all special characters escaped.
+
+        3.2.2 :035 > a.dump
+        => "\"hello\"" 
+
+38.  str.empty?  : Returns true if str is empty (has a zero length).
+
+        3.2.2 :036 > a.empty?
+        => false 
+
+39.  str.eql?('string')  : Checks if str is equal to the string mentioned in the bracket.
+
+        3.2.2 :037 > a.eql?("hello")
+        => true 
+
+40.  str.each_byte{|byte|print byte,' '}  : Gives ASCII code for each character in the string along with the string.
+
+        3.2.2 :038 > a.each_byte{|byte|print byte,' '} 
+        104 101 108 108 111  => "hello" 
+
+41.  str.each_char{|c|print c,' '}  : Calls the given block with each successive character from self; returns self.
+
+        3.2.2 :040 > a.each_char{|c|print c,' / '}
+        h / e / l / l / o /  => "hello" 
+
+42.  str.encoding  : Returns the Encoding object that represents the encoding of obj.
+
+        3.2.2 :042 > a.encoding
+         => #<Encoding:UTF-8> 
+
+43.  str.end_with?('a')  : Returns whether self ends with any of the given 'a'.
+
+        3.2.2 :043 > a.end_with?('a')
+        => false 
+
+44.  str.force_encoding(type)  : Changes the encoding of the string to the type mentioned.
+
+        3.2.2 :045 > a.force_encoding("ASCII-8BIT")
+        => "hello" 
+
+45.  str.freeze  : Used to make the string immutable.
+
+        3.2.2 :046 > a.freeze
+        => "hello" 
+
+46.  str.getbyte(index)  : Returns the byte at zero-based index as an ASCII value, or nil if index is out of range.
+
+        3.2.2 :047 > a.getbyte(4)
+        => 111 
+
+47.  str.hex  : Used to interpret the leading substring of a string as a string of hexadecimal digits (characters 0-9 and A-F, case-insensitive).
+
+        3.2.2 :048 > a.hex
+        => 0 
+
+48.  str.include?  : Returns true if self contains other_string, false otherwise.
+
+        3.2.2 :049 > a.include?("el")
+        => true 
+
+49.  str.index (substring, offset = 0)  : Returns the integer index of the first match for the given argument, or nil if none found; begins at position offset (in characters).
+
+        3.2.2 :050 > a.index("el")
+        => 1 
+
+50.  str.initialize_copy(other_string)  : Replaces the contents of self with the contents of other_string.
+
+        3.2.2 :053 > b.replace("guys")
+        => "guys" 
+
+51.  str.insert (index,other_string)  : Inserts the given other_string into self.
+
+        3.2.2 :055 > b.insert(4,",how are you?")
+        => "guys,how are you?" 
+
+52.  str.inspect  : Returns a printable version of self, enclosed in double-quotes, and with special characters escaped.
+
+        3.2.2 :056 > b.inspect
+        => "\"guys,how are you?\"" 
+
+53.  str.intern  : Returns the Symbol corresponding to str, creating the symbol if it did not previously exist.
+
+        3.2.2 :057 > b.intern
+        => :"guys,how are you?" 
+
+54.  str.length  : Returns the count of characters (not bytes) in self.
+
+        3.2.2 :058 > b.length
+        => 17 
+
+55.  str.ljust(size,pad_string=' ')  : Returns a left-justified copy of self by the size mentioned and with the help of pad size mentioned.
+
+        3.2.2 :061 > a.ljust(25,pad_string=',')
+        => "hello,,,,,,,,,,,,,,,,,,,," 
+
+56.  str.lstrip  : Returns a copy of self with whitespace at left removed.
+
+        3.2.2 :062 > a.lstrip
+        => "hello" 
+
+57.  str.lstrip!  : If modification made returns self otherwise nil.
+
+        3.2.2 :063 > a.lstrip!
+        => "hello" 
+
+58.  str.next  : Returns successor to self (calculated by incrementing the characters).
+
+        3.2.2 :064 > a.next
+        => "hellp" 
+
+59.  str.next!  : Returns the modification in the self itself.
+
+        3.2.2 :065 > a.next!
+        => "hellp" 
+
+60.  str.oct  : Returns the octal value and then converts to decimal again.
+
+        3.2.2 :066 > b.oct
+        => 0 
+
+61.  str.ord  : Returns the integer ordinal of the first character of self.
+
+        3.2.2 :067 > b.ord
+        => 103 
+
+62.  str.partition(string_or_regexp)  : Returns a 3-element array of substrings of self → [head, match, tail].
+
+        3.2.2 :068 > b.partition("how")
+        => ["guys,", "how", " are you?"] 
+
+63.  str.prepend('a','b')  : Firstly writes the strings mentioned then appends self.
+
+        3.2.2 :069 > b.prepend("h","i"," ")
+        => "hi guys,how are you?" 
+
+64.  str.reverses  : Reverses the String.
+
+        3.2.2 :070 > a.reverse
+        => "olleh" 
+
+65.  str.reverse!  : Modification made to self.
+
+        3.2.2 :071 > a.reverse!
+        => "olleh" 
+
+66.  str.rjust(size,pad size='')  : Justifies from right (opposite of ljust).
+
+        3.2.2 :072 > b.rjust(25,pad_string=',')
+        => ",,,,,hi guys,how are you?" 
+
+67.  str.rpartition(sep)  : Partitions[head, match, tail].
+
+        3.2.2 :073 > b.rpartition("how")
+         => ["hi guys,", "how", " are you?"] 
+
+68.  str.rstrip  : Returns a copy of the receiver with trailing whitespace removed.
+
+        3.2.2 :074 > b.rstrip
+        => "hi guys,how are you?" 
+
+69.  str.rstrip!  : Returns self and same functionality as rstrip.
+
+        3.2.2 :075 > b.rstrip!
+        => "hi guys,how are you?" 
+
+70.  str.scan (string or regex)  : Matches a pattern against self.
+
+        3.2.2 :076 > b.scan("how")
+        => ["how"] 
+
+71.  str.setbyte(index,integer)  : Sets the byte at zero-based index to integer; returns integer.
+
+        3.2.2 :077 > b.setbyte(0,97)
+        => 97 
+        3.2.2 :078 > b
+        => "ai guys,how are you?" 
+
+72.  str.size  : Returns the count of characters (not bytes) in self.
+
+        3.2.2 :079 > b.size
+        => 20 
+
+73.  str.slice (a)  : Returns the substring of self specified by a (can be integer or range or start,length or substring).
+
+        3.2.2 :080 > b.slice("a")
+        => "a" 
+
+74.  str.slice!(*args)  : Removes and returns the substring of self specified by the arguments.
+
+        3.2.2 :081 > b.slice!("a")
+        => "a" 
+
+75.  str.squeeze(*)  : Adjacent repeatative character is squeezed down to a single character.
+
+        3.2.2 :082 > a.squeeze
+        => "helo" 
+
+76.  str.squeeze!()  : Modification done to self.
+
+        3.2.2 :083 > a.squeeze
+        => "helo" 
+
+77.  str.start_with?(a)  : Returns whether self starts with any of the given string_or_regexp.
+
+        3.2.2 :084 > a.start_with?("h")
+        => true 
+
+78.  str.strip  : Returns self with leading and trailing whitespaces removed.
+
+        3.2.2 :085 > a.strip
+        => "hello" 
+
+79.  str.strip!  : Modifies actual string.
+
+        3.2.2 :086 > a.strip!
+        => "hello" 
+
+80.  str.sub(pattern | replacement)  : Returns a copy of self with only the first occurrence (not all occurrences) of the given pattern replaced.
+
+        3.2.2 :086 > b.sub("ai","hi")
+        => "hi guys,how are you?" 
+
+81.  str.sub(pattern | replacement)  : Returns a copy of self with only the first occurrence (not all occurrences) of the given pattern replaced.
+
+        3.2.2 :086 > b.sub("ai","hi")
+        => "hi guys,how are you?" 
+
+82.  str.sum(n=16)  : Computes a basic checksum of the characters in the string.
+
+        3.2.2 :087 > b.sum(n=16)
+        => 1856 
+
+83.  str.swapcase(*options)  : Reverses cases of characters of string.
+
+        3.2.2 :088 > b.swapcase
+        => "AI GUYS,HOW ARE YOU?" 
+
+84.  str.swapcase!(*options)  : Modifies the actual string.
+
+        3.2.2 :088 > b.swapcase
+        => "AI GUYS,HOW ARE YOU?" 
+
+85.  str.to_c  : Returns the complex denoting the string form.
+
+        3.2.2 :089 > b.to_c
+        => (0+0i) 
+        
+86.  str.to_f  : Returns the result of interpreting leading characters in self as a Float.
+
+        3.2.2 :090 > b.to_f
+        => 0.0 
+
+87.  str.to_i(base=10)  : Returns the result of interpreting leading characters in self as an integer in the given base.
+
+        3.2.2 :091 > b.to_i(base=10)
+        => 0 
+
+88.  str.to_r  : Returns the result of interpreting leading characters in str as a rational.
+
+        3.2.2 :092 > b.to_r
+        => (0/1) 
+
+89.  str.to_s  : Returns self if self is a String, or self converted to a String if self is a subclass of String.
+
+        3.2.2 :093 > b.to_s
+        => "ai guys,how are you?" 
+
+90.  str.tr(selector,replacement)  : Changes the specified to the corresponding character in string replacements.
+
+        3.2.2 :094 > b.tr("ai","hi")
+        => "hi guys,how hre you?" 
+
+91.  str.tr!(selector,replacement)  : Modifies the actual string.
+
+        3.2.2 :094 > b.tr!("ai","hi")
+        => "hi guys,how hre you?" 
+
+92.  str.tr_s(selector,replacement)  : Modifies like   .tr   command and also combines squeezing command.
+
+        3.2.2 :095 > b.tr_s("ai","hi")
+        => "hi guys,how hre you?" 
+
+93.  str.tr_s!(selector,replacement)  : Modifies actual string.
+
+        3.2.2 :096 > b.tr_s!("ai","hi")
+        => "hi guys,how hre you?" 
+
+95.  str.upcase(*options)  : Modifies the case of string to uppercase.
+
+        3.2.2 :097 > b.upcase
+        => "AI GUYS,HOW ARE YOU?" 
+
+96.  str.upcase!(*options)  : Modifies in actual string.
+
+        3.2.2 :098> b.upcase!
+        => "AI GUYS,HOW ARE YOU?" 
+
+97.  str.upto(other_string,exclusive=false){|string|...}  : Used to iterate through successive string values, starting from the receiver string up to (and including, by default) the specified other_string.
+
+        3.2.2 :098 > b.upto('c1'){|s| print s , ','}
+        ai guys,how are you?, => "ai guys,how are you?" 
+
+98.  str.valid_encoding?  : Returns true if self is encoded correctly, false otherwise.
+
+        3.2.2 :099 > b.valid_encoding?
+        => true 
+
+99.  str.gsub!  : Performs modification on the self.
+
+        3.2.2 :100 > b.gsub!("h","hello")
+        => "ai guys,helloow are you?" 
+
+100. str.gsub(pattern,replacement)  : Returns a copy of str with all occurrences of pattern replaced with either replacement or the value of the block.
+
+        3.2.2 :100 > b.gsub("h","hello")
+        => "ai guys,helloow are you?" 
+
+101. str.match(pattern)  : Used to search a string for a match against a specified regular expression pattern.
+
+        3.2.2 :101 > b.match("gu")
+         => #<MatchData "gu"> 
+
+102. str.hash  : Returns a hash based on strings length and content.
+
+        3.2.2 :102 > b.hash
+        => -147775130531713299 
+
+103. new  : Used to create an instance of the string class.
+
+        3.2.2 :103 > c=String.new("iphone")
+        => "iphone" 
+
+104. str.try_convert(type)  : Used to convert the string to specified type if possible.
+
+        3.2.2 :111 > a=String.try_convert(c)
+        => nil 
+
+105. string[a.b] : used to display the characters of string in the range a..b
+
+        3.2.2 :112 > b[3,9]
+        => "guys,how " 
+
+106. ascii_only? : used to display if it has ascii encoding
+
+        3.2.2 :114 > b.ascii_only?
+        => true 
+
+107. chr : returns string containing first character of self
+
+        3.2.2 :115 > b.chr
+        => "a" 
+
+108. codepoints : returns an array containing integer value of characters(short for str.each_codepoint.to_a)
+
+        3.2.2 :116 > b.codepoints
+        => [97, 105, 32, 103, 117, 121, 115, 44, 104, 111, 119, 32, 97, 114, 101, 32, 121, 111, 117, 63] 
+
+109.delete : used to delete characters of a string
+
+        3.2.2 :118 > b.delete"guys"
+         => "ai ,how are o?" 
+
+110. delete_prefix(prefix) or delete_prefix!(prefix) : used to delete prefix from the string
+
+        3.2.2 :119 > b.delete_prefix"ai"
+        => " guys,how are you?" 
+
+111. delete_suffix(suffix) : used to delete suffix from the string
+
+        3.2.2 :124 > b.delete_suffix("ou?")
+        => "ai guys,how are y"
+
+112. 
+
+
+
