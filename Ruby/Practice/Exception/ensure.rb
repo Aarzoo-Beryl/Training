@@ -1,12 +1,12 @@
 #!/usr/bin/ruby
 
 begin
-    raise 'A test exception'
+  raise 'A test exception'
 rescue Exception => e
-    puts e.message
-    puts e.backtrace.inspect
+  puts e.message
+  puts e.backtrace.inspect
 ensure
-    puts 'Ensuring expression'
+  puts 'Ensuring expression'
 end
 
 

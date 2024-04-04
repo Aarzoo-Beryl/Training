@@ -1,10 +1,10 @@
 #!/usr/bin/ruby
 
 catch :finish do
-    5.times do |i|
-      puts "Iteration #{i}"
-      throw :finish if i == 2
-    end
+  5.times do |i|
+    puts "Iteration #{i}"
+    throw :finish if i == 2
+  end
 end
 puts "Finished!"
 

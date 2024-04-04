@@ -1,13 +1,13 @@
 #!/usr/bin/ruby
 
 begin 
-    file = open("/unseen_file")
-    if file
-        puts"file opened"
-    end
+	file = open("/unseen_file")
+	if file
+		puts"file opened"
+	end
 
 rescue 
-    file = STDIN
+  file = STDIN
 end
 
 print file,"==",STDIN,"\n"

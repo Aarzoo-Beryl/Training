@@ -1,13 +1,13 @@
 #!usr/bin/ruby
 
 File.open(path, "w") do |file|
-    begin
-      # Write out the data ...
-    rescue
-      # Something went wrong!
-      raise FileSaveError.new($!)
-    end
+  begin
+    # Write out the data ...
+  rescue
+    # Something went wrong!
+    raise FileSaveError.new($!)
   end
+end
 
   
 =begin
