@@ -1,0 +1,525 @@
+#this file contains practice of the built-in methods of array
+
+1. a.at(index): displays object at the index mentioned
+
+    3.2.2 :001 > a=[1,4,8,2,5,9,3,6,0,7]
+    => [1, 4, 8, 2, 5, 9, 3, 6, 0, 7] 
+    3.2.2 :002 > a.at(5)
+    => 9 
+
+
+2. arr.fetch(index): displays object at the index mentioned
+
+    3.2.2 :003 > a.fetch(9)
+    => 7 
+
+3. arr.first: displays first element of the array
+
+    3.2.2 :004 > a.first
+    => 1 
+
+4. arr.last: displays the last element of the array
+
+    3.2.2 :005 > a.last
+    => 7 
+
+5. arr.take(n): takes out the first n elements from the array
+
+    3.2.2 :006 > a.take(3)
+    => [1, 4, 8]
+
+6. a.drop(n): displays the elements after dropping the n elemts of array
+
+    3.2.2 :007 > a.drop(3)
+    => [2, 5, 9, 3, 6, 0, 7] 
+
+7. arr.length: displays the total number of elements in array
+
+    3.2.2 :008 > a.length
+    => 10 
+
+8. arr.count: same as arr.length
+
+    3.2.2 :009 > a.count
+    => 10 
+
+9. a.empty? : checks if the array is empty or not
+
+    3.2.2 :010 > a.empty?
+    => false 
+
+10. a.include?(obj) : checks if the array contains that particular array
+
+    3.2.2 :011 > a.include?(0)
+    => true 
+
+11. a.push(obj) : add obje to the last of the array
+
+    3.2.2 :012 > a.push(10)
+    => [1, 4, 8, 2, 5, 9, 3, 6, 0, 7, 10] 
+
+12. a.unshift(obj) : adds obj to the starting of the array
+
+    3.2.2 :013 > a.unshift(20)
+    => [20, 1, 4, 8, 2, 5, 9, 3, 6, 0, 7, 10] 
+
+13. a.insert(index,obj): adds object at particularly mentioned index of the array
+
+    3.2.2 :014 > a.insert(10,50)
+    => [20, 1, 4, 8, 2, 5, 9, 3, 6, 0, 50, 7, 10] 
+
+14. arr.pop : removes the last element from the array
+
+    3.2.2 :026 > a.pop
+    => 10 
+    3.2.2 :027 > a
+    => [20, 1, 4, 8, 2, 5, 9, 3, 6, 0, 50, 7] 
+
+15. arr.shift : removes the first element from the array
+
+    3.2.2 :028 > a.shift
+    => 20 
+    3.2.2 :031 > a
+    => [1, 4, 8, 2, 5, 9, 3, 6, 0, 50, 7] 
+
+16. arr.delete_at(index):deletes elemt present at the given index
+
+    3.2.2 :032 > a.delete_at(9)
+    => 50 
+    3.2.2 :033 > a
+    => [1, 4, 8, 2, 5, 9, 3, 6, 0, 7] 
+
+17. arr.delete(obj): deletes the object mentioned from the array
+
+    3.2.2 :034 > a.delete(0)
+    => 0 
+    3.2.2 :035 > a
+    => [1, 4, 8, 2, 5, 9, 3, 6, 7] 
+
+18. arr.compact: used to remove nil values from the array
+    compact!: modification done to self
+
+    3.2.2 :040 > a
+    => [9, 9, 9, nil, nil, 1, 4, 8, 2, 5, nil, 9, 3, 6, 7, 8, 7, 6] 
+    3.2.2 :041 > a.compact
+    => [9, 9, 9, 1, 4, 8, 2, 5, 9, 3, 6, 7, 8, 7, 6] 
+
+19. arr.compact!: modification done to self
+
+    3.2.2 :042 > a.compact!
+    => [9, 9, 9, 1, 4, 8, 2, 5, 9, 3, 6, 7, 8, 7, 6] 
+    3.2.2 :043 > a
+    => [9, 9, 9, 1, 4, 8, 2, 5, 9, 3, 6, 7, 8, 7, 6]
+20. arr.uniq: used to eleminate duplicate values from the array
+    uniq!: modification done to self
+
+    3.2.2 :044 > a.uniq
+    => [9, 1, 4, 8, 2, 5, 3, 6, 7] 
+
+21. arr.uniq!: modification done to self
+
+    3.2.2 :045 > a.uniq!
+    => [9, 1, 4, 8, 2, 5, 3, 6, 7] 
+    3.2.2 :046 > a
+    => [9, 1, 4, 8, 2, 5, 3, 6, 7] 
+
+22. arr.each{}: determines what to be done to each element of an array
+
+    3.2.2 :048 > a.each{|s| print s+10," , "}
+    19 , 11 , 14 , 18 , 12 , 15 , 13 , 16 , 17 ,  => [9, 1, 4, 8, 2, 5, 3, 6, 7] 
+
+23. arr.reverse_each{}: iterates in reverse order over the array
+
+    3.2.2 :049 > a.reverse_each{|s| print s+10," , "}
+    17 , 16 , 13 , 15 , 12 , 18 , 14 , 11 , 19 ,  => [9, 1, 4, 8, 2, 5, 3, 6, 7] 
+
+24. arr.map{}: used to create a new array based on the original array(values modified by block)
+    map!: changes made to self
+
+    3.2.2 :002 > a.map{|s| s*10}
+    => [90, 10, 40, 80, 20, 50, 30, 60, 70] 
+    3.2.2 :003 > a
+    => [9, 1, 4, 8, 2, 5, 3, 6, 7] 
+
+25. arr.map!{}:modification done to self
+
+    3.2.2 :004 > a.map!{|s| s*10}
+    => [90, 10, 40, 80, 20, 50, 30, 60, 70] 
+    3.2.2 :005 > a
+    => [90, 10, 40, 80, 20, 50, 30, 60, 70] 
+
+26. a.select{}: selects only the values that satisfy the block
+    a.select!: changes made to self
+
+    3.2.2 :006 > a.select{|s| s%3==0}
+    => [90, 30, 60] 
+
+27. a.reject{}:selects only the values that are not rejected by the block
+    a.reject! : changes made to self
+
+    3.2.2 :007 > a.reject{|s| s%3==0}
+    => [10, 40, 80, 20, 50, 70] 
+
+28. a.drop_while{}:selects only the values that are not rejected by the block
+
+    3.2.2 :027 > a.drop_while { |s| s <= 5 }
+    => [6, 7, 8, 9, 0] 
+
+29. a.delete_if{}: deletes elements that satisfy the block
+
+    3.2.2 :028 > a.delete_if { |s| s <= 5 }
+    => [6, 7, 8, 9] 
+
+30. a.keep_if{}: keeps the element only if it satisfies the given block
+
+    3.2.2 :029 > a.keep_if{|s| s%3 !=0}
+    => [7, 8] 
+
+31. a.all?{} : returns if all the elements meets the given criteria
+
+    3.2.2 :031 > a=[1,2,3,4,5,6,7,8,9,0]
+    => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0] 
+    3.2.2 :032 > a.all?{|s| s<10}
+    => true 
+
+32. a.any?(obj): returns if any element of the array is equal to the object mentioned
+
+    3.2.2 :034 > a.any?(10)
+    => false 
+
+33. a.none?(obj): returns true if the array has no element that is equal to the object mentioned
+
+3.2.2 :035 > a.none?(10)
+ => true 
+
+34. a.find_index(obj): returns the index of the object mentioned
+
+    3.2.2 :037 > a.find_index(0)
+    => 9 
+
+35. a.index(index):returns the index of the object
+
+    3.2.2 :038 > a.index(2)
+    => 1 
+
+36. a.one?(object): returns if exactly one element is equal to the object mentioned
+
+    3.2.2 :036 > a.one?(0)
+    => true 
+
+37. a.rindex{}: gives the index of the last element that satisfies the block
+
+    3.2.2 :039 > a.rindex{|s| s%2==0}
+    => 9 
+
+38. a.hash : returns the integer hash code
+
+    3.2.2 :041 > a.hash
+    => 4123424141605367990 
+
+39. a.eql?(a2): determines if both the arrays are equal
+
+    3.2.2 :042 > a.eql? s
+    => false 
+
+40. a.first : returns the first element of the array
+
+    3.2.2 :043 > a.first
+    => 1 
+
+41. a.last: returns the last element of the array
+
+    3.2.2 :044 > a.last
+    => 0 
+
+42. a.min :returns the min value element from the array
+
+    3.2.2 :045 > a.min
+    => 0 
+
+43. a.max:returns the max value element from the array
+
+    3.2.2 :046 > a.max
+    => 9 
+
+44. a.minmax : returns the array of length 2 - [min value element,max value element]
+
+    3.2.2 :047 > a.minmax
+    => [0, 9] 
+
+45. assoc(obj): Returns the first element that is an array whose first element == a given object.
+
+    3.2.2 :052 > a
+    => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, [5, 6, 7]] 
+    3.2.2 :051 > a.assoc(5)
+    => [5, 6, 7] 
+
+46. rassoc(obj): Returns the first element that is an array whose second element == a given object.
+
+    3.2.2 :055 > a.rassoc(6)
+    => [5, 6, 7] 
+
+47. values_at: Returns the elements at given offsets.
+
+    3.2.2 :056 > a.values_at(2..4)
+    => [3, 4, 5] 
+
+48. dig: Returns the object in nested objects that is specified by a given index and additional arguments.
+
+    3.2.2 :064 > a.dig(10,1)
+    => 6 
+
+49. take: Returns leading elements as determined by a given index.
+
+    3.2.2 :065 > a.take(10)
+    => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0] 
+
+50. take_while: Returns leading elements as determined by a given block.
+
+    3.2.2 :066 > a.take_while{|s| s<5}
+    => [1, 2, 3, 4] 
+
+51. slice: Returns consecutive elements as determined by a given argument.
+    slice!: modification done to self
+
+    3.2.2 :069 > a.slice(5..7)
+    => [6, 7, 8] 
+
+52. sort: Returns all elements in an order determined by <=> or a given block.
+    sort! : changes made to self
+
+    3.2.2 :072 > a.sort
+    => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] 
+
+53. filter: Returns an array containing elements selected by a given block.
+    filter!: modification done to self
+
+    3.2.2 :073 > a.filter{|s| s<=3}
+    => [1, 2, 3, 0] 
+
+54. rotate: Returns all elements with some rotated from one end to the other.
+    rotate!: Replaces self with its elements rotated.
+
+    3.2.2 :074 > a.rotate(1)
+    => [2, 3, 4, 5, 6, 7, 8, 9, 0, 1] 
+
+55. bsearch: Returns an element selected via a binary search as determined by a given block.
+
+    3.2.2 :093 > s.bsearch{|x| x>=4}
+    => 4 
+
+56. bsearch_index: Returns the index of an element selected via a binary search as determined by a given block.
+
+    3.2.2 :096 > s.bsearch_index{|x| x<=4}
+    => 0 
+
+57. sample: Returns one or more random elements.
+
+    3.2.2 :097 > a.sample
+    => 0 
+
+58. shuffle: Returns elements in a random order.
+    shuffle! : modification done to self
+
+    3.2.2 :098 > a.shuffle
+    => [5, 6, 1, 7, 3, 9, 2, 0, 4, 8] 
+
+59. append or <<: Appends trailing elements.
+
+    3.2.2 :099 > a.append(10)
+    => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
+    3.2.2 :100 > a<<(20)
+    => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20] 
+
+60. prepend: Prepends leading elements.
+
+    3.2.2 :101 > a.prepend(100)
+    => [100, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20] 
+
+61. concat: Appends all elements from given arrays.
+
+    3.2.2 :102 > a.concat(s)
+    => [100, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 1, 2, 3, 4, 5] 
+
+62. fill: Replaces specified elements with specified objects.
+
+    3.2.2 :103 > a.fill(2,start=0,length=nil)
+    => [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] 
+    3.2.2 :104 > a
+    => [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] 
+    3.2.2 :105 > a.fill(1,start=3,length=2)
+    => [2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] 
+
+63. replace: Replaces the content of self with the content of a given array.
+
+    3.2.2 :106 > a.replace(s)
+    => [1, 2, 3, 4, 5] 
+
+64. reverse : reverses the order of elements in an array
+    reverse!: Replaces self with its elements reversed.
+
+    3.2.2 :107 > a.reverse
+    => [5, 4, 3, 2, 1] 
+
+65. sort_by : sorts the array by given order
+    sort_by!: Replaces self with its elements sorted, as determined by a given block.
+
+    3.2.2 :109 > array = ["banana", "apple", "cherry", "date"]
+    => ["banana", "apple", "cherry", "date"] 
+    3.2.2 :112 > sorted_array = array.sort_by { |fruit| fruit.length }
+    => ["date", "apple", "banana", "cherry"] 
+
+66. intersection: Returns an array containing elements found both in self and in each given array.
+
+    3.2.2 :118 > a.intersection(b)
+    => [1, 2, 3, 4, 5] 
+
+67. +: Returns an array containing all elements of self followed by all elements of a given array.
+
+    3.2.2 :119 > a+b
+    => [1, 2, 3, 4, 5, 2, 4, 6, 8, 9, 7, 5, 4, 3, 4, 5, 3, 1, 2] 
+
+68. -: Returns an array containing all elements of self that are not found in a given array.
+
+    3.2.2 :120 > a-b
+    => [6, 8, 9, 7] 
+69. #|: Returns an array containing all elements of self and all elements of a given array, duplicates removed.
+
+    3.2.2 :121 > a#|b
+    => [1, 2, 3, 4, 5, 2, 4, 6, 8, 9, 7, 5, 4, 3] 
+
+70. union: Returns an array containing all elements of self and all elements of given arrays, duplicates removed.
+
+    3.2.2 :122 > a.union b
+    => [1, 2, 3, 4, 5, 6, 8, 9, 7] 
+
+71. difference: Returns an array containing all elements of self that are not found in any of the given arrays..
+
+    3.2.2 :123 > a.difference b
+    => [6, 8, 9, 7] 
+72. product: Returns or yields all combinations of elements from self and given arrays.
+
+    3.2.2 :125 > s=[2,3]
+    => [2, 3] 
+    3.2.2 :126 > s.product b
+    => [[2, 4], [2, 5], [2, 3], [2, 1], [2, 2], [3, 4], [3, 5], [3, 3], [3, 1], [3, 2]] 
+
+73. cycle: Calls a given block with each element, then does so again, for a specified number of times, or forever.
+
+    3.2.2 :136 > b.cycle(2){|s| print s,' , '}
+    4 , 5 , 3 , 1 , 2 , 4 , 5 , 3 , 1 , 2 ,  => nil 
+
+74. combination: Calls a given block with combinations of elements of self; a combination does not use the same element more than once.
+
+    3.2.2 :135 > b.combination(2){|s| print s,' , '}
+    [4, 5] , [4, 3] , [4, 1] , [4, 2] , [5, 3] , [5, 1] , [5, 2] , [3, 1] , [3, 2] , [1, 2] ,  => [4, 5, 3, 1, 2] 
+
+75. permutation: Calls a given block with permutations of elements of self; a permutation does not use the same element more than once.
+
+    3.2.2 :132 > b.permutation(2){|s| print s,' , '}
+    [4, 5] , [4, 3] , [4, 1] , [4, 2] , [5, 4] , [5, 3] , [5, 1] , [5, 2] , [3, 4] , [3, 5] , [3, 1] , [3, 2] , [1, 4] , [1, 5] , [1, 3] , [1, 2] , [2, 4] , [2, 5] , [2, 3] , [2, 1] ,  => [4, 5, 3, 1, 2] 
+
+76. repeated_combination: Calls a given block with combinations of elements of self; a combination may use the same element more than once.
+
+    3.2.2 :134 > b.repeated_combination(2){|s| print s,' , '}
+    [4, 4] , [4, 5] , [4, 3] , [4, 1] , [4, 2] , [5, 5] , [5, 3] , [5, 1] , [5, 2] , [3, 3] , [3, 1] , [3, 2] , [1, 1] , [1, 2] , [2, 2] ,  => [4, 5, 3, 1, 2]  
+
+77. repeated_permutation: Calls a given block with permutations of elements of self; a permutation may use the same element more than once.
+
+    3.2.2 :133 > b.repeated_permutation(2){|s| print s,' , '}
+    [4, 4] , [4, 5] , [4, 3] , [4, 1] , [4, 2] , [5, 4] , [5, 5] , [5, 3] , [5, 1] , [5, 2] , [3, 4] , [3, 5] , [3, 3] , [3, 1] , [3, 2] , [1, 4] , [1, 5] , [1, 3] , [1, 1] , [1, 2] , [2, 4] , [2, 5] , [2, 3] , [2, 1] , [2, 2] ,  => [4, 5, 3, 1, 2]
+
+78. collect: Returns an array containing the block return-value for each element.
+    collect!: changes made to self
+    
+
+79. flatten: Returns an array that is a recursive flattening of self.
+    flatten!: modification made to self
+
+
+80. inspect or to_s: Returns a new String containing the elements.
+
+    3.2.2 :137 > a.inspect
+    => "[1, 2, 3, 4, 5, 2, 4, 6, 8, 9, 7, 5, 4, 3]" 
+
+81. join: Returns a newsString containing the elements joined by the field separator.
+
+    3.2.2 :142 > a.join
+    => "12345246897543" 
+
+82. to_a: Returns self or a new array containing all elements.
+
+    3.2.2 :145 > a.to_a
+    => [1, 2, 3, 4, 5, 2, 4, 6, 8, 9, 7, 5, 4, 3] 
+
+83. to_ary: Returns self.
+
+    3.2.2 :146 > a.to_ary
+    => [1, 2, 3, 4, 5, 2, 4, 6, 8, 9, 7, 5, 4, 3] 
+
+84. to_h: Returns a new hash formed from the elements.
+
+    3.2.2 :152 > c=[[:h,2],[:a,1]]
+    => [[:h, 2], [:a, 1]] 
+    3.2.2 :153 > c.to_h
+    => {:h=>2, :a=>1} 
+
+85. transpose: Transposes self, which must be an array of arrays.
+
+    3.2.2 :154 > c.transpose
+    => [[:h, :a], [2, 1]] 
+
+86. zip: Returns a new array of arrays containing self and given arrays
+
+    3.2.2 :155 > c.zip
+    => [[[:h, 2]], [[:a, 1]]] 
+
+87. *: a new array that is the concatenation of n copies of self.
+
+    3.2.2 :158 > c*2
+    => [[:h, 2], [:a, 1], [:h, 2], [:a, 1]] 
+
+88. || : returns elements present in either of arrays ,removing duplicates
+
+    3.2.2 :170 > a||b
+    => [1, 2, 3, 4, 5, 2, 4, 6, 8, 9, 7, 5, 4, 3] 
+
+89. pack: Packs the elements into a binary sequence.
+
+    3.2.2 :172 > a.pack("C*")
+    => "\x01\x02\x03\x04\x05\x02\x04\x06\b\t\a\x05\x04\x03" 
+
+    3.2.2 :173 > array = [65, 66, 67].pack("C*")
+    => "ABC" 
+
+90. sum: Returns a sum of elements according to either + or a given block.
+
+    3.2.2 :162 > a.sum
+    => 63 
+
+91. & : returns the common element from both arrays
+
+    3.2.2 :163 > a & b
+    => [1, 2, 3, 4, 5] 
+
+92. try_convert:tries to convert to the mentioned data type
+
+    3.2.2 :175 > Array.try_convert([2,3,4])
+    => [2, 3, 4] 
+
+93. array<=>array2:return -1 if arr>arr1,0 if equal and 1 if arr1>arr2
+
+    3.2.2 :164 > a<=>b
+    => -1 
+
+94.arr1 == arr2:checks if both arrays ae equal
+
+    3.2.2 :165 > a==b
+    => false 
+
+95. clear: empties the contents of the array
+
+    3.2.2 :167 > c.clear
+    => [] 
+
+
