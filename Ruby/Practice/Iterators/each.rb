@@ -3,7 +3,7 @@
 digits = 0..5
 
 digits.each do |digits|
-    puts "In loop #{digits}"
+  puts "In loop #{digits}"
 end
 
 #output - 
