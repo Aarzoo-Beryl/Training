@@ -1,13 +1,13 @@
 #!/usr/bin/ruby
 def number(integer)
-    while integer > 0 
-        if integer == 3
-            integer -= 1 
-            redo
-        end
-        print "#{integer},"
-        integer -= 1
+  while integer > 0 
+    if integer == 3
+      integer -= 1 
+      redo
     end
+    print "#{integer},"
+    integer -= 1
+  end
 end
 
 

@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 def method(a="aarzoo",b='abhishek')
-    puts "#{a},#{b}"
+	puts "#{a},#{b}"
 end
 
 

@@ -5,13 +5,13 @@ require "include_1.rb"
 
 
 class Decade
-    include Week
-    no_of_years = 10
-    def no_of_months
-        puts Week::FIRST_DAY
-        number = 10*12
-        puts number
-    end
+	include Week
+	no_of_years = 10
+	def no_of_months
+		puts Week::FIRST_DAY
+		number = 10*12
+		puts number
+	end
 end
 
 

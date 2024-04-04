@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 def method(a="aarzoo",b='abhishek')
-    return a,b
+  return a,b
 end
 
 a=method("vijay","sunita")

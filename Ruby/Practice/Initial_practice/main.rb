@@ -3,24 +3,24 @@
 #creating a class
 
 class Customer 
-    @@no_of_customer = 0
+	@@no_of_customer = 0
 
-    def initialize(id,name,addr)
-        @@no_of_customer+=1
-        @cust_id = id
-        @cust_name = name
-        @cust_addr = addr
-    end
+	def initialize(id,name,addr)
+		@@no_of_customer+=1
+		@cust_id = id
+		@cust_name = name
+		@cust_addr = addr
+	end
 
-    def details()
-        puts "Customer id - #@cust_id"
-        puts "Customer name - #@cust_name"
-        puts "Customer addr - #@cust_addr"
-    end
+	def details()
+		puts "Customer id - #@cust_id"
+		puts "Customer name - #@cust_name"
+		puts "Customer addr - #@cust_addr"
+	end
 
-    def total_customers()
-        puts "Total customer - #@@no_of_customer"
-    end
+	def total_customers()
+		puts "Total customer - #@@no_of_customer"
+	end
 
 end
 

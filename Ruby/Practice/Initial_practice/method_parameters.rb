@@ -1,11 +1,11 @@
 #!/usr/bin/ruby
 
 def method(*a)
-    puts "Total number of parameters assigned -> #{a.length}"
-    for i in 0...a.length
-        b=i+1
-        puts "#{b} . #{a[i]}"
-    end
+	puts "Total number of parameters assigned -> #{a.length}"
+	for i in 0...a.length
+		b=i+1
+		puts "#{b} . #{a[i]}"
+	end
 end
 
 method("iphone","iwatch","macbook")

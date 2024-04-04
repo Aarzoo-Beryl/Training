@@ -1,12 +1,12 @@
 #!/usr/bin/ruby
 
 begin
-    for i in 0..5
-        raise "Exception" if i > 2
-        print "#{i},"
-    end
+	for i in 0..5
+		raise "Exception" if i > 2
+		print "#{i},"
+	end
 rescue
-    retry
+	retry
 end
 
 
