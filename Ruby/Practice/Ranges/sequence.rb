@@ -9,7 +9,7 @@ max = digits.max
 reject = digits.reject{|i|i<5}
 
 digits.each do |digits|
-    puts "In loop #{digits}"
+	puts "In loop #{digits}"
 end
 
 
