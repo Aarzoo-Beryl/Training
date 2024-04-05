@@ -1,0 +1,358 @@
+# this file contains the practice documentaion of the built-in methods of the hashes
+
+1. h = {:x => n, :y => n, :z => n} :basic syntax for initialization
+
+    3.2.2 :001 > h = {:lapi => 3, :watch => 1, :phone => 2}
+    => {:lapi=>3, :watch=>1, :phone=>2} 
+
+2. new : used to create an instance of hash class
+
+    3.2.2 :003 > a = { hi: 2, good: 4, morning: 7}
+    => {:hi=>2, :good=>4, :morning=>7} 
+
+3. hash[:x] : used to display the value of key 'x'
+
+    3.2.2 :004 > a[:hi]
+    => 2 
+
+4. rehash : Rebuilds the hash table by recomputing the hash index for each key.
+
+    3.2.2 :014 > x
+    => [:abc, :b] 
+    3.2.2 :015 > y
+    => [:c, :d] 
+    3.2.2 :016 > z
+    => {[:abc, :b]=>0, [:c, :d]=>1} 
+    3.2.2 :017 > x[0]=:a
+    => :a 
+    3.2.2 :018 > z.include?(x)
+    => false 
+    3.2.2 :019 > z.rehash
+    => {[:a, :b]=>0, [:c, :d]=>1} 
+
+5. default : used to specify default value for keys
+
+    3.2.2 :020 > z.default = nil
+    => nil 
+
+6. value_at: used to deisplay values of mentioned keys
+
+    3.2.2 :025 > h.values_at(:phone,:lapi,:watch)
+    => [2, 3, 1] 
+
+7. dig : same as value_at
+
+    3.2.2 :024 > h.dig(:phone)
+    => 2 
+
+8. keys : displays all the keys in the hash
+
+    3.2.2 :026 > h.keys
+    => [:lapi, :watch, :phone] 
+
+9. try_convert: Returns a new hash created from a given object.
+
+    3.2.2 :027 > Hash.try_convert(h)
+    => {:lapi=>3, :watch=>1, :phone=>2} 
+
+10. compare_by_identity: Sets self to consider only identity in comparing keys.
+
+    3.2.2 :028 > h.compare_by_identity
+    => {:lapi=>3, :watch=>1, :phone=>2} 
+
+11. default_proc=: Sets the default proc to a given proc.
+
+    3.2.2 :129 > z.default_proc=proc{|hash,key| "no default for #{key.inspect}"}
+    => #<Proc:0x00007f427c123ca0 (irb):129> 
+    3.2.2 :132 > z[:aarzoo]
+    => "no default for :aarzoo" 
+
+12. any?: Returns whether any element satisfies a given criterion.
+
+    3.2.2 :032 > h.any?([:phone,2])
+    => true 
+
+13. compare_by_identity?: Returns whether the hash considers only identity when comparing keys.
+
+    3.2.2 :029 > h.compare_by_identity?
+    => true 
+
+14. default: Returns the default value, or the default value for a given key.
+
+    3.2.2 :033 > h.default
+    => nil 
+
+15. default_proc: Returns the default proc.(procs are often used to define custom behavior for certain operations, such as accessing keys or setting default values.)
+
+    3.2.2 :130 > z.default_proc
+    => #<Proc:0x00007f427c123ca0 (irb):129> 
+
+16. empty?: Returns whether there are no entries.
+
+    3.2.2 :034 > h.empty?
+    => false 
+
+17. eql? or equal? : Returns whether a given object is equal to self.
+
+    3.2.2 :035 > h.eql? a
+    => false 
+
+18. hash: Returns the integer hash code.
+
+    3.2.2 :036 > h.hash
+    => -4517164392990470295 
+
+19. has_value?: Returns whether a given object is a value in self.
+
+    3.2.2 :037 > h.has_value?(2)
+    => true 
+
+20. include? or has_key? or member? or key?: Returns whether a given object is a key in self.
+
+    3.2.2 :040 > h.has_key?(:lapi)
+    => true 
+    3.2.2 :041 > h.member?(:watch)
+    => true 
+    3.2.2 :042 > h.key?(:hello)
+    => false 
+    3.2.2 :043 > h.include?(:phone)
+    => true 
+
+21. length or size: Returns the count of entries.
+
+    3.2.2 :045 > h.length
+    => 3 
+    3.2.2 :046 > h.size
+    => 3 
+
+22. value?: Returns whether a given object is a value in self.
+
+    3.2.2 :049 > h.value?(20)
+    => false 
+    3.2.2 :050 > h.value?(2)
+    => true 
+
+23. #<: Returns whether self is a proper subset of a given object.
+
+    3.2.2 :120 > a<z
+    => true 
+
+24. #<=: Returns whether self is a subset of a given object.
+
+    3.2.2 :121 > a<=z
+    => true 
+    
+25. ==: Returns whether a given object is equal to self.
+
+    3.2.2 :122 > a==z
+    => false 
+
+26. #>: Returns whether self is a proper superset of a given object
+
+    3.2.2 :123 > a>z
+    => false 
+
+27. #>=: Returns whether self is a proper superset of a given object.
+
+    3.2.2 :124 > a>=z
+    => false 
+
+28. assoc: Returns a 2-element array containing a given key and its value.
+
+    3.2.2 :052 > z.assoc(x)
+    => [[:a, :b], 0] 
+
+29. fetch: Returns the value for a given key.
+
+    3.2.2 :053 > z.fetch(x)
+    => 0 
+
+30. fetch_values: Returns array containing the values associated with given keys.
+
+    3.2.2 :056 > z.fetch_values(x,y)
+    => [0, 1] 
+
+31. key: Returns the key for the first-found entry with a given value.
+
+    3.2.2 :059 > z.key(0)
+    => [:a, :b]
+
+32. rassoc: Returns a 2-element array consisting of the key and value of the first-found entry having a given value.
+
+    3.2.2 :061 > z.rassoc(1)
+    => [[:c, :d], 1] 
+
+33. values: Returns an array containing all values in self.
+
+    3.2.2 :062 > z.values
+    => [0, 1] 
+
+34. [] or store: Associates a given key with a given value.
+
+    3.2.2 :063 > z.store(:a,25)
+    => 25 
+    3.2.2 :064 > z
+    => {[:a, :b]=>0, [:c, :d]=>1, :a=>25} 
+
+35. merge: Returns the hash formed by merging each given hash into a copy of self.
+    merge!: modification done to self
+
+    3.2.2 :065 > z.merge a
+    => {[:a, :b]=>0, [:c, :d]=>1, :a=>25, :hi=>2, :good=>4, :morning=>7} 
+    3.2.2 :066 > z.merge! a
+    => {[:a, :b]=>0, [:c, :d]=>1, :a=>25, :hi=>2, :good=>4, :morning=>7} 
+
+36. update: Merges each given hash into self.
+
+    3.2.2 :068 > x[0]=:abc
+    => :abc 
+    3.2.2 :069 > z.update
+    => {[:abc, :b]=>0, [:c, :d]=>1, :a=>25, :hi=>2, :good=>4, :morning=>7} 
+
+37. replace: Replaces the entire contents of self with the contents of a given hash.
+
+    3.2.2 :070 > h.replace a
+    => {:hi=>2, :good=>4, :morning=>7} 
+
+38. clear: Removes all entries from self.
+
+    3.2.2 :071 > h.clear
+    => {} 
+
+39. compact: Removes all nil-valued entries from self.
+    compact!: modification done to self
+
+    3.2.2 :077 > z
+    => {[:abc, :b]=>0, [:c, :d]=>1, :a=>25, :hi=>2, :good=>4, :morning=>7, :empty=>nil} 
+    3.2.2 :078 > z.compact
+    => {[:abc, :b]=>0, [:c, :d]=>1, :a=>25, :hi=>2, :good=>4, :morning=>7} 
+
+40. delete: Removes the entry for a given key.
+
+    3.2.2 :079 > z.delete(:a)
+    => 25 
+
+41. delete_if: Removes entries selected by a given block.
+
+    3.2.2 :081 > z.delete_if{|key,value| key.length>4}
+    => {[:abc, :b]=>0, [:c, :d]=>1, :hi=>2, :good=>4} 
+
+42. keep_if: Keep only those entries selected by a given block.
+
+    3.2.2 :083 > a.keep_if{|key,value| key.length<=4}
+    => {:hi=>2, :good=>4} 
+
+43. shift: Removes and returns the first entry.
+
+    3.2.2 :085 > z.shift
+    => [[:abc, :b], 0] 
+    3.2.2 :086 > z
+    => {[:c, :d]=>1, :hi=>2, :good=>4} 
+
+44. filter: Returns a copy of self with only those entries selected by a given block.
+    filter!: modfication done to self
+
+    3.2.2 :090 > z.filter{|key,value| key.length<4}
+    => {[:c, :d]=>1, :hi=>2, [:abc, :b]=>0} 
+
+45. select: Returns a copy of self with only those entries selected by a given block.
+    select!: modification done to self
+
+    3.2.2 :091 > z.select{|key,value| key.length<4}
+    => {[:c, :d]=>1, :hi=>2, [:abc, :b]=>0}
+
+46. except: Returns a copy of self with entries removed for specified keys.
+
+    3.2.2 :093 > z.except(:good)
+    => {[:c, :d]=>1, :hi=>2, [:abc, :b]=>0} 
+
+47. reject: Returns a copy of self with entries removed as specified by a given block.
+    reject!: modificationdone to self
+
+    3.2.2 :094 > z.reject{|key,value| key.length<4}
+    => {:good=>4} 
+
+48. slice: Returns a hash containing the entries for given keys.
+
+    3.2.2 :097 > z.slice(x,y)
+    => {[:abc, :b]=>0, [:c, :d]=>1} 
+
+49. each or each_pair: Calls a given block with each key-value pair.
+
+    3.2.2 :099 > z.each{|key,value| puts value*2}
+    2
+    4                                                                          
+    8                                                                          
+    0                                                               
+    => {[:c, :d]=>1, :hi=>2, :good=>4, [:abc, :b]=>0}   
+
+50. each_key: Calls a given block with each key.
+
+    3.2.2 :101 > z.each_key{|key,value| puts key}
+    c
+    hi                                                              
+    good
+    abc
+    => {[:c, :d]=>1, :hi=>2, :good=>4, [:abc, :b]=>0} 
+
+51. each_value: Calls a given block with each value.
+
+    3.2.2 :106 > z.each_value{|value| puts value**2}
+    1
+    4                                                                     
+    16                                                                    
+    0                                                                     
+    => {[:c, :d]=>1, :hi=>2, :good=>4, [:abc, :b]=>0} 
+
+52. inspect or to_s: Returns a new String containing the hash entries.
+
+    3.2.2 :107 > z.inspect
+    => "{[:c, :d]=>1, :hi=>2, :good=>4, [:abc, :b]=>0}" 
+
+53. to_a: Returns a new array of 2-element arrays; each nested array contains a key-value pair from self.
+
+    3.2.2 :108 > z.to_a
+    => [[[:c, :d], 1], [:hi, 2], [:good, 4], [[:abc, :b], 0]] 
+
+54. to_h: Returns self if a Hash; if a subclass of Hash, returns a Hash containing the entries from self.
+
+    3.2.2 :109 > a.to_h 
+    => {:hi=>2, :good=>4} 
+
+55. to_hash: Returns self.
+
+    3.2.2 :110 > a.to_hash
+    => {:hi=>2, :good=>4} 
+
+56. to_proc: Returns a proc that maps a given key to its value.
+
+    3.2.2 :134 > proc=z.to_proc
+    => #<Proc:0x00007f4277147268 (lambda)> 
+    3.2.2 :135 > proc.call(:hi)
+    => 2 
+    3.2.2 :136 > proc.call(:aarzoo)
+    => "no default for :aarzoo" 
+
+57. transform_keys: Returns a copy of self with modified keys.
+    transform_keys!: Modifies keys in self
+
+    3.2.2 :111 > z.transform_keys{|key| key.to_s}
+    => {"[:c, :d]"=>1, "hi"=>2, "good"=>4, "[:abc, :b]"=>0} 
+
+58. transform_values: Returns a copy of self with modified values.
+    transform_values!: Modifies values in self.
+
+    3.2.2 :112 > z.transform_values{|value| value*2}
+    => {[:c, :d]=>2, :hi=>4, :good=>8, [:abc, :b]=>0} 
+
+59. flatten: Returns an array that is a 1-dimensional flattening of self.
+
+    3.2.2 :113 > z.flatten
+    => [[:c, :d], 1, :hi, 2, :good, 4, [:abc, :b], 0] 
+
+60. invert: Returns a hash with the each key-value pair inverted.
+
+    3.2.2 :114 > z.invert
+    => {1=>[:c, :d], 2=>:hi, 4=>:good, 0=>[:abc, :b]}
+
+
