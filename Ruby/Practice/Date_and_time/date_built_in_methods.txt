@@ -1,0 +1,300 @@
+# this file contains the built-in methods of the date class
+
+1. today : creates an instance of the current date
+
+    3.2.2 :008 > puts Date.today
+    2024-04-05
+     => nil    
+
+2. new : takes integer year, month, and day-of-month
+
+    3.2.2 :012 > a=Date.new(2002,9,8)
+    => #<Date: 2002-09-08 ((2452526j,0s,0n),+0s,2299161j)> 
+
+3. ordinal : takes integer year and day-of-year
+
+    3.2.2 :014 > b = Date.ordinal(2002,5)
+    => #<Date: 2002-01-05 ((2452280j,0s,0n),+0s,2299161j)> 
+
+4. jd : takes integer Julian day
+
+    3.2.2 :031 > c = Date.jd(2460048)
+    => #<Date: 2023-04-13 ((2460048j,0s,0n),+0s,2299161j)> 
+
+5. commercial : takes integer commercial data (year, week, day-of-week)
+
+    3.2.2 :002 > d = Date.commercial(2010,35,6)
+    => #<Date: 2010-09-04 ((2455444j,0s,0n),+0s,2299161j)> 
+
+6. parse : takes a string, which it parses heuristically
+
+    3.2.2 :003 > e = Date.parse('2002-09-08')
+    => #<Date: 2002-09-08 ((2452526j,0s,0n),+0s,2299161j)> 
+
+7. strptime : takes a date string and a format string, then parses the date string according to the format string
+
+    3.2.2 :004 > f = Date.strptime('2010-10-20','%Y-%m-%d')
+    => #<Date: 2010-10-20 ((2455490j,0s,0n),+0s,2299161j)> 
+
+8. httpdate: returns a string of the date it is applied on
+    Date._httpdate(obj): returns a hash of the date
+
+    3.2.2 :009 > s=a.httpdate
+    => "Sun, 08 Sep 2002 00:00:00 GMT" 
+    3.2.2 :010 > Date._httpdate(s)
+    => {:wday=>0, :mday=>8, :mon=>9, :year=>2002, :hour=>0, :min=>0, :sec=>0, :zone=>"GMT", :offset=>0}
+
+9. iso8601 : creates an instance in ISO 8601 format
+    _iso8601: returns hash in the ISO 8601 format
+
+    3.2.2 :011 > t=b.iso8601
+    => "2002-01-05" 
+    3.2.2 :013 > Date._iso8601(t)
+    => {:mday=>5, :year=>2002, :mon=>1} 
+
+10. date.jisx0301 : used to parse a date/time string in the format specified by the JIS X 0301 date format
+    date._jisx0301 : returns the value pased by above string
+
+    3.2.2 :014 > t=b.jisx0301
+    => "H14.01.05" 
+    3.2.2 :015 > Date._jisx0301(t)
+    => {:year=>2002, :mon=>1, :mday=>5} 
+
+11. date.parse(string) : returns a new Date object with values parsed from string
+    date._parse(string) :returns a hash of values parsed from string(here string is in the form 'yyyy-mm-dd' )
+
+    3.2.2 :021 > v=Date.parse(e)
+    => #<Date: 2019-10-10 ((2458767j,0s,0n),+0s,2299161j)> 
+    3.2.2 :023 > Date._parse(e)
+    => {:year=>2019, :mon=>10, :mday=>10} 
+
+12. date.rfc2822(string): used to parse a date/time string in the format specified by the RFC 2822 date format
+    date._rfc2822(string): returns a hash of values parsed from the above string
+                
+    3.2.2 :025 > v=a.rfc2822
+    => "Sun, 8 Sep 2002 00:00:00 +0000"
+    3.2.2 :027 > Date._rfc2822(v)
+    => {:wday=>0, :mday=>8, :mon=>9, :year=>2002, :hour=>0, :min=>0, :sec=>0, :zone=>"+0000", :offset=>0}
+
+13. date.rfc3339(string) : used to parse a date/time string in the format specified by the RFC 3339 date format
+    date._rfc3339(string): returns a hash of values parsed from the above string
+                    
+    3.2.2 :028 > v=a.rfc3339
+    => "2002-09-08T00:00:00+00:00" 
+    3.2.2 :029 > Date._rfc3339(v)
+    => {:year=>2002, :mon=>9, :mday=>8, :hour=>0, :min=>0, :sec=>0, :zone=>"+00:00", :offset=>0}
+
+14. date.strptime(string,format = '%F'): returns a new Date object with values parsed from string in the format specified
+    date._strptime(string,format = '%F'): returns a hash value of the above string
+                
+    3.2.2 :034 > Date.strptime("2019-10-10", "%Y-%m-%d")
+    => #<Date: 2019-10-10 ((2458767j,0s,0n),+0s,2299161j)> 
+    3.2.2 :035 > Date._strptime("2019-10-10", "%Y-%m-%d")
+    => {:year=>2019, :mon=>10, :mday=>10} 
+
+15. date.xmlschema(string) :used to parse a date/time string in the format specified by the XML date format
+    date._xmlschema(string): returns a hash of values parsed from the above string
+                
+    3.2.2 :036 > Date.xmlschema("2019-10-10")
+    => #<Date: 2019-10-10 ((2458767j,0s,0n),+0s,2299161j)> 
+    3.2.2 :037 > Date._xmlschema("2019-10-10")
+    => {:year=>2019, :mon=>10, :mday=>10} 
+
+16. date.gregorian_leap?(year) [OR]date.leap?(year) :returns true if the mentioned year ia a leap year
+                    
+    3.2.2 :038 > Date.leap?(2024)
+    => true 
+
+17. date.jd(days) : used to create a Date object based on the Julian Day Number (JD)(a continuous count of days since the beginning of the Julian Period which is from 1st Jan,4713BC)
+                
+    3.2.2 :040 > Date.jd(23456777)
+    => #<Date: 59510-05-17 ((23456777j,0s,0n),+0s,2299161j)> 
+
+18. date.julian_leap?(year): checks if the mentioned year is leap year according to julian days
+                
+    3.2.2 :041 > Date.julian_leap?(23456777)
+    => false 
+
+19. date.valid_civil?(yyyy,mm,dd) [OR] date.valid_date?(yyyy,mm,dd) : checks if hte mentioned date is valid or not
+                    
+    3.2.2 :043 > Date.valid_date?(2020,46,37)
+    => false 
+
+20. date.valid_commercial?(cwyear,cweek,cwday): returns id the date mentioned is valid commercial date
+                
+    3.2.2 :045 > Date.valid_commercial?(2020,46,7)
+    => true 
+
+21. date.valif_jd?(days) : returns true unless days are invali(i.e not numeric)
+                
+    3.2.2 :046 > Date.valid_jd?(2343650)
+    => true 
+
+22. date.valid_oridinal?(year,yday): returns if the date mentioned is valid ordinal date
+                
+    3.2.2 :047 > Date.valid_ordinal?(2020,7)
+    => true 
+
+23. date+days : returns the date after adding number or days mentioned
+                
+    3.2.2 :048 > a
+    => #<Date: 2002-09-08 ((2452526j,0s,0n),+0s,2299161j)> 
+    3.2.2 :049 > a+4
+    => #<Date: 2002-09-12 ((2452530j,0s,0n),+0s,2299161j)> 
+
+24. date-days : returns the date after subtraction the number of days mentioned
+                
+    3.2.2 :050 > a
+    => #<Date: 2002-09-08 ((2452526j,0s,0n),+0s,2299161j)> 
+    3.2.2 :051 > a-35
+    => #<Date: 2002-08-04 ((2452491j,0s,0n),+0s,2299161j)> 
+
+25. date<<n : returns a new date object representing the date n months earliear(nshould be numeric)
+                
+    3.2.2 :052 > a<<5
+    => #<Date: 2002-04-08 ((2452373j,0s,0n),+0s,2299161j)> 
+
+26. date1 <=> date2 : returns -1 if date1<date2,0 id date1=date2,1 if date1>date2
+                    
+    3.2.2 :053 > a<=>b
+    => 1
+
+27. date1 === date2 : checks if both the dates are equal
+                
+    3.2.2 :054 > a===b
+    => false 
+
+28. date>>n : returns the date representing the date n months later
+
+    3.2.2 :055 > a>>10
+    => #<Date: 2003-07-08 ((2452829j,0s,0n),+0s,2299161j)> 
+
+29. date.day [OR] date.mday :returns the day of month in the range(1..31)
+
+    3.2.2 :062 > a.day
+    => 8 
+
+30.date.sunday? : returns true id the day of the mentioned day is friday
+
+    3.2.2 :063 > a.sunday?
+    => true 
+
+31. date.asctime [OR] date.ctime: equivalent to strftime with argument '%a %b %e %T %Y' (or its shorthand form '%c')
+
+    3.2.2 :065 > Date.new(2020,2,20).asctime
+    => "Thu Feb 20 00:00:00 2020" 
+
+32. date.cwday :returns the commercial-date weekday index for date(1is for monday)
+
+    3.2.2 :067 > a.cwday
+    => 7 
+
+33. date.cweek :returns commercial date week index for date(week refers to week of the year)
+
+    3.2.2 :068 > a.cweek
+    => 36 
+
+34. date.cwyear : returns commercial date year for date
+
+    3.2.2 :069 > a.cwyear
+    => 2002 
+
+37. date.gregorian? :is used to determine if a given date falls within the Gregorian calendar system
+
+    3.2.2 :070 > a.gregorian?
+    => true 
+
+38. date.inspect :returns a string representation of the current date
+
+    3.2.2 :071 > a.inspect
+    => "#<Date: 2002-09-08 ((2452526j,0s,0n),+0s,2299161j)>" 
+
+40. date.jd :returns the julia day number
+
+    3.2.2 :072 > a.jd
+    => 2452526 
+
+41. date.julian? :checks if the date falls within the julian calender or not
+
+    3.2.2 :074 > a.julian?
+    => false 
+
+42. date.ld :returns the Lilian day number, which is the number of days since the beginning of the Gregorian calendar, October 15, 1582
+
+    3.2.2 :075 > a.ld
+    => 153366 
+
+43. date.mjd :returns the modified julian day number
+
+    3.2.2 :076 > a.mjd
+    => 52525 
+
+44. date.month [OR] day.mon: returns the month mentioned in the date, ranges from(1..12)
+
+    3.2.2 :077 > a.mon
+    => 9 
+
+45. date.next [OR] date.succ: returns a new day representing the following day
+
+    3.2.2 :078 > a.next
+    => #<Date: 2002-09-09 ((2452527j,0s,0n),+0s,2299161j)> 
+    3.2.2 :079 > a.succ
+    => #<Date: 2002-09-09 ((2452527j,0s,0n),+0s,2299161j)> 
+
+46. date.next_day [OR] date.next_month [OR] date.next_year :returns a copy of self with increment in respective terms.
+
+    3.2.2 :080 > a.next_day
+    => #<Date: 2002-09-09 ((2452527j,0s,0n),+0s,2299161j)> 
+    3.2.2 :081 > a.next_month
+    => #<Date: 2002-10-08 ((2452556j,0s,0n),+0s,2299161j)> 
+    3.2.2 :082 > a.next_year
+    => #<Date: 2003-09-08 ((2452891j,0s,0n),+0s,2299161j)> 
+
+47. date.prev_day [OR] date.prev_month [OR] date.prev_year :returns a copy of self with one decrement in respective terms.
+
+    3.2.2 :083 > a.prev_day
+    => #<Date: 2002-09-07 ((2452525j,0s,0n),+0s,2299161j)> 
+    3.2.2 :084 > a.prev_month
+    => #<Date: 2002-08-08 ((2452495j,0s,0n),+0s,2299161j)> 
+    3.2.2 :085 > a.prev_year
+    => #<Date: 2001-09-08 ((2452161j,0s,0n),+0s,2299161j)> 
+
+48. date.step(limit,step=1){|date|...}: returns the dates that satisfies the condition
+
+    3.2.2 :096 > a.step(b){|date| p date.to_s if date.mon==9}
+    => #<Date: 2002-09-08 ((2452526j,0s,0n),+0s,2299161j)>
+
+49. date.to_date :return the date
+
+    3.2.2 :087 > a.to_date
+    => #<Date: 2002-09-08 ((2452526j,0s,0n),+0s,2299161j)> 
+
+50. date.to_datetime :returns datetime whose value is same as the mentioned date
+
+    3.2.2 :086 > a.to_datetime
+    => #<DateTime: 2002-09-08T00:00:00+00:00 ((2452526j,0s,0n),+0s,2299161j)>
+
+51. date.to_s :returns date as string
+
+    3.2.2 :088 > a.to_s
+    => "2002-09-08" 
+
+52. date.to_time :returns a new time object with same value as date
+
+    3.2.2 :089 > a.to_time
+    => 2002-09-08 00:00:00 +0530 
+
+53. date.wday :returns the day of week,range(0..6 where 0 is sunday)
+
+    3.2.2 :090 > a.wday
+    => 0 
+
+54. date.yday :returns the day of the year(range 1..366)
+
+    3.2.2 :091 > a.yday
+    => 251 
+
+55. date.year :returns the year from the date
+
+    3.2.2 :092 > a.year
+    => 2002 
