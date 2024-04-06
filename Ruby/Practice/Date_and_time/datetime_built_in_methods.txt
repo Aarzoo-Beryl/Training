@@ -1,0 +1,144 @@
+# this file contains the built-in methods of the DateTime class
+
+
+1. DateTime.new : returns new date time object
+
+    3.2.2 :007 > a=DateTime.new(2020)
+    => #<DateTime: 2020-01-01T00:00:00+00:00 ((2458850j,0s,0n),+0s,2299161j)> 
+
+2. DateTime.strptime(string[,format='%FT%T%z']) : parses the given DateTime with the given format
+
+    3.2.2 :011 > e=DateTime.strptime('2020-09-08','%Y-%m-%d')
+    => #<DateTime: 2020-09-08T00:00:00+00:00 ((2459101j,0s,0n),+0s,2299161j)> 
+
+3. DateTime._strptime(string[,format='%FT%T%z']) : returns the hash of above statement
+
+    3.2.2 :006 > f=DateTime._strptime('2020-09-08','%Y-%m-%d')
+    => {:year=>2020, :mon=>9, :mday=>8} 
+
+4. DateTime.commercial([cwyear=-4712[,cweek=1[,cwday=1[,hour=0[,minute=0[,second=0[,offset=0[,start=Date::ITALY]]]]]]]]) : creates a DateTime object denoting the given week date
+
+    3.2.2 :021 > b = DateTime.commercial(2024, 25, 5, 22, 33, 55)
+    => #<DateTime: 2024-06-21T22:33:55+00:00 ((2460483j,81235s,0n),+0s,2299161j)> 
+
+5. DateTime.httpdate(string) : creates a new DateTime object by parsing from a string according to some RFC 2616 format
+
+    3.2.2 :023 > c = DateTime.httpdate('Sun, 06 Nov 1994 08:49:37 GMT')
+    => #<DateTime: 1994-11-06T08:49:37+00:00 ((2449663j,31777s,0n),+0s,2299161j)> 
+
+6. DateTime.iso8601(string) : creates a new DateTime object by parsing from a string according to some ISO 8601 format
+
+    3.2.2 :010 > c = DateTime.iso8601('2020-09-08T12:34:56+00:00')
+    => #<DateTime: 2020-09-08T12:34:56+00:00 ((2459101j,45296s,0n),+0s,2299161j)> 
+
+7. DateTime.jd(days) : created a new DateTime object denoting the jullian day number
+
+    3.2.2 :011 > g= DateTime.jd(2345567.6)
+    => #<DateTime: 1709-11-04T14:24:00+00:00 ((2345567j,51840s,8047n),+0s,2299161j)>
+
+8. DateTime.jisx0301(string) : creates a new DateTime object by parsing from a string according to some JIS X 0301 format
+
+    3.2.2 :012 > c = DateTime.strptime('H03.09.08T12:34:56+09:00', 'H%y.%m.%dT%H:%M:%S%:z')
+    => #<DateTime: 2003-09-08T12:34:56+09:00 ((2452891j,12896s,0n),+32400s,2299161j)> 
+
+9. DateTime.now : creates a new DateTime object denoting present time
+
+    3.2.2 :005 > a=DateTime.now
+    => #<DateTime: 2024-04-06T14:20:30+05:30 ((2460407j,31830s,720931596n),+19800s,2299161j)> 
+
+10. DateTime.ordinal(yyyy,dd) : creates a new DateTime object denoting the given ordinal data
+
+    3.2.2 :013 > x = DateTime.ordinal(2020,54)
+    => #<DateTime: 2020-02-23T00:00:00+00:00 ((2458903j,0s,0n),+0s,2299161j)> 
+
+11. DateTime.parse(datetime) : parses the given representation of given date and time
+
+    3.2.2 :014 > w = DateTime.parse('2023-04-13T12:34:56+00:00')
+    => #<DateTime: 2023-04-13T12:34:56+00:00 ((2460048j,45296s,0n),+0s,2299161j)> 
+
+12. DateTime.rfc2822(string) : creates a new DateTime object denoting the RFC 2822 format based on the string given
+
+    3.2.2 :015 > parsed_date = DateTime.rfc2822('Mon, 12 Apr 2023 12:34:56 +0000')
+    => #<DateTime: 2023-04-12T12:34:56+00:00 ((2460047j,45296s,0n),+0s,2299161j)> 
+
+13. DateTime.rfc3339(string) : creates a new DateTime object denoting the RFC 3339 format based on the provided string
+
+    3.2.2 :016 > date = DateTime.rfc3339('2023-04-12T12:34:56+00:00')
+    => #<DateTime: 2023-04-12T12:34:56+00:00 ((2460047j,45296s,0n),+0s,2299161j)> 
+
+14. DateTime.(string) : creates a new DateTime object from the string
+
+    3.2.2 :017 > y = DateTime.parse('2023-04-12T12:34:56+00:00')
+    => #<DateTime: 2023-04-12T12:34:56+00:00 ((2460047j,45296s,0n),+0s,2299161j)> 
+
+15. dt.hour : returns the hour in range(0..23)
+
+    3.2.2 :018 > y.hour
+    => 12 
+
+16. dt.iso8601(n) [OR] dt.xmlschema : alias for strftime,n refers to fractional seconds
+
+    3.2.2 :019 > y.iso8601
+    => "2023-04-12T12:34:56+00:00" 
+
+17. dt.jisx0301(n) : returns a string in a JIS X 0301 format,n same as above
+
+    3.2.2 :020 > y.jisx0301
+    => "R05.04.12T12:34:56+00:00" 
+
+18. dt.min [OR] dt.minute : returns minute in the range(0..59)
+
+    3.2.2 :021 > y.min
+    => 34 
+
+19. dt.new_offset(string) : duplicates dt and resets its offset to the one mentioned in the string
+
+    3.2.2 :003 > a.new_offset('+9000')
+    => #<DateTime: 2024-04-06T13:01:44+00:00 ((2460407j,46904s,614138268n),+0s,2299161j)> 
+
+20. dt.offset : returns the ofset of dt
+
+    3.2.2 :004 > a.offset
+    => (11/48) 
+
+21. dt.rfc3339(n) : returns a string in the RFC 3339 format
+
+    3.2.2 :023 > y.rfc3339
+    => "2023-04-12T12:34:56+00:00" 
+
+22. dt.sec [OR] dt.second : returns the second
+
+    3.2.2 :024 > y.sec
+    => 56 
+
+23. dt.sec_fraction [OR] dt.second_fraction : returns the fractional seconds
+
+    3.2.2 :005 > a.sec_fraction
+    => (153534567/250000000) 
+
+24. dt.strftime(format) : returns the string of dt formatted according to the given format
+
+    3.2.2 :031 > y.strftime('%Y-%m-%d')
+    => "2023-04-12"
+
+25. dt.to_date : returns a date object that denotes dt
+
+    3.2.2 :033 > y.to_date
+    => #<Date: 2023-04-12 ((2460047j,0s,0n),+0s,2299161j)> 
+
+26. dt.to_s : returns a string in ISO 8601 format
+
+    3.2.2 :034 > y.to_s
+    => "2023-04-12T12:34:56+00:00" 
+
+27. dt.to_time : returns a string object that denotes dt
+
+    3.2.2 :035 > y.to_time
+    => 2023-04-12 12:34:56 +0000 
+
+28. dt.zone : returns the timezone
+
+    3.2.2 :036 > y.zone
+    => "+00:00" 
+
+
