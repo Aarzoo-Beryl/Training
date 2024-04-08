@@ -3,8 +3,8 @@
 
 def permutation(string)
 
-    a = string.chars
-    a.permutation{|s| print s ,','}
+	a = string.chars
+	a.permutation{|s| print s ,','}
 
 end
 
