@@ -1,4 +1,4 @@
-#1/usr/bin/ruby
+#!/usr/bin/ruby
 
 
 def running_sum(arr)

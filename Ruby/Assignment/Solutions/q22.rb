@@ -1,4 +1,4 @@
-#1/usr/bin/ruby
+#!/usr/bin/ruby
 
 def pairs(a,k)
   pair = []

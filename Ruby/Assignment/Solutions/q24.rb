@@ -1,4 +1,4 @@
-#1/usr/bin/ruby
+#!/usr/bin/ruby
 
 def diagonal_sum(a)
 	sum = 0

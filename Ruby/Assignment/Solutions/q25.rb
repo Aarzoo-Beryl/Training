@@ -1,4 +1,4 @@
-#1/usr/bin/ruby
+#!/usr/bin/ruby
 
 def majority_element(a)
 	new = []

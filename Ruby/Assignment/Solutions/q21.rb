@@ -1,4 +1,4 @@
-#1/usr/bin/ruby
+#!/usr/bin/ruby
 
 def prime(n)
 	if n>1000
