@@ -1,0 +1,61 @@
+----------------------------------------RAILS----------------------------------------------
+
+
+RUBY ON RAILS - 
+	- open source web application framework
+	- written in RUBY
+	- created in 2003 by DAVID HEINEMEIER HANSSON ['DHH']
+	- released as open source in 2004
+
+
+RAILS - 
+	- set of web framework 
+	  [framework => prewritten code and libraries that developer can use to handle common tasks and solve 
+	  re-occuring problems]
+	- follows DRY code (Don't repeat yourself)
+	  [idea - every peice of information should be written only once and can be refered where ever needed]
+	  [pros - concise,consistant and easily maintainable code]
+	- follows Convention Over Configuration
+	  [idea - rather than configuring again and again ,use pre configured functions with default setting for 
+	  general purpose and if some specification neede the perconfigured function can be overwritten according 
+	  to the preference]
+	  [pros - speed up development process]
+
+
+MVC ARCHITECTURE - 
+	- M - MODEL [refers to the data objects we use in the application]
+	  V - VIEW [refers to presentation layer, how data is presented to the user]
+	  C - CONTROLLER [processes and responds to user's events]
+
+	- Basic Web Architecture 
+	 	[BROWSER] <=> [PAGE] <=> [DATABASE]
+
+	- MVC Web Architecture
+		[BROWSER] <=> [CONTROLLER] <=> [MODEL] <=> [DATABASE]
+		       ^\     /.
+			     [VIEW]
+		 - browser sends info to controller which fetched info from database through model
+		 - once info recieved , the indo is sent to view by controller and is then finally displayed on browser
+
+		 - here contoller (handles decisions) , model (handles data) , view (handles presentation)
+		 - in RAILS , code library for controller -> ActionController , model -> ActiveRecord , view -> ActionView
+		   [controller and view can be packed, as they are very related, into -> ActionPack]
+	
+INSTALLATION - 
+
+	- $curl -sSL https://get.rvm.io -o rvm.sh
+	- $less /tmp/rvm.sh
+	- $cat /tmp/rvm.sh | bash -s stable --rails
+	- $source /home/sammy/.rvm/scripts/rvm
+
+NEW PROJECT - 
+
+	- $rails new <project_name> -d <database_name>
+	  [if run bundle install not working, open the project_name directory
+		do - 
+		$gem install pg
+		$gem update --system
+		$gem update bundler
+		$bundle install			]
+
+	- 
