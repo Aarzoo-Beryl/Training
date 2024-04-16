@@ -102,7 +102,7 @@ ROUTES -
 	- when web server can't find the requested file in the public directory,then sends rewuest to routing portion of the framework,which further
 	  examines what conroller and action to be called (done by using definitions of route.rb file present in config folder)
 	- main point of rounting - to identify how a url string works
-	
+
 	- ROUTES TYPES - 
 			- SIMPLE MATCH ROUTE - 
 				- get 'demo/index'
@@ -116,6 +116,48 @@ ROUTES -
 				- acts as a home page
 				- syntax - root 'demo#index'
 		
+RENDER A TEMPLATE - 
+
+	- (examining how controller and view works,and how can we add dynamic content to it)
+	- essential part of Architecture includes browser,controller and view
+
+	- request-respond loop main parts include route,controller action and view template
+
+	- Render template syntax - 
+			- controller primarily picks the template by matching the current controller and message by default 
+			- to do it manualy 'render' command is used inside current controller 
+				   render (:template => 'demo/hello')
+			  [or] render ('demo/hello')
+			  [or] render ('hello')  [used if to be done inside current controller]
+			- main purpose - to define what view to open when a certain url is requested 
+
+REDIRECT ACTIONS - 
+	- controller can respond to the rendering view but can also send them to another controller/action
+	  (i.e. when requesting some url the controller has capability to redirect it to some other controller ot action)
+	- example - for some user's request, we first need to check if he/she has logged in or not , then we can design it such way that when user's request is processed ,
+				it opens login page first.(we want the url to change)
+	
+	- HTTP Redirect -
+			- when we redirect ,rails put status code to browser[when browser recieves request got the mentioned url, it goes back to route to identify what to view]
+	- Rails Redirect - 
+			- syntax - 
+					     redirect_to(:controller=>'demo',:action=>'index')
+					[or] redirect_to(controller:'demo',action:'index')
+					[or] redirect_to (action:'index') [if redirecting in same directory]
+			- it can redirect to anywhere, location not limited to the currect application
+
+VIEW TEMPLATES - 
+
+	- ERB - Embeded Ruby 
+		- it is a template system to embed Ruby
+		- in file name hello.html.erb , the file is processed with erb and output format is html
+		- correct erb tag is to be used in order to tell ruby what it should put in code
+		- syntax - <% code %>
+			  [or] <%= code%>   [= prints output of the code , here puts and print doesn't work]
+		- example - <% 3.times do |n| %>
+					<p><%= n %></p>
+					<% end %>
+
 
 
 
