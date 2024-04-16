@@ -12,14 +12,18 @@ RAILS -
 	- set of web framework 
 	  [framework => prewritten code and libraries that developer can use to handle common tasks and solve 
 	  re-occuring problems]
+
 	- follows DRY code (Don't repeat yourself)
 	  [idea - every peice of information should be written only once and can be refered where ever needed]
 	  [pros - concise,consistant and easily maintainable code]
+
 	- follows Convention Over Configuration
 	  [idea - rather than configuring again and again ,use pre configured functions with default setting for 
 	  general purpose and if some specification neede the perconfigured function can be overwritten according 
 	  to the preference]
 	  [pros - speed up development process]
+	
+	- most coding done in app folder, config used to describe configurations like routes,database,etc.
 
 
 MVC ARCHITECTURE - 
@@ -58,11 +62,17 @@ NEW PROJECT -
 		$gem update bundler
 		$bundle install			]
 
+OPENING BROWSER - 
+
 	- $rails server [or] $ rails s
 	  [creates server]
 
+CREATING BASIC DATABASE - 
+
 	- $rails db:create
 	  [creates necessary database]
+
+GENEREATING CONTROLLER - 
 
 	- $rails generate [or] $rails g
 	  [tells us what all it can generate]
@@ -74,8 +84,38 @@ NEW PROJECT -
 	  [generate controller Demo and view index]
 	  ['index' is basically a function/method that controller would perform and when put inside controller class it is called an action that controller will perform]
 	
-	- 
+SERVER REQUEST HANDELING - 
 
+	- Actual ROR Architecture - 
+											(RAILS FRAMEWORK)		
+		[BROWSER]<=>[WEB SERVER]<=>[PUBLIC]=>[ROUTER]
+						^						|.
+						|					[CONTROLLER]
+						|				       |.    |.
+						-------------------[VIEWS] [MODELS]<=>[DATABASE]
+
+	- Newly added items - ROUTER and PUBLIC
+	- the files in public directory can be directly accessed by anyone
+
+ROUTES - 
+
+	- when web server can't find the requested file in the public directory,then sends rewuest to routing portion of the framework,which further
+	  examines what conroller and action to be called (done by using definitions of route.rb file present in config folder)
+	- main point of rounting - to identify how a url string works
+	
+	- ROUTES TYPES - 
+			- SIMPLE MATCH ROUTE - 
+				- get 'demo/index'
+				  [simply matches the controller and the action][mostly used]
+			- DEFAULT MATCH ROUTE - 
+				- basic structure - :controller/:action/:id
+				- example - get ':controller(/:action(/:id))
+				  [they act as variable name and help match pattern]
+			- ROOT MATCH ROUTE - 
+				- purpose - routes request to the controller when no controller or action is specified 
+				- acts as a home page
+				- syntax - root 'demo#index'
+		
 
 
 
