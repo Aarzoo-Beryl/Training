@@ -58,4 +58,44 @@ NEW PROJECT -
 		$gem update bundler
 		$bundle install			]
 
+	- $rails server [or] $ rails s
+	  [creates server]
+
+	- $rails db:create
+	  [creates necessary database]
+
+	- $rails generate [or] $rails g
+	  [tells us what all it can generate]
+
+	- $rails generate controller
+	  [asks us to provide more details and also provides us with options available]
+
+	- $rails generate controller Demo index
+	  [generate controller Demo and view index]
+	  ['index' is basically a function/method that controller would perform and when put inside controller class it is called an action that controller will perform]
+	
 	- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
