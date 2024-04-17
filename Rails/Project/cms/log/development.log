@@ -1,0 +1,2345 @@
+Started GET "/" for 127.0.0.1 at 2024-04-15 18:36:58 +0530
+  
+ActiveRecord::ConnectionNotEstablished (connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  role "beryl" does not exist
+):
+  
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:80:in `rescue in new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:68:in `new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:980:in `connect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:992:in `reconnect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:685:in `block in reconnect!'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:684:in `reconnect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:788:in `verify!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:795:in `connect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1001:in `block in with_raw_connection'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1000:in `with_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1113:in `valid_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:616:in `get_database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:374:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:70:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:200:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:871:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:644:in `check_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:678:in `new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:723:in `checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:702:in `try_to_checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:654:in `acquire_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `checkout'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:182:in `connection'
+activerecord (7.1.3.2) lib/active_record/migration/pending_migration_connection.rb:8:in `establish_temporary_connection'
+activerecord (7.1.3.2) lib/active_record/migration.rb:774:in `block in pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `each'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:752:in `check_pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:644:in `block (2 levels) in call'
+activesupport (7.1.3.2) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.1.3.2) lib/active_record/migration.rb:649:in `block in call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+  [1m[35m (825.2ms)[0m  [1m[35mCREATE DATABASE "cms_development" ENCODING = 'unicode'[0m
+  [1m[35m (797.9ms)[0m  [1m[35mCREATE DATABASE "cms_test" ENCODING = 'unicode'[0m
+  [1m[35m (126.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (94.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (19.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-04-15 13:11:40.596014', '2024-04-15 13:11:40.596021') RETURNING "key"[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2024-04-15 18:42:18 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 4.0ms | Allocations: 376)
+Completed 200 OK in 37ms (Views: 15.6ms | ActiveRecord: 0.0ms | Allocations: 4940)
+
+
+Started GET "/" for 127.0.0.1 at 2024-04-15 18:57:58 +0530
+  
+ActiveRecord::DatabaseConnectionError (There is an issue connecting to your database with your username/password, username: tab.
+
+Please check your database configuration to ensure the username/password are valid.
+):
+  
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:76:in `rescue in new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:68:in `new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:980:in `connect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:992:in `reconnect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:685:in `block in reconnect!'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:684:in `reconnect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:788:in `verify!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:795:in `connect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1001:in `block in with_raw_connection'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1000:in `with_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1113:in `valid_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:616:in `get_database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:374:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:70:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:200:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:871:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:644:in `check_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:678:in `new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:723:in `checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:702:in `try_to_checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:654:in `acquire_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `checkout'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:182:in `connection'
+activerecord (7.1.3.2) lib/active_record/migration/pending_migration_connection.rb:8:in `establish_temporary_connection'
+activerecord (7.1.3.2) lib/active_record/migration.rb:774:in `block in pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `each'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:752:in `check_pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:644:in `block (2 levels) in call'
+activesupport (7.1.3.2) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.1.3.2) lib/active_record/migration.rb:649:in `block in call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2024-04-15 19:00:03 +0530
+  
+ActiveRecord::DatabaseConnectionError (There is an issue connecting to your database with your username/password, username: tab.
+
+Please check your database configuration to ensure the username/password are valid.
+):
+  
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:76:in `rescue in new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:68:in `new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:980:in `connect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:992:in `reconnect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:685:in `block in reconnect!'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:684:in `reconnect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:788:in `verify!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:795:in `connect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1001:in `block in with_raw_connection'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1000:in `with_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1113:in `valid_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:616:in `get_database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:374:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:70:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:200:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:871:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:644:in `check_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:678:in `new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:723:in `checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:702:in `try_to_checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:654:in `acquire_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `checkout'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:182:in `connection'
+activerecord (7.1.3.2) lib/active_record/migration/pending_migration_connection.rb:8:in `establish_temporary_connection'
+activerecord (7.1.3.2) lib/active_record/migration.rb:774:in `block in pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `each'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:752:in `check_pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:644:in `block (2 levels) in call'
+activesupport (7.1.3.2) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.1.3.2) lib/active_record/migration.rb:649:in `block in call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2024-04-15 19:00:26 +0530
+  
+ActiveRecord::DatabaseConnectionError (There is an issue connecting to your database with your username/password, username: tab.
+
+Please check your database configuration to ensure the username/password are valid.
+):
+  
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:76:in `rescue in new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:68:in `new_client'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:980:in `connect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:992:in `reconnect'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:685:in `block in reconnect!'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:684:in `reconnect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:788:in `verify!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:795:in `connect!'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1001:in `block in with_raw_connection'
+activesupport (7.1.3.2) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1000:in `with_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:1113:in `valid_raw_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:616:in `get_database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:374:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:70:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/schema_cache.rb:200:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract_adapter.rb:871:in `database_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/postgresql_adapter.rb:644:in `check_version'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:678:in `new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:723:in `checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:702:in `try_to_checkout_new_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:654:in `acquire_connection'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `checkout'
+activerecord (7.1.3.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:182:in `connection'
+activerecord (7.1.3.2) lib/active_record/migration/pending_migration_connection.rb:8:in `establish_temporary_connection'
+activerecord (7.1.3.2) lib/active_record/migration.rb:774:in `block in pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `each'
+activerecord (7.1.3.2) lib/active_record/migration.rb:773:in `pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:752:in `check_pending_migrations'
+activerecord (7.1.3.2) lib/active_record/migration.rb:644:in `block (2 levels) in call'
+activesupport (7.1.3.2) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.1.3.2) lib/active_record/migration.rb:649:in `block in call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `synchronize'
+activerecord (7.1.3.2) lib/active_record/migration.rb:641:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE DATABASE "cms_development" ENCODING = 'unicode'[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE DATABASE "cms_test" ENCODING = 'unicode'[0m
+Started GET "/" for 127.0.0.1 at 2024-04-16 10:33:50 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (15.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.8ms | Allocations: 376)
+Completed 200 OK in 42ms (Views: 10.4ms | ActiveRecord: 0.0ms | Allocations: 4289)
+
+
+Started GET "/" for 127.0.0.1 at 2024-04-16 11:05:20 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.3ms | Allocations: 376)
+Completed 200 OK in 14ms (Views: 5.4ms | ActiveRecord: 0.0ms | Allocations: 4290)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-16 11:05:37 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.5ms | Allocations: 94)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 831)
+
+
+Started GET "/static.htlm" for 127.0.0.1 at 2024-04-16 11:34:14 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/static.htlm"):
+  
+Started GET "/static.html" for 127.0.0.1 at 2024-04-16 11:35:39 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/static.html"):
+  
+Started GET "/demo/styles.css" for 127.0.0.1 at 2024-04-16 12:20:10 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/demo/styles.css"):
+  
+Started GET "/demo/styles.css" for 127.0.0.1 at 2024-04-16 12:21:32 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/demo/styles.css"):
+  
+Started GET "/demo/styles.css" for 127.0.0.1 at 2024-04-16 12:21:52 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/demo/styles.css"):
+  
+Started GET "/demo/styles.css" for 127.0.0.1 at 2024-04-16 12:22:08 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/demo/styles.css"):
+  
+Started GET "/" for 127.0.0.1 at 2024-04-16 13:03:24 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.3ms | Allocations: 376)
+Completed 200 OK in 13ms (Views: 5.1ms | ActiveRecord: 0.0ms | Allocations: 4290)
+
+
+Started GET "/" for 127.0.0.1 at 2024-04-16 13:04:03 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:11)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:11)
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.4ms | Allocations: 97)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 901)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-16 13:04:36 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.1ms | Allocations: 7)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 227)
+
+
+Started GET "/demo" for 127.0.0.1 at 2024-04-16 13:05:04 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.0ms | Allocations: 7)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 226)
+
+
+Started GET "/demo" for 127.0.0.1 at 2024-04-16 13:05:52 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/demo"):
+  
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-16 13:06:12 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.9ms | Allocations: 93)
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 0.0ms | Allocations: 791)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-16 14:25:44 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.6ms | Allocations: 185)
+Completed 200 OK in 11ms (Views: 4.4ms | ActiveRecord: 0.0ms | Allocations: 4102)
+
+
+Started GET "/about/us" for 127.0.0.1 at 2024-04-16 14:25:55 +0530
+Processing by AboutController#us as HTML
+  Rendering about/us.html.erb
+  Rendered about/us.html.erb (Duration: 0.9ms | Allocations: 147)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.0ms | Allocations: 507)
+
+
+Started GET "/about/styles.css" for 127.0.0.1 at 2024-04-16 14:25:56 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/about/styles.css"):
+  
+Started GET "/about/faculty" for 127.0.0.1 at 2024-04-16 14:26:05 +0530
+Processing by AboutController#faculty as HTML
+  Rendering about/faculty.html.erb
+  Rendered about/faculty.html.erb (Duration: 0.6ms | Allocations: 168)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.0ms | Allocations: 451)
+
+
+Started GET "/about/styles.css" for 127.0.0.1 at 2024-04-16 14:26:05 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/about/styles.css"):
+  
+Started GET "/about/members" for 127.0.0.1 at 2024-04-16 14:26:33 +0530
+Processing by AboutController#members as HTML
+  Rendering about/members.html.erb
+  Rendered about/members.html.erb (Duration: 0.5ms | Allocations: 171)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms | Allocations: 453)
+
+
+Started GET "/about/styles.css" for 127.0.0.1 at 2024-04-16 14:26:33 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/about/styles.css"):
+  
+Started GET "/" for 127.0.0.1 at 2024-04-16 14:26:53 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.0ms | Allocations: 7)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 222)
+
+
+Started GET "/" for 127.0.0.1 at 2024-04-16 14:27:25 +0530
+Processing by AboutController#us as HTML
+  Rendering about/us.html.erb
+  Rendered about/us.html.erb (Duration: 0.6ms | Allocations: 149)
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 888)
+
+
+Started GET "/styles.css" for 127.0.0.1 at 2024-04-16 14:27:25 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/styles.css"):
+  
+Started GET "/" for 127.0.0.1 at 2024-04-16 14:39:10 +0530
+Processing by AboutController#us as HTML
+  Rendering about/us.html.erb
+  Rendered about/us.html.erb (Duration: 0.6ms | Allocations: 149)
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 889)
+
+
+Started GET "/styles.css" for 127.0.0.1 at 2024-04-16 14:39:10 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/styles.css"):
+  
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 14:39:17 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.5ms | Allocations: 91)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms | Allocations: 443)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 14:55:16 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.4ms | Allocations: 94)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 835)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 14:56:53 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.5ms | Allocations: 95)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.0ms | Allocations: 829)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-16 14:56:58 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.6ms | Allocations: 90)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms | Allocations: 359)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-16 14:57:19 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.4ms | Allocations: 93)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 824)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 14:57:25 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.5ms | Allocations: 89)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 355)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 14:58:39 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.4ms | Allocations: 94)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 821)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 14:58:45 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.0ms | Allocations: 7)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 211)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 15:00:18 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.5ms | Allocations: 98)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.0ms | Allocations: 830)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 15:01:14 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.3ms | Allocations: 95)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 823)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 15:01:38 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.5ms | Allocations: 95)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 822)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 15:02:51 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.5ms | Allocations: 99)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 831)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-16 15:37:39 +0530
+Processing by DemoController#index as HTML
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 870)
+
+
+Started GET "/" for 127.0.0.1 at 2024-04-16 15:37:39 +0530
+Processing by AboutController#us as HTML
+  Rendering about/us.html.erb
+  Rendered about/us.html.erb (Duration: 0.4ms | Allocations: 149)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 884)
+
+
+Started GET "/styles.css" for 127.0.0.1 at 2024-04-16 15:37:39 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/styles.css"):
+  
+Started GET "/" for 127.0.0.1 at 2024-04-16 16:02:58 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.9ms | Allocations: 270)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 1061)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:15:38 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.5ms | Allocations: 110)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.0ms | Allocations: 849)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:15:52 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.6ms | Allocations: 121)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 866)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:16:24 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.3ms | Allocations: 119)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 859)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:17:20 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.8ms | Allocations: 119)
+Completed 200 OK in 5ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 859)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:17:45 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.6ms | Allocations: 125)
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 870)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:20:47 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.9ms | Allocations: 158)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 898)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:21:03 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.6ms | Allocations: 159)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 899)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:21:22 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.7ms | Allocations: 163)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 908)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:21:35 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.4ms | Allocations: 159)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms | Allocations: 899)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 16:22:20 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.5ms | Allocations: 12)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 229)
+
+
+Started GET "/" for 127.0.0.1 at 2024-04-16 19:02:51 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beryl/.rvm/gems/ruby-3.2.2/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.8ms | Allocations: 376)
+Completed 200 OK in 16ms (Views: 6.0ms | ActiveRecord: 0.0ms | Allocations: 4290)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-16 19:03:00 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.9ms | Allocations: 230)
+Completed 200 OK in 5ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 971)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-17 10:31:17 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (15.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 2.5ms | Allocations: 1663)
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms | Allocations: 5524)
+
+
+  
+ActionView::Template::Error (uninitialized constant #<Class:0x00007f91e61af020>::Page):
+    10: <%= "Hello! I am from #{target}"%>
+    11: 
+    12: <br><br>
+    13: <%= link_to(Index Page, '/demo/index')%>
+    14: <% @array.each do |n|%>
+    15: <p><%= n %></p>
+    16: <% end %>
+  
+app/views/demo/hello.html.erb:13
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-17 10:32:07 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.9ms | Allocations: 292)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 1079)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 10:32:09 +0530
+Processing by DemoController#index as HTML
+Redirected to http://127.0.0.1:3000/about/us
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 777)
+
+
+Started GET "/about/us" for 127.0.0.1 at 2024-04-17 10:32:09 +0530
+Processing by AboutController#us as HTML
+  Rendering about/us.html.erb
+  Rendered about/us.html.erb (Duration: 1.1ms | Allocations: 147)
+Completed 200 OK in 16ms (Views: 3.1ms | ActiveRecord: 0.0ms | Allocations: 499)
+
+
+Started GET "/about/styles.css" for 127.0.0.1 at 2024-04-17 10:32:09 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/about/styles.css"):
+  
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 10:32:23 +0530
+Processing by DemoController#index as HTML
+Redirected to http://127.0.0.1:3000/about/us
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 194)
+
+
+Started GET "/about/us" for 127.0.0.1 at 2024-04-17 10:32:23 +0530
+Processing by AboutController#us as HTML
+  Rendering about/us.html.erb
+  Rendered about/us.html.erb (Duration: 0.1ms | Allocations: 7)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 221)
+
+
+Started GET "/about/styles.css" for 127.0.0.1 at 2024-04-17 10:32:23 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/about/styles.css"):
+  
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-17 10:32:40 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.6ms | Allocations: 262)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.0ms | Allocations: 1008)
+
+
+Started GET "/index.html.erb" for 127.0.0.1 at 2024-04-17 10:32:43 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/index.html.erb"):
+  
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-17 10:33:23 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 1.1ms | Allocations: 261)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.0ms | Allocations: 1005)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 10:33:25 +0530
+Processing by DemoController#index as HTML
+Redirected to http://127.0.0.1:3000/about/us
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 592)
+
+
+Started GET "/about/us" for 127.0.0.1 at 2024-04-17 10:33:25 +0530
+Processing by AboutController#us as HTML
+  Rendering about/us.html.erb
+  Rendered about/us.html.erb (Duration: 0.5ms | Allocations: 145)
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 495)
+
+
+Started GET "/about/styles.css" for 127.0.0.1 at 2024-04-17 10:33:25 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/about/styles.css"):
+  
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-17 10:33:54 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 1.1ms | Allocations: 261)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 1003)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 10:33:56 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.4ms | Allocations: 92)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 368)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-17 12:04:21 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.6ms | Allocations: 263)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 1010)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 12:04:26 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 2.8ms | Allocations: 649)
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 926)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:04:34 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.1ms | Allocations: 31)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 251)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 12:04:48 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.4ms | Allocations: 110)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms | Allocations: 327)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:04:50 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.1ms | Allocations: 31)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 251)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 12:04:52 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.3ms | Allocations: 110)
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 327)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:04:54 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.1ms | Allocations: 31)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 251)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:10:34 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:16)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:16)
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.6ms | Allocations: 261)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 1005)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:10:35 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.1ms | Allocations: 31)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 251)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:11:15 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:16)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:16)
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.8ms | Allocations: 261)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 1004)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:11:16 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.1ms | Allocations: 31)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 251)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 12:11:19 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 1.9ms | Allocations: 685)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 962)
+
+
+Started GET "/demo/hello/20?page=4" for 127.0.0.1 at 2024-04-17 12:11:21 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"page"=>"4", "id"=>"20"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.1ms | Allocations: 31)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 252)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 12:15:25 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 1.1ms | Allocations: 668)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.0ms | Allocations: 1412)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:15:29 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 1.7ms | Allocations: 1283)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 1577)
+
+
+  
+ActionView::Template::Error (no implicit conversion of Symbol into Integer):
+    19: 
+    20: <br><br>
+    21: ID: <%= @id %> <br>
+    22: ID: <%=@page[:id] %>
+    23: <br><br>
+    24: PAGE: <%= @page %> <br>
+    25: PAGE: <%=@page[:page] %>
+  
+app/views/demo/hello.html.erb:22:in `[]'
+app/views/demo/hello.html.erb:22
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:17:39 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 1.5ms | Allocations: 1234)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 1969)
+
+
+  
+ActionView::Template::Error (no implicit conversion of Symbol into Integer):
+    19: 
+    20: <br><br>
+    21: ID: <%= @id %> <br />
+    22: ID: <%= @page[:id] %>
+    23: <br /><br />
+    24: PAGE: <%= @page %> <br />
+    25: PAGE: <%= @page[:page] %>
+  
+app/views/demo/hello.html.erb:22:in `[]'
+app/views/demo/hello.html.erb:22
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:18:11 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 2.4ms | Allocations: 1237)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 1972)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `id' for #<ActionView::Base:0x0000000002e8d8>):
+    19: 
+    20: <br><br>
+    21: ID: <%= @id %> <br />
+    22: ID: <%= @page[id] %>
+    23: <br /><br />
+    24: PAGE: <%= @page %> <br />
+    25: PAGE: <%= @page[:page] %>
+  
+app/views/demo/hello.html.erb:22
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:18:45 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 1.5ms | Allocations: 1236)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 1970)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for nil:NilClass):
+    19: 
+    20: <br><br>
+    21: ID: <%= @id %> <br />
+    22: ID: <%= @params[:id] %>
+    23: <br /><br />
+    24: PAGE: <%= @page %> <br />
+    25: PAGE: <%= @params[:page] %>
+  
+app/views/demo/hello.html.erb:22
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:19:24 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.7ms | Allocations: 982)
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1192)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for nil:NilClass):
+    19: 
+    20: <br><br>
+    21: ID: <%= @id %> <br />
+    22: ID: <%= @params[:id] %>
+    23: <br /><br />
+    24: PAGE: <%= @page %> <br />
+    25: PAGE: <%= @params[:page] %>
+  
+app/views/demo/hello.html.erb:22
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:21:16 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.8ms | Allocations: 346)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 1099)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:21:52 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.7ms | Allocations: 263)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 1021)
+
+
+Started GET "/demo/index" for 127.0.0.1 at 2024-04-17 12:21:54 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 2.1ms | Allocations: 755)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 1032)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:23:15 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 1.2ms | Allocations: 820)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 1576)
+
+
+Started GET "/demo/hello?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:23:18 +0530
+Processing by DemoController#hello as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 0.3ms | Allocations: 125)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 356)
+
+
+Started GET "/demo/index?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:23:24 +0530
+Processing by DemoController#index as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 1.0ms | Allocations: 272)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms | Allocations: 549)
+
+
+Started GET "/demo/index?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:24:32 +0530
+Processing by DemoController#index as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 1.1ms | Allocations: 756)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 1496)
+
+
+Started GET "/demo/index?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:24:33 +0530
+Processing by DemoController#index as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.5ms | Allocations: 91)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 308)
+
+
+Started GET "/demo/hello" for 127.0.0.1 at 2024-04-17 12:25:27 +0530
+Processing by DemoController#hello as HTML
+  Rendering demo/hello.html.erb
+  Rendered demo/hello.html.erb (Duration: 1.4ms | Allocations: 836)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 1594)
+
+
+Started GET "/demo/index?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:25:29 +0530
+Processing by DemoController#index as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 1.1ms | Allocations: 272)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 549)
+
+
+Started GET "/demo/index?id=20&page=4" for 127.0.0.1 at 2024-04-17 12:26:24 +0530
+Processing by DemoController#index as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 2.1ms | Allocations: 766)
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.0ms | Allocations: 1517)
+
+
+Started GET "/demo/about" for 127.0.0.1 at 2024-04-17 13:00:40 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DemoController#about as HTML
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 2.3ms | Allocations: 954)
+Completed 200 OK in 13ms (Views: 6.1ms | ActiveRecord: 0.0ms | Allocations: 4868)
+
+
+Started GET "/demo/styles.css" for 127.0.0.1 at 2024-04-17 13:00:40 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/demo/styles.css"):
+  
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:01:23 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+Completed 406 Not Acceptable in 1ms (ActiveRecord: 0.0ms | Allocations: 837)
+
+
+  
+ActionController::MissingExactTemplate (DemoController#contact is missing a template for request formats: text/html):
+  
+actionpack (7.1.3.2) lib/action_controller/metal/implicit_render.rb:47:in `default_render'
+actionpack (7.1.3.2) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+turbo-rails (2.0.5) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.5) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+actiontext (7.1.3.2) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3.2) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3.2) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:02:10 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+Completed 406 Not Acceptable in 1ms (ActiveRecord: 0.0ms | Allocations: 551)
+
+
+  
+ActionController::MissingExactTemplate (DemoController#contact is missing a template for request formats: text/html):
+  
+actionpack (7.1.3.2) lib/action_controller/metal/implicit_render.rb:47:in `default_render'
+actionpack (7.1.3.2) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+turbo-rails (2.0.5) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.5) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+actiontext (7.1.3.2) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3.2) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3.2) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:03:49 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+Completed 406 Not Acceptable in 1ms (ActiveRecord: 0.0ms | Allocations: 944)
+
+
+  
+ActionController::MissingExactTemplate (DemoController#contact is missing a template for request formats: text/html):
+  
+actionpack (7.1.3.2) lib/action_controller/metal/implicit_render.rb:47:in `default_render'
+actionpack (7.1.3.2) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+turbo-rails (2.0.5) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.5) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+actiontext (7.1.3.2) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3.2) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3.2) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:03:54 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+Completed 406 Not Acceptable in 1ms (ActiveRecord: 0.0ms | Allocations: 554)
+
+
+  
+ActionController::MissingExactTemplate (DemoController#contact is missing a template for request formats: text/html):
+  
+actionpack (7.1.3.2) lib/action_controller/metal/implicit_render.rb:47:in `default_render'
+actionpack (7.1.3.2) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+turbo-rails (2.0.5) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.5) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+actiontext (7.1.3.2) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3.2) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3.2) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:05:26 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+Completed 406 Not Acceptable in 1ms (ActiveRecord: 0.0ms | Allocations: 949)
+
+
+  
+ActionController::MissingExactTemplate (DemoController#contact is missing a template for request formats: text/html):
+  
+actionpack (7.1.3.2) lib/action_controller/metal/implicit_render.rb:47:in `default_render'
+actionpack (7.1.3.2) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+turbo-rails (2.0.5) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.5) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+actiontext (7.1.3.2) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3.2) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3.2) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/demo/about" for 127.0.0.1 at 2024-04-17 13:05:30 +0530
+Processing by DemoController#about as HTML
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.4ms | Allocations: 724)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 1257)
+
+
+Started GET "/demo/about" for 127.0.0.1 at 2024-04-17 13:06:22 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#about as HTML
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.3ms | Allocations: 732)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.0ms | Allocations: 1471)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:06:25 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+Completed 406 Not Acceptable in 1ms (ActiveRecord: 0.0ms | Allocations: 797)
+
+
+  
+ActionController::MissingExactTemplate (DemoController#contact is missing a template for request formats: text/html):
+  
+actionpack (7.1.3.2) lib/action_controller/metal/implicit_render.rb:47:in `default_render'
+actionpack (7.1.3.2) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+turbo-rails (2.0.5) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.5) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+actiontext (7.1.3.2) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3.2) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3.2) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/method_override.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:08:54 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1010)
+
+
+  
+ActionView::MissingTemplate (Missing template demo/contact.html.erb, application/contact.html.erb with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :jbuilder]}.
+
+Searched in:
+  * "/home/beryl/home/Training/Rails/Project/cms/app/views"
+  * "/home/beryl/.rvm/gems/ruby-3.2.2/gems/turbo-rails-2.0.5/app/views"
+  * "/home/beryl/.rvm/gems/ruby-3.2.2/gems/actiontext-7.1.3.2/app/views"
+  * "/home/beryl/.rvm/gems/ruby-3.2.2/gems/actionmailbox-7.1.3.2/app/views"
+):
+  
+app/controllers/demo_controller.rb:22:in `contact'
+Started GET "/demo/about" for 127.0.0.1 at 2024-04-17 13:12:03 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#about as HTML
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.8ms | Allocations: 743)
+Completed 200 OK in 6ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 1512)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:12:06 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.1ms | Allocations: 289)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.0ms | Allocations: 575)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:12:25 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.7ms | Allocations: 759)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.0ms | Allocations: 1509)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:12:33 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.5ms | Allocations: 276)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 562)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:12:36 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.4ms | Allocations: 111)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 352)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:13:31 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.4ms | Allocations: 770)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 1521)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:14:43 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.4ms | Allocations: 788)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.0ms | Allocations: 1542)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:14:44 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.3ms | Allocations: 111)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 338)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:14:45 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.8ms | Allocations: 111)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 337)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:14:45 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.4ms | Allocations: 111)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms | Allocations: 337)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:15:29 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.2ms | Allocations: 784)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 1535)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:16:08 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 2.0ms | Allocations: 800)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.0ms | Allocations: 1550)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:16:23 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.0ms | Allocations: 789)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.0ms | Allocations: 1543)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:17:10 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.2ms | Allocations: 794)
+Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 0.0ms | Allocations: 1545)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:17:57 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.1ms | Allocations: 800)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 1551)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:18:44 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.6ms | Allocations: 808)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 1562)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:18:55 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.4ms | Allocations: 812)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 1565)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:19:11 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 2.0ms | Allocations: 818)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.0ms | Allocations: 1569)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:19:49 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.4ms | Allocations: 824)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 1575)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:20:02 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 2.1ms | Allocations: 834)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.0ms | Allocations: 1588)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:20:35 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 2.2ms | Allocations: 838)
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.0ms | Allocations: 1589)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 13:34:16 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.7ms | Allocations: 832)
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.0ms | Allocations: 1586)
+
+
+Started GET "/demo/contact?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:23:19 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.6ms | Allocations: 834)
+Completed 200 OK in 5ms (Views: 3.2ms | ActiveRecord: 0.0ms | Allocations: 1587)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:23:23 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.7ms | Allocations: 736)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 1022)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:25:48 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 2.6ms | Allocations: 1284)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 2035)
+
+
+Started GET "/demo/contact?country=us&id=20" for 127.0.0.1 at 2024-04-17 14:26:05 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"country"=>"us", "id"=>"20"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.2ms | Allocations: 272)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 558)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:26:19 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 0.7ms | Allocations: 466)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms | Allocations: 707)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:28:27 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.8ms | Allocations: 1305)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.0ms | Allocations: 2059)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:28:59 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.9ms | Allocations: 1306)
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.0ms | Allocations: 2057)
+
+
+Started GET "/demo/contact?country=us&id=20" for 127.0.0.1 at 2024-04-17 14:34:14 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"country"=>"us", "id"=>"20"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.7ms | Allocations: 1258)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 2023)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* Internal CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        section {
+            padding: 20px;
+            text-align: left;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Contact Us</h1>
+</header>
+
+<section>
+    <!-- Your contact information goes here -->
+    <p>Company Name: Your Company Name</p>
+    <p>Headquaters: <%= @country%></p>
+    <p>Phone: <% if params[:country]=='us' or params[:country]=='ca'%>
+                <%= "(800) 555-6789"%>
+              <% elsif params[:country]=='uk'%>
+                <%= "(020) 7946 1234"%>
+              <% else %>
+                <%= "+1 (987) 654-3210"%>
+    </p>
+    <p>Email: info@example.com</p>
+    <br><br><b><center>
+    <%= link_to("About Us", {:controller=>"demo",:action=>"about",:page=>4,:id =>20})%></center></b>
+    <br><br>
+</section>
+
+</body>
+</html>
+
+):
+1:    <!DOCTYPE html>
+2:    <html lang="en">
+3:    <head>
+4:        <meta charset="UTF-8">
+5:        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+6:        <title>Contact Us</title>
+7:        <style>
+8:            /* Internal CSS styles */
+9:            body {
+10:                font-family: Arial, sans-serif;
+11:                margin: 0;
+12:                padding: 0;
+13:                background-color: #f0f0f0;
+14:            }
+15:            header {
+16:                background-color: #003366;
+17:                color: #fff;
+18:                padding: 20px 0;
+19:                text-align: center;
+20:            }
+21:            h1 {
+22:                margin-top: 0;
+23:            }
+24:            section {
+25:                padding: 20px;
+26:                text-align: left;
+27:                margin: 20px auto;
+28:                max-width: 800px;
+29:                background-color: #fff;
+30:                border-radius: 8px;
+31:                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+32:            }
+33:            p {
+34:                line-height: 1.5;
+35:            }
+36:        </style>
+37:    </head>
+38:    <body>
+39:    
+40:    <header>
+41:        <h1>Contact Us</h1>
+42:    </header>
+43:    
+44:    <section>
+45:        <!-- Your contact information goes here -->
+46:        <p>Company Name: Your Company Name</p>
+47:        <p>Headquaters: <%= @country%></p>
+48:        <p>Phone: <% if params[:country]=='us' or params[:country]=='ca'%>
+49:                    <%= "(800) 555-6789"%>
+50:                  <% elsif params[:country]=='uk'%>
+51:                    <%= "(020) 7946 1234"%>
+52:                  <% else %>
+53:                    <%= "+1 (987) 654-3210"%>
+54:        </p>
+55:        <p>Email: info@example.com</p>
+56:        <br><br><b><center>
+57:        <%= link_to("About Us", {:controller=>"demo",:action=>"about",:page=>4,:id =>20})%></center></b>
+58:        <br><br>
+59:    </section>
+60:    
+61:    </body>
+62:    </html>
+  
+app/views/demo/contact.html.erb:65: syntax error, unexpected end-of-input
+Started GET "/demo/contact?country=us&id=20" for 127.0.0.1 at 2024-04-17 14:34:45 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+Processing by DemoController#contact as HTML
+  Parameters: {"country"=>"us", "id"=>"20"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 1.6ms | Allocations: 1016)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 1770)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:41:27 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 2.7ms | Allocations: 738)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.0ms | Allocations: 1024)
+
+
+Started GET "/demo/contact?country=ca&id=10" for 127.0.0.1 at 2024-04-17 14:41:29 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"country"=>"ca", "id"=>"10"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.4ms | Allocations: 118)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 344)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:41:32 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.1ms | Allocations: 466)
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 692)
+
+
+Started GET "/demo/contact?country=uk&id=30" for 127.0.0.1 at 2024-04-17 14:41:34 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"country"=>"uk", "id"=>"30"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.4ms | Allocations: 120)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 346)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:41:35 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.1ms | Allocations: 466)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 692)
+
+
+Started GET "/demo/contact?country=in&id=50" for 127.0.0.1 at 2024-04-17 14:41:37 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"country"=>"in", "id"=>"50"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.4ms | Allocations: 120)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 346)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:41:41 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.0ms | Allocations: 466)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms | Allocations: 692)
+
+
+Started GET "/demo/contact?country=sk&id=40" for 127.0.0.1 at 2024-04-17 14:41:43 +0530
+Processing by DemoController#contact as HTML
+  Parameters: {"country"=>"sk", "id"=>"40"}
+  Rendering demo/contact.html.erb
+  Rendered demo/contact.html.erb (Duration: 0.3ms | Allocations: 120)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 346)
+
+
+Started GET "/demo/about?id=20&page=4" for 127.0.0.1 at 2024-04-17 14:41:45 +0530
+Processing by DemoController#about as HTML
+  Parameters: {"id"=>"20", "page"=>"4"}
+  Rendering demo/about.html.erb
+  Rendered demo/about.html.erb (Duration: 1.2ms | Allocations: 466)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.0ms | Allocations: 692)
+
+
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[35m (173.0ms)[0m  [1m[35mDROP TABLE "schema_migrations"[0m
+  [1m[35m (41.4ms)[0m  [1m[35mDROP TABLE "ar_internal_metadata"[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE DATABASE "cms_development" ENCODING = 'unicode'[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE DATABASE "cms_test" ENCODING = 'unicode'[0m
+  [1m[35m (295.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (94.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (41.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-04-17 09:32:46.358027', '2024-04-17 09:32:46.358033') RETURNING "key"[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE DATABASE "cms_development" ENCODING = 'unicode'[0m
+  [1m[35m (1834.9ms)[0m  [1m[35mCREATE DATABASE "cms_test" ENCODING = 'unicode'[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to DoNothingYet (20240417103927)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417103927') RETURNING "version"[0m
+  [1m[36mTRANSACTION (16.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20240417104455)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (136.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417104455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreateSubjects (20240417115704)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (136.0ms)[0m  [1m[35mCREATE TABLE "subjects" ("id" bigserial primary key, "name" character varying, "position" integer, "visible" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417115704') RETURNING "version"[0m
+  [1m[36mTRANSACTION (23.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePages (20240417120130)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (113.6ms)[0m  [1m[35mCREATE TABLE "pages" ("id" bigserial primary key, "sunject_id" integer, "name" character varying, "position" integer, "visible" boolean, "permalink" character varying, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (36.9ms)[0m  [1m[35mCREATE INDEX "index_pages_on_sunject_id" ON "pages" ("sunject_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417120130') RETURNING "version"[0m
+  [1m[36mTRANSACTION (20.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePages (20240417120130)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.9ms)[0m  [1m[35mDROP TABLE "pages"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.3ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20240417120130'[0m
+  [1m[36mTRANSACTION (19.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSubjects (20240417115704)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.6ms)[0m  [1m[35mDROP TABLE "subjects"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.0ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20240417115704'[0m
+  [1m[36mTRANSACTION (14.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20240417104455)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.5ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.8ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20240417104455'[0m
+  [1m[36mTRANSACTION (10.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DoNothingYet (20240417103927)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (3.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20240417103927'[0m
+  [1m[36mTRANSACTION (10.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to DoNothingYet (20240417103927)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417103927') RETURNING "version"[0m
+  [1m[36mTRANSACTION (15.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20240417104455)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (105.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417104455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (21.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSubjects (20240417115704)
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (74.9ms)[0m  [1m[35mCREATE TABLE "subjects" ("id" bigserial primary key, "name" character varying, "position" integer, "visible" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417115704') RETURNING "version"[0m
+  [1m[36mTRANSACTION (12.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePages (20240417120130)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (83.4ms)[0m  [1m[35mCREATE TABLE "pages" ("id" bigserial primary key, "sunject_id" integer, "name" character varying, "position" integer, "visible" boolean, "permalink" character varying, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (36.2ms)[0m  [1m[35mCREATE INDEX "index_pages_on_sunject_id" ON "pages" ("sunject_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417120130') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

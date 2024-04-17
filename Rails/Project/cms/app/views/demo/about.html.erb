@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* Internal CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        section {
+            padding: 20px;
+            text-align: left;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>About Us</h1>
+</header>
+
+<section>
+    <h2>Our Story</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod metus ac tortor aliquet, at sagittis lorem hendrerit. Quisque vel lectus vestibulum, fermentum tortor id, ultricies arcu. Phasellus convallis odio a dolor bibendum, at volutpat nulla blandit. Duis tincidunt ultricies ipsum. Nullam eget turpis non libero dictum viverra sit amet at mi. Ut et nunc at urna accumsan vehicula. Suspendisse et commodo ex. Integer ut bibendum nisi.</p>
+
+    <h2>Our Mission</h2>
+    <p>Integer sodales libero in diam fringilla, id dictum dui congue. Cras a libero nec enim hendrerit lacinia sed nec justo. Nam rhoncus, velit in bibendum vestibulum, ipsum lorem tincidunt metus, nec vehicula nunc magna id lorem. Ut euismod mi vel est bibendum, ut consectetur odio condimentum. Fusce commodo vehicula ipsum, eu viverra ipsum. Nam posuere quam nec mauris congue, nec tincidunt quam dictum. Suspendisse vel pulvinar odio. Nulla viverra ipsum a risus malesuada, eget blandit quam pretium.</p>
+
+    <h2>Our Team</h2>
+    <p>Nam id neque sapien. Duis tempor nisl vel tincidunt tempus. Nulla non turpis in lorem viverra sodales. Fusce ullamcorper varius libero, non vulputate velit consequat nec. Vivamus quis risus nec nisl ultricies dictum. Morbi hendrerit sollicitudin neque non commodo. Pellentesque aliquet placerat odio vitae aliquam. Vestibulum ac lorem odio.</p>
+    <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><%= link_to("Contact Us(US)", {:controller=>"demo",:action=>"contact",:country=>'us',:id =>20})%></b><tab>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><%= link_to("Contact Us(CA)", {:controller=>"demo",:action=>"contact",:country=>'ca',:id =>10})%></b><tab>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><%= link_to("Contact Us(UK)", {:controller=>"demo",:action=>"contact",:country=>'uk',:id =>30})%></b><tab>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><%= link_to("Contact Us(IN)", {:controller=>"demo",:action=>"contact",:country=>'in',:id =>50})%></b><tab>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><%= link_to("Contact Us(SK)", {:controller=>"demo",:action=>"contact",:country=>'sk',:id =>40})%></b><tab>
+    </p>
+
+
+</section>
+
+</body>
+</html>

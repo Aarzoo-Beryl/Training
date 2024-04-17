@@ -1,0 +1,16 @@
+<br>
+<h1 align="center">hello file in demo</h1>
+<hr style="border-top: 2px solid black;">
+<br><br>
+
+
+<%= "Let's try to print target-" %>
+<br>
+<% target = "Beryl systems" %>
+<%= "Hello! I am from #{target}"%>
+
+<br><br>
+<%= link_to("Index Page", {:controller=>"demo",:action=>"index",:page=>4,:id =>20})%>
+<% @array.each do |n|%>
+<p><%= n %></p>
+<% end %>

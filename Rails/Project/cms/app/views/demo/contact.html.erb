@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* Internal CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        section {
+            padding: 20px;
+            text-align: left;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Contact Us</h1>
+</header>
+
+<section>
+    <!-- Your contact information goes here -->
+    <p>Company Name: Your Company Name</p>
+    <p>Headquaters: <%= @country%></p>
+    <p>Phone: <% if params[:country]=='us' or params[:country]=='ca'%>
+                <%= "(800) 555-6789"%>
+              <% elsif params[:country]=='uk'%>
+                <%= "(020) 7946 1234"%>
+              <% else %>
+                <%= "+1 (987) 654-3210"%>
+              <% end %>
+    </p>
+    <p>Email: info@example.com</p>
+    <br><br><b><center>
+    <%= link_to("About Us", {:controller=>"demo",:action=>"about",:page=>4,:id =>20})%></center></b>
+    <br><br>
+</section>
+
+</body>
+</html>
