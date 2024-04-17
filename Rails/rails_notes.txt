@@ -158,7 +158,7 @@ VIEW TEMPLATES -
 					<p><%= n %></p>
 					<% end %>
 
-INSATANCE VARIABLE - 
+INSTANCE VARIABLE - 
 
 	- primary responsibility of controller is to gather data from model and database, and make it available for view templaate to view it on browser
 	- controller sets everything ahead of time so that view can focus on presentation only
@@ -176,9 +176,80 @@ LINKS -
 	- Working - when cliked on "Click me ", the browser sends request using the string to web server and request is passed by routes and sent 
 				to correct controller and action
 
+URL PARAMENTERS - 
+
+	- values helping us to access a paricular part(maybe in a multipage list) 
+	- if using link_to method, then can simply be put inside hash code 
+	  like - {:controller=>'demo',:action=>'index',id=>20,page=4}
+	  [rails convert it into url string, it helps us gather controller and action and as well as parameters so you can have easy access to them]
+	- rails puts these parameters into special objects called 'params'
+	  [it also puts GET(parameters from url) and POST(submitted by web forum) values in it]
+	- params can be considered as a hash with come special features - 
+		a value in params can be accessed either by params['id'] or params[:id]
+
+MANAGING DATABASE TABLES - 
+
+	three ways - 
+	- using legacy database tables(i.e. using existing tables and making it interact whith ror application)
+	- managing tables manualy
+	- using Ruby on Rails migerations
+
+MIGRATIONS - 
+
+	- it is a set of database instructions written in ruby
+	- helps migrate data from one state to another(staging changes made)
+	- contain instruction to move "up" (to next state) or "down" (to previous state) in a database
+	- ADVANTAGES - 
+			- keeps databse schema with application code
+			- executable and repeatable
+			- allow sharing schema (allow sahring migration file)
+			- allow writing in ruby instead of SQL
+			- able to access project code
+	- GENERATING MIGRATION - 
+			-$rails generate migration Migrationname [generates migration]
+			-$rails generate model User first_name:string last_name:string email:string[generates model with specified column name and what data they can have]
+	- RUNNING MIGRATIONS - 
+			- $rails db:migrate [rails run all migerations that have not been run yet]
+					output- == 20240417115704 CreateSubjects: migrating ===================================
+							-- create_table(:subjects)
+							-> 0.1429s
+							== 20240417115704 CreateSubjects: migrated (0.1431s) ==========================
+
+							== 20240417120130 CreatePages: migrating ======================================
+							-- create_table(:pages)
+							-> 0.1600s
+							== 20240417120130 CreatePages: migrated (0.1602s) =============================
 
 
+			- $rails db:migrate:status [tell the status of what is in up and what is in down]
+					output- 
+							Status   Migration ID    Migration Name
+							--------------------------------------------------
+							up     20240417103927  Do nothing yet
+							up     20240417104455  Create users
+							up     20240417115704  Create subjects
+							down    20240417120130  Create pages
 
+
+			- $rails db:migrate VERSION=0 [undoes all the migration]
+					output- == 20240417115704 CreateSubjects: reverting ===================================
+							-- drop_table(:subjects)
+							-> 0.0051s
+							== 20240417115704 CreateSubjects: reverted (0.0187s) ==========================
+
+							== 20240417104455 CreateUsers: reverting ======================================
+							-- drop_table(:users)
+							-> 0.0083s
+							== 20240417104455 CreateUsers: reverted (0.0086s) =============================
+
+							== 20240417103927 DoNothingYet: reverting =====================================
+							== 20240417103927 DoNothingYet: reverted (0.0000s) ============================
+
+			- $rails db:migrate VERSION=346746987297 [undeos till that version]
+					output- == 20240417120130 CreatePages: reverting ======================================
+							-- drop_table(:pages)
+							-> 0.0171s
+							== 20240417120130 CreatePages: reverted (0.0562s) =============================
 
 
 
