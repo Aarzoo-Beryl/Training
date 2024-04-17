@@ -158,7 +158,23 @@ VIEW TEMPLATES -
 					<p><%= n %></p>
 					<% end %>
 
+INSATANCE VARIABLE - 
 
+	- primary responsibility of controller is to gather data from model and database, and make it available for view templaate to view it on browser
+	- controller sets everything ahead of time so that view can focus on presentation only
+	- to pass data from controllerto view , we use 'instance variables'
+	- these instance variable have scope throughout the instance of the ruby class[once called can be accessed from other methods of the same class]
+	  [here object is instance od controller class]
+	- syntax - @variable
+	- when ruby randers a template it gathers up all instance variables and make them available for the template[regular will not be available]
+
+LINKS - 
+
+	- basic syntax - <a href = "/demo/index">Click me </a>     [html version]
+	- easier syntax - <%= link_to("Click me","path") %>        [ruby version]
+		[path can be written in form "/demo/index" [or] {:controller => "demo", :action => "index"} [or] {:action => "index} if same controller]
+	- Working - when cliked on "Click me ", the browser sends request using the string to web server and request is passed by routes and sent 
+				to correct controller and action
 
 
 
