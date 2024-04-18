@@ -524,7 +524,6 @@ BLOCKS - basically a chunk of code that can be assigned a name and can be invoke
                     - syntax - END{
                                }
 
-
 MODULES - it is a way of grouping together methods,classes and constants
         - provides a namespace and prevent name clashes
         - implements the mixin facility
@@ -552,6 +551,15 @@ MODULES - it is a way of grouping together methods,classes and constants
                  - Mixins are implemented using modules, which are collections of methods and constants. 
                  - Modules in Ruby serve as containers for methods and can be included in classes to extend their functionality.
                  - When a module is included in a class, all the methods defined within that module become available to instances of that class.
+
+
+HOOK METHODS - used to access modules and make changes in them. 
+             - Included - This method is used to include a method or attribute or module to another module. 
+                          The method makes the underlined module available to the instances of the class.
+             - Prepended - uses the concept of overriding. 
+                         - The modules can be overridden using methods defined in the target class.
+             - Extend - while include applies methods in a certain module to instance of a class, 
+                        extend applies those methods to the same class. 
 
 
 STRINGS - enclosed inside single inverted commas ''
