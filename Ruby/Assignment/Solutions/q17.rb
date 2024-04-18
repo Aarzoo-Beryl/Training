@@ -4,7 +4,7 @@
 def fibonnaci(i)
 	a = [0,1]
 	(2..i).each do |j|
-		a << a[j-1]+a[j-2]
+		a << a[j-1] + a[j-2]
 	end
 	return a
 end

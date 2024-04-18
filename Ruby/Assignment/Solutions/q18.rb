@@ -4,7 +4,7 @@ def count(arr)
   b=0
   arr.each do |i|
     if i%2 == 0
-      b+=1
+      b += 1
     end
   end
   return b

@@ -3,7 +3,7 @@
 require 'date'
 
 def valid_date(d,m,y)
-    return Date.valid_date?(y,m,d)
+  return Date.valid_date?(y,m,d)
 end
 
 

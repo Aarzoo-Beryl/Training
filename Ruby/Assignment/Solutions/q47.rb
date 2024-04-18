@@ -3,8 +3,8 @@
 require 'date'
 
 def friday_13(m,y)
-    date = Date.new(y,m,13)
-    return date.friday?
+	date = Date.new(y,m,13)
+	return date.friday?
 end
 
 month = 5

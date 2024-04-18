@@ -2,10 +2,10 @@
 
 
 def remove(s,p)
-    for i in 0..s.length
-        s.sub!(p,'')
-    end
-    return s
+	for i in 0..s.length
+		s.sub!(p,'')
+	end
+	return s
 end
 
 s = "abracadabracad arshbjbcad"

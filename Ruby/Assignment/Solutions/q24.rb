@@ -6,7 +6,7 @@ def diagonal_sum(a)
 	for i in (0...n)
 		sum += a[i][i]
 		j = n - i - 1
-		sum += a[i][j] unless i==j
+		sum += a[i][j] unless i == j
 	end
 	return sum
 end

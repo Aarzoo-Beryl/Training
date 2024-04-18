@@ -1,6 +1,6 @@
 x = %{Ruby is fun}
 y = %Q{Ruby is good}
-z = %q[Ruby is obejct oriented]
+z = %q[Ruby is object oriented]
 a = %x!ls!
 
 

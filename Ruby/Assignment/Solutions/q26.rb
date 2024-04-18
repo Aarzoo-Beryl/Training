@@ -1,7 +1,7 @@
 #!usr/bin/ruby
 
 def distinct_string(a,k)
-	new = a.select{|i| a.count(i)==1}
+	new = a.select{|i| a.count(i) == 1}
 	if k < new.length
   	puts new[k]
 	else 

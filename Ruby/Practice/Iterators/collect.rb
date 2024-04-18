@@ -2,7 +2,7 @@
 
 digits = [1,2,3,4,5]
 
-a = digits.collect{|x|10*x}
+a = digits.collect{|x| 10*x}
 
 puts "#{a}"
 
