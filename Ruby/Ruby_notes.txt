@@ -561,6 +561,32 @@ HOOK METHODS - used to access modules and make changes in them.
              - Extend - while include applies methods in a certain module to instance of a class, 
                         extend applies those methods to the same class. 
 
+SYMBOL CLASS - are immutable, meaning their value cannot be changed once they are created. 
+             - They are often used as identifiers for things like method names, keys in hashes, or enum-like values.
+             - syntax - :name
+             - Once created, the value of a Symbol cannot be modified. This means that two symbols with the same name will always refer to the same object.
+             - when you create a symbol, Ruby ensures that there is only one copy of that symbol in memory, regardless of how many times it is referenced.
+             - are widely used for their memory efficiency, immutability, and performance benefits
+
+STRUCT CLASS - is a creator of specific classes, each one is defined to hold a set of variable and their accessors
+             - allows you to define a new class with a fixed set of attributes.
+             - syntax - Struct.new(attribute1,attribute2)
+             - Instances of Struct are immutable by default, meaning that once created, their attribute values cannot be modified.
+             - useful when you need a simple class to hold data but don't need any additional behavior or methods.
+
+DIR CLASS - used to handle/ manage directories
+          - double dot(..) denotes parent directory and single dot(.) denotes directory itself.
+          - Dir.mkdir "dir_name" : used to mane new instance of directory class
+          - Dir.delete "dir_name" [or] Dir.rmdir "dir_name" [or] Dir.unlink " Dir_name" :deletes directory
+          - Dir.exist?"dir_name" : looks if the directory exists in the system
+          - Dir.pwd : prints the path of directory
+          - Dir.chdir ”path” : used to change the path of the working directory
+          - Dir.entries”dir_name” : provides an array containing list of directories content
+          - Dir.getwd : returns path of the current working directory
+          - Dir.home : returns to home directory of current user
+          - Dir.glob(“pattern”) : used to find directories with matching pattern
+          - h_o.close: used to close directory system
+          - each{|filename|block} : block to be called on each file of the directory
 
 STRINGS - enclosed inside single inverted commas ''
         - for the special character to behave as character in the string use '\' before it
