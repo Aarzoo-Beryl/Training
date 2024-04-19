@@ -200,7 +200,7 @@ MIGRATIONS -
 	- helps migrate data from one state to another(staging changes made)
 	- contain instruction to move "up" (to next state) or "down" (to previous state) in a database
 	- ADVANTAGES - 
-			- keeps databse schema with application code
+			- keeps database schema with application code
 			- executable and repeatable
 			- allow sharing schema (allow sahring migration file)
 			- allow writing in ruby instead of SQL
@@ -251,11 +251,108 @@ MIGRATIONS -
 							-> 0.0171s
 							== 20240417120130 CreatePages: reverted (0.0562s) =============================
 
+ACTIVE RECORD - it is a design patttern for relational database
+							- helps to retrieve and manipulate data as objects and not as static rows
+							- makes object intelligent [i.e. object understands database structure of a table]
+							- contains data from table rows, as well as code to manipulate rows
+							- object can be manipulated and saved easily
+							- eg - user = User.new
+										 user.first_name = "kevin"
+										 user.saved																[creates SQL insert statement]
+										 user.last_name = "kumar"
+										 user.save																[creates SQL update statement]
+										 user.destroy															[creates SQL delete statement]	
+								
+ACTIVE RELATION - also called "Arel"
+								- object-oriented interpretation of relational algebra
+								- it simplifies the generation of complex database queries(i.e. in practice, we can change small queries together,chainable, as ruby objects)
+								- handles them together as complex joins and aggregation using efficient SQL
+								- the queries created will not be used until needed
+								- eg - users = Users.where("first_name = 'kevin'")
+											 users = Users.order("last_name 'ASC'")
+											 #these will not be executed until we call something upon them
+											 users.each{|usr| ....}				#now as it accesses it then all the above queries will be combined and an appropriate SQL query by combining them
 
+RAILS CONSOLE - allows to experiment with the project model in isolation[i.e. without having worry about controllers and views]
+							- basic syntax - $rails console -e development		[-e helps to specify environment(development is default)]
+													[or] $rails c
+							- it is basically irb + our project
+							- whatever we do here stays in memory unless you do (model_name.save) to save it in the actual database
+			- Important - in ruby console, we are interacting with the web browser's database,any change made here will be showcased on the web browser(public data)
 
+			- CREATE RECORD - 
+							- Method_1 -> 
+													Step_1 -> instantiate object [a=Subject.new]
+													Step_2 -> set values 				 [a.name = 'kevin']
+													Step_3 -> save 							 [a.save]
+							- Method_2 -> Create 										 [a=Subject.create(:name=>'kevin')]
+													#does everything in one step
+							
+							#if the record is saved in the database then a.new_record?==false , true otherwise
 
+			- UPDATE RECORD - 
+							- Method_1 -> 
+													Step_1 -> find object 				[a=Subject.find(1)]
+													Step_2 -> update values 			[a.name = 'kumar']
+													Step_3 -> save 							  [a.save]
+							- Method_2 ->
+													Step_1 -> find object 				[a=Subject.find(1)]
+													Step_2 -> set values and save [a.update(:name=>"kumar")]
 
+			- DELETE RECORD - 
+							- Method -> 
+													Step_1 -> find object 				[a=Subject.find(1)]
+													Step_2 -> destroy							[a.destroy]
+								#here destroy should be prefered over delete , as destroy removes the row from datatbase and freezes it but it will still be available for the inspection
 
+			- FIND RECORD - 
+							- Method_1 -> Primary key finding
+													syntax -> Subject.find(1)				{1 is the primary key ,id}
+													#return orbject if present, error otherwise
+							- Method_2 -> Conditions
+													syntax -> Subject.where(:visible=>true)			{allows to mention conditions}
+													syntax -> Subject.where("name='kumar' AND position=1")
+											Warning -> we never interpolate ,like Users.where("first_name LIKE #{@query}"), directly into the string because interpolating string might be corrupt and can cause SQL injection
+																 so rather we write it like => Users.where("first_name LIKE ?",@query) {in this ruby first sanitizes it before putting it into the string}
+											Combining conditions -> Subject.order()
+																							Subject.limit()
+																							Subject.offset()
+														eg - Subject.where(:visible=>true).order('position ASC')
+
+			- ONE-TO-MANY -> 
+													Step_1 -> create relationship in database making sure it contains foreign key
+													Step_2 -> define relationshipin models,both sides
+													Step_3 -> use relationships
+							- Defining Methods ->
+											Eg-> (in module)
+														class Subject
+																has_many :pages
+														end
+														class Pages
+																belongs_to :pages
+														end
+											[rails automatically invokes after definning relationship]
+											
+						  - Practical ->
+													> a=Subject.find(1) 											[finds subject with id =1]
+													> a.pages																	[checks for pages with same subject id as a]
+													> b = Page.new(:name=>'first_page')				[creates new page object]
+													> a.page << b															[sets a's page id as b's subject_id]
+													> a.pages																	[results b]
+
+CRUD - refers to Create Read Update Delete 
+		 - web application performs these basic CRUD operations on the database -
+					CRUD 			ACTION 				Example URL
+					Create 		new 					/subjects/new
+					Create 		create				/subjects/create
+					Read				index					/subjects
+					Read				show 					/subject/show/:id
+					Update			edit 					/subject/edit/:id
+					Update			update 				/subject/update/:id
+					Delete			delete 				/subject/delete/:id
+					Delete			destroy 			/subject/destroy/:id
+		 - these means we need to have seperate controller for separate database
+		 - CRUD allows for clear and well structured URLs
 
 
 
