@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_17_120130) do
   enable_extension "plpgsql"
 
   create_table "pages", force: :cascade do |t|
-    t.integer "sunject_id"
+    t.bigint "subject_id"
     t.string "name"
     t.integer "position"
     t.boolean "visible"
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_17_120130) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sunject_id"], name: "index_pages_on_sunject_id"
+    t.index ["subject_id"], name: "index_pages_on_subject_id"
   end
 
   create_table "subjects", force: :cascade do |t|

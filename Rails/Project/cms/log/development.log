@@ -2343,3 +2343,45 @@ Migrating to CreatePages (20240417120130)
   [1m[36mTRANSACTION (22.6ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (2.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to DoNothingYet (20240417103927)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417103927') RETURNING "version"[0m
+  [1m[36mTRANSACTION (11.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20240417104455)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (77.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417104455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (14.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSubjects (20240417115704)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (80.6ms)[0m  [1m[35mCREATE TABLE "subjects" ("id" bigserial primary key, "name" character varying, "position" integer, "visible" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417115704') RETURNING "version"[0m
+  [1m[36mTRANSACTION (16.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePages (20240417120130)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (87.9ms)[0m  [1m[35mCREATE TABLE "pages" ("id" bigserial primary key, "subject_id" bigint, "name" character varying, "position" integer, "visible" boolean, "permalink" character varying, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (36.8ms)[0m  [1m[35mCREATE INDEX "index_pages_on_subject_id" ON "pages" ("subject_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417120130') RETURNING "version"[0m
+  [1m[36mTRANSACTION (15.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/home/Training/Rails/Project/cms/config/routes.rb:18)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubject Create (2.3ms)[0m  [1m[32mINSERT INTO "subjects" ("name", "position", "visible", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "maths"], ["position", 1], ["visible", true], ["created_at", "2024-04-19 10:27:26.917228"], ["updated_at", "2024-04-19 10:27:26.917228"]]
+  [1m[36mTRANSACTION (10.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPage Load (1.1ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."subject_id" = $1 /* loading for pp */ LIMIT $2[0m  [["subject_id", 1], ["LIMIT", 11]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPage Create (2.2ms)[0m  [1m[32mINSERT INTO "pages" ("subject_id", "name", "position", "visible", "permalink", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["subject_id", 1], ["name", "First Page"], ["position", 1], ["visible", true], ["permalink", nil], ["content", "This is the first page"], ["created_at", "2024-04-19 10:42:14.894446"], ["updated_at", "2024-04-19 10:42:14.894446"]]
+  [1m[36mTRANSACTION (26.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPage Load (1.1ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."subject_id" = $1 /* loading for pp */ LIMIT $2[0m  [["subject_id", 1], ["LIMIT", 11]]
+  [1m[36mPage Count (11.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPage Create (2.4ms)[0m  [1m[32mINSERT INTO "pages" ("subject_id", "name", "position", "visible", "permalink", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["subject_id", 1], ["name", "Second page"], ["position", 2], ["visible", true], ["permalink", nil], ["content", nil], ["created_at", "2024-04-19 10:44:15.297201"], ["updated_at", "2024-04-19 10:44:15.297201"]]
+  [1m[36mTRANSACTION (15.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPage Load (0.3ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."subject_id" = $1 /* loading for pp */ LIMIT $2[0m  [["subject_id", 1], ["LIMIT", 11]]
