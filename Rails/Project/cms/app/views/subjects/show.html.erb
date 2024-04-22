@@ -1,4 +1,36 @@
-<h1>Subjects#show</h1>
-<p><br><br>
-  <%= link_to('Edit Subjects',edit_subject_path(@subject))%>
-<br><br></p>
+
+<div class="Action Show">
+  <h2>Subject : <%=@subject.id%></h2>
+
+  <%= link_to("Update Details","#",:class=>'action update')%>
+  <br><br>
+  <table class='listing' summary="Subject detailed view" cellspacing="5">
+    <tr class="header">
+      <td>Position</td><td> : </td><td><%= @subject.position %></td>
+    </tr>
+    <tr>
+      <td>Subject</td><td> : </td><td><%= @subject.name.capitalize %></td>
+    </tr>
+    <tr>
+      <td>Visible</td><td> : </td><td class='center'><%= @subject.visible ? "Yes" : "No" %></td>
+    </tr>
+    <tr>
+      <td>Pages</td><td> : </td><td class='center'><%= @subject.pages.size %></td>
+    </tr>
+    <tr>
+      <td>Actions</td><td> : </td><td class="action">
+        <%= link_to("Edit",'#',:class=>'action edit') %>
+        <%= link_to("Delete",'#',:class=>'action delete') %>
+      </td>
+    </tr>
+    <tr>
+      <td>Created At</td><td> : </td><td class='center'><%= @subject.created_at %></td>
+    </tr>
+    <tr>
+      <td>Updated At</td><td> : </td><td class='center'><%= @subject.updated_at %></td>
+    </tr>
+  </table>
+  <br><br>
+  <%= link_to("Back",subjects_path,:class=>'Subjects Index')%>
+  <br><br>
+</div>
