@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
   #root route
-#  root 'about#us'
-
-
+  root 'demo#index'
 
   get 'demo/index'
   get 'demo/hello'
@@ -13,6 +11,29 @@ Rails.application.routes.draw do
   get 'about/faculty'
   get 'about/members'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+    resources :subjects do
+      member do
+        get :delete
+      end
+    end
+    resources :pages do
+      member do
+        get :delete
+      end
+    end
+
+    # get 'subjects/index'
+    # get 'subjects/show'
+    # get 'subjects/new'
+    # get 'subjects/edit'
+    # get 'subjects/delete'
+    #
+    # get 'pages/index'
+    # get 'pages/show'
+    # get 'pages/new'
+    # get 'pages/edit'
+    # get 'pages/delete'
 
   #default route
   get ':controller(/:action(/:id))'
@@ -25,4 +46,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+
 end

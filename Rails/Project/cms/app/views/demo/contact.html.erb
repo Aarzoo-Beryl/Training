@@ -44,7 +44,7 @@
 <section>
     <!-- Your contact information goes here -->
     <p>Company Name: Your Company Name</p>
-    <p>Headquaters: <%= @country%></p>
+    <p>Headquaters: <%= @country.upcase%></p>
     <p>Phone: <% if params[:country]=='us' or params[:country]=='ca'%>
                 <%= "(800) 555-6789"%>
               <% elsif params[:country]=='uk'%>
