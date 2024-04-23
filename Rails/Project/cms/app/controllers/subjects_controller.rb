@@ -8,9 +8,11 @@ class SubjectsController < ApplicationController
   end
 
   def new
+    @subject = Subject.new
   end
 
   def create
+    @subject = Subject.new(params[:subject])
   end
 
   def edit
