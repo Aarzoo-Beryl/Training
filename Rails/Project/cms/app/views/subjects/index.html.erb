@@ -4,13 +4,13 @@
   <%= link_to("Add New Subject",new_subject_path,:class=>'action new')%>
   <br><br>
 
-  <table class='listing' summary="Subject List" cellspacing="10">
+  <table class='listing' summary="Subject List" cellspacing="20">
     <tr class="header">
-      <td>#</td>
-      <td>Subject</td>
-      <td>Visible</td>
-      <td>Pages</td>
-      <td>Actions</td>
+      <th>#</th>
+      <th>Subject</th>
+      <th>Visible</th>
+      <th>Pages</th>
+      <th>Actions</th>
     </tr>
     <% @subjects.each do |subject| %>
     <tr>
