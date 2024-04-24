@@ -6706,3 +6706,246 @@ Processing by SubjectsController#new as HTML
 Completed 200 OK in 7ms (Views: 5.9ms | ActiveRecord: 0.0ms | Allocations: 2199)
 
 
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE DATABASE "cms_development" ENCODING = 'unicode'[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE DATABASE "cms_development" ENCODING = 'unicode'[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+  [1m[35m (803.9ms)[0m  [1m[35mCREATE DATABASE "cms_development" ENCODING = 'unicode'[0m
+  [1m[35m (782.4ms)[0m  [1m[35mCREATE DATABASE "cms_test" ENCODING = 'unicode'[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+  [1m[35m (168.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (218.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (36.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-04-24 09:04:16.116583', '2024-04-24 09:04:16.116588') RETURNING "key"[0m
+Migrating to DoNothingYet (20240417103927)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417103927') RETURNING "version"[0m
+  [1m[36mTRANSACTION (38.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20240417104455)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (89.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417104455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (21.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSubjects (20240417115704)
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (96.0ms)[0m  [1m[35mCREATE TABLE "subjects" ("id" bigserial primary key, "name" character varying, "position" integer, "visible" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417115704') RETURNING "version"[0m
+  [1m[36mTRANSACTION (21.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePages (20240417120130)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (121.8ms)[0m  [1m[35mCREATE TABLE "pages" ("id" bigserial primary key, "subject_id" bigint, "name" character varying, "position" integer, "visible" boolean, "permalink" character varying, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (28.3ms)[0m  [1m[35mCREATE INDEX "index_pages_on_subject_id" ON "pages" ("subject_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240417120130') RETURNING "version"[0m
+  [1m[36mTRANSACTION (26.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(3211460282272531590)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubject Create (1.3ms)[0m  [1m[32mINSERT INTO "subjects" ("name", "position", "visible", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Maths"], ["position", 1], ["visible", true], ["created_at", "2024-04-24 09:06:06.869440"], ["updated_at", "2024-04-24 09:06:06.869440"]]
+  [1m[36mTRANSACTION (29.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubject Create (2.0ms)[0m  [1m[32mINSERT INTO "subjects" ("name", "position", "visible", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Science"], ["position", 2], ["visible", false], ["created_at", "2024-04-24 09:06:30.520475"], ["updated_at", "2024-04-24 09:06:30.520475"]]
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+Started GET "/" for 127.0.0.1 at 2024-04-24 14:36:53 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 2.7ms | Allocations: 1170)
+Completed 200 OK in 127ms (Views: 13.6ms | ActiveRecord: 0.0ms | Allocations: 8719)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2024-04-24 14:37:01 +0530
+Processing by SubjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/index.html.erb within layouts/application
+  [1m[36mSubject Load (1.2ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" ORDER BY position ASC[0m
+  ↳ app/views/subjects/index.html.erb:15
+  [1m[36mPage Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/index.html.erb:20
+  [1m[36mPage Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 2]]
+  ↳ app/views/subjects/index.html.erb:20
+  Rendered subjects/index.html.erb within layouts/application (Duration: 153.0ms | Allocations: 20566)
+  Rendered layout layouts/application.html.erb (Duration: 316.7ms | Allocations: 55117)
+Completed 200 OK in 677ms (Views: 290.0ms | ActiveRecord: 33.8ms | Allocations: 66645)
+
+
+Started GET "/subjects/1" for 127.0.0.1 at 2024-04-24 14:37:03 +0530
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSubject Load (0.6ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" WHERE "subjects"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/subjects_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/show.html.erb within layouts/application
+  [1m[36mPage Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/show.html.erb:20
+  Rendered subjects/show.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1131)
+  Rendered layout layouts/application.html.erb (Duration: 271.4ms | Allocations: 5012)
+Completed 200 OK in 277ms (Views: 271.1ms | ActiveRecord: 1.9ms | Allocations: 6811)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2024-04-24 14:37:08 +0530
+Processing by SubjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/index.html.erb within layouts/application
+  [1m[36mSubject Load (1.5ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" ORDER BY position ASC[0m
+  ↳ app/views/subjects/index.html.erb:15
+  [1m[36mPage Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/index.html.erb:20
+  [1m[36mPage Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 2]]
+  ↳ app/views/subjects/index.html.erb:20
+  Rendered subjects/index.html.erb within layouts/application (Duration: 9.7ms | Allocations: 1681)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 2973)
+Completed 200 OK in 14ms (Views: 9.6ms | ActiveRecord: 3.3ms | Allocations: 3256)
+
+
+Started GET "/subjects/2" for 127.0.0.1 at 2024-04-24 14:37:09 +0530
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSubject Load (0.6ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" WHERE "subjects"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/subjects_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/show.html.erb within layouts/application
+  [1m[36mPage Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 2]]
+  ↳ app/views/subjects/show.html.erb:20
+  Rendered subjects/show.html.erb within layouts/application (Duration: 3.6ms | Allocations: 666)
+  Rendered layout layouts/application.html.erb (Duration: 7.6ms | Allocations: 1948)
+Completed 200 OK in 13ms (Views: 8.2ms | ActiveRecord: 1.3ms | Allocations: 2611)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2024-04-24 14:37:13 +0530
+Processing by SubjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/index.html.erb within layouts/application
+  [1m[36mSubject Load (1.2ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" ORDER BY position ASC[0m
+  ↳ app/views/subjects/index.html.erb:15
+  [1m[36mPage Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/index.html.erb:20
+  [1m[36mPage Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 2]]
+  ↳ app/views/subjects/index.html.erb:20
+  Rendered subjects/index.html.erb within layouts/application (Duration: 10.5ms | Allocations: 1681)
+  Rendered layout layouts/application.html.erb (Duration: 13.9ms | Allocations: 2967)
+Completed 200 OK in 16ms (Views: 12.2ms | ActiveRecord: 2.8ms | Allocations: 3250)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2024-04-24 14:37:15 +0530
+Processing by SubjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/new.html.erb within layouts/application
+  Rendered subjects/new.html.erb within layouts/application (Duration: 28.4ms | Allocations: 3918)
+  Rendered layout layouts/application.html.erb (Duration: 31.6ms | Allocations: 5021)
+Completed 200 OK in 33ms (Views: 32.3ms | ActiveRecord: 0.0ms | Allocations: 5381)
+
+
+Started GET "/" for 127.0.0.1 at 2024-04-24 14:37:29 +0530
+Processing by DemoController#index as HTML
+  Rendering demo/index.html.erb
+  Rendered demo/index.html.erb (Duration: 0.5ms | Allocations: 102)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 327)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2024-04-24 14:37:59 +0530
+Processing by SubjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/index.html.erb within layouts/application
+  [1m[36mSubject Load (0.6ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" ORDER BY position ASC[0m
+  ↳ app/views/subjects/index.html.erb:15
+  [1m[36mPage Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/index.html.erb:20
+  [1m[36mPage Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 2]]
+  ↳ app/views/subjects/index.html.erb:20
+  Rendered subjects/index.html.erb within layouts/application (Duration: 8.2ms | Allocations: 1691)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 2983)
+Completed 200 OK in 12ms (Views: 9.5ms | ActiveRecord: 1.8ms | Allocations: 3257)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2024-04-24 14:38:01 +0530
+Processing by SubjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/new.html.erb within layouts/application
+  Rendered subjects/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 460)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | Allocations: 1563)
+Completed 200 OK in 5ms (Views: 4.6ms | ActiveRecord: 0.0ms | Allocations: 1826)
+
+
+Started GET "/subjects/1" for 127.0.0.1 at 2024-04-24 14:38:02 +0530
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSubject Load (0.4ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" WHERE "subjects"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/subjects_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/show.html.erb within layouts/application
+  [1m[36mPage Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/show.html.erb:20
+  Rendered subjects/show.html.erb within layouts/application (Duration: 3.7ms | Allocations: 666)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | Allocations: 1939)
+Completed 200 OK in 12ms (Views: 8.2ms | ActiveRecord: 0.9ms | Allocations: 2594)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2024-04-24 14:38:06 +0530
+Processing by SubjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/new.html.erb within layouts/application
+  Rendered subjects/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 472)
+  Rendered layout layouts/application.html.erb (Duration: 3.5ms | Allocations: 1575)
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 1839)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2024-04-24 14:38:07 +0530
+Processing by SubjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/index.html.erb within layouts/application
+  [1m[36mSubject Load (1.4ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" ORDER BY position ASC[0m
+  ↳ app/views/subjects/index.html.erb:15
+  [1m[36mPage Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/index.html.erb:20
+  [1m[36mPage Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 2]]
+  ↳ app/views/subjects/index.html.erb:20
+  Rendered subjects/index.html.erb within layouts/application (Duration: 12.2ms | Allocations: 1681)
+  Rendered layout layouts/application.html.erb (Duration: 14.6ms | Allocations: 2970)
+Completed 200 OK in 16ms (Views: 12.3ms | ActiveRecord: 2.9ms | Allocations: 3247)
+
+
+Started GET "/subjects/1" for 127.0.0.1 at 2024-04-24 14:38:08 +0530
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSubject Load (0.9ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" WHERE "subjects"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/subjects_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/show.html.erb within layouts/application
+  [1m[36mPage Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/show.html.erb:20
+  Rendered subjects/show.html.erb within layouts/application (Duration: 3.5ms | Allocations: 666)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | Allocations: 1975)
+Completed 200 OK in 12ms (Views: 6.8ms | ActiveRecord: 1.5ms | Allocations: 2631)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2024-04-24 14:38:09 +0530
+Processing by SubjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering subjects/index.html.erb within layouts/application
+  [1m[36mSubject Load (0.8ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" ORDER BY position ASC[0m
+  ↳ app/views/subjects/index.html.erb:15
+  [1m[36mPage Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 1]]
+  ↳ app/views/subjects/index.html.erb:20
+  [1m[36mPage Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" WHERE "pages"."subject_id" = $1[0m  [["subject_id", 2]]
+  ↳ app/views/subjects/index.html.erb:20
+  Rendered subjects/index.html.erb within layouts/application (Duration: 9.1ms | Allocations: 1676)
+  Rendered layout layouts/application.html.erb (Duration: 13.1ms | Allocations: 2974)
+Completed 200 OK in 14ms (Views: 12.0ms | ActiveRecord: 1.7ms | Allocations: 3249)
+
+
