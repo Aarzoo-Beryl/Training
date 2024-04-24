@@ -1,2 +1,25 @@
-<h1>Subjects#edit</h1>
-<p>Edit</p>
+<%= link_to("<< Back to list",subjects_path,:class=>'back-link')%>
+
+<div class="Subjects edit">
+  <h2 align='center'> UPDATE SUBJECT</h2><hr><br><br>
+  <%= form_for(@subject) do |f| %>
+  <center>
+    <table summary="subject form fields">
+      <tr>
+        <th>Name</th>
+        <td><%= f.text_field(:name) %></td>
+      </tr>
+      <tr>
+        <th>Position</th>
+        <td><%= f.text_field(:position) %></td>
+      </tr>
+      <tr>
+        <th>Visible</th>
+        <td><%= f.text_field(:visible) %></td>
+      </tr>
+    </table><br><br>
+      <div class="form-button">
+        <%= f.submit("Update Subject") %>
+      </div></center>
+      <% end %>
+</div>

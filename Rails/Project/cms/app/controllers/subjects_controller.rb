@@ -13,23 +13,27 @@ class SubjectsController < ApplicationController
 
   def create
     # Instantiate a new object using form parameters
-    @subject = Subject.new(params[subject_params])
+    @subject = Subject.new(subject_params)
 
     # Save the object
-    @subject.save
-    # If save succeeds,redirect to index page
     if @subject.save
-      redirect_to(subjects_path)
-    # If save fails,redisplay the form so user can fix it
+      redirect_to(subjects_path)      # If save succeeds,redirect to index page
     else
-      render('new')
+      render('new')     # If save fails,redisplay the form so user can fix it
     end
   end
 
   def edit
+    @subject=Subject.find(params[:id])
   end
 
   def update
+    @subject=Subject.find(params[:id])
+    if @subject.update(subject_params)
+      redirect_to(subject_path(@subject))      # If update succeeds,redirect to index page
+    else
+      render('edit')     # If update fails,redisplay the form so user can fix it
+    end
   end
 
   def delete

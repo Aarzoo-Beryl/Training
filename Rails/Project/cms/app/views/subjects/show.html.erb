@@ -1,9 +1,9 @@
+<%= link_to("Update Details","#",:class=>'action update')%>
+<br><br>
 
 <div class="Action Show">
   <h2>Subject : <%=@subject.id%></h2>
 
-  <%= link_to("Update Details","#",:class=>'action update')%>
-  <br><br>
 
   <br>
   <table class='listing' summary="Subject detailed view" cellspacing="5" >
@@ -11,7 +11,7 @@
       <td>Position</td><td> : </td><td><%= @subject.position %></td>
     </tr>
     <tr>
-      <td>Subject</td><td> : </td><td><%= @subject.name.capitalize %></td>
+      <td>Subject</td><td> : </td><td><%= @subject.name.upcase %></td>
     </tr>
     <tr>
       <td>Visible</td><td> : </td><td class='center'><%= @subject.visible ? "Yes" : "No" %></td>
