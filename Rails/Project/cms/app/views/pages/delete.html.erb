@@ -1,2 +1,35 @@
-<h1>Pages#delete</h1>
-<p>Find me in app/views/pages/delete.html.erb</p>
+<%= link_to("<< Back to list",pages_path,:class=>'back-link')%>
+
+<div class="Page new">
+  <h2 align='center'> DELETE PAGE</h2><hr><br><br>
+  <%= form_for(@page,:method=>'delete') do |f| %>
+
+  <table class='listing' summary="Page detailed view" cellspacing="5" align='center'><b>
+
+    <tr>
+      <td>Subject</td><td> : </td><td><%= @page.subject_id %></td>
+    </tr>
+    <tr>
+      <td>Page</td><td> : </td><td class='center'><%= @page.name.upcase %></td>
+    </tr>
+    <tr>
+      <td>Position</td><td> : </td><td><%= @page.position %></td>
+    </tr>
+    <tr>
+      <td>Visible</td><td> : </td><td class='center'><%= @page.visible ? "Yes" : "No" %></td>
+    </tr>
+    <tr>
+      <td>Permalink</td><td> : </td><td class='center'><%= @page.permalink %></td>
+    </tr>
+    <tr>
+      <td>Permalink</td><td> : </td><td class='center'><%= @page.permalink %></td>
+    </tr></b>
+  </table>
+
+  <p align='center'> <b>Are you sure you want to delete this page?</b></p><br>
+
+    <div class="form-button">
+      <center><%= f.submit("Delete Page") %></center>
+    </div>
+    <% end %>
+</div>
