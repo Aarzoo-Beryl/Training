@@ -9551,3 +9551,54 @@ Processing by SubjectsController#edit as HTML
 Completed 200 OK in 30ms (Views: 5.8ms | ActiveRecord: 5.4ms | Allocations: 5070)
 
 
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 17:58:49 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 1346)
+
+
+  
+NameError (uninitialized constant PagesController::Pages):
+  
+app/controllers/pages_controller.rb:3:in `index'
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 17:59:14 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (1.1ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:15
+  Rendered pages/index.html.erb within layouts/application (Duration: 5.5ms | Allocations: 1176)
+  Rendered layout layouts/application.html.erb (Duration: 81.7ms | Allocations: 32809)
+Completed 200 OK in 124ms (Views: 83.6ms | ActiveRecord: 8.2ms | Allocations: 43412)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:01:11 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.8ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:15
+  Rendered pages/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 443)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | Allocations: 1743)
+Completed 200 OK in 8ms (Views: 6.6ms | ActiveRecord: 0.7ms | Allocations: 2045)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:02:24 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.8ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:17
+  Rendered pages/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 855)
+  Rendered layout layouts/application.html.erb (Duration: 23.4ms | Allocations: 15323)
+Completed 200 OK in 29ms (Views: 24.4ms | ActiveRecord: 0.7ms | Allocations: 17199)
+
+
