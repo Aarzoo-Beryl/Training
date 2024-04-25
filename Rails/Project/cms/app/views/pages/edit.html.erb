@@ -1,2 +1,13 @@
-<h1>Pages#edit</h1>
-<p>Find me in app/views/pages/edit.html.erb</p>
+<%= link_to("<< Back to list",pages_path,:class=>'back-link')%>
+
+<div class="Pages edit">
+  <h2 align='center'> UPDATE PAGE</h2><hr><br><br>
+  <%= form_for(@page) do |f| %>
+
+  <%= render(:partial=>'form(page)',:locals=>{:f=>f}) %>
+
+    <div class="form-button">
+      <%= f.submit("Update Page") %>
+    </div>
+    <% end %>
+</div>

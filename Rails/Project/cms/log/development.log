@@ -9792,3 +9792,323 @@ Processing by PagesController#index as HTML
 Completed 200 OK in 11ms (Views: 9.6ms | ActiveRecord: 1.0ms | Allocations: 2127)
 
 
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+Started GET "/pages/1/edit" for 127.0.0.1 at 2024-04-25 18:21:52 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPage Load (0.6ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:27:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/edit.html.erb within layouts/application
+  Rendered application/_error_messages.html.erb (Duration: 0.4ms | Allocations: 221)
+  Rendered pages/_form(page).html.erb (Duration: 2.1ms | Allocations: 1024)
+  Rendered pages/edit.html.erb within layouts/application (Duration: 10.4ms | Allocations: 3452)
+  Rendered layout layouts/application.html.erb (Duration: 83.7ms | Allocations: 35307)
+Completed 200 OK in 170ms (Views: 87.4ms | ActiveRecord: 15.1ms | Allocations: 64492)
+
+
+Started PATCH "/pages/1" for 127.0.0.1 at 2024-04-25 18:22:01 +0530
+Processing by PagesController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "page"=>{"subject_id"=>"2", "name"=>"page 1", "position"=>"1", "visible"=>"true", "permalink"=>"abcdef.com", "content"=>"hello! this is the first page"}, "commit"=>"Update Page", "id"=>"1"}
+  [1m[36mPage Load (0.5ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pages_controller.rb:33:in `update'
+  [1m[36mPage Update (3.0ms)[0m  [1m[33mUPDATE "pages" SET "permalink" = $1, "updated_at" = $2 WHERE "pages"."id" = $3[0m  [["permalink", "abcdef.com"], ["updated_at", "2024-04-25 12:52:01.691055"], ["id", 1]]
+  ↳ app/controllers/pages_controller.rb:33:in `update'
+  [1m[36mTRANSACTION (30.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pages_controller.rb:33:in `update'
+Redirected to http://127.0.0.1:3000/pages/1
+Completed 302 Found in 44ms (ActiveRecord: 34.1ms | Allocations: 3885)
+
+
+Started GET "/pages/1" for 127.0.0.1 at 2024-04-25 18:22:01 +0530
+Processing by PagesController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mPage Load (0.5ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/show.html.erb within layouts/application
+  Rendered pages/show.html.erb within layouts/application (Duration: 1.8ms | Allocations: 658)
+  Rendered layout layouts/application.html.erb (Duration: 4.7ms | Allocations: 1948)
+Completed 200 OK in 8ms (Views: 5.3ms | ActiveRecord: 0.5ms | Allocations: 2721)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:22:04 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.8ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 4.1ms | Allocations: 935)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | Allocations: 2231)
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.7ms | Allocations: 2620)
+
+
+Started GET "/pages/1/delete" for 127.0.0.1 at 2024-04-25 18:22:09 +0530
+Processing by PagesController#delete as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPage Load (0.8ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:41:in `delete'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/delete.html.erb within layouts/application
+  Rendered pages/delete.html.erb within layouts/application (Duration: 0.6ms | Allocations: 92)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 1375)
+Completed 200 OK in 27ms (Views: 7.2ms | ActiveRecord: 0.7ms | Allocations: 2115)
+
+
+Started GET "/pages/new" for 127.0.0.1 at 2024-04-25 18:22:10 +0530
+Processing by PagesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/new.html.erb within layouts/application
+  Rendered application/_error_messages.html.erb (Duration: 0.0ms | Allocations: 11)
+  Rendered pages/_form(page).html.erb (Duration: 0.8ms | Allocations: 303)
+  Rendered pages/new.html.erb within layouts/application (Duration: 3.0ms | Allocations: 921)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | Allocations: 2024)
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms | Allocations: 2388)
+
+
+Started POST "/pages" for 127.0.0.1 at 2024-04-25 18:22:41 +0530
+Processing by PagesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "page"=>{"subject_id"=>"", "name"=>"page 2", "position"=>"2", "visible"=>"false", "permalink"=>"new.com", "content"=>"Hey! its the second page"}, "commit"=>"Create New Page"}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/new.html.erb within layouts/application
+  Rendered application/_error_messages.html.erb (Duration: 2.2ms | Allocations: 1747)
+  Rendered pages/_form(page).html.erb (Duration: 2.5ms | Allocations: 1817)
+  Rendered pages/new.html.erb within layouts/application (Duration: 3.2ms | Allocations: 1979)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | Allocations: 2070)
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 5.6ms | Allocations: 8708)
+
+
+  
+ActionView::Template::Error (undefined method `error' for #<Page id: nil, subject_id: nil, name: "page 2", position: 2, visible: false, permalink: "new.com", content: "Hey! its the second page", created_at: nil, updated_at: nil>):
+    1: <% if object && object.errors.size > 0 %>
+    2:   <div id="error explanation">
+    3:     <h2><%= pluralize(object.error.size,"error") %> Prohibited this record from being saved</h2>
+    4:     <p> There were prblems with the following field</p>
+    5:     <ul><% object.error.full_messages.each do |msg| %>
+    6:       <li><%= msg %></li>
+  
+app/views/application/_error_messages.html.erb:3
+app/helpers/application_helper.rb:4:in `error_messages_for'
+app/views/pages/_form(page).html.erb:1
+app/views/pages/new.html.erb:7
+app/views/pages/new.html.erb:5
+app/controllers/pages_controller.rb:22:in `create'
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:23:21 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (1.0ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 551)
+  Rendered layout layouts/application.html.erb (Duration: 6.4ms | Allocations: 1844)
+Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.9ms | Allocations: 2122)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:23:21 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.8ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 3.8ms | Allocations: 549)
+  Rendered layout layouts/application.html.erb (Duration: 8.5ms | Allocations: 1840)
+Completed 200 OK in 10ms (Views: 8.7ms | ActiveRecord: 0.8ms | Allocations: 2121)
+
+
+Started GET "/pages/new" for 127.0.0.1 at 2024-04-25 18:23:23 +0530
+Processing by PagesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/new.html.erb within layouts/application
+  Rendered application/_error_messages.html.erb (Duration: 0.0ms | Allocations: 11)
+  Rendered pages/_form(page).html.erb (Duration: 1.1ms | Allocations: 302)
+  Rendered pages/new.html.erb within layouts/application (Duration: 2.9ms | Allocations: 711)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | Allocations: 1814)
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms | Allocations: 2081)
+
+
+Started POST "/pages" for 127.0.0.1 at 2024-04-25 18:23:36 +0530
+Processing by PagesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "page"=>{"subject_id"=>"2", "name"=>"page 2", "position"=>"2", "visible"=>"false", "permalink"=>"new.com", "content"=>"Hey! its the second page"}, "commit"=>"Create New Page"}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mSubject Load (0.4ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" WHERE "subjects"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mPage Create (0.8ms)[0m  [1m[32mINSERT INTO "pages" ("subject_id", "name", "position", "visible", "permalink", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["subject_id", 2], ["name", "page 2"], ["position", 2], ["visible", false], ["permalink", "new.com"], ["content", "Hey! its the second page"], ["created_at", "2024-04-25 12:53:36.691405"], ["updated_at", "2024-04-25 12:53:36.691405"]]
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (39.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+Redirected to http://127.0.0.1:3000/pages
+Completed 302 Found in 65ms (ActiveRecord: 44.9ms | Allocations: 9653)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:23:36 +0530
+Processing by PagesController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (1.0ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 648)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | Allocations: 1937)
+Completed 200 OK in 7ms (Views: 4.6ms | ActiveRecord: 1.0ms | Allocations: 2216)
+
+
+Started GET "/pages/2/delete" for 127.0.0.1 at 2024-04-25 18:23:43 +0530
+Processing by PagesController#delete as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPage Load (0.6ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:41:in `delete'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/delete.html.erb within layouts/application
+  Rendered pages/delete.html.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 1276)
+Completed 200 OK in 7ms (Views: 3.3ms | ActiveRecord: 0.6ms | Allocations: 1940)
+
+
+Started GET "/pages/new" for 127.0.0.1 at 2024-04-25 18:23:44 +0530
+Processing by PagesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/new.html.erb within layouts/application
+  Rendered application/_error_messages.html.erb (Duration: 0.0ms | Allocations: 11)
+  Rendered pages/_form(page).html.erb (Duration: 0.7ms | Allocations: 302)
+  Rendered pages/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 702)
+  Rendered layout layouts/application.html.erb (Duration: 3.8ms | Allocations: 1805)
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 2072)
+
+
+Started POST "/pages" for 127.0.0.1 at 2024-04-25 18:24:10 +0530
+Processing by PagesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "page"=>{"subject_id"=>"4", "name"=>"page 3", "position"=>"3", "visible"=>"true", "permalink"=>"abc.com", "content"=>"Hey! its the third page"}, "commit"=>"Create New Page"}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mSubject Load (0.4ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" WHERE "subjects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/new.html.erb within layouts/application
+  Rendered application/_error_messages.html.erb (Duration: 1.4ms | Allocations: 1316)
+  Rendered pages/_form(page).html.erb (Duration: 1.9ms | Allocations: 1384)
+  Rendered pages/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1503)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | Allocations: 1594)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 1.1ms | Allocations: 4317)
+
+
+  
+ActionView::Template::Error (undefined method `error' for #<Page id: nil, subject_id: 4, name: "page 3", position: 3, visible: true, permalink: "abc.com", content: "Hey! its the third page", created_at: nil, updated_at: nil>):
+    1: <% if object && object.errors.size > 0 %>
+    2:   <div id="error explanation">
+    3:     <h2><%= pluralize(object.error.size,"error") %> Prohibited this record from being saved</h2>
+    4:     <p> There were prblems with the following field</p>
+    5:     <ul><% object.error.full_messages.each do |msg| %>
+    6:       <li><%= msg %></li>
+  
+app/views/application/_error_messages.html.erb:3
+app/helpers/application_helper.rb:4:in `error_messages_for'
+app/views/pages/_form(page).html.erb:1
+app/views/pages/new.html.erb:7
+app/views/pages/new.html.erb:5
+app/controllers/pages_controller.rb:22:in `create'
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:24:14 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (1.1ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 4.7ms | Allocations: 648)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | Allocations: 1948)
+Completed 200 OK in 10ms (Views: 8.0ms | ActiveRecord: 1.1ms | Allocations: 2224)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:24:14 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.6ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 648)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | Allocations: 1943)
+Completed 200 OK in 8ms (Views: 6.3ms | ActiveRecord: 0.6ms | Allocations: 2232)
+
+
+Started GET "/pages/new" for 127.0.0.1 at 2024-04-25 18:24:14 +0530
+Processing by PagesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/new.html.erb within layouts/application
+  Rendered application/_error_messages.html.erb (Duration: 0.0ms | Allocations: 11)
+  Rendered pages/_form(page).html.erb (Duration: 0.7ms | Allocations: 302)
+  Rendered pages/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 717)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | Allocations: 1820)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 2087)
+
+
+Started POST "/pages" for 127.0.0.1 at 2024-04-25 18:24:43 +0530
+Processing by PagesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "page"=>{"subject_id"=>"7", "name"=>"page 3", "position"=>"3", "visible"=>"true", "permalink"=>"abc.com", "content"=>"Hey! its the third page"}, "commit"=>"Create New Page"}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mSubject Load (0.5ms)[0m  [1m[34mSELECT "subjects".* FROM "subjects" WHERE "subjects"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mPage Create (0.7ms)[0m  [1m[32mINSERT INTO "pages" ("subject_id", "name", "position", "visible", "permalink", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["subject_id", 7], ["name", "page 3"], ["position", 3], ["visible", true], ["permalink", "abc.com"], ["content", "Hey! its the third page"], ["created_at", "2024-04-25 12:54:43.073857"], ["updated_at", "2024-04-25 12:54:43.073857"]]
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (31.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pages_controller.rb:19:in `create'
+Redirected to http://127.0.0.1:3000/pages
+Completed 302 Found in 42ms (ActiveRecord: 32.8ms | Allocations: 2752)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:24:43 +0530
+Processing by PagesController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (1.1ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 4.6ms | Allocations: 747)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | Allocations: 2042)
+Completed 200 OK in 12ms (Views: 9.9ms | ActiveRecord: 1.0ms | Allocations: 2321)
+
+
+Started GET "/pages/1/delete" for 127.0.0.1 at 2024-04-25 18:24:44 +0530
+Processing by PagesController#delete as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPage Load (0.8ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:41:in `delete'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/delete.html.erb within layouts/application
+  Rendered pages/delete.html.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 1303)
+Completed 200 OK in 13ms (Views: 8.2ms | ActiveRecord: 0.7ms | Allocations: 1967)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:25:33 +0530
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.8ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 16.1ms | Allocations: 4932)
+  Rendered layout layouts/application.html.erb (Duration: 38.9ms | Allocations: 19483)
+Completed 200 OK in 46ms (Views: 34.2ms | ActiveRecord: 6.6ms | Allocations: 21357)
+
+
+Started GET "/pages/1/delete" for 127.0.0.1 at 2024-04-25 18:25:38 +0530
+Processing by PagesController#delete as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPage Load (0.7ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:41:in `delete'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/delete.html.erb within layouts/application
+  Rendered pages/delete.html.erb within layouts/application (Duration: 0.6ms | Allocations: 92)
+  Rendered layout layouts/application.html.erb (Duration: 3.1ms | Allocations: 1378)
+Completed 200 OK in 7ms (Views: 3.7ms | ActiveRecord: 0.6ms | Allocations: 2697)
+
+
