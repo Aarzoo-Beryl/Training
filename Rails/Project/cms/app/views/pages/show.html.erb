@@ -1,1 +1,46 @@
+<%= link_to("Update Details",edit_page_path,:class=>'action update')%>
+<br><br>
 
+<div class="Action Show">
+  <h2>Page : <%=@page.id%></h2>
+
+
+  <br>
+  <table class='listing' summary="Page detailed view" cellspacing="5" >
+    <tr >
+      <td>Subject</td><td> : </td><td><%= @page.subject_id %></td>
+    </tr>
+    <tr>
+      <td>Position</td><td> : </td><td><%= @page.position %></td>
+    </tr>
+    <tr>
+      <td>Page</td><td> : </td><td><%= @page.name.upcase %></td>
+    </tr>
+    <tr>
+      <td>Visible</td><td> : </td><td class='center'><%= @page.visible ? "Yes" : "No" %></td>
+    </tr>
+    <tr>
+      <td>Permalink</td><td> : </td><td class='center'><%= @page.permalink %></td>
+    </tr>
+    <tr >
+      <td>Content</td><td> : </td><td><%= @page.content %></td>
+    </tr>
+
+    <tr>
+      <td>Created At</td><td> : </td><td class='center'><%= @page.created_at %></td>
+    </tr>
+    <tr>
+      <td>Updated At</td><td> : </td><td class='center'><%= @page.updated_at %></td>
+    </tr>
+    <tr>
+      <td>Actions</td><td> : </td><td class="action">
+        <%= link_to("Edit",edit_page_path,:class=>'action edit') %>
+        <%= link_to("Delete",delete_page_path(@page),:class=>'action delete') %>
+      </td>
+    </tr>
+  </table>
+  <br><br>
+  <%= link_to("Back",pages_path,:class=>'Pages Index')%>
+  <br><br>
+
+</div>

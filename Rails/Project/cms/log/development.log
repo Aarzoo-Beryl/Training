@@ -9744,3 +9744,51 @@ Processing by PagesController#show as HTML
 Completed 200 OK in 8ms (Views: 3.9ms | ActiveRecord: 0.6ms | Allocations: 2717)
 
 
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 7.2. (called from block in <main> at /home/beryl/Training/Rails/Project/cms/config/routes.rb:39)
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:19:45 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (1.7ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 61.4ms | Allocations: 14607)
+  Rendered layout layouts/application.html.erb (Duration: 145.3ms | Allocations: 47453)
+Completed 200 OK in 200ms (Views: 140.8ms | ActiveRecord: 18.3ms | Allocations: 61056)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:19:48 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.9ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 554)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | Allocations: 1856)
+Completed 200 OK in 8ms (Views: 6.6ms | ActiveRecord: 0.8ms | Allocations: 2144)
+
+
+Started GET "/pages/1" for 127.0.0.1 at 2024-04-25 18:19:49 +0530
+Processing by PagesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPage Load (0.7ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/show.html.erb within layouts/application
+  Rendered pages/show.html.erb within layouts/application (Duration: 2.1ms | Allocations: 742)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | Allocations: 2024)
+Completed 200 OK in 11ms (Views: 5.0ms | ActiveRecord: 1.0ms | Allocations: 4609)
+
+
+Started GET "/pages" for 127.0.0.1 at 2024-04-25 18:19:55 +0530
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (1.0ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY position ASC[0m
+  ↳ app/views/pages/index.html.erb:16
+  Rendered pages/index.html.erb within layouts/application (Duration: 5.0ms | Allocations: 553)
+  Rendered layout layouts/application.html.erb (Duration: 10.0ms | Allocations: 1842)
+Completed 200 OK in 11ms (Views: 9.6ms | ActiveRecord: 1.0ms | Allocations: 2127)
+
+
