@@ -1,2 +1,28 @@
-<h1>Subjects#delete</h1>
-<p>Find me in app/views/subjects/delete.html.erb</p>
+<%= link_to("<< Back to list",subjects_path,:class=>'back-link')%>
+
+<div class="Subjects new">
+  <h2 align='center'> DELETE SUBJECT</h2><hr><br><br>
+  <%= form_for(@subject,:method=>'delete') do |f| %>
+
+  <table class='listing' summary="Subject detailed view" cellspacing="5" align='center'><b>
+    <tr>
+      <td>Subject</td><td> : </td><td><%= @subject.name.upcase %></td>
+    </tr>
+    <tr class="header">
+      <td>Position</td><td> : </td><td><%= @subject.position %></td>
+    </tr>
+    <tr>
+      <td>Visible</td><td> : </td><td class='center'><%= @subject.visible ? "Yes" : "No" %></td>
+    </tr>
+    <tr>
+      <td>Pages</td><td> : </td><td class='center'><%= @subject.pages.size %></td>
+    </tr></b>
+  </table>
+
+  <p align='center'> <b>Are you sure you want to delete this subject?</b></p><br>
+
+    <div class="form-button">
+      <center><%= f.submit("Delete Subject") %></center>
+    </div>
+    <% end %>
+</div>

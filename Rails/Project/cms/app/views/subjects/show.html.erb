@@ -22,7 +22,7 @@
     <tr>
       <td>Actions</td><td> : </td><td class="action">
         <%= link_to("Edit",edit_subject_path,:class=>'action edit') %>
-        <%= link_to("Delete",'#',:class=>'action delete') %>
+        <%= link_to("Delete",delete_subject_path(@subject),:class=>'action delete') %>
       </td>
     </tr>
     <tr>
