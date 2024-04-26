@@ -1,3 +1,4 @@
+
 # PostgreSQL. Versions 9.3 and up are supported.
 #
 # Install the pg driver:
@@ -50,9 +51,7 @@ development:
   # Defaults to warning.
   #min_messages: notice
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+
 test:
   <<: *default
   database: library_management_system_test
@@ -80,5 +79,5 @@ test:
 production:
   <<: *default
   database: library_management_system_production
-  username: library_management_system
-  password: <%= ENV["LIBRARY_MANAGEMENT_SYSTEM_DATABASE_PASSWORD"] %>
+  #username: library_management_system
+  #password: <%= ENV["LIBRARY_MANAGEMENT_SYSTEM_DATABASE_PASSWORD"] %>

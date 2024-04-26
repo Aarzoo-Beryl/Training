@@ -42,7 +42,11 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
+<<<<<<< HEAD
     apt-get install --no-install-recommends -y curl libvips postgresql-client && \
+=======
+    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
+>>>>>>> db39c49ea53f4a596db2313f6c8bd1a52621294a
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
