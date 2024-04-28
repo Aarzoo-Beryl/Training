@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_183056) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_184126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_183056) do
     t.datetime "updated_at", null: false
     t.bigint "books_id"
     t.bigint "memebers_id"
+    t.decimal "late_submittion_fine", precision: 5, scale: 2
     t.index ["books_id"], name: "index_transactions_on_books_id"
     t.index ["memebers_id"], name: "index_transactions_on_memebers_id"
   end
