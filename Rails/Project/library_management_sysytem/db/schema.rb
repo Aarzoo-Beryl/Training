@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.1].define(version: 2024_04_28_190850) do
+=======
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_190248) do
+>>>>>>> 059f82c7700d51d4bc46bdf8f6de706bfddd908f
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,11 +33,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_190850) do
     t.bigint "memeber_id"
   end
 
+<<<<<<< HEAD
   create_table "borrow_log", id: false, force: :cascade do |t|
     t.bigint "book_id"
     t.bigint "memeber_id"
   end
 
+=======
+>>>>>>> 059f82c7700d51d4bc46bdf8f6de706bfddd908f
   create_table "memebers", force: :cascade do |t|
     t.string "name"
     t.string "email"
