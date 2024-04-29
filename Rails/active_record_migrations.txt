@@ -13,44 +13,44 @@ GENERATING MIGRATION - $rails g migration migration_name
 DIFFERENT MIGERATIONS FOR COLUMNS - 
 
   - add_column - 
-      def change
-        add_column :table_name, :column_name, :datatype
-      end
+    def change
+      add_column :table_name, :column_name, :datatype
+    end
 
   - remove_column - 
-          def change
-              remove_column :table_name, :column_name, :datatype
-          end
+      def change
+        remove_column :table_name, :column_name, :datatype
+      end
 
   - add_reference - 
-          def change
-              add_reference :table_name1, :table_name2, foriegn_key: true
-          end
+      def change
+        add_reference :table_name1, :table_name2, foriegn_key: true
+      end
 
   - remove_reference - 
-          def change
-              remove_reference :table_name1, :table_name2, foriegn_key: true
-          end
+      def change
+        remove_reference :table_name1, :table_name2, foriegn_key: true
+      end
 
   - add_index - 
-          def change
-              add_index :table_name, :column_name
-          end
+      def change
+        add_index :table_name, :column_name, name: "index_name"
+      end
 
   - remove_index - 
-          def change
-              remove_index :table_name, name: 'index_name'
-          end
+      def change
+        remove_index :table_name, name: 'index_name'
+      end
 
   - passing_modifier - 
-          def change
-              add_reference :table1, :table2, modifier: value
-          end
+      def change
+        add_reference :table1, :table2, modifier: value
+      end
 
   - change_column - 
-          def change
-              change_column :table_name, :column_name, :datatype
-          end
+      def change
+        change_column :table_name, :column_name, :datatype
+      end
 
   - add_check_constraint - 
       def change
@@ -92,6 +92,10 @@ DIFFERENT MIGERATIONS FOR COLUMNS -
         change_column_comment :table_name, :column_name , "comment"
       end   
 
+  - change_column_null - 
+      def change
+        change_column_null :table_name, :column_name , false
+      end 
 
 DIFFERENT MIGERATIONS FOR TABLES - 
 
