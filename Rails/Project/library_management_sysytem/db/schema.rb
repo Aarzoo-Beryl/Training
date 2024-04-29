@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_022046) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_023050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_022046) do
     t.bigint "memeber_id"
   end
 
-  create_table "memebers", force: :cascade do |t|
+  create_table "members", force: :cascade do |t|
     t.string "name"
     t.string "email", null: false
     t.string "address"
@@ -46,8 +46,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_022046) do
     t.index ["email"], name: "unique_emails", unique: true
   end
 
-  create_table "practice_tables", primary_key: ["first_column", "second_column"], force: :cascade do |t|
-    t.integer "first_column", null: false
+  create_table "practice_tables", primary_key: ["phone_number", "second_column"], force: :cascade do |t|
+    t.integer "phone_number", null: false
     t.string "second_column", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -83,5 +83,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_022046) do
   end
 
   add_foreign_key "transactions", "books", column: "books_id"
-  add_foreign_key "transactions", "memebers", column: "memebers_id"
+  add_foreign_key "transactions", "members", column: "memebers_id"
 end
