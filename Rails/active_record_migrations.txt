@@ -82,10 +82,15 @@ DIFFERENT MIGERATIONS FOR COLUMNS -
         rename_index :table_name, :old_name, :new_name
       end   
 
-    - add_timestamp - 
-            def change
-                add_timestamp :table_name
-            end   
+  - change_column_default - 
+      def change
+        change_column_default :table_name, :column_name , from: "value", to: "value"
+      end   
+
+  - change_column_comment - 
+      def change
+        change_column_comment :table_name, :column_name , "comment"
+      end   
 
 
 DIFFERENT MIGERATIONS FOR TABLES - 
@@ -116,3 +121,37 @@ DIFFERENT MIGERATIONS FOR TABLES -
         create_table :table_name ,primary_key: [:col1, :col2 ] do |t|
           t.datatype :column_name
       end    
+
+  - change_table_comment - 
+      def change
+        change_table_comment :table_name, from: "old_comment", to: "new_comment"
+      end 
+
+REVERSIBLE - 
+  - def change 
+      reversible do |dir|
+      dir.up do
+        # 
+      end
+      dir.down do
+        # 
+      end
+    end
+
+REVERT PREVIOUS MIGRATION - 
+  - def change 
+      revert do
+        what_to_do_on_rollback
+      end
+    end
+
+DIRECTION - 
+
+  - def change
+      direction.up do
+        #code to do when migration is up
+      end
+      direction.down do
+          #code to do when migration is up
+      end
+    end
