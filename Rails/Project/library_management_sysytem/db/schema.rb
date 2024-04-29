@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_051643) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_054805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", comment: "contains list of all the books present in library", force: :cascade do |t|
     t.string "title"
     t.string "author"
     t.string "publication_year"
