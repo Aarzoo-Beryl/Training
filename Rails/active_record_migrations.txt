@@ -1,0 +1,118 @@
+ACTIVE RECORD MIGRATIONS
+    - active record refers to the model layer of the MVC architecture
+
+ORM(Object Relationship Management)
+    - states that to every table there is a corresponding class present in the application
+    - states that to every record there is a corresponding object present in the application
+    - states that to every column/attribute there is a corresponding attribute present in the application
+
+GENERATING MODEL - $rails g model ModelName
+
+GENERATING MIGRATION - $rails g migration migration_name
+
+DIFFERENT MIGERATIONS FOR COLUMNS - 
+
+  - add_column - 
+      def change
+        add_column :table_name, :column_name, :datatype
+      end
+
+  - remove_column - 
+          def change
+              remove_column :table_name, :column_name, :datatype
+          end
+
+  - add_reference - 
+          def change
+              add_reference :table_name1, :table_name2, foriegn_key: true
+          end
+
+  - remove_reference - 
+          def change
+              remove_reference :table_name1, :table_name2, foriegn_key: true
+          end
+
+  - add_index - 
+          def change
+              add_index :table_name, :column_name
+          end
+
+  - remove_index - 
+          def change
+              remove_index :table_name, name: 'index_name'
+          end
+
+  - passing_modifier - 
+          def change
+              add_reference :table1, :table2, modifier: value
+          end
+
+  - change_column - 
+          def change
+              change_column :table_name, :column_name, :datatype
+          end
+
+  - add_check_constraint - 
+      def change
+        add_check_constraint :table_name, "constraint", name: "constraint_name"
+      end
+
+  - remove_check_constraint - 
+      def change
+        remove_check_constraint :table_name, name: "constraint_name", if_exist: true
+      end
+
+  - add_timestamp - 
+      def change
+        add_timestamp :table_name
+      end           
+
+  - remove_timestamp - 
+      def change
+        remove_timestamp :table_name
+      end   
+
+  - rename_column - 
+      def change
+        rename_column :table_name, :old_name, :new_name
+      end   
+
+  - rename_index - 
+      def change
+        rename_index :table_name, :old_name, :new_name
+      end   
+
+    - add_timestamp - 
+            def change
+                add_timestamp :table_name
+            end   
+
+
+DIFFERENT MIGERATIONS FOR TABLES - 
+
+  - create_table - 
+      def change
+        create_table :table_name do |t|
+          t.datatype :column_name
+      end   
+
+  - drop_table - 
+      def change
+        drop_table :table_name
+      end   
+
+  - create_join_table - 
+      def change
+        create_join_table :table_name1, table_name2 ,column_options: { null: true }, table_name: :join_table_name
+      end 
+
+  - rename_table - 
+      def change
+        rename_table :table_name , new_table_name
+      end  
+
+  - create_table with composite primary key - 
+      def change
+        create_table :table_name ,primary_key: [:col1, :col2 ] do |t|
+          t.datatype :column_name
+      end    
