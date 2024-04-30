@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'book/delete'
+  get 'book/edit'
+  get 'book/index'
+  get 'book/new'
+  get 'book/show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -402,4 +402,17 @@ OTHER IMPORTANT POINTS -
                           - can call a custom validator using the validates_with method in your model.
       - can use the validators method on your model to list all validators, or validators_on to check validators for a specific field
       - when defining custom validation with "validate" use ActiveModel::Validator, & when with "validate_each" use ActiveModel::EachValidator
-      - 
+      
+
+DISPLAYING VALIDATION ERRORS IN VIEW - 
+      - rails doesn't include any view helpers to help you generate these messages directly
+      - def create
+          @model = Model.new(model_params)
+          if @model.save
+            redirect_to @model
+          else
+            flash.now[:error] = @model.errors.full_messages.join(", ")
+            render :new
+          end
+        end
+        
