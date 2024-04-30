@@ -2,7 +2,7 @@
 
 <div class="New User">
   <h1 align='center'>NEW USER</h1><hr>
-  <%= form_for(@user,:url => subjects_path,:method=>'post') do |f|
+  <%= form_for(@user,:url => users_path,:method=>'post') do |f| %>
       <%=render(:partial => 'form', locals: {:f => f}) %>
       <div class="form-button">
         <%= f.submit("Add User") %>

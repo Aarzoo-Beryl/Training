@@ -1,6 +1,7 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
+
   def index
-    @users = User.order("id ASC")
+    @users = User.all
   end
 
   def show
@@ -25,9 +26,9 @@ class UserController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(user_params)
     if @user.save
-      redirect_to(users_path)
+      redirect_to(subject_path(@subject))
     else
       render('edit')
     end
@@ -40,9 +41,11 @@ class UserController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+    redirect_to(users_path)
   end
 
   private
   def user_params
+    params.require(:user).permit(:name,:email,:gender,:phone_number,:address)
   end
 end
