@@ -22,6 +22,7 @@ SERVER SIDE PROGRAMMING -
 
 VALIDATIONS - 
   - guides you how to check if the object is in right state before saving it to the the database
+  - to be added to model classes
   - basic syntax - 
         class Person < ApplicationRecord
           validates :name, presence: true
@@ -91,11 +92,18 @@ valid? and invalid? -
     - new mothod doesn't tell errors , create and save does
     - invalid?- reverse of valid?
 
-errors[] - 
-    - to check if a particular attribute of a record is valid or not you can do errors[:attribute] (returns all the errors present for the given attribute)
-    - if no error, an empty array is returned
-    - useful only after validation have been run
-    - different from invalid? becoz it only check for particular attributes rather than comparing them as whole
+ERROR - 
+    - error[]- 
+             - to check if a particular attribute of a record is valid or not you can do errors[:attribute] (returns all the errors present for the given attribute)
+             - if no error, an empty array is returned
+             - useful only after validation have been run
+             - different from invalid? becoz it only check for particular attributes rather than comparing them as whole
+    - object.errors.full_messages - returns an array of strings containing all error messages for the object
+    - errors.where is used to filter error objects by various conditions, such as attribute and type of error
+    - errors.add method lets you create custom error messages by specifying the attribute, error type, and additional options
+    - can add errors related to the object's state as a whole using errors[:base]
+    - errors.size returns the total number of errors for the object
+    - errors.clear to intentionally clear the errors collection
 
 VALIDATION HELPERS - 
     - active records offer many predefined  validation helpers that you can use directly inside your class definition
@@ -205,5 +213,193 @@ VALIDATION HELPERS -
                    - message can be customized using :wrong_length, :too_long and too_short options and %{count} as place holder for number corresponding to the length being used
                    - message can also be customised using the default :message option
 
-          - numericality - thishelper validates that your attribute has only numerical values 
-                   
+          - numericality - this helper validates that your attribute has only numerical values 
+                         - default message when no option specified "is not a number"
+                         - by default it will match an optional sign followed by an integer or floating point number
+                         - basic syntax - class Player < ApplicationRecord
+                                            validates :points, numericality: true
+                                            validates :games_played, numericality: { only_integer: true }
+                                          end
+                         - "only_integer: true" is set to allow only integer values(uses "/\A[+-]?\d+\z" to evaluate)
+                         - if not set, it will try to convert to a number using float(floats are cast tobig decimal using column's precision value or a max of 15 digits)
+                         - :numeric is also accepted which specifies that value must be an instanc eof Numeric class and tries to parse it if it is a string
+                         - note - numericality doesn't allow nil values , so for that you need to set allow_nil: true
+                         - for integer and float empty strings are converted to nil
+                         - other options used to add constraints - 
+                                :greater_than -> default message "must be greater than %{count}"
+                                :greater_than_or_equal_to -> default message "must be greater than or equal to %{count}"
+                                :equal_to -> default message "must be equal to %{count}"
+                                :less_than -> default message "must be less than %{count}"
+                                :less_than_or_equal_to -> default message "must be less than or equal to %{count}"
+                                :other than -> default message "must be other than %{count}"
+                                :in -> the value must be in specified range , default message "must be in %{count}
+                                :odd -> default message "must be odd"
+                                :even -> default message "must be even"
+
+          - presence - validates that the specified attribute should not be empty
+                     - uses Object#blank? method to check if the value is either nil or a blank string (=> string is either empty or consists only whitespaces)
+                     - basic syntax - class Person < ApplicationRecord
+                                        validates :name, :login, :email, presence: true
+                                      end
+                     - if you want to be sure that an association is present, youllneed to test whether the associated object itself is present, and not the foreign key used to map the association 
+                     - helps to check whether not only hte foriegn key is not empty but also the reference object exists
+                     - syntax - class Supplier < ApplicationRecord
+                                  has_one :account
+                                  validates :account, presence: true
+                                end 
+                          # validates :account, presence: true line ensures that each Supplier record must have an associated Account record. 
+                          # It checks not only if the foreign key (account_id) is present but also if the associated Account object exists.
+                     - when two models are associated with each other, and you want to make sure that records in one model always have associated records in the other model-
+                            class Order < ApplicationRecord
+                              has_many :line_items, inverse_of: :order
+                            end
+                          # inverse_of: :order part is important because it tells Rails to also consider the association in the opposite direction
+                          # it ensures that when you're checking if an Order has any LineItems, Rails also checks if each LineItem belongs to an Order (helps maintain data integrity and ensures that both sides of the association are consistent.)
+                     - if you validate presence of an object via "has_one" or "has_many" relationships, it will check neither the object is blank? nor marked_for_destruction? 
+                     - since false.blank? is true, if you want to validate the presence of a boolean field - 
+                            validate :boolean_field_name, inclusion: [true,false]  # value must be true or false
+                       [or] validate :boolean_field_name, exclusion: [nil]  # value must not be nil => true or false
+                     - default error message - "can't be blank"
+                
+          - absence - checks if the specified attributes are either nil or empty
+                    - uses Object#present? to check value is not either nil or a blank string
+                    - syntax -  class Person < ApplicationRecord
+                                  validates :name, :login, :email, absence: true
+                                end
+                    - if want to be sure that association is absent, you'll need to test whther the association object itself is absent and not he foriegn key used to map the association
+                            class LineItem < ApplicationRecord
+                              belogns_to :order
+                              validates :order, absence: true
+                            end
+                        # LineItem model associated with an Order, you might want to ensure that a LineItem is not associated with any Order
+                    - To validate associated records' absence effectively, especially in bi-directional associations, specify the :inverse_of option for the association
+                            class Order < ApplicationRecord
+                              has_many :line_items, inverse_of: :order
+                            end
+                        #  if an Order has many LineItems, you'd specify inverse_of: :order to ensure Rails correctly handles the Validation
+                    - want to ensure an association is both present and valid, you should use validates_associated
+                    - validating absence of a boolean field, use exclusion: { in: [true, false] }, because false.present? is false
+                    - default error message - "must be blank"
+                    
+          - uniqueness - validates the attribute value is unique right before the object gets saved
+                       - syntax - class Account < ApplicationRecord
+                                    validates :email, uniqueness: true
+                                  end
+                       - the validation happens by performing an SQL query into the model's table searching for an existing record with same value for that attribute
+                       - :scope option can be used to specify one or more attributes that are used to limit the uniqueness check:
+                                class Holiday < ApplicationRecord
+                                  validates :name, uniqueness: {scope: :year, message: "shoud happen once a year"}
+                                end
+                            #ensure holiday name is unique within each year
+                            #to prevent voilations using the :scope option, you must create a unique index on bothe the columns in your database
+                       - note - this validation doesnt create a unique constraint in database itself(possible that two different processes create records with the same value for the column you're trying to make unique)
+                       - to prevent this, need to create a unique index on that column directly in your database(makes database itself prevent from entering duplicate values for the same attribute)
+                       - to do so in migration file - add_index :holidays, [:name, :year], unique: true
+                       - hence prevent data inconsistency
+                       - :case_sensitive option used to define whether the unique constraint will be case_sensitive, case insensitive or should follow the datatbase defualt collation(default)
+                                  class Account < ApplicationRecord
+                                    validates :email, uniqueness: {case_sensitive: false}
+                                  end
+                       - :condition option can be used to specify additional conditions as a where sql fragment to limit the uniqueness constraint lookup
+                          eg-> condition: -> {where(status:'active')}
+                       - default error message "had already been taken"
+
+          - validates_associated - used when model has associations that always needs to be validated
+                                 - every time you save your object, valid? will be called on each one of the associated objects
+                                 - syntax - class Genre < ApplicationRecord
+                                              has_many :books
+                                              validates :books
+                                            end
+                                 - this validation works with all association type
+                                 - note - dont call this validation on both ends of your association (they would call each other and create infinite loop)
+                                 - defualt message "is invalid"
+                                 - note - each associated object wil contain its own errors collection, errors do not bubble up to the calling method
+                                 - note - can only be used with ActiveRecord objects
+
+          - validates_each - validates attributes agains a block
+                           - doesn't have a predefined validation function
+                           - one needs to create it using a block and every attribute passed to validate_each will be tested against each
+                           - syntax - class Person < ApplicationRecord
+                                        validates_each :name, :surname do |record, attr, value|
+                                          record.errors.add(attr, 'must start with upper case') if /\A[[:lower:]]/.match?(value)
+                                        end
+                                      end
+                                # rejects names and surnames that begin with lower case
+                           - you can customize ithowever you like ,if validation fails , you should add error to a model, therefore making it invalid
+
+          - validates_with - helper passes the record to seperate class for validation
+                           - syntax - class GoodnessValidator < ActiveModel::Validator
+                                        def validate(record)
+                                          if record.first_name == "Evil"
+                                            record.errors.add :base, "This person is evil"
+                                          end
+                                        end
+                                      end
+                                      class Person < ApplicationRecord
+                                        validates_with GoodnessValidator
+                                      end
+                           - no default message
+                           - errors added to record.errors.add[:base] relate to the state as whole
+                           - to implement this method, you must accept a record parameter in the method definition, which is therecord to be validated
+                           - if you want to pass error for specific attribute, then write (record.errors.add :first_name, "please choose another name")
+                           - takes :if,:unless and :on as options, if pass any other options it will send those options to the validator class as options
+                                class GoodnessValidator < ActiveModel::Validator
+                                  def validate(record)
+                                    if options[:fields].any? { |field| record.send(field) == "Evil" }
+                                      record.errors.add :base, "This person is evil"
+                                    end
+                                  end
+                                end
+
+                                class Person < ApplicationRecord
+                                  validates_with GoodnessValidator, fields: [:first_name, :last_name]
+                                end
+                           - note - validator will be initialized only once for the whole application life cycle and not for each validation run(try to avoid using instance variables)
+                           - if validation complex, you can use a plain old Ruby object instead of instance variables
+                                  class Person < ApplicationRecord
+                                    validate do |person|
+                                      GoodnessValidator.new(person).validate
+                                    end
+                                  end
+
+                                  class GoodnessValidator
+                                    def initialize(person)
+                                      @person = person
+                                    end
+
+                                    def validate
+                                      if some_complex_condition_involving_ivars_and_private_methods?
+                                        @person.errors.add :base, "This person is evil"
+                                      end
+                                    end
+
+                                    # ...
+                                  end
+
+ActiveModel::Validations Methods - 
+    - error() - returns the object errors that holds all the information about the attribute error messages
+    - invalid?(context = nil) - returns true if errors were added, false otherwise
+    - valid?(context = nil) -  returns true if no errors were added, false otherwise
+    - validate(context = nil) - alias for valid?
+    - validate!(context = nil) - returns true if no errors found, raises ValidationError otherwise
+    - validates_with(args,&block) - passes record to class/classes specified and allows them to add errors based on more complex condition
+    - validate_context - return the context when running validations(useful when running validation except a certain context)
+
+    these validation methods can include the following options - 
+      - :allow_nil - skip validation if the attribute is nil
+      - :allow_blank - skip validation if the attribute is blank
+      - :on - specify context where this validation is active
+      - :strict - raises an exception if the validation fails(haults the validation process)(raises exception instead of adding it to errors collection)
+      - :if - specify when validation should occur
+      - :unless - specify when validation should not occur
+      - :message - helps specify what message to add to errors collection if validation fails
+      - 
+OTHER IMPORTANT POINTS - 
+      - with_option - can be used to group number of validations that run if/unless one common conditionis satisfied
+      - when mentioning multiple conditions at once - put them in an array
+      - Custom Validators - are classes that inherit from ActiveModel::Validator.
+                          - must implement a validate method that takes a record as an argument and performs the validation on it.
+                          - can call a custom validator using the validates_with method in your model.
+      - can use the validators method on your model to list all validators, or validators_on to check validators for a specific field
+      - when defining custom validation with "validate" use ActiveModel::Validator, & when with "validate_each" use ActiveModel::EachValidator
+      - 
