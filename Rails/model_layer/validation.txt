@@ -1,0 +1,209 @@
+VALIDATIONS
+
+
+CLIENT SIDE PROGRAMMING - 
+  - it is the program that runs on the client machine(browser) and deals with user interface/display and any other programming that can happen on the client machine like reading/writting cookies
+  - it refers to the execution of the code on the user's device rather than on the remote SERVER
+  - involves writing code in HTML,CSS,JavaScript to create interactive and dynamic GUI
+  - Client Side Validation - validates input before sending it to the server
+                           - hence improves data integrity and reduces server load
+  - focuses on creating interactive user interfaces and handelling user user interactions within the webbrowser
+
+SERVER SIDE PROGRAMMING - 
+  - involves executing code on the server to generate dynamic web content, process requests from clients, managing data storage and retrieval
+  - languages - PHP Python,Ruby,Java,Node.js
+  - uses sql for querying and managing data in relational database
+  - it recieves requests from clients, processes them and generates appropriate response
+  - responsible for iplementing the core functionalityof the web application such as  authentication,data validation and bussiness rules
+  - manages connection to databases,execute queries and handles data retrieval,storageand manipulation
+  - manages user sessions , manages authentication tokens and store session data
+
+
+
+VALIDATIONS - 
+  - guides you how to check if the object is in right state before saving it to the the database
+  - basic syntax - 
+        class Person < ApplicationRecord
+          validates :name, presence: true
+        end
+
+  - USE - 
+      - used to ensure that data meets certain citeria before its stored int he database , making sure its correct and consistent
+      - model-level validations are best to check if the data to be stored is valid or not
+      - these validations canwork with any type of database 
+      - user can't bypass these checks hence maintaining integrity of data
+      - easy to test and update , making it simpler to keep your code working smoothly
+      - rails provide built in helpers for common need and can create custom validations as well
+  
+  - TYPES OF VALIDATIONS - 
+      - DATABASE CONSTRAINTS / STORED PROCEDURES - makes validation mechanism database-dependent and can make testing and maintainance more difficult
+                  - if database used by other applications , it can be a good idea to use some database level constraints
+                  - can be helpul to handle certain databse-level validations successfully which would be difficult otherwise
+      - CLIENT SIDE - generally unreliable if used alone
+                  - id implemented using javascript and javascript is turned off on the app then the user may bypass them
+                  - if combined with other techniques , can be proved convenient to provide users with immediate feedback as they use your site
+      - CONTROLLER LEVEL - difficult to test and maintain
+                  - (keep controllers simple, good practice in long run)
+
+  - WHEN TO USE VALIDATION - 
+      - typically run before CRUD commands are sent to database
+      - if validation fails, object will be marked as invalid and hence will not be stored in the database
+      - separate validations for seperate commands are also possible
+      - note - some methods trigger state of an object and some don't , so be careful
+  
+  - METHODS THAT TRIGGER VALIDATION - 
+        # the ones with "!"raise exception if the record is invalid, pthers only return false
+      - create
+      - create!
+      - save
+      - save!
+      - update
+      - update!
+
+  - METHODS THAT SKIP VALIDATIONS - 
+      - decrement!
+      - decrement_counter
+      - increment!
+      - increment_counter
+      - insert
+      - insert!
+      - insert_all
+      - insert_all!
+      - toggle!
+      - touch
+      - touch_all
+      - update_all
+      - update_attribute
+      - update_column
+      - update_columns
+      - update_counters
+      - upsert
+      - upsert_all
+      - save(validate:false)
+
+
+valid? and invalid? - 
+    - before saving any object , rails runs your validation 
+    - if these validation produce error then rails doesn't saves the object
+    - valid? can beused to manually inspect the validation
+    - after validation, errors can be accessedusing errors instance method
+    - we can a say the object is valid if the errors collecion is empty after running validations
+    - new mothod doesn't tell errors , create and save does
+    - invalid?- reverse of valid?
+
+errors[] - 
+    - to check if a particular attribute of a record is valid or not you can do errors[:attribute] (returns all the errors present for the given attribute)
+    - if no error, an empty array is returned
+    - useful only after validation have been run
+    - different from invalid? becoz it only check for particular attributes rather than comparing them as whole
+
+VALIDATION HELPERS - 
+    - active records offer many predefined  validation helpers that you can use directly inside your class definition
+    - every time a validation fails, an error is added to the object's error collection and this is associated with the attribute being validated
+    - each helper accepts any number of attribute names, so we can define same validation for several attributes
+    - each helper accepts the :on (defines when the validation should run) and :message (defines what message to add t errors collection if validation fails) options 
+    - : on takes one of the values :create or :update
+    - when nothing is specified in the :message option or it is not used, default error messages are used 
+    - these default error messages exist for each one of the validation helpers
+    - HELPERS -  
+
+          - acceptance - validates that a checkbox on the user interface was checked  when a form was submitted
+                       - typically used when user needs to validate to your conditions
+                       - syntax(message is optional)-
+                                class User <ApplicationRecord
+                                  validates :terms_of_services, acceptance:{message: 'must be read'} 
+                                end
+                       - can also be used to mention what values are considered acceptable (defaults to ['1',true] can be customized)
+                                class User <ApplicationRecord
+                                  validates :terms_of_services, acceptance:{ accept: 'yes'} 
+                                end
+                       - this validation is specific to web applications and this acceptance doesnt needs to be recorded  anywhere in your database
+                       - if no field for it in database, helper creates a virtual attribute for it
+                       - if field exist, it should be set to or include true , else validation will not run
+
+          - confirmation - this helper should be used when you have two fields that should recieve exactly the same content(email and password)
+                         - this creates a virtual attribute whose name is "fieldname_confirmation"
+                         -syntax - class Person < ApplicationRecord
+                                      validates :email, confirmation: true
+                                    end
+                         - it can be used in view template as  - <%= text_field :person, :email %>
+                                                                 <%= text_field :person, :email_confirmation %>
+                         - this check is only performed if  email_confirmation is not nill(for which we need to add presence check)
+                             as - class Person < ApplicationRecord
+                                    validates :email, confirmation: true
+                                    validates :email_confirmation, presence: true
+                                  end
+                         - :case_sensitive option can also be mentioned to make the validation case case_sensitive(by default true)
+                              as - class Person < ApplicationRecord
+                                      validates :email, confirmation: { case_sensitive: false }
+                                    end
+                         - default message for confirmation - "doesn't match confirmation"
+                         - can pass custom measage using :message option
+                         - can add :if option if you want to do validation only if the field is changed again and not every timeyou save the record
+                              as - class Person < ApplicationRecord
+                                      validates :email, confirmation: true
+                                      validates :email_confirmation, presence: true, if: :email_changed?
+                                    end
+
+          - comparison - this check validates comparison between any two comparable values
+                       - basic syntax - class Promotion < ApplicationRecord
+                                          validates :end_date, comparison: { greater_than: :start_date }
+                                        end
+                       - default massage - "failed comparison"
+                       - options supported (compared with the supplied value)- 
+                            :greater_than -> default message "must be greater than %{count}"
+                            :greater_than_or_equal_to -> default message "must be greater than or equal to %{count}"
+                            :equal_to -> default message "must be equal to %{count}"
+                            :less_than -> default message "must be less than %{count}"
+                            :less_than_or_equal_to -> default message "must be less than or equal to %{count}"
+                            :other than -> default message "must be other than %{count}"
+                       - the validator requires a compare option be supplied
+
+          - format - this validates the attributes value by testing they match the given regular expression( specified using :with option)
+                   - basic syntax - class Product < ApplicationRecord
+                                      validates :legacy_code, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+                                    end
+                   - inversely , :without can be used to ommit character specified by regular_expression
+                   - default measse for both "is invalid"
+                   - use \A or ^ and \Z or $ to match the start and end of the line(if you use symbol then yo must pass multiline:true option)
+          
+          - inclusion - validates that the attributes values are included in a given set(this set can be any enumberable set)
+                      - basic syntax - class Coffee <ApplicationRecord
+                                          validates :size, inclusion: { in:%w(small medium large), message: "%{value} is not a valid size}
+                                       end
+                      - the :in option recieves the set of value the inclusion helper will accept
+                      - :within can also be used in place of :in , as both serve the same purpose
+                      - default error message - "is not included in the list"
+
+          - exclusion - opposite of inclusion
+                      - validates that the attributes values are not included in a given set(this set can be any enumberable set)
+                      - basic syntax - class Coffee <ApplicationRecord
+                                          validates :size, exclusion: { in:%w(small medium large), message: "%{value} is not a valid size}
+                                       end
+                      - the :in option recieves the set of value the exclusion helper will not accept
+                      - :within can also be used in place of :in , as both serve the same purpose
+                      - default error message - "is reserved"
+                      - if the set is range then test is performed using Range#cover otherwise include?
+
+          - length - validates the length of the attributes' value 
+                   - provides variety of options to specifythe desired length
+                   - basic syntax - 
+                          class Person < ApplicationRecord
+                            validates :name, length: { minimum: 2 }
+                            validates :bio, length: { maximum: 500 }
+                            validates :password, length: { in: 6..20 }
+                            validates :registration_number, length: { is: 6 }
+                          end
+                   - options -
+                          :minimum -> attribute cannot have less than the specified length
+                          :maximum -> attribute cannot have more than the specified length
+                          :in / :within -> attribute length must be in given range
+                          :is -> attribute length must be equal to given value
+                        #only one option can be used at a time(except :minimum and :maximum)
+                   - default message - depends on the type of validation being performed
+                   - default error messages are plural , so when :minimum is one , you need to provide custom message or use "presence: true" instead
+                   - message can be customized using :wrong_length, :too_long and too_short options and %{count} as place holder for number corresponding to the length being used
+                   - message can also be customised using the default :message option
+
+          - numericality - thishelper validates that your attribute has only numerical values 
+                   
