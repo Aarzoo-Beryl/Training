@@ -1,2 +1,56 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<%=link_to("<< Back To List",users_path,:class=>"Index Page") %>
+
+<div class="Show User">
+  <h1>USER</h1><hr>
+  <table class="heading">
+    <tr>
+      <td><b>Id</b></td>
+      <td> : </td>
+      <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <td><b>Name</b></td>
+      <td> : </td>
+      <td><%= @user.name.capitalize %></td>
+    </tr>
+    <tr>
+      <td><b>Email</b></td>
+      <td> : </td>
+      <td><%= @user.email%></td>
+    </tr>
+    <tr>
+      <td><b>Gender</b></td>
+      <td> : </td>
+      <td><%= @user.gender%></td>
+    </tr>
+    <tr>
+      <td><b>Phone Number</b></td>
+      <td> : </td>
+      <td><%= @user.phone_number%></td>
+    </tr>
+    <tr>
+      <td><b>Address</b></td>
+      <td> : </td>
+      <td><%= @user.address %></td>
+    </tr>
+    <tr>
+      <td><b>Created At</b></td>
+      <td> : </td>
+      <td><%= @user.created_at %></td>
+    </tr>
+    <tr>
+      <td><b>Updated At</b></td>
+      <td> : </td>
+      <td><%= @user.updated_at%></td>
+    </tr>
+    <tr>
+      <td><b>Actions</b></td>
+      <td> : </td>
+      <td>
+        <%= link_to("Show User",user_path(user),:class=>"action new")%>
+        <%= link_to("Edit User",edit_user_path(user),:class=>"action new")%>
+        <%= link_to("Delete User",delete_user_path(user),:class=>"action new")%>
+      </td>
+    </tr>
+  </table>
+</div>

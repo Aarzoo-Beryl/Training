@@ -1,2 +1,50 @@
-<h1>User#delete</h1>
-<p>Find me in app/views/user/delete.html.erb</p>
+<%=link_to("<< Back To List",users_path,:class=>"Index Page") %>
+
+<div class="Delete User">
+  <h1 align='center'>DELETE USER</h1><hr><br>
+  <table class="heading">
+    <tr>
+      <td><b>Id</b></td>
+      <td> : </td>
+      <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <td><b>Name</b></td>
+      <td> : </td>
+      <td><%= @user.name.capitalize %></td>
+    </tr>
+    <tr>
+      <td><b>Email</b></td>
+      <td> : </td>
+      <td><%= @user.email%></td>
+    </tr>
+    <tr>
+      <td><b>Gender</b></td>
+      <td> : </td>
+      <td><%= @user.gender%></td>
+    </tr>
+    <tr>
+      <td><b>Phone Number</b></td>
+      <td> : </td>
+      <td><%= @user.phone_number%></td>
+    </tr>
+    <tr>
+      <td><b>Address</b></td>
+      <td> : </td>
+      <td><%= @user.address %></td>
+    </tr>
+    <tr>
+      <td><b>Created At</b></td>
+      <td> : </td>
+      <td><%= @user.created_at %></td>
+    </tr>
+    <tr>
+      <td><b>Updated At</b></td>
+      <td> : </td>
+      <td><%= @user.updated_at%></td>
+    </tr>
+  </table>
+  <br><br>
+  <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1">
+  <label for="myCheckbox">Are you sure you want to delete the user named : <%= @user.name.capitalize%>  ? </label>
+</div>
