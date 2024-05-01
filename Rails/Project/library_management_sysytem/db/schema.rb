@@ -85,4 +85,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_054805) do
 
   add_foreign_key "transactions", "books", column: "books_id"
   add_foreign_key "transactions", "members", column: "memebers_id"
+
 end
