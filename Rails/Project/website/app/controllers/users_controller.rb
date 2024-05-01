@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params) && params[:checkbox] == '1'
+    if @user.update(user_params) && params[:user][:accept] == '1'
       redirect_to(user_path(@user))
     else
       puts @user.errors.full_messages
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    if params[:checkbox] == '1'
+    if params[:user][:accept] == '1'
       @user.destroy
       redirect_to(users_path)
     else
@@ -51,6 +51,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name,:email,:gender,:phone_number,:address, :checkbox)
+    params.require(:user).permit(:name,:email,:gender,:phone_number,:address, :accept)
   end
 end

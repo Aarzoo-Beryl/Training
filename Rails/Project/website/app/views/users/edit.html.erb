@@ -7,9 +7,12 @@
 
     <%=render(:partial => 'form', locals: {:f => f}) %>
 
-    <input type="checkbox" id="checkbox" name="user[checkbox]" value="1">
-    <label for="checkbox">Are you sure you want to update the user named : <%= @user.name.titleize%> ? </label>
-    <br><br>
+    <div class="field">
+      <%= f.label :accept do %>
+        <%= f.check_box :accept %>
+        Are you sure you want to update the user?
+      <% end %><br><br>
+    </div>
 
     <%= render partial: 'errors', locals: { user: @user } %>
     <div class="form-button">
