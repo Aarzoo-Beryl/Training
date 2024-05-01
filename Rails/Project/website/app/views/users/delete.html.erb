@@ -2,6 +2,17 @@
 
 <div class="Delete User">
   <h1 align='center'>DELETE USER</h1><hr><br>
+  <%= form_for(@user,:method=>'delete') do |f| %>
+    <% if @user.errors.any? %>
+      <div class="error-explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> Prohibited this record from being saved:</h2>
+        <ul>
+          <% @user.errors.each do |attr,msg| %>
+            <li><%= "#{attr}: #{msg}" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   <table class="heading">
     <tr>
       <td><b>Id</b></td>
@@ -45,6 +56,11 @@
     </tr>
   </table>
   <br><br>
-  <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1">
-  <label for="myCheckbox">Are you sure you want to delete the user named : <%= @user.name.capitalize%>  ? </label>
+  <input type="checkbox" id="validation_needed" name="validation_needed" value="1">
+  <label for="validation_needed">Are you sure you want to delete the user named : <%= @user.name.capitalize%> ? </label>
+
+  <div class="form-button">
+    <center><%= f.submit("Delete User") %></center>
+  </div>
+  <% end %>
 </div>

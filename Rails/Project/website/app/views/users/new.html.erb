@@ -1,11 +1,23 @@
 <%=link_to("<< Back To List",users_path,:class=>"Index Page") %>
 
 <div class="New User">
-  <h1 align='center'>NEW USER</h1><hr>
+  <h1 align='center'>NEW USER</h1><hr><br>
+  <% if @user.errors.any? %>
+    <%= @user.errors.inspect %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> Prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_for(@user,:url => users_path,:method=>'post') do |f| %>
-      <%=render(:partial => 'form', locals: {:f => f}) %>
-      <div class="form-button">
-        <%= f.submit("Add User") %>
-      </div>
+    <%=render(:partial => 'form', locals: {:f => f}) %>
+    <div class="form-button">
+      <%= f.submit("Add User") %>
+    </div>
   <% end %>
 </div>

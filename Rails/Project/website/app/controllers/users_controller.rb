@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new
+    @user = User.new(user_params)
     if @user.save
       redirect_to(users_path)
     else
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(user_params)
-    if @user.save
-      redirect_to(subject_path(@subject))
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to(user_path(@user))
     else
       render('edit')
     end

@@ -1,6 +1,6 @@
 <%=link_to("<< Back To List",users_path,:class=>"Index Page") %>
 
-<div class="Show User">
+<div class="Action show">
   <h1>USER</h1><hr>
   <table class="heading">
     <tr>
@@ -31,7 +31,7 @@
     <tr>
       <td><b>Address</b></td>
       <td> : </td>
-      <td><%= @user.address %></td>
+      <td><%= @user.address.capitalize %></td>
     </tr>
     <tr>
       <td><b>Created At</b></td>
@@ -47,9 +47,8 @@
       <td><b>Actions</b></td>
       <td> : </td>
       <td>
-        <%= link_to("Show User",user_path(user),:class=>"action new")%>
-        <%= link_to("Edit User",edit_user_path(user),:class=>"action new")%>
-        <%= link_to("Delete User",delete_user_path(user),:class=>"action new")%>
+        <%= link_to("Edit",edit_user_path(@user),:class=>"action edit")%>
+        <%= link_to("Delete",delete_user_path(@user),:class=>"action delete")%>
       </td>
     </tr>
   </table>
