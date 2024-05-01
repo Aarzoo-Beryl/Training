@@ -1,22 +1,17 @@
 <%=link_to("<< Back To List",users_path,:class=>"Index Page") %>
 
-<div class="Edit User">
+<div class="action edit">
   <h1 align='center'>USER</h1><hr><br>
-  <%= form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> Prohibited this user from being updated:</h2>
-        <ul>
-          <% @user.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+
+  <%= form_for(@user)  do |f| %>
+
     <%=render(:partial => 'form', locals: {:f => f}) %>
-    <input type="checkbox" id="validation_needed" name="validation_needed" value="1">
-    <label for="validation_needed">Are you sure you want to update the user named : <%= @user.name.capitalize%> ? </label>
+
+    <input type="checkbox" id="checkbox" name="user[checkbox]" value="1">
+    <label for="checkbox">Are you sure you want to update the user named : <%= @user.name.titleize%> ? </label>
     <br><br>
+
+    <%= render partial: 'errors', locals: { user: @user } %>
     <div class="form-button">
       <%= f.submit("Update User") %>
     </div>

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.order('id ASC')
   end
 
   def show
@@ -27,10 +27,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(user_params) && params[:checkbox] == '1'
       redirect_to(user_path(@user))
     else
-      render('edit')
+      puts @user.errors.full_messages
+      render 'edit'
     end
   end
 
@@ -40,12 +41,16 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to(users_path)
+    if params[:checkbox] == '1'
+      @user.destroy
+      redirect_to(users_path)
+    else
+      render 'delete'
+    end
   end
 
   private
   def user_params
-    params.require(:user).permit(:name,:email,:gender,:phone_number,:address)
+    params.require(:user).permit(:name,:email,:gender,:phone_number,:address, :checkbox)
   end
 end

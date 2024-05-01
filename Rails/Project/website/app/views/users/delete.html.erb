@@ -1,18 +1,10 @@
 <%=link_to("<< Back To List",users_path,:class=>"Index Page") %>
 
-<div class="Delete User">
+<div class="action delete">
   <h1 align='center'>DELETE USER</h1><hr><br>
+
   <%= form_for(@user,:method=>'delete') do |f| %>
-    <% if @user.errors.any? %>
-      <div class="error-explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> Prohibited this record from being saved:</h2>
-        <ul>
-          <% @user.errors.each do |attr,msg| %>
-            <li><%= "#{attr}: #{msg}" %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+
   <table class="heading">
     <tr>
       <td><b>Id</b></td>
@@ -22,7 +14,7 @@
     <tr>
       <td><b>Name</b></td>
       <td> : </td>
-      <td><%= @user.name.capitalize %></td>
+      <td><%= @user.name.titleize %></td>
     </tr>
     <tr>
       <td><b>Email</b></td>
@@ -32,7 +24,7 @@
     <tr>
       <td><b>Gender</b></td>
       <td> : </td>
-      <td><%= @user.gender%></td>
+      <td><%= @user.gender.titleize%></td>
     </tr>
     <tr>
       <td><b>Phone Number</b></td>
@@ -42,7 +34,7 @@
     <tr>
       <td><b>Address</b></td>
       <td> : </td>
-      <td><%= @user.address %></td>
+      <td><%= @user.address.titleize %></td>
     </tr>
     <tr>
       <td><b>Created At</b></td>
@@ -56,8 +48,9 @@
     </tr>
   </table>
   <br><br>
-  <input type="checkbox" id="validation_needed" name="validation_needed" value="1">
-  <label for="validation_needed">Are you sure you want to delete the user named : <%= @user.name.capitalize%> ? </label>
+  <input type="checkbox" id="checkbox" name="checkbox" value="1" >
+  <label for="checkbox">Are you sure you want to delete the user named: <%= @user.name.capitalize %>? </label>
+  <%= render partial: 'errors', locals: { user: @user } %>
 
   <div class="form-button">
     <center><%= f.submit("Delete User") %></center>
