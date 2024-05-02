@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :gender, inclusion: { in:%w(Male Female Other (Male Female Other).map(&:downcase)), message: "%{value} is not a valid gender, Please specify something among (Male Female Other)" }
 
 
-  validates :accept, acceptance: {message:"must be accepted to proceed"}, on: [ :destroy, :update]
+  validates :accept, acceptance: {message:" checkbox to proceed"}, on: [ :destroy, :update]
 
 
   # Other attributes and validations
