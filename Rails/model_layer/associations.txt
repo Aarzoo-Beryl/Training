@@ -1,0 +1,180 @@
+-------------ASSOCIATIONS --------
+
+ASSOCIATION - refers to connection between two active record models
+            - need - make common operations simpler and easier in code
+            - rather than writing lengthy code and loops for connecting models , we can streamline it by declaratively telling rails that there is a connection between the two
+                class Author <ApplicationRecord
+                  has-many :books, dependent: :destroy
+                end
+                class Books <ApplicationRecord
+                  belongs_to :author
+                end
+              # this defines that an author can have many books and if an author is deleted , all associated books should also be deleted
+              # this makes creating a new book for a particular author easy too
+                  @book = @author.book.create(published_at: Time.now)
+              # also makes deletion of the object and related books easier
+                @author.destroy
+
+TYPES OF ASSOCIATIONS - 
+    - belongs_to - specifies a one-on-one relationship with another class
+                 - should only be used if the class contains a foreign key(if other class contains foreign key, then use has_one)
+
+            Methods - it automatically generates several methods to help you work with that association
+                    - association - returns the associated object, if not object associated returns nil
+                                    book.author #similar to Author.find(book.author_id)
+                    - association= - assigns the associated object and sets it as the foreign key on the models instance(doesn't modify existing records)
+                                     book.author = author_id #similar to book.author_id = author_id
+                    - build_association - returns a new object of the associated type, instantiated with the provided attributes
+                                        - it links this new object to the current object through the foreign key but does not save it to the database
+                                          book.build_author # similar to book.author_id = Author.new
+                                        # if you call build_comment, you're saying, "Hey, I want to make a new comment for this post," but it's like making a draft.
+                                        # It's there, connected to the post, but it won't be published (saved to the database) until you explicitly do so. 
+                                        # This gives you the chance to set any additional attributes or perform validations before actually saving it.
+                    - create_association - returns a new object of the associated type, instantiated with the provided attributes
+                                         - it links this new object to the current object through the foreign key and saves it to the database if it passes validations
+                                          book.create_author # similar to book.author_id = Author.new ; book.author.save; book.author
+                                         #same as build just stored it if it passes the validations set for it
+                    - create_association! - same as above , just raises exception of ActiveRecord::RecordInvalid if record is invalid instead of returning false
+                                            book.create_author # similar to book.author_id = Author.new ; book.author.save! ; book.author
+                    - reload_association - reloads the associated object from the database, forcing a database read to ensure you have most up-to-date data
+                                           book.reload_author
+                                          # It goes back to the database and gets the latest version of that associated object.
+                                          # So, if something changed in the database since you last loaded it, you'll get the most up-to-date data.
+                    - reset_association - unloads the associated object from the database, so next access with query it from the database again
+                                          book.reset_author
+                                          # like clearing your browser cache,it unloads the associated object that was previously loaded
+                                          # the next time you try to access it, Rails will go back to the database to get the fresh data again.
+                                          # It ensures you're not using stale information.
+                    - association_changed? - returns true if new association has been assigned and the next save will update the foreign key
+                                             book.author_changed?
+                                              # if you've changed the relationship between two objects but haven't saved that change to the database, this method will return true.
+                                              # It's a way to check if the associated object has been changed in the current session.
+                    - association_previously_changed? - returns true id the precious save updated the association to reference a new associated object
+                                                        book.author_previously_changed?
+                                                        # tells you if, in the previous save operation, the association was updated to reference a new associated object
+                                                        # It helps you track if the association was modified in the last save operation, even if it hasn't been saved yet in the current session
+
+            Scope - second argument scope can be passed, which is essentially a set of conditions or operations that customize the query used to retrieve associated objects.
+                  - this can be particularly useful when you want to filter, order, or customize the retrieval of associated records based on certain criteria.
+                    - eg1 - belongs_to :author, -> { where(id:2) }
+                    - eg2 - belongs_to :user, -> { joins(:address) }
+                    - eg3 - belongs_to :product, -> (price){ where("price>0", price)  }
+
+            Options - used to specialize the behavior of the association
+                    - :class_name - specifies class name of the association 
+                                  - used to specialize if the real class name is different from the association name
+                                    belongs_to :author, class_name: 'Writer'
+                    - :foreign_key - used to specify foreign_key for the association
+                                   - by default its "id", but can be changed using this
+                                   - (also good to set :inverse_of option along with it)
+                                     belongs_to :author, foreign_key: 'name'
+                    - :foreign_type - by default the associated foreign key's datatype is used, if want to change can be done with this
+                                      belongs_to :comment, polymorphic: true
+                    - :primary_key - specifies the method that return primary key of associated object used for association
+                                   - by default id, but can be changed 
+                                     belongs_to :person, primary_key: "name", foreign_key: "person_name"
+                                     # this states person_name attribute in the current model to find the associated Person record based on its name attribute
+                    - :dependent - if set to :destroy - the associated object is destroyed when this object is
+                                 - if set to :delete - the associated object is deleted without calling its destroy method
+                                 - if set to :destroy_async - the associated object is scheduled yo be destroyed in the background
+                                 - should not be used if the belongs_to is used in conjunction with has_many on another class, as it has potential to leave orphaned records behind
+                    - :counter_cache - when this is enabled, rails expect a column named #{table-name}_count in the associated model
+                                     - the counter cache will increase if an object is created and decremented if its destroyed
+                                     - helps to calculate the count automatically ,rather than calculating it manually every time
+                                     - when this option is used, rails automatically adds the counter column to the list of read-only attributes using "attr_readonly" preventing you from accidentally modifying it manually
+                                       belongs_to :post, counter_cache: true
+                                     - custom counter_cache column can be mentioned like
+                                       belongs_to :post, counter_cache: :custom_column_name
+                                     - you might want to ass this method as attr_readonly in its module too
+                                       class Post < ApplicationRecord
+                                         attr_readonly :custom_column_name
+                    - :polymorphic - specify the association to be polymorphic by passing true 
+                                   - allows a model to belong to more than one other model, on a single association
+                                   - means that the associated model can belong to different types of models and rails handle the association dynamically based on the type of the associated object
+                                   - allows you to access or associate a table without creating its foreign key
+                                      class Comment < ApplicationRecord
+                                        belongs_to :commentable , polymorphic: true
+                                      end
+                                      #can be accessed in other table as - 
+                                      class Post < ApplicationRecord
+                                        has_many :comments, as: :commentable
+                                      end
+                                      class Image < ApplicationRecord
+                                        has_many :comments, as: :commentable
+                                      end
+                    - :validate - when set to true , validates the new objects added while saving the parent object
+                                - by default false
+                                - this basically allows you to inherit and apply the validations of the associated object present on its model
+                                # mtlb ki jo bhi object link kra h belongs_to ki help se uske khudke model pe jo validations h vo yaha  pe bhi apply hongi 
+                                - if you want to ensure associated objects are revalidated on every update, use validate_association
+                    - :autosave - if true, will save the associated object or destroy if marked for destruction while saving the parent object
+                                - if false neither saves nor destroys
+                                - by default, associated object is saved only if it a new record 
+                                - accepts_nested_attributes_for sets autosave to true
+                                - If validations for any of the associations fail, their error messages will be applied to the parent.
+                    - :touch - if true , the associated objects will be touched(updated_at will change to current time) when this record is either saved or destroyed
+                             - if a symbol is specified along it both the symbol and updated-at field will be touched
+                             - no validation is performed when object touched 
+                             - only after_touch, after_commit and after_rollback callbacks will be executed
+                             - typically used to track when an associated object was last updated in relation to changes made to the parent object
+                                class Post < ApplicationRecord
+                                  belongs_to :author, touch: :last_post_updated_at
+                                end
+                    - :inverse_of - opposite of belongs_to
+                                  - used to specify the name that has_many or has_one for the current association
+                                  - helps rails to set up bi-directional association and ensures data changes is made on one side is reflected on other side too
+                                    class Author < ApplicationRecord
+                                      has_many :books, inverse_of: :author
+                                    end
+                                    class Book < ApplicationRecord
+                                      belongs_to :author, inverse_of: :books
+                                    end
+                                    #ensure that as author has many book each books should be associated to an author
+                                    #means that if you add a new book to an author's collection of books, the author's association on the book will be automatically set
+                    - :optional - when set to true , association will not have its presence validated
+                                - by default rails validate the object associated using belongs_to to presence:true, this makes it false
+                                  class Book < ApplicationRecord
+                                    belongs_to :author, optional: true
+                                  end
+                    - :required - set to true, the association will also have its presence validated
+                                - this validates the association itself and not the id(for id use :inverse_of)
+                                - by default true
+                                - opposite of optional
+                    - :default - provide a callable(proc/lambda) to specify that the association should be initialized with a particular record before validation
+                               - callable will not be executed if the record exists
+                               - When a new instance of the parent model (e.g., User) is created, Rails will attempt to initialize the association with a record using the callable specified in the :default option
+                                  class User < ApplicationRecord
+                                    has_one :profile, default: -> { Profile.new(status: "active") }
+                                  end
+                                  # means that if a user record does not already have an associated profile, it will be initialized with a new profile record with the status set to "active"
+                    - :strict_loading - enforces strict loading every time the associated record is loaded through this association
+                                      - refers to the practice of loading associated records in a single query or batch, rather than triggering additional queries for each associated record individually
+                                      - strict loading ensures that associated records are efficiently loaded with minimal database queries, helping to prevent performance bottlenecks and ensuring optimal application performance, especially in scenarios with complex associations and large datasets
+                                        class Author < ApplicationRecord
+                                          has_many :books, strict_loading: true
+                                        end
+                                        # means that whenever you load books through the author.books association, Rails will enforce strict loading, ensuring that the associated records are preloaded or eager loaded to avoid N+1 query problems
+                    - :ensuring_owner_was - specifies the instance method to be called on the owner
+                                          - the method must return true in order for the associated records to be deleted
+                                          - it provides validation before the deletion method takes place determines when the object scheduled for deletion in background should actually be deleted
+                                              class User < ApplicationRecord
+                                                has_many :posts, ensuring_owner_was: :active?
+                                                
+                                                def active?
+                                                  status == "active"
+                                                end
+                                              end
+                                            # means that before associated posts are deleted in a background job, the active? method must return true on the user object
+                    - :query_constraints - serves as a composite foreign key
+                                         - defines list of columns to be used to query the associated object
+                                         - by default rails will attempt to derive the value automatically 
+                                         - useful when the association cannot be inferred automatically by Rails based on naming conventions or when the association involves multiple columns as a composite key
+                                            class Order < ApplicationRecord
+                                              belongs_to :customer, query_constraints: [:customer_id, :region_id]
+                                            end
+                                            # means that when querying the associated Customer object, Rails will use both the customer_id and region_id columns as the composite foreign key
+                                            #tells Rails to look for the associated object (in this case, a customer) using not just one column but a combination of columns as the "key" to find the right customer
+                                            #helpful when you need more than one piece of information to uniquely identify the associated object
+
+
+
