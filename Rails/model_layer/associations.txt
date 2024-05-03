@@ -1,4 +1,4 @@
--------------ASSOCIATIONS --------
+------------------------------------------------------------------------------ASSOCIATIONS-------------------------------------------------------------------------------
 
 ASSOCIATION - refers to connection between two active record models
             - need - make common operations simpler and easier in code
@@ -176,5 +176,58 @@ TYPES OF ASSOCIATIONS -
                                             #tells Rails to look for the associated object (in this case, a customer) using not just one column but a combination of columns as the "key" to find the right customer
                                             #helpful when you need more than one piece of information to uniquely identify the associated object
 
+    - has_one - specifies one-to-one relationship with another class
+              - should only be used if another class contains a foreign key(if current class has the foreign key use belongs_to)
+              - helps in retrieval and query of a single associated object
+            Methods - it automatically generates several methods to help you work with that association
+                    - association - returns the associated object, if not object associated returns nil
+                                    book.author #similar to Author.find(book.author_id)
+                    - association= - assigns the associated object, extracts the primary key, sets it as foreign key and saves the associated object
+                                   - to avoid database inconsistency, permanently deletes an existing associated object when assigning a new one , even if the new obe isn't saved in the database
+                                      user = User.first
+                                      profile = Profile.new(name: "John Doe")
+                                      user.profile = profile
+                                     # associates the profile instance with the user
+                                     # It sets the foreign key profile_id in the users table to the primary key of the profile and saves the profile to the database.
+                    - build_association - returns a new object of the associated type that as been instantiated with attributes and linked to this object through a foreign key but has not been saved yet
+                                        - it links this new object to the current object through the foreign key but does not save it to the database
+                                          user = User.first
+                                          profile = user.build_profile(name: "Jane Doe")
+                                        # creates a new profile instance associated with the user
+                                        # it does not save the profile to the database until explicitly done so
+                    - create_association - same as above but saves it to the database
+                                         - it links this new object to the current object through the foreign key and saves it to the database if it passes validations
+                                          user = User.first
+                                          profile = user.create_profile(name: "Alice Wonderland")
+                                          # creates a new profile instance associated with the user and saves it to the database
+                    - create_association! - same as above , just raises exception of ActiveRecord::RecordInvalid if record is invalid instead of returning false
+                                            user = User.first
+                                            profile = user.create_profile!(name: nil)
+                    - reload_association - reloads the associated object from the database, forcing a database read to ensure you have most up-to-date data
+                                            user = User.first
+                                            profile = user.profile
+                                            # Suppose changes were made to the profile in another part of the application or by another user
+                                            profile.name = "New Name"
+                                            profile.save
 
+                                            # Now you want to reload the profile to get the updated data from the database
+                                            user.reload_profile
+                                          # It goes back to the database and gets the latest version of that associated object.
+                                          # So, if something changed in the database since you last loaded it, you'll get the most up-to-date data.
+                    - reset_association - unloads the associated object from the database resetting it to its initial state, so next access with query it from the database again
+                                          user = User.first
+                                          profile = user.profile
+                                          # Now you want to reset the association to its initial state
+                                          user.reset_profile
 
+                                          # like clearing your browser cache,it unloads the associated object that was previously loaded
+                                          # the next time you try to access it, Rails will go back to the database to get the fresh data again.
+                                          # It ensures you're not using stale information.
+
+            Scope - second argument scope can be passed, which is essentially a set of conditions or operations that customize the query used to retrieve associated objects.
+                  - this can be particularly useful when you want to filter, order, or customize the retrieval of associated records based on certain criteria.
+                    - eg1 - belongs_to :author, -> { where(id:2) }
+                    - eg2 - belongs_to :user, -> { joins(:address) }
+                    - eg3 - belongs_to :product, -> (price){ where("price>0", price)  }
+
+            Options
