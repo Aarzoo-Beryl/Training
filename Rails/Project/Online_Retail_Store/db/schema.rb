@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_04_020507) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_030408) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_020507) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "bills", force: :cascade do |t|
+    t.string "date"
+    t.string "shipping_address"
+    t.float "total_bill"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "brands", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -35,6 +43,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_020507) do
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "phone_number"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "date"
+    t.string "payment_type"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
