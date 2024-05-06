@@ -1,4 +1,4 @@
 class OrderSummary < ApplicationRecord
-  belongs_to :bills, validate: true, dependencies: :delete
-  belongs_to :products, validate: true, dependencies: :delete
+  belongs_to :bill, validate: true, dependent: :destroy
+  belongs_to :product, validate: true, dependent: :destroy
 end

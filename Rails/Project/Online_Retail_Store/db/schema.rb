@@ -95,11 +95,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_064052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "brands_id"
-    t.bigint "seller_id"
+    t.bigint "sellers_id"
     t.bigint "categories_id"
     t.index ["brands_id"], name: "index_products_on_brands_id"
     t.index ["categories_id"], name: "index_products_on_categories_id"
-    t.index ["seller_id"], name: "index_products_on_seller_id"
+    t.index ["sellers_id"], name: "index_products_on_sellers_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -129,7 +129,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_064052) do
   add_foreign_key "payments", "payment_types", column: "payment_types_id"
   add_foreign_key "products", "brands", column: "brands_id"
   add_foreign_key "products", "categories", column: "categories_id"
-  add_foreign_key "products", "sellers"
+  add_foreign_key "products", "sellers", column: "sellers_id"
   add_foreign_key "reviews", "customers", column: "customers_id"
   add_foreign_key "reviews", "products", column: "products_id"
 end

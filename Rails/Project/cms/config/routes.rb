@@ -14,12 +14,12 @@ Rails.application.routes.draw do
 
     resources :subjects do
       member do
-        get :delete
+        get :destroy
       end
     end
     resources :pages do
       member do
-        get :delete
+        get :destroy
       end
     end
 

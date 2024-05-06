@@ -3,4 +3,8 @@ class Customer < ApplicationRecord
   has_many :review, inverse_of: :customer, validate: true
   has_many :bills, inverse_of: :customer, validate: true
   has_many :payments, through: :bill
+
+  validates :name, presence: true
+  validates :phone_number, presence: true
+  validates :email, presence: true, uniqueness: true
 end
