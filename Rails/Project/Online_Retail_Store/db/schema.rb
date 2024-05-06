@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_06_023946) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_06_064052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_023946) do
     t.integer "pincode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "customers_id"
+    t.index ["customers_id"], name: "index_addresses_on_customers_id"
   end
 
   create_table "bills", force: :cascade do |t|
@@ -55,8 +57,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_023946) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "addresses_id"
-    t.index ["addresses_id"], name: "index_customers_on_addresses_id"
   end
 
   create_table "order_summaries", force: :cascade do |t|
@@ -120,8 +120,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_023946) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "customers", column: "customers_id"
   add_foreign_key "bills", "customers", column: "customers_id"
-  add_foreign_key "customers", "addresses", column: "addresses_id"
   add_foreign_key "order_summaries", "bills", column: "bills_id"
   add_foreign_key "order_summaries", "products", column: "products_id"
   add_foreign_key "payments", "bills", column: "bills_id"

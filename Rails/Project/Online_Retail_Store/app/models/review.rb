@@ -1,4 +1,4 @@
 class Review < ApplicationRecord
-  has_many :products, validate: true
-  has_many :customers, validate: true
+  belongs_to :products, validate: true
+  belongs_to :customers, validate: true
 end
