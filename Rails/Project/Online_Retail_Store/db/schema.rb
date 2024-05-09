@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_061155) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_112951) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,17 +25,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_061155) do
     t.datetime "updated_at", null: false
     t.bigint "customers_id"
     t.index ["customers_id"], name: "index_addresses_on_customers_id"
-  end
-
-  create_table "bills", force: :cascade do |t|
-    t.string "date"
-    t.string "shipping_address"
-    t.float "total_bill"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "customers_id"
-    t.integer "products_count", default: 0
-    t.index ["customers_id"], name: "index_bills_on_customers_id"
   end
 
   create_table "brands", force: :cascade do |t|
@@ -60,13 +49,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_061155) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_summaries", force: :cascade do |t|
+  create_table "orders", force: :cascade do |t|
+    t.string "date"
+    t.string "shipping_address"
+    t.float "total_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "products_id"
-    t.bigint "bills_id"
-    t.index ["bills_id"], name: "index_order_summaries_on_bills_id"
-    t.index ["products_id"], name: "index_order_summaries_on_products_id"
+    t.bigint "customers_id"
+    t.integer "products_count", default: 0
+    t.index ["customers_id"], name: "index_orders_on_customers_id"
+  end
+
+  create_table "orders_products", id: false, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "order_id", null: false
   end
 
   create_table "payment_types", force: :cascade do |t|
@@ -81,11 +77,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_061155) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "bills_id"
+    t.bigint "orders_id"
     t.bigint "customers_id"
     t.bigint "payment_types_id"
-    t.index ["bills_id"], name: "index_payments_on_bills_id"
     t.index ["customers_id"], name: "index_payments_on_customers_id"
+    t.index ["orders_id"], name: "index_payments_on_orders_id"
     t.index ["payment_types_id"], name: "index_payments_on_payment_types_id"
   end
 
@@ -122,11 +118,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_061155) do
   end
 
   add_foreign_key "addresses", "customers", column: "customers_id"
-  add_foreign_key "bills", "customers", column: "customers_id"
-  add_foreign_key "order_summaries", "bills", column: "bills_id"
-  add_foreign_key "order_summaries", "products", column: "products_id"
-  add_foreign_key "payments", "bills", column: "bills_id"
+  add_foreign_key "orders", "customers", column: "customers_id"
   add_foreign_key "payments", "customers", column: "customers_id"
+  add_foreign_key "payments", "orders", column: "orders_id"
   add_foreign_key "payments", "payment_types", column: "payment_types_id"
   add_foreign_key "products", "brands", column: "brands_id"
   add_foreign_key "products", "categories", column: "categories_id"
