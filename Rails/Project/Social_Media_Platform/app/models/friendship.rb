@@ -1,4 +1,3 @@
 class Friendship < ApplicationRecord
-  belongs_to :user
-  belongs_to :friend
+  belongs_to :user, dependent: :destroy, inverse_of: :friendship
 end
