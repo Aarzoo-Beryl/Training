@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
-  belongs_to :brand , inverse_of: :products, foreign_key: 'title', validate: true
-  belongs_to :category, inverse_of: :products, foreign_key: 'title', validate: true
-  belongs_to :seller, inverse_of: :products, foreign_key: 'name', validate: true
+  belongs_to :brand , inverse_of: :products, validate: true
+  belongs_to :category, inverse_of: :products, validate: true
+  belongs_to :seller, inverse_of: :products, validate: true
   has_many :reviews
   has_and_belongs_to_many :orders
 

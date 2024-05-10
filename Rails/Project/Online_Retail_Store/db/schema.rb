@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_112951) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_122014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_112951) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -91,12 +93,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_112951) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "brands_id"
-    t.bigint "sellers_id"
-    t.bigint "categories_id"
-    t.index ["brands_id"], name: "index_products_on_brands_id"
-    t.index ["categories_id"], name: "index_products_on_categories_id"
-    t.index ["sellers_id"], name: "index_products_on_sellers_id"
+    t.bigint "brand_id"
+    t.bigint "seller_id"
+    t.bigint "category_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -122,9 +124,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_112951) do
   add_foreign_key "payments", "customers", column: "customers_id"
   add_foreign_key "payments", "orders", column: "orders_id"
   add_foreign_key "payments", "payment_types", column: "payment_types_id"
-  add_foreign_key "products", "brands", column: "brands_id"
-  add_foreign_key "products", "categories", column: "categories_id"
-  add_foreign_key "products", "sellers", column: "sellers_id"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "sellers"
   add_foreign_key "reviews", "customers", column: "customers_id"
   add_foreign_key "reviews", "products", column: "products_id"
 end
