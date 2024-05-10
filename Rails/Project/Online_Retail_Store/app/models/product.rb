@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  belongs_to :brand , inverse_of: :products, validate: true, strict_loading: true
+  belongs_to :brand , inverse_of: :products, validate: true
   belongs_to :category, inverse_of: :products, validate: true, touch: true
   belongs_to :seller, inverse_of: :products, validate: true
   has_many :reviews

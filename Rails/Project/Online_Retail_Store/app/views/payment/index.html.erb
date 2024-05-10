@@ -1,0 +1,35 @@
+<div class="Payment Index">
+  <h1 align="center">PAYMENTS</h1><hr>
+  <%# <%= link_to("Add New Address",new_payment_path,:class=>'action new')%>
+  <br><br>
+  <table class="heading" style="border: 3px solid black;" border="1" cellpadding=13 cellspacing=3 align='center'>
+    <tr>
+      <th>ID</th>
+      <th>BILL ID</th>
+      <th>CUSTOMER</th>
+      <th>PAYMENT TYPE</th>
+      <th>DATE</th>
+      <th>STATUS</th>
+      <th>CREATED AT</th>
+      <th>UPDATED AT</th>
+      <th>ACTIONS</th>
+    </tr>
+    <% @payments.each do |payment|%>
+    <tr>
+      <td><%= payment.id %></td>
+      <td><%= payment.bill_id %></td>
+      <td><%= payment.customer.name %></td>
+      <td><%= payment.payment_type.name %></td>
+      <td><%= payment.date %></td>
+      <td><%= payment.status %></td>
+      <td><%= payment.created_at %></td>
+      <td><%= payment.updated_at %></td>
+      <td>
+        <%# <%= link_to("Show",payment_path(payment),:class=>"action show") %>
+        <%# <%= link_to("Edit",edit_payment_path(payment),:class=>"action edit")%>
+        <%# <%= link_to("Delete",delete_payment_path(payment),:class=>"action delete")%> 
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

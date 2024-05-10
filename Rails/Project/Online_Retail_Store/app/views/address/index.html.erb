@@ -1,0 +1,39 @@
+<div class="Address Index">
+  <h1 align="center">ADDRESSES</h1><hr>
+  <%# <%= link_to("Add New Address",new_address_path,:class=>'action new')%> 
+  <br><br>
+  <table class="heading" style="border: 3px solid black;" border="1" cellpadding=13 cellspacing=3 align='center'>
+    <tr>
+      <th>ID</th>
+      <th>CUSTOMER</th>
+      <th>HOUSE_NUMBER</th>
+      <th>SECTOR</th>
+      <th>CITY</th>
+      <th>STATE</th>
+      <th>COUNTRY</th>
+      <th>PINCODE</th>
+      <th>CREATED AT</th>
+      <th>UPDATED AT</th>
+      <th>ACTIONS</th>
+    </tr>
+    <% @addresses.each do |address|%>
+    <tr>
+      <td><%= address.id %></td>
+      <td><%= address.customer.name %></td>
+      <td><%= address.house_number %></td>
+      <td><%= address.sector %></td>
+      <td><%= address.city %></td>
+      <td><%= address.state %></td>
+      <td><%= address.country %></td>
+      <td><%= address.pincode %></td>
+      <td><%= address.created_at %></td>
+      <td><%= address.updated_at %></td>
+      <td>
+        <%= link_to("Show",address_path(address),:class=>"action show") %>
+        <%= link_to("Edit",edit_address_path(address),:class=>"action edit")%>
+        <%= link_to("Delete",delete_address_path(address),:class=>"action delete")%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

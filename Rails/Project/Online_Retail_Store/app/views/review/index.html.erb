@@ -1,0 +1,31 @@
+<div class="Review Index">
+  <h1 align="center">REVIEWS</h1><hr>
+  <%# <%= link_to("Add New Address",new_review_path,:class=>'action new')%>
+  <br><br>
+  <table class="heading" style="border: 3px solid black;" border="1" cellpadding=13 cellspacing=3 align='center'>
+    <tr>
+      <th>ID</th>
+      <th>PRODUCT</th>
+      <th>CUSTOMER</th>
+      <th>REVIEW</th>
+      <th>CREATED AT</th>
+      <th>UPDATED AT</th>
+      <th>ACTIONS</th>
+    </tr>
+    <% @reviews.each do |review|%>
+    <tr>
+      <td><%= review.id %></td>
+      <td><%= review.product.name %></td>
+      <td><%= review.customer.name %></td>
+      <td><%= review.description %></td>
+      <td><%= review.created_at %></td>
+      <td><%= review.updated_at %></td>
+      <td>
+        <%= link_to("Show",review_path(review),:class=>"action show") %>
+        <%= link_to("Edit",edit_review_path(review),:class=>"action edit")%>
+        <%= link_to("Delete",delete_review_path(review),:class=>"action delete")%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

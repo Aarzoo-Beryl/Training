@@ -1,5 +1,5 @@
 class PaymentType < ApplicationRecord
-  has_many :payments, validate: true, default: 0
+  has_many :payments, validate: true
 
   validates :title, presence: true
 end

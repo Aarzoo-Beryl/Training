@@ -1,0 +1,28 @@
+<div class="Customer Index">
+  <h1 align="center">CUSTOMERS</h1><hr>
+  <%# <%= link_to("Add New Address",new_customer_path,:class=>'action new')%>
+  <br><br>
+  <table class="heading" style="border: 3px solid black;" border="1" cellpadding=13 cellspacing=3 align='center'>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>PHONE NUMBER</th>
+      <th>EMAIL</th>
+    </tr>
+    <% @customers.each do |customer|%>
+    <tr>
+      <td><%= customer.id %></td>
+      <td><%= customer.name %></td>
+      <td><%= customer.phone_number %></td>
+      <td><%= customer.email %></td>
+      <td><%= customer.created_at %></td>
+      <td><%= customer.updated_at %></td>
+      <td>
+        <%# <%= link_to("Show",customer_path(customer),:class=>"action show") %>
+        <%# <%= link_to("Edit",edit_customer_path(customer),:class=>"action edit")%>
+        <%# <%= link_to("Delete",delete_customer_path(customer),:class=>"action delete")%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

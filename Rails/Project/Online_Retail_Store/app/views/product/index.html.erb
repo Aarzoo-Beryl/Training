@@ -1,0 +1,37 @@
+<div class="Products Index">
+  <h1 align="center">Products</h1><hr>
+  <%# <%= link_to("Add New Address",new_product_path,:class=>'action new')%>
+  <br><br>
+  <table class="heading" style="border: 3px solid black;" border="1" cellpadding=13 cellspacing=3 align='center'>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>PRICE</th>
+      <th>DESCRIPTION</th>
+      <th>BRAND</th>
+      <th>CATEGORY</th>
+      <th>SELLER</th>
+      <th>CREATED AT</th>
+      <th>UPDATED AT</th>
+      <th>ACTIONS</th>
+    </tr>
+    <% @products.each do |product|%>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= product.name %></td>
+      <td><%= product.price %></td>
+      <td><%= product.description %></td>
+      <td><%= product.brand.title %></td>
+      <td><%= product.category.title %></td>
+      <td><%= product.seller.name %></td>
+      <td><%= product.created_at %></td>
+      <td><%= product.updated_at %></td>
+      <td>
+        <%# <%= link_to("Show",product_path(product),:class=>"action show") %>
+        <%# <%= link_to("Edit",edit_product_path(product),:class=>"action edit")%>
+        <%# <%= link_to("Delete",delete_product_path(product),:class=>"action delete")%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
