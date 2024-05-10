@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :customer, inverse_of: :order, validate: true, foreign_key: true
-  belongs_to :payment, inverse_of: :order, validate: true, foreign_key: true
+  belongs_to :payment, inverse_of: :order, validate: true, foreign_key: true, ->{includes :payment_type}
   has_many :addresses, through: :customer, foreign_key: "shipping_address"
   has_and_belongs_to_many :products
 
