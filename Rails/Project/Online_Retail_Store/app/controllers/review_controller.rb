@@ -1,6 +1,6 @@
 class ReviewController < ApplicationController
   def index
-    @reviewes = Review.order('id ASC')
+    @reviews = Review.order('id ASC')
   end
 
   def show
@@ -17,7 +17,7 @@ class ReviewController < ApplicationController
 
     # Save the object
     if @review.save
-      redirect_to(reviewes_path)      # If save succeeds,redirect to index page
+      redirect_to(reviews_path)      # If save succeeds,redirect to index page
     else
       render('new')     # If save fails,redisplay the form so user can fix it
     end

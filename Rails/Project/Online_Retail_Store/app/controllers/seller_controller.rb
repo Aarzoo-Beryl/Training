@@ -1,6 +1,6 @@
 class SellerController < ApplicationController
   def index
-    @selleres = Seller.order('id ASC')
+    @sellers = Seller.order('id ASC')
   end
 
   def show
@@ -17,7 +17,7 @@ class SellerController < ApplicationController
 
     # Save the object
     if @seller.save
-      redirect_to(selleres_path)      # If save succeeds,redirect to index page
+      redirect_to(sellers_path)      # If save succeeds,redirect to index page
     else
       render('new')     # If save fails,redisplay the form so user can fix it
     end

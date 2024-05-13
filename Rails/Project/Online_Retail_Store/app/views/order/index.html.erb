@@ -1,3 +1,4 @@
+<%=link_to("<< Back To List",{controller:"home",action:"home_page"}) %>
 <div class="Order Index">
   <h1 align="center">ORDERS</h1><hr>
   <%# <%= link_to("Add New Address",new_order_path,:class=>'action new')%>
@@ -11,7 +12,7 @@
       <th>TOTAL BILL</th>
       <th>CREATED AT</th>
       <th>UPDATED AT</th>
-      <th>ACTIONS</th>
+      <!-- <th>ACTIONS</th> -->
     </tr>
     <% @orders.each do |order|%>
     <tr>
@@ -22,11 +23,11 @@
       <td><%= order.total_order %></td>
       <td><%= order.created_at %></td>
       <td><%= order.updated_at %></td>
-      <td>
+      <!-- <td> -->
         <%# <%= link_to("Show",order_path(order),:class=>"action show") %>
         <%# <%= link_to("Edit",edit_order_path(order),:class=>"action edit")%>
         <%# <%= link_to("Delete",delete_order_path(order),:class=>"action delete")%>
-      </td>
+      <!-- </td> -->
     </tr>
     <% end %>
   </table>

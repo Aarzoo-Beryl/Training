@@ -1,6 +1,7 @@
+<%=link_to("<< Back To List",{controller:"home",action:"home_page"}) %>
 <div class="Brands Index">
   <h1 align="center">BRANDS</h1><hr>
-  <%# <%= link_to("Add New Address",new_brand_path,:class=>'action new')%>
+  <%= link_to("Add New Address",new_brand_path,:class=>'action new') %>
   <br><br>
   <table class="heading" style="border: 3px solid black;" border="1" cellpadding=13 cellspacing=3 align='center'>
     <tr>
@@ -19,9 +20,9 @@
       <td><%= brand.created_at %></td>
       <td><%= brand.updated_at %></td>
       <td>
-        <%# <%= link_to("Show",brand_path(brand),:class=>"action show") %> 
-        <%# <%= link_to("Edit",edit_brand_path(brand),:class=>"action edit")%> 
-        <%# <%= link_to("Delete",delete_brand_path(brand),:class=>"action delete")%> 
+        <%# <%= link_to("Show",brand_path(brand),:class=>"action show") %>
+        <%# <%= link_to("Edit",edit_brand_path(brand),:class=>"action edit")%>
+        <%# <%= link_to("Delete",delete_brand_path(brand),:class=>"action delete")%>
       </td>
     </tr>
     <% end %>

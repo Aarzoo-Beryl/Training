@@ -1,6 +1,7 @@
+<%=link_to("<< Back To List",{controller:"home",action:"home_page"}) %>
 <div class="Address Index">
   <h1 align="center">ADDRESSES</h1><hr>
-  <%# <%= link_to("Add New Address",new_address_path,:class=>'action new')%> 
+  <%# <%= link_to("Add New Address",new_address_path,:class=>'action new')%>
   <br><br>
   <table class="heading" style="border: 3px solid black;" border="1" cellpadding=13 cellspacing=3 align='center'>
     <tr>
@@ -14,7 +15,7 @@
       <th>PINCODE</th>
       <th>CREATED AT</th>
       <th>UPDATED AT</th>
-      <th>ACTIONS</th>
+      <!-- <th>ACTIONS</th> -->
     </tr>
     <% @addresses.each do |address|%>
     <tr>
@@ -28,11 +29,11 @@
       <td><%= address.pincode %></td>
       <td><%= address.created_at %></td>
       <td><%= address.updated_at %></td>
-      <td>
-        <%= link_to("Show",address_path(address),:class=>"action show") %>
-        <%= link_to("Edit",edit_address_path(address),:class=>"action edit")%>
-        <%= link_to("Delete",delete_address_path(address),:class=>"action delete")%>
-      </td>
+      <!-- <td>
+        <%# <%= link_to("Show",address_path(address),:class=>"action show") %> %>
+        <%# <%= link_to("Edit",edit_address_path(address),:class=>"action edit")%> %>
+        <%# <%= link_to("Delete",delete_address_path(address), method: :delete, data: { confirm: "Are you sure?" },:class=>"action delete")%> %>
+      </td> -->
     </tr>
     <% end %>
   </table>

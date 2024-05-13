@@ -1,3 +1,4 @@
+<%=link_to("<< Back To List",{controller:"home",action:"home_page"}) %>
 <div class="Payment_types Index">
   <h1 align="center">PAYMENT TYPES</h1><hr>
   <%# <%= link_to("Add New Address",new_payment_type_path,:class=>'action new')%>
@@ -9,7 +10,7 @@
       <th>DESCRIPTION</th>
       <th>CREATED AT</th>
       <th>UPDATED AT</th>
-      <th>ACTIONS</th>
+      <!-- <th>ACTIONS</th> -->
     </tr>
     <% @payment_types.each do |payment_type|%>
     <tr>
@@ -18,11 +19,11 @@
       <td><%= payment_type.description %></td>
       <td><%= payment_type.created_at %></td>
       <td><%= payment_type.updated_at %></td>
-      <td>
+      <!-- <td>
         <%# <%= link_to("Show",payment_type_path(payment_type),:class=>"action show") %>
         <%# <%= link_to("Edit",edit_payment_type_path(payment_type),:class=>"action edit")%>
         <%# <%= link_to("Delete",delete_payment_type_path(payment_type),:class=>"action delete")%>
-      </td>
+      </td> -->
     </tr>
     <% end %>
   </table>

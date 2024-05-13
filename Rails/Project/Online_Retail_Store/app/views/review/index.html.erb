@@ -1,3 +1,4 @@
+<%=link_to("<< Back To List",{controller:"home",action:"home_page"}) %>
 <div class="Review Index">
   <h1 align="center">REVIEWS</h1><hr>
   <%# <%= link_to("Add New Address",new_review_path,:class=>'action new')%>
@@ -10,7 +11,7 @@
       <th>REVIEW</th>
       <th>CREATED AT</th>
       <th>UPDATED AT</th>
-      <th>ACTIONS</th>
+      <!-- <th>ACTIONS</th> -->
     </tr>
     <% @reviews.each do |review|%>
     <tr>
@@ -20,11 +21,11 @@
       <td><%= review.description %></td>
       <td><%= review.created_at %></td>
       <td><%= review.updated_at %></td>
-      <td>
-        <%= link_to("Show",review_path(review),:class=>"action show") %>
-        <%= link_to("Edit",edit_review_path(review),:class=>"action edit")%>
-        <%= link_to("Delete",delete_review_path(review),:class=>"action delete")%>
-      </td>
+      <!-- <td>
+        <%# <%= link_to("Show",review_path(review),:class=>"action show") %> %>
+        <%# <%= link_to("Edit",edit_review_path(review),:class=>"action edit")%> %>
+        <%# <%= link_to("Delete",delete_review_path(review),:class=>"action delete")%> %>
+      </td> -->
     </tr>
     <% end %>
   </table>
