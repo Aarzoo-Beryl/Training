@@ -779,3 +779,210 @@ HOW TO FETCH QUERIES---------------
                   email: "xyz@abc.in",
                   created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00,
                   updated_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00>] 
+
+- Eager loading Associations - mechanism used for loading associated objects
+      - N+1 queries problem - whenever we go search for a loop and in the search we want to find the associated objects too
+                            - the first query retrieves the record from main table and n further queries are generated to search for the object associated with each record
+                - solution - 
+                      - includes - ensures that all of the specified associations are loaded using the minimum possible number of queries
+                                 - conditions can also be specified along like where , select etc
+                                    3.3.1 :041 > r = Review.includes(:customer)
+                                      Review Load (0.6ms)  SELECT "reviews".* FROM "reviews" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                                      Customer Load (0.7ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" IN ($1, $2)  [["id", 1], ["id", 2]]
+                                    => 
+                                    [#<Review:0x00007f5c27a016a0
+                                    ... 
+                                    3.3.1 :042 > r.each do |x|
+                                    3.3.1 :043 >   puts x.customer.name
+                                    3.3.1 :044 > end
+                                      Review Load (0.9ms)  SELECT "reviews".* FROM "reviews"
+                                      Customer Load (1.0ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" IN ($1, $2)  [["id", 1], ["id", 2]]
+                                    Aarzoo
+                                    Abhishek
+                                    Aarzoo
+                                    => 
+                                    [#<Review:0x00007f5c27a35018
+                                      id: 1,
+                                      description: "very good product, would highly recommend",
+                                      created_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                      updated_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                      customer_id: 1,
+                                      product_id: 1,
+                                      lock_version: 0>,
+                                    #<Review:0x00007f5c27a34ed8
+                                      id: 2,
+                                      description: "very good product, but very pricy",
+                                      created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                      updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                      customer_id: 2,
+                                      product_id: 2,
+                                      lock_version: 0>,
+                                    #<Review:0x00007f5c27a34d98
+                                      id: 3,
+                                      description: "not durable",
+                                      created_at: Mon, 13 May 2024 05:56:11.035826000 UTC +00:00,
+                                      updated_at: Tue, 14 May 2024 05:19:47.839572000 UTC +00:00,
+                                      customer_id: 1,
+                                      product_id: 3,
+                                      lock_version: 1>] 
+                              - loading multiple associations - 
+                                      3.3.1 :037 > r = Review.includes(:customer,:product)
+                                        Review Load (0.2ms)  SELECT "reviews".* FROM "reviews" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                                        Customer Load (0.5ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" IN ($1, $2)  [["id", 1], ["id", 2]]
+                                        Product Load (3.6ms)  SELECT "products".* FROM "products" WHERE "products"."id" IN ($1, $2, $3)  [["id", 1], ["id", 2], ["id", 3]]
+                                      => 
+                                      [#<Review:0x00007f5c3401a788
+                                      ... 
+                                      3.3.1 :038 > r.each do |x|
+                                      3.3.1 :039 >   puts "[#{x.customer.name}, #{x.product.name}, #{x.description}]"
+                                      3.3.1 :040 > end
+                                        Review Load (0.6ms)  SELECT "reviews".* FROM "reviews"
+                                        Customer Load (0.6ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" IN ($1, $2)  [["id", 1], ["id", 2]]
+                                        Product Load (0.4ms)  SELECT "products".* FROM "products" WHERE "products"."id" IN ($1, $2, $3)  [["id", 1], ["id", 2], ["id", 3]]
+                                      [Aarzoo, Oversize Tshirt, very good product, would highly recommend]
+                                      [Abhishek, Iphone15, very good product, but very pricy]
+                                      [Aarzoo, Lowrise Bed, not durable]
+                                      => 
+                                      [#<Review:0x00007f5c34015dc8
+                                        id: 1,
+                                        description: "very good product, would highly recommend",
+                                        created_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                        updated_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                        customer_id: 1,
+                                        product_id: 1,
+                                        lock_version: 0>,
+                                      #<Review:0x00007f5c34015c88
+                                        id: 2,
+                                        description: "very good product, but very pricy",
+                                        created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                        updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                        customer_id: 2,
+                                        product_id: 2,
+                                        lock_version: 0>,
+                                      #<Review:0x00007f5c34015b48
+                                        id: 3,
+                                        description: "not durable",
+                                        created_at: Mon, 13 May 2024 05:56:11.035826000 UTC +00:00,
+                                        updated_at: Tue, 14 May 2024 05:19:47.839572000 UTC +00:00,
+                                        customer_id: 1,
+                                        product_id: 3,
+                                        lock_version: 1>] 
+
+                      - preload - loads each association user one query per association
+                                - doesn't allow to specify conditions
+                                  3.3.1 :019 > r = Review.preload(:customer)
+                                    Review Load (0.7ms)  SELECT "reviews".* FROM "reviews" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                                    Customer Load (0.5ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" IN ($1, $2)  [["id", 1], ["id", 2]]
+                                  => 
+                                  [#<Review:0x00007f02487d46b8
+                                  ... 
+                                  3.3.1 :020 > r.each do |x|
+                                  3.3.1 :021 >   puts x.customer.name
+                                  3.3.1 :022 > end
+                                    Review Load (0.9ms)  SELECT "reviews".* FROM "reviews"
+                                    Customer Load (0.5ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" IN ($1, $2)  [["id", 1], ["id", 2]]
+                                  Aarzoo
+                                  Abhishek
+                                  Aarzoo
+                                  => 
+                                  [#<Review:0x00007f02491bc090
+                                    id: 1,
+                                    description: "very good product, would highly recommend",
+                                    created_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                    updated_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                    customer_id: 1,
+                                    product_id: 1,
+                                    lock_version: 0>,
+                                  #<Review:0x00007f02491bbf50
+                                    id: 2,
+                                    description: "very good product, but very pricy",
+                                    created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                    updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                    customer_id: 2,
+                                    product_id: 2,
+                                    lock_version: 0>,
+                                  #<Review:0x00007f02491bbe10
+                                    id: 3,
+                                    description: "not durable",
+                                    created_at: Mon, 13 May 2024 05:56:11.035826000 UTC +00:00,
+                                    updated_at: Tue, 14 May 2024 05:19:47.839572000 UTC +00:00,
+                                    customer_id: 1,
+                                    product_id: 3,
+                                    lock_version: 1>] 
+
+                      - eager_load - loads all specified associations using a left outer join
+                                   - can specify conditions along with it
+                                    3.3.1 :023 > r = Review.eager_load(:customer)
+                                      SQL (0.8ms)  SELECT "reviews"."id" AS t0_r0, "reviews"."description" AS t0_r1, "reviews"."created_at" AS t0_r2, "reviews"."updated_at" AS t0_r3, "reviews"."customer_id" AS t0_r4, "reviews"."product_id" AS t0_r5, "reviews"."lock_version" AS t0_r6, "customers"."id" AS t1_r0, "customers"."name" AS t1_r1, "customers"."phone_number" AS t1_r2, "customers"."email" AS t1_r3, "customers"."created_at" AS t1_r4, "customers"."updated_at" AS t1_r5 FROM "reviews" LEFT OUTER JOIN "customers" ON "customers"."id" = "reviews"."customer_id" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                                    => 
+                                    [#<Review:0x00007f0249173480
+                                    ... 
+                                    3.3.1 :024 > r.each do |x|
+                                    3.3.1 :025 >   puts x.customer.name
+                                    3.3.1 :026 > end
+                                      SQL (1.0ms)  SELECT "reviews"."id" AS t0_r0, "reviews"."description" AS t0_r1, "reviews"."created_at" AS t0_r2, "reviews"."updated_at" AS t0_r3, "reviews"."customer_id" AS t0_r4, "reviews"."product_id" AS t0_r5, "reviews"."lock_version" AS t0_r6, "customers"."id" AS t1_r0, "customers"."name" AS t1_r1, "customers"."phone_number" AS t1_r2, "customers"."email" AS t1_r3, "customers"."created_at" AS t1_r4, "customers"."updated_at" AS t1_r5 FROM "reviews" LEFT OUTER JOIN "customers" ON "customers"."id" = "reviews"."customer_id"
+                                    Aarzoo
+                                    Aarzoo
+                                    Abhishek
+                                    => 
+                                    [#<Review:0x00007f0248fd5010
+                                      id: 3,
+                                      description: "not durable",
+                                      created_at: Mon, 13 May 2024 05:56:11.035826000 UTC +00:00,
+                                      updated_at: Tue, 14 May 2024 05:19:47.839572000 UTC +00:00,
+                                      customer_id: 1,
+                                      product_id: 3,
+                                      lock_version: 1>,
+                                    #<Review:0x00007f0248fd4d90
+                                      id: 1,
+                                      description: "very good product, would highly recommend",
+                                      created_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                      updated_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                                      customer_id: 1,
+                                      product_id: 1,
+                                      lock_version: 0>,
+                                    #<Review:0x00007f0248fd4c50
+                                      id: 2,
+                                      description: "very good product, but very pricy",
+                                      created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                      updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                                      customer_id: 2,
+                                      product_id: 2,
+                                      lock_version: 0>] 
+
+                      - strict_loading - ensures no associations are lazy loaded
+                                       - error will be raised if the associations are lazy loaded
+                                       - here lazy loaded refers to -  when the records are not loaded from the database until they are explicitly accessed or requested
+                                        3.3.1 :029 > a = Order.strict_loading.first
+                                          Order Load (0.3ms)  SELECT "orders".* FROM "orders" ORDER BY "orders"."id" ASC LIMIT $1  [["LIMIT", 1]]
+                                        => 
+                                        #<Order:0x00007f0249397680
+                                        ... 
+                                        3.3.1 :030 > a.customer.name
+                                        (irb):30:in `<main>': `Order` is marked for strict_loading. The Customer association named `:customer` cannot be lazily loaded. (ActiveRecord::StrictLoadingViolationError)
+                      - strict_loading! - called on the object
+                                        3.3.1 :031 > a = Order.first
+                                          Order Load (0.4ms)  SELECT "orders".* FROM "orders" ORDER BY "orders"."id" ASC LIMIT $1  [["LIMIT", 1]]
+                                        => 
+                                        #<Order:0x00007f0248fdcbd0
+                                        ... 
+                                        3.3.1 :032 > a.strict_loading!
+                                        => true 
+                                        3.3.1 :033 > a.customer.name
+                                        (irb):33:in `<main>': `Order` is marked for strict_loading. The Customer association named `:customer` cannot be lazily loaded. (ActiveRecord::StrictLoadingViolationError)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
