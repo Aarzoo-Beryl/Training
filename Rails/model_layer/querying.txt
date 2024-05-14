@@ -971,13 +971,121 @@ HOW TO FETCH QUERIES---------------
                                         3.3.1 :033 > a.customer.name
                                         (irb):33:in `<main>': `Order` is marked for strict_loading. The Customer association named `:customer` cannot be lazily loaded. (ActiveRecord::StrictLoadingViolationError)
 
+- scopes - way to define reusable queries that you can apply to your models
+         - chainable scopes can be written by referencing one in others where condition as scope1.where(condition)
+         - basic syntax - scope :scope_name, -> { where(condition)}
+            # to be written inside models
+                scope :customer, -> { where('reviews.customer_id >?',1)}
+                3.3.1 :006 > Review.customer
+                  Review Load (0.7ms)  SELECT "reviews".* FROM "reviews" WHERE (reviews.customer_id >1) /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                => 
+                [#<Review:0x00007f92b9621ee0
+                  id: 2,
+                  description: "very good product, but very pricy",
+                  created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                  updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                  customer_id: 2,
+                  product_id: 2,
+                  lock_version: 0>] 
+         - passing in arguments - allows user to pass values
+                - if mentioned directly like -  scope :costs_more_than, ->(amount) { where("price > ?", amount) }
+                - can be written into a function that can be accessed by the associated objects too
+                    class Customer < ApplicationRecord
+                      def self.id_more_than(x)
+                        where("id> ?", x)
+                      end
+                    end    
+                    # can be accessed as  -  Review.customer.id_more_than(x)
+         - conditionals - conditional statements like if can be used inside scope
+                - scope :name, -> (x){where(created_at: ...time) if time.present}
+                  
+                      def self.total_amount_greater_than(amount)
+                        where('total_order > ?', amount) if amount.present?
+                      end
+         - applying default_scope - specifies default scope that doesn't need to be called but will be executed everytime a wuery involves the models
+                        default_scope {where('customer_id > 1')}
 
+                      3.3.1 :027 > Order.all
+                        Order Load (1.5ms)  SELECT "orders".* FROM "orders" WHERE (customer_id > 1) /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                      => 
+                      [#<Order:0x00007f92b9b944e0
+                        id: 2,
+                        date: "2024-05-12",
+                        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32540bf0>",
+                        total_order: nil,
+                        created_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+                        products_count: 0,
+                        customer_id: 2>,
+                      #<Order:0x00007f92b81187b0
+                        id: 3,
+                        date: "2024-05-14",
+                        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c38076d80>",
+                        total_order: nil,
+                        created_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                        products_count: 0,
+                        customer_id: 4>] 
+         - merging of scopes - putting two scopes together 
+                      - just put the scope together seperated by"."
+                        scope :customer, -> { where('reviews.customer_id >?',1)}
+                        scope :product, -> { where('reviews.product_id >?',1)}
+                        3.3.1 :029 > Review.customer.product
+                          Review Load (0.8ms)  SELECT "reviews".* FROM "reviews" WHERE (reviews.customer_id >1) AND (reviews.product_id >1) /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                        => 
+                        [#<Review:0x00007f92b856f480
+                          id: 2,
+                          description: "very good product, but very pricy",
+                          created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                          updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                          customer_id: 2,
+                          product_id: 2,
+                          lock_version: 0>] 
+         - removing all scoping - used to unload all the scopes , specially default scope to be removed for the particular query
+                                - if all scopes to be removed - used unscoped
+                                - if particular scope to be removed - use unscope(scope_name)
+                        3.3.1 :031 > Order.unscoped.all
+                          Order Load (0.5ms)  SELECT "orders".* FROM "orders" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                        => 
+                        [#<Order:0x00007f92b8390a88
+                          id: 1,
+                          date: "2024-05-13",
+                          shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32658718>",
+                          total_order: nil,
+                          created_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+                          updated_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+                          products_count: 0,
+                          customer_id: 1>,
+                        #<Order:0x00007f92b81c1040
+                          id: 2,
+                          date: "2024-05-12",
+                          shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32540bf0>",
+                          total_order: nil,
+                          created_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+                          updated_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+                          products_count: 0,
+                          customer_id: 2>,
+                        #<Order:0x00007f92b80b3860
+                          id: 3,
+                          date: "2024-05-14",
+                          shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c38076d80>",
+                          total_order: nil,
+                          created_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                          updated_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                          products_count: 0,
+                          customer_id: 4>] 
 
-
-
-
-
-
+- dynamic finders - these refers to the by default find options provided by rails 
+                  3.3.1 :032 > Customer.find_by_name("Vijay")
+                    Customer Load (0.6ms)  SELECT "customers".* FROM "customers" WHERE "customers"."name" = $1 LIMIT $2  [["name", "Vijay"], ["LIMIT", 1]]
+                  => 
+                  #<Customer:0x00007f92b9891360
+                  id: 5,
+                  name: "Vijay",
+                  phone_number: "1230023999",
+                  email: "xyz@abc.in",
+                  created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00,
+                  updated_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00> 
 
 
 
