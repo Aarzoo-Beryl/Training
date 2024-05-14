@@ -605,10 +605,177 @@ HOW TO FETCH QUERIES---------------
               products_count: 0,
               customer_id: 4>] 
 
-- locks - 
+- locks - used to restrict other people from modifying the same record as one person is already doing
+        - ensures data integrity by allowing only one user to update a record at a time
+      - types of locks - 
+            - Optimistic Locking - it acknowledges that the possibility of different users updating the same record is rare
+                                 - hence allows multiple people to update /access the same record concurrently without blocking each other
+                                 - before saving the changes,checks if the same record has been modified by another user since it was retrieved 
+                                 - if not, saves the changes
+                                 - else, raises error 'ActiveRecord::StaleObjectError" indication a conflict
+                                  3.3.1 :001 > a = Review.find(3)
+                                    Review Load (0.8ms)  SELECT "reviews".* FROM "reviews" WHERE "reviews"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+                                  => 
+                                  #<Review:0x00007f5c342d7980
+                                  ... 
+                                  3.3.1 :002 > b = Review.find(3)
+                                    Review Load (1.0ms)  SELECT "reviews".* FROM "reviews" WHERE "reviews"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+                                  => 
+                                  #<Review:0x00007f5c35d08840
+                                  ... 
+                                  3.3.1 :003 > a.customer = Customer.find(1)
+                                    Customer Load (0.3ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  => 
+                                  #<Customer:0x00007f5c340dab50
+                                  ... 
+                                  3.3.1 :004 > a.save
+                                    TRANSACTION (0.5ms)  BEGIN
+                                    Review Update (2.9ms)  UPDATE "reviews" SET "updated_at" = $1, "customer_id" = $2, "lock_version" = $3 WHERE "reviews"."id" = $4 AND "reviews"."lock_version" = $5  [["updated_at", "2024-05-14 05:19:47.839572"], ["customer_id", 1], ["lock_version", 1], ["id", 3], ["lock_version", 0]]
+                                    TRANSACTION (1.3ms)  COMMIT
+                                  => true 
+                                  3.3.1 :005 > b.customer = Customer.find(2)
+                                    Customer Load (0.9ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+                                  => 
+                                  #<Customer:0x00007f5c27ffeb20
+                                  ... 
+                                  3.3.1 :006 > b.save
+                                    TRANSACTION (0.3ms)  BEGIN
+                                    Review Update (1.2ms)  UPDATE "reviews" SET "updated_at" = $1, "customer_id" = $2, "lock_version" = $3 WHERE "reviews"."id" = $4 AND "reviews"."lock_version" = $5  [["updated_at", "2024-05-14 05:20:14.029245"], ["customer_id", 2], ["lock_version", 1], ["id", 3], ["lock_version", 0]]
+                                    TRANSACTION (0.3ms)  ROLLBACK
+                                  (irb):6:in `<main>': Attempted to update a stale object: Review. (ActiveRecord::StaleObjectError)
 
 
+            - Pessimistic Locking - it refers to obtaining exclusive locks on selected rows in the database,preventing other users from accessing or modifying them until the lock is released
+                                  - useful when conflicts are expected or performance is not a primary concern
+                                  - utilizes locking mechanism of the underlying database
+                                  - typically used in a transaction to prevent deadlock
+                                  3.3.1 :026 > Review.transaction do
+                                  3.3.1 :027 >   a = Review.lock.first
+                                  3.3.1 :028 >   b = Review.first.description
+                                  3.3.1 :029 >   b = b.capitalize!
+                                  3.3.1 :030 >   Review.first.save
+                                  3.3.1 :031 > end
+                                    TRANSACTION (0.2ms)  BEGIN
+                                    Review Load (0.9ms)  SELECT "reviews".* FROM "reviews" ORDER BY "reviews"."id" ASC LIMIT $1 FOR UPDATE  [["LIMIT", 1]]
+                                    Review Load (0.3ms)  SELECT "reviews".* FROM "reviews" ORDER BY "reviews"."id" ASC LIMIT $1  [["LIMIT", 1]]
+                                    Review Load (0.3ms)  SELECT "reviews".* FROM "reviews" ORDER BY "reviews"."id" ASC LIMIT $1  [["LIMIT", 1]]
+                                    TRANSACTION (1.4ms)  COMMIT
+                                  => true 
 
+- joins - 
+      - string SQL format - 
+              3.3.1 :035 > Review.joins("INNER JOIN customers ON reviews.customer_id = customers.id ")
+                Review Load (0.8ms)  SELECT "reviews".* FROM "reviews" INNER JOIN customers ON reviews.customer_id = customers.id /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+              => 
+              [#<Review:0x00007f5c27ffaca0
+                id: 3,
+                description: "not durable",
+                created_at: Mon, 13 May 2024 05:56:11.035826000 UTC +00:00,
+                updated_at: Tue, 14 May 2024 05:19:47.839572000 UTC +00:00,
+                customer_id: 1,
+                product_id: 3,
+                lock_version: 1>,
+              #<Review:0x00007f5c27ffab60
+                id: 1,
+                description: "very good product, would highly recommend",
+                created_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                updated_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                customer_id: 1,
+                product_id: 1,
+                lock_version: 0>,
+              #<Review:0x00007f5c27ffaa20
+                id: 2,
+                description: "very good product, but very pricy",
+                created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                customer_id: 2,
+                product_id: 2,
+                lock_version: 0>] 
+      - joining multiple associations - 
+              3.3.1 :046 > Review.joins(:customer,:product)
+                Review Load (0.5ms)  SELECT "reviews".* FROM "reviews" INNER JOIN "customers" ON "customers"."id" = "reviews"."customer_id" INNER JOIN "products" ON "products"."id" = "reviews"."product_id" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+      - joining nested associations - 
+              3.3.1 :002 > Payment.joins(order: :customer)
+                Payment Load (0.7ms)  SELECT "payments".* FROM "payments" INNER JOIN "orders" ON "orders"."id" = "payments"."order_id" INNER JOIN "customers" ON "customers"."id" = "orders"."customer_id" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+              => 
+              [#<Payment:0x00007f024a74d490
+                id: 1,
+                date: "2024-05-13",
+                status: "paid",
+                created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                order_id: 1,
+                payment_type_id: 1,
+                customer_id: 1>,
+              #<Payment:0x00007f024a74d350
+                id: 2,
+                date: "2024-05-12",
+                status: "pending",
+                created_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+                updated_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+                order_id: 2,
+                payment_type_id: 2,
+                customer_id: 2>,
+              #<Payment:0x00007f024a74d210
+                id: 3,
+                date: "2024-05-14",
+                status: "refund instantiated",
+                created_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+                updated_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+                order_id: 3,
+                payment_type_id: 4,
+                customer_id: 4>] 
+      - merge - 
 
+- left_outer_joins - 
+              3.3.1 :013 > Product.left_outer_joins(:brand).limit(1)
+                Product Load (0.5ms)  SELECT "products".* FROM "products" LEFT OUTER JOIN "brands" ON "brands"."id" = "products"."brand_id" /* loading for pp */ LIMIT $1  [["LIMIT", 1]]
+              => 
+              [#<Product:0x00007f0249170f00
+                id: 1,
+                name: "Oversize Tshirt",
+                description: "Loose Tshirt for Women",
+                price: 2500,
+                created_at: Fri, 10 May 2024 04:54:18.365298000 UTC +00:00,
+                updated_at: Fri, 10 May 2024 04:54:18.365298000 UTC +00:00,
+                brand_id: 1,
+                seller_id: 1,
+                category_id: 1>] 
 
+- where.associated - helps to select records based on the presence of associations
+              3.3.1 :016 > Customer.where.associated(:review).distinct
+                Customer Load (0.5ms)  SELECT DISTINCT "customers".* FROM "customers" INNER JOIN "reviews" ON "reviews"."customer_id" = "customers"."id" WHERE "reviews"."id" IS NOT NULL /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+              => 
+              [#<Customer:0x00007f024917c300
+                id: 1,
+                name: "Aarzoo",
+                phone_number: "1234123456",
+                email: "abc@abc.gmail.com",
+                created_at: Sun, 12 May 2024 16:08:19.294850000 UTC +00:00,
+                updated_at: Sun, 12 May 2024 16:08:19.294850000 UTC +00:00>,
+              #<Customer:0x00007f024917c080
+                id: 2,
+                name: "Abhishek",
+                phone_number: "1234123400",
+                email: "xyz@abc.gmail.com",
+                created_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00,
+                updated_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00>] 
 
+- where.missing - helps to select records based on the absence of associations
+                3.3.1 :017 > Customer.where.missing(:review).distinct
+                  Customer Load (0.8ms)  SELECT DISTINCT "customers".* FROM "customers" LEFT OUTER JOIN "reviews" ON "reviews"."customer_id" = "customers"."id" WHERE "reviews"."id" IS NULL /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                => 
+                [#<Customer:0x00007f024917d700
+                  id: 4,
+                  name: "Piyush",
+                  phone_number: "1230023400",
+                  email: "xyz@abc.com",
+                  created_at: Sun, 12 May 2024 16:09:47.849882000 UTC +00:00,
+                  updated_at: Sun, 12 May 2024 16:09:47.849882000 UTC +00:00>,
+                #<Customer:0x00007f024917d5c0
+                  id: 5,
+                  name: "Vijay",
+                  phone_number: "1230023999",
+                  email: "xyz@abc.in",
+                  created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00,
+                  updated_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00>] 
