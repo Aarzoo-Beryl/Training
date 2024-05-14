@@ -1,0 +1,614 @@
+HOW TO FETCH QUERIES---------------
+
+
+- find - used to retrieve single objects
+       - find! - raises error if nothing found, rest works same
+        3.3.1 :016 > Address.find(3)
+          Address Load (0.8ms)  SELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+        => 
+        #<Address:0x00007f4748b288b0
+        id: 3,
+        house_number: 16,
+        sector: 84,
+        city: "Panipat",
+        state: "Haryana",
+        country: "India",
+        pincode: 121080,
+        created_at: Mon, 13 May 2024 05:39:31.514111000 UTC +00:00,
+        updated_at: Mon, 13 May 2024 05:39:31.514111000 UTC +00:00,
+        customer_id: 4> 
+
+- find_each - used to find each record for the specified block
+       - options -
+             - :batch_size - allows you to specify the number of records to be retrieved in each batch
+                      3.3.1 :023 > Customer.find_each(batch_size:2) do |a|
+                      3.3.1 :024 >   puts a.name
+                      3.3.1 :025 > end
+                        Customer Load (0.3ms)  SELECT "customers".* FROM "customers" ORDER BY "customers"."id" ASC LIMIT $1  [["LIMIT", 2]]
+                      Aarzoo
+                      Abhishek
+                        Customer Load (0.3ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" > $1 ORDER BY "customers"."id" ASC LIMIT $2  [["id", 2], ["LIMIT", 2]]
+                      Piyush
+                      Vijay
+                        Customer Load (0.3ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" > $1 ORDER BY "customers"."id" ASC LIMIT $2  [["id", 5], ["LIMIT", 2]]
+                      => nil 
+
+             - :start - allows to specify the search should start from a particular id
+                      3.3.1 :026 > Customer.find_each(batch_size:2,start:2) do |a|
+                      3.3.1 :027 >   puts a.name
+                      3.3.1 :028 > end
+                        Customer Load (0.6ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" >= $1 ORDER BY "customers"."id" ASC LIMIT $2  [["id", 2], ["LIMIT", 2]]
+                      Abhishek
+                      Piyush
+                        Customer Load (0.3ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" >= $1 AND "customers"."id" > $2 ORDER BY "customers"."id" ASC LIMIT $3  [["id", 2], ["id", 4], ["LIMIT", 2]]
+                      Vijay
+                      => nil 
+
+             - :finish - used to specify till what id the search should happen
+                      3.3.1 :029 > Customer.find_each(finish:3) do |a|
+                      3.3.1 :030 >   puts a.name
+                      3.3.1 :031 > end
+                        Customer Load (0.5ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" <= $1 ORDER BY "customers"."id" ASC LIMIT $2  [["id", 3], ["LIMIT", 1000]]
+                      Aarzoo
+                      Abhishek
+                      => nil 
+
+             - :error_on_ignore - by default , if the ordering or he task specified is unable to be completed then rails ignore it
+                                - this tells rails that i want to know whats the problem so i can fix it
+                                - basically says what you are unable to do specify it as an error
+             - :order - used to specify the order you want the data to be displayed in
+                      - can have "asc" and "desc" values
+                      3.3.1 :032 > Customer.find_each(order: :desc) do |a|
+                      3.3.1 :033 >   puts a.name
+                      3.3.1 :034 > end
+                        Customer Load (0.8ms)  SELECT "customers".* FROM "customers" ORDER BY "customers"."id" DESC LIMIT $1  [["LIMIT", 1000]]
+                      Vijay
+                      Piyush
+                      Abhishek
+                      Aarzoo
+                      => nil 
+
+- find_in_batch - similar to above
+                - options - 
+                        - :batch_size - 
+                              3.3.1 :057 > Customer.find_in_batches(batch_size: 3) do |a|
+                              3.3.1 :058 >   a.each do |b|
+                              3.3.1 :059 >     puts b.name
+                              3.3.1 :060 >   end
+                              3.3.1 :061 > end
+                                Customer Load (0.8ms)  SELECT "customers".* FROM "customers" ORDER BY "customers"."id" ASC LIMIT $1  [["LIMIT", 3]]
+                              Aarzoo
+                              Abhishek
+                              Piyush
+                                Customer Load (0.3ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" > $1 ORDER BY "customers"."id" ASC LIMIT $2  [["id", 4], ["LIMIT", 3]]
+                              Vijay
+                              => nil 
+                        - :start - 
+                              3.3.1 :062 > Customer.find_in_batches(start: 2) do |a|
+                              3.3.1 :063 >   a.each do |b|
+                              3.3.1 :064 >     puts b.name
+                              3.3.1 :065 >   end
+                              3.3.1 :066 > end
+                                Customer Load (0.6ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" >= $1 ORDER BY "customers"."id" ASC LIMIT $2  [["id", 2], ["LIMIT", 1000]]
+                              Abhishek
+                              Piyush
+                              Vijay
+                              => nil 
+                        - :finish - 
+                              3.3.1 :067 > Customer.find_in_batches(finish: 3) do |a|
+                              3.3.1 :068 >   a.each do |b|
+                              3.3.1 :069 >     puts b.name
+                              3.3.1 :070 >   end
+                              3.3.1 :071 > end
+                                Customer Load (0.9ms)  SELECT "customers".* FROM "customers" WHERE "customers"."id" <= $1 ORDER BY "customers"."id" ASC LIMIT $2  [["id", 3], ["LIMIT", 1000]]
+                              Aarzoo
+                              Abhishek
+                              => nil 
+                        - :error_on_ignore - overrides the ignore with error it corresponds to
+
+- find_by - finds according to the required field
+       - find_by! - raises error if nothing found, rest works same
+       - while working with composite primary keys, instead of using id, use id_value when refers to another instance as id only take the tables'id and id_value takes the values of all primary keys values 
+        3.3.1 :021 > Order.find_by date:Date.today
+          Order Load (0.4ms)  SELECT "orders".* FROM "orders" WHERE "orders"."date" = $1 LIMIT $2  [["date", "2024-05-13"], ["LIMIT", 1]]
+        => 
+        #<Order:0x00007f47490f4258
+        id: 1,
+        date: "2024-05-13",
+        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32658718>",
+        total_order: nil,
+        created_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+        updated_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+        products_count: 0,
+        customer_id: 1> 
+
+- first - retrieves the first object in the table
+       - first! - raises error if nothing found, rest works same
+        3.3.1 :018 > Payment.first
+          Payment Load (0.8ms)  SELECT "payments".* FROM "payments" ORDER BY "payments"."id" ASC LIMIT $1  [["LIMIT", 1]]
+        => 
+        #<Payment:0x00007f4748fc3e88
+        id: 1,
+        date: "2024-05-13",
+        status: "paid",
+        created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+        updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+        order_id: 1,
+        payment_type_id: 1,
+        customer_id: 1> 
+
+- grouping - used to group the fields based on common factors
+           - basic -
+                3.3.1 :101 > Customer.select(:created_at).group(:created_at)
+                  Customer Load (0.4ms)  SELECT "customers"."created_at" FROM "customers" GROUP BY "customers"."created_at" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                => 
+                [#<Customer:0x00007f47490fd858 id: nil, created_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00>,
+                #<Customer:0x00007f47490fd718 id: nil, created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00>,
+                #<Customer:0x00007f47490fd5d8 id: nil, created_at: Sun, 12 May 2024 16:08:19.294850000 UTC +00:00>,
+                #<Customer:0x00007f47490fd498 id: nil, created_at: Sun, 12 May 2024 16:09:47.849882000 UTC +00:00>] 
+           - total of grouped items - used to count the total items grouped
+                3.3.1 :102 > Customer.group(:created_at).count
+                  Customer Count (2.1ms)  SELECT COUNT(*) AS "count_all", "customers"."created_at" AS "customers_created_at" FROM "customers" GROUP BY "customers"."created_at"
+                => 
+                {Sun, 12 May 2024 16:08:38.230638000 UTC +00:00=>1,
+                Sun, 12 May 2024 16:10:09.556963000 UTC +00:00=>1,
+                Sun, 12 May 2024 16:08:19.294850000 UTC +00:00=>1,
+                Sun, 12 May 2024 16:09:47.849882000 UTC +00:00=>1} 
+           - having - used to specify conditions on the groups
+                  3.3.1 :109 > Product.select("price").
+                  3.3.1 :110 > group("price").having("price > ?",2000 )
+                    Product Load (0.5ms)  SELECT "products"."price" FROM "products" GROUP BY "products"."price" HAVING (price > 2000) /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                  => [#<Product:0x00007f4748954f20 id: nil, price: 2500>, #<Product:0x00007f4748fea010 id: nil, price: 82500>] 
+   
+- last - retrieves the last object in the table
+       - last! - raises error if nothing found, rest works same
+        3.3.1 :019 > Customer.last
+          Customer Load (0.8ms)  SELECT "customers".* FROM "customers" ORDER BY "customers"."id" DESC LIMIT $1  [["LIMIT", 1]]
+        => 
+        #<Customer:0x00007f4748fc6048
+        id: 5,
+        name: "Vijay",
+        phone_number: "1230023999",
+        email: "xyz@abc.in",
+        created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00,
+        updated_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00> 
+       - if any number is specified - retrieves the last n elements
+        3.3.1 :020 > Customer.last(2)
+          Customer Load (0.5ms)  SELECT "customers".* FROM "customers" ORDER BY "customers"."id" DESC LIMIT $1  [["LIMIT", 2]]
+        => 
+        [#<Customer:0x00007f4748fdb560
+          id: 4,
+          name: "Piyush",
+          phone_number: "1230023400",
+          email: "xyz@abc.com",
+          created_at: Sun, 12 May 2024 16:09:47.849882000 UTC +00:00,
+          updated_at: Sun, 12 May 2024 16:09:47.849882000 UTC +00:00>,
+        #<Customer:0x00007f4748fdb6a0
+          id: 5,
+          name: "Vijay",
+          phone_number: "1230023999",
+          email: "xyz@abc.in",
+          created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00,
+          updated_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00>] 
+
+- limit - used to limit the records to be shown
+          3.3.1 :094 > Customer.select(:name).limit(2)
+            Customer Load (0.3ms)  SELECT "customers"."name" FROM "customers" /* loading for pp */ LIMIT $1  [["LIMIT", 2]]
+          => [#<Customer:0x00007f47490fba58 id: nil, name: "Aarzoo">, #<Customer:0x00007f47490fb918 id: nil, name: "Abhishek">] 
+
+- offset - used to set from where the selection/search should start
+            3.3.1 :095 > Customer.select(:id,:name).limit(2).offset(2)
+              Customer Load (0.3ms)  SELECT "customers"."id", "customers"."name" FROM "customers" /* loading for pp */ LIMIT $1 OFFSET $2  [["LIMIT", 2], ["OFFSET", 2]]
+            => [#<Customer:0x00007f4748fca508 id: 4, name: "Piyush">, #<Customer:0x00007f4748fca3c8 id: 5, name: "Vijay">] 
+
+- order - used to specify the order you want the data to be displayed in
+        - can have "asc" and "desc" values
+        - for specifying two conditions ,do abc.order(...).order(...)
+        3.3.1 :092 > Payment.order(created_at: :desc)
+          Payment Load (0.6ms)  SELECT "payments".* FROM "payments" /* loading for pp */ ORDER BY "payments"."created_at" DESC LIMIT $1  [["LIMIT", 11]]
+        => 
+        [#<Payment:0x00007f4748fcc308
+          id: 3,
+          date: "2024-05-14",
+          status: "refund instantiated",
+          created_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+          updated_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+          order_id: 3,
+          payment_type_id: 4,
+          customer_id: 4>,
+        #<Payment:0x00007f4748fcc1c8
+          id: 2,
+          date: "2024-05-12",
+          status: "pending",
+          created_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+          updated_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+          order_id: 2,
+          payment_type_id: 2,
+          customer_id: 2>,
+        #<Payment:0x00007f4748fcc088
+          id: 1,
+          date: "2024-05-13",
+          status: "paid",
+          created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+          updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+          order_id: 1,
+          payment_type_id: 1,
+          customer_id: 1>] 
+
+- select - used to select specific fields
+          3.3.1 :093 > Payment.select(:status).distinct
+            Payment Load (0.3ms)  SELECT DISTINCT "payments"."status" FROM "payments" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+          => 
+          [#<Payment:0x00007f47490ff158 id: nil, status: "refund instantiated">,
+          #<Payment:0x00007f47490ff018 id: nil, status: "pending">,
+          #<Payment:0x00007f47490feed8 id: nil, status: "paid">] 
+
+- where - allows you to specify certain condition for filtering the data
+        - this can apply on various things like individuals, arrays, hashes, not conditions, or conditions, 
+    - Conditions - 
+          - pure string conditions - 
+              3.3.1 :072 > Customer.where(name:"Abhishek")
+                Customer Load (0.4ms)  SELECT "customers".* FROM "customers" WHERE "customers"."name" = $1 /* loading for pp */ LIMIT $2  [["name", "Abhishek"], ["LIMIT", 11]]
+              => 
+              [#<Customer:0x00007f4748fcb408
+                id: 2,
+                name: "Abhishek",
+                phone_number: "1234123400",
+                email: "xyz@abc.gmail.com",
+                created_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00,
+                updated_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00>] 
+
+          - array conditions - 
+                - basic - 
+                      3.3.1 :075 > Brand.where("title = ?", "puma")
+                        Brand Load (0.7ms)  SELECT "brands".* FROM "brands" WHERE (title = 'puma') /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                      => 
+                      [#<Brand:0x00007f47489ad738
+                        id: 1,
+                        title: "puma",
+                        description: "logo of cheetah",
+                        created_at: Fri, 10 May 2024 04:50:16.699633000 UTC +00:00,
+                        updated_at: Fri, 10 May 2024 04:50:16.699633000 UTC +00:00>]
+
+                - placeholder - 
+                      3.3.1 :078 > Order.where("date >= :a", {a: Date.today})
+                        Order Load (0.7ms)  SELECT "orders".* FROM "orders" WHERE (date >= '2024-05-13') /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                      => 
+                      [#<Order:0x00007f4748fd3ae0
+                        id: 1,
+                        date: "2024-05-13",
+                        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32658718>",
+                        total_order: nil,
+                        created_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+                        products_count: 0,
+                        customer_id: 1>,
+                      #<Order:0x00007f4748fd39a0
+                        id: 3,
+                        date: "2024-05-14",
+                        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c38076d80>",
+                        total_order: nil,
+                        created_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                        products_count: 0,
+                        customer_id: 4>] 
+
+                - like condition - 
+                      3.3.1 :079 > Review.where("description LIKE ?", "very good%" ) 
+                        Review Load (1.7ms)  SELECT "reviews".* FROM "reviews" WHERE (description LIKE 'very good%') /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                      => 
+                      [#<Review:0x00007f4748d027a8
+                        id: 1,
+                        description: "very good product, would highly recommend",
+                        created_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 05:55:09.886515000 UTC +00:00,
+                        customer_id: 1,
+                        product_id: 1>,
+                      #<Review:0x00007f4749016688
+                        id: 2,
+                        description: "very good product, but very pricy",
+                        created_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 05:55:42.405427000 UTC +00:00,
+                        customer_id: 2,
+                        product_id: 2>] 
+
+          - hashes - allows you to specify conditions for hashes in the form of key and value pairs
+                - equality -
+                      3.3.1 :080 > Payment.where(status:"paid")
+                        Payment Load (0.4ms)  SELECT "payments".* FROM "payments" WHERE "payments"."status" = $1 /* loading for pp */ LIMIT $2  [["status", "paid"], ["LIMIT", 11]]
+                      => 
+                      [#<Payment:0x00007f47490f9c58
+                        id: 1,
+                        date: "2024-05-13",
+                        status: "paid",
+                        created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                        order_id: 1,
+                        payment_type_id: 1,
+                        customer_id: 1>] 
+
+                - range - 
+                      3.3.1 :084 > Order.where(date: Date.yesterday..Date.tomorrow)
+                        Order Load (0.6ms)  SELECT "orders".* FROM "orders" WHERE "orders"."date" BETWEEN $1 AND $2 /* loading for pp */ LIMIT $3  [["date", "2024-05-12"], ["date", "2024-05-14"], ["LIMIT", 11]]
+                      => 
+                      [#<Order:0x00007f4748fc8708
+                        id: 1,
+                        date: "2024-05-13",
+                        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32658718>",
+                        total_order: nil,
+                        created_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+                        products_count: 0,
+                        customer_id: 1>,
+                      #<Order:0x00007f4748fc85c8
+                        id: 2,
+                        date: "2024-05-12",
+                        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32540bf0>",
+                        total_order: nil,
+                        created_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+                        products_count: 0,
+                        customer_id: 2>,
+                      #<Order:0x00007f4748fc8488
+                        id: 3,
+                        date: "2024-05-14",
+                        shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c38076d80>",
+                        total_order: nil,
+                        created_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+                        products_count: 0,
+                        customer_id: 4>] 
+                        
+                - subject condition - 
+                      3.3.1 :086 > Payment.where(status: ["paid","pending"])
+                        Payment Load (0.6ms)  SELECT "payments".* FROM "payments" WHERE "payments"."status" IN ($1, $2) /* loading for pp */ LIMIT $3  [["status", "paid"], ["status", "pending"], ["LIMIT", 11]]
+                      => 
+                      [#<Payment:0x00007f4749019b08
+                        id: 1,
+                        date: "2024-05-13",
+                        status: "paid",
+                        created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                        order_id: 1,
+                        payment_type_id: 1,
+                        customer_id: 1>,
+                      #<Payment:0x00007f47490199c8
+                        id: 2,
+                        date: "2024-05-12",
+                        status: "pending",
+                        created_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+                        updated_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+                        order_id: 2,
+                        payment_type_id: 2,
+                        customer_id: 2>] 
+          - not conditions - written as where.not
+                           - specifies the condition to be not met
+                            3.3.1 :088 > Payment.where.not(status: "pending")
+                              Payment Load (0.5ms)  SELECT "payments".* FROM "payments" WHERE "payments"."status" != $1 /* loading for pp */ LIMIT $2  [["status", "pending"], ["LIMIT", 11]]
+                            => 
+                            [#<Payment:0x00007f4748fe1a50
+                              id: 1,
+                              date: "2024-05-13",
+                              status: "paid",
+                              created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                              updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                              order_id: 1,
+                              payment_type_id: 1,
+                              customer_id: 1>,
+                            #<Payment:0x00007f4748fe1910
+                              id: 3,
+                              date: "2024-05-14",
+                              status: "refund instantiated",
+                              created_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+                              updated_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+                              order_id: 3,
+                              payment_type_id: 4,
+                              customer_id: 4>] 
+          - or condition - used two specify two conditions together
+                            3.3.1 :090 > Payment.where(order_id: [1,3]).or(Payment.where(status:"pending"))
+                              Payment Load (0.6ms)  SELECT "payments".* FROM "payments" WHERE ("payments"."order_id" IN ($1, $2) OR "payments"."status" = $3) /* loading for pp */ LIMIT $4  [["order_id", 1], ["order_id", 3], ["status", "pending"], ["LIMIT", 11]]
+                            => 
+                            [#<Payment:0x00007f474901ec48
+                              id: 1,
+                              date: "2024-05-13",
+                              status: "paid",
+                              created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                              updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                              order_id: 1,
+                              payment_type_id: 1,
+                              customer_id: 1>,
+                            #<Payment:0x00007f474901eb08
+                              id: 2,
+                              date: "2024-05-12",
+                              status: "pending",
+                              created_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+                              updated_at: Mon, 13 May 2024 06:44:01.174305000 UTC +00:00,
+                              order_id: 2,
+                              payment_type_id: 2,
+                              customer_id: 2>,
+                            #<Payment:0x00007f474901e888
+                              id: 3,
+                              date: "2024-05-14",
+                              status: "refund instantiated",
+                              created_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+                              updated_at: Mon, 13 May 2024 06:45:07.611367000 UTC +00:00,
+                              order_id: 3,
+                              payment_type_id: 4,
+                              customer_id: 4>] 
+          - and condition - 
+                            3.3.1 :091 > Payment.where(order_id: [1,3]).and(Payment.where(status:"paid"))
+                              Payment Load (0.5ms)  SELECT "payments".* FROM "payments" WHERE "payments"."order_id" IN ($1, $2) AND "payments"."status" = $3 /* loading for pp */ LIMIT $4  [["order_id", 1], ["order_id", 3], ["status", "paid"], ["LIMIT", 11]]
+                            => 
+                            [#<Payment:0x00007f4748feb690
+                              id: 1,
+                              date: "2024-05-13",
+                              status: "paid",
+                              created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                              updated_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+                              order_id: 1,
+                              payment_type_id: 1,
+                              customer_id: 1>]
+
+- take - retrieves any given number of order without specific order
+       - take! - raises error if nothing found, rest works same
+        3.3.1 :017 > Customer.take(2)
+          Customer Load (0.3ms)  SELECT "customers".* FROM "customers" LIMIT $1  [["LIMIT", 2]]
+        => 
+        [#<Customer:0x00007f4748bdc220
+          id: 1,
+          name: "Aarzoo",
+          phone_number: "1234123456",
+          email: "abc@abc.gmail.com",
+          created_at: Sun, 12 May 2024 16:08:19.294850000 UTC +00:00,
+          updated_at: Sun, 12 May 2024 16:08:19.294850000 UTC +00:00>,
+        #<Customer:0x00007f474afb4260
+          id: 2,
+          name: "Abhishek",
+          phone_number: "1234123400",
+          email: "xyz@abc.gmail.com",
+          created_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00,
+          updated_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00>] 
+
+- overriding conditions - 
+      - unscope - used to undo a condition specified
+                3.3.1 :111 > Product.select(:name,:price).order(price: :asc).unscope(:order)
+                  Product Load (0.2ms)  SELECT "products"."name", "products"."price" FROM "products" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                => 
+                [#<Product:0x00007f4748fddfe0 id: nil, name: "Oversize Tshirt", price: 2500>,
+                #<Product:0x00007f4748fddea0 id: nil, name: "Iphone15", price: 82500>,
+                #<Product:0x00007f4748fddd60 id: nil, name: "Lowrise Bed", price: 82500>] 
+      - only - specifies the conditions to be followed, rest are ignored
+                3.3.1 :112 > Product.select(:name,:price).order(price: :desc).only(:order)
+                  Product Load (0.4ms)  SELECT "products".* FROM "products" /* loading for pp */ ORDER BY "products"."price" DESC LIMIT $1  [["LIMIT", 11]]
+                => 
+                [#<Product:0x00007f4748fe1910
+                  id: 2,
+                  name: "Iphone15",
+                  description: "15th phone from iphone series",
+                  price: 82500,
+                  created_at: Fri, 10 May 2024 05:05:49.847215000 UTC +00:00,
+                  updated_at: Fri, 10 May 2024 05:05:49.847215000 UTC +00:00,
+                  brand_id: 2,
+                  seller_id: 2,
+                  category_id: 2>,
+                #<Product:0x00007f4748fe17d0
+                  id: 3,
+                  name: "Lowrise Bed",
+                  description: "very low height bed",
+                  price: 82500,
+                  created_at: Fri, 10 May 2024 05:06:56.996438000 UTC +00:00,
+                  updated_at: Fri, 10 May 2024 05:06:56.996438000 UTC +00:00,
+                  brand_id: 3,
+                  seller_id: 3,
+                  category_id: 3>,
+                #<Product:0x00007f4748fe1690
+                  id: 1,
+                  name: "Oversize Tshirt",
+                  description: "Loose Tshirt for Women",
+                  price: 2500,
+                  created_at: Fri, 10 May 2024 04:54:18.365298000 UTC +00:00,
+                  updated_at: Fri, 10 May 2024 04:54:18.365298000 UTC +00:00,
+                  brand_id: 1,
+                  seller_id: 1,
+                  category_id: 1>] 
+
+      - reselect - overrides existing select statement
+                  3.3.1 :113 > Product.select(:name,:price).order(price: :desc).reselect(:id,:name)
+                    Product Load (0.3ms)  SELECT "products"."id", "products"."name" FROM "products" /* loading for pp */ ORDER BY "products"."price" DESC LIMIT $1  [["LIMIT", 11]]
+                  => 
+                  [#<Product:0x00007f47490562d8 id: 2, name: "Iphone15">,
+                  #<Product:0x00007f4749056198 id: 3, name: "Lowrise Bed">,
+                  #<Product:0x00007f4749056058 id: 1, name: "Oversize Tshirt">] 
+
+      - reorder - overrides order statement
+                  3.3.1 :115 > Product.select(:name,:price).order(price: :asc).reorder(name: :asc)
+                    Product Load (0.8ms)  SELECT "products"."name", "products"."price" FROM "products" /* loading for pp */ ORDER BY "products"."name" ASC LIMIT $1  [["LIMIT", 11]]
+                  => 
+                  [#<Product:0x00007f4748fd80e0 id: nil, name: "Iphone15", price: 82500>,
+                  #<Product:0x00007f4748fd7fa0 id: nil, name: "Lowrise Bed", price: 82500>,
+                  #<Product:0x00007f4748fd7e60 id: nil, name: "Oversize Tshirt", price: 2500>] 
+
+      - reverse_order - reverses the order specified
+                  3.3.1 :116 > Product.select(:name,:price).order(price: :asc).reverse_order
+                    Product Load (0.4ms)  SELECT "products"."name", "products"."price" FROM "products" /* loading for pp */ ORDER BY "products"."price" DESC LIMIT $1  [["LIMIT", 11]]
+                  => 
+                  [#<Product:0x00007f474900b698 id: nil, name: "Iphone15", price: 82500>,
+                  #<Product:0x00007f474900b558 id: nil, name: "Lowrise Bed", price: 82500>,
+                  #<Product:0x00007f474900b418 id: nil, name: "Oversize Tshirt", price: 2500>] 
+
+      - rewhere - overrides where statement
+                  3.3.1 :117 > Customer.where(name:"Abhishek").rewhere(name:"Vijay")
+                    Customer Load (0.4ms)  SELECT "customers".* FROM "customers" WHERE "customers"."name" = $1 /* loading for pp */ LIMIT $2  [["name", "Vijay"], ["LIMIT", 11]]
+                  => 
+                  [#<Customer:0x00007f4749038ad0
+                    id: 5,
+                    name: "Vijay",
+                    phone_number: "1230023999",
+                    email: "xyz@abc.in",
+                    created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00,
+                    updated_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00>] 
+
+      - regroup - overrides group statement
+                  3.3.1 :119 > Customer.group(:created_at).regroup(:id).limit(2)
+                    Customer Load (0.4ms)  SELECT "customers".* FROM "customers" GROUP BY "customers"."id" /* loading for pp */ LIMIT $1  [["LIMIT", 2]]
+                  => 
+                  [#<Customer:0x00007f4748fcc808
+                    id: 1,
+                    name: "Aarzoo",
+                    phone_number: "1234123456",
+                    email: "abc@abc.gmail.com",
+                    created_at: Sun, 12 May 2024 16:08:19.294850000 UTC +00:00,
+                    updated_at: Sun, 12 May 2024 16:08:19.294850000 UTC +00:00>,
+                  #<Customer:0x00007f4748fcc6c8
+                    id: 2,
+                    name: "Abhishek",
+                    phone_number: "1234123400",
+                    email: "xyz@abc.gmail.com",
+                    created_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00,
+                    updated_at: Sun, 12 May 2024 16:08:38.230638000 UTC +00:00>] 
+
+- null - written as table.none
+       - returns an empty Relationship
+       - used for conditional code
+       3.3.1 :120 > Order.none
+        => [] 
+
+- readonly - used to specify the objects as readonly(prevent from updation/deletion)
+            3.3.1 :121 > Order.readonly
+              Order Load (0.7ms)  SELECT "orders".* FROM "orders" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+            => 
+            [#<Order:0x00007f47490fde98
+              id: 1,
+              date: "2024-05-13",
+              shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32658718>",
+              total_order: nil,
+              created_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+              updated_at: Mon, 13 May 2024 06:24:59.985698000 UTC +00:00,
+              products_count: 0,
+              customer_id: 1>,
+            #<Order:0x00007f47490fdd58
+              id: 2,
+              date: "2024-05-12",
+              shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c32540bf0>",
+              total_order: nil,
+              created_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+              updated_at: Mon, 13 May 2024 06:25:34.983201000 UTC +00:00,
+              products_count: 0,
+              customer_id: 2>,
+            #<Order:0x00007f47490fdc18
+              id: 3,
+              date: "2024-05-14",
+              shipping_address: "#<Address::ActiveRecord_Relation:0x00007f6c38076d80>",
+              total_order: nil,
+              created_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+              updated_at: Mon, 13 May 2024 06:26:22.639326000 UTC +00:00,
+              products_count: 0,
+              customer_id: 4>] 
+
+- locks - 
+
+
+
+
+
+
