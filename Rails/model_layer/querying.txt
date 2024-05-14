@@ -1087,10 +1087,26 @@ HOW TO FETCH QUERIES---------------
                   created_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00,
                   updated_at: Sun, 12 May 2024 16:10:09.556963000 UTC +00:00> 
 
+- enums - provides a way to represent a finite set of values for an attribute in a model
+        - these values are represented as symbols and rails will automatically map each symbol to an integer value when storing it in the database
+        - using this also generates scope and various instance methods automatically
+        - helps tp query based on particular values of the column
+          enum status: [:paid, :refund_initiated, :pending]
 
+          3.3.1 :044 > Payment.paid
+            Payment Load (0.6ms)  SELECT "payments".* FROM "payments" WHERE "payments"."status" = $1 /* loading for pp */ LIMIT $2  [["status", "0"], ["LIMIT", 11]]
+          => 
+          [#<Payment:0x00007f92b80a35c8
+            id: 1,
+            date: "2024-05-13",
+            status: nil,
+            created_at: Mon, 13 May 2024 06:43:16.299837000 UTC +00:00,
+            updated_at: Tue, 14 May 2024 13:10:54.851164000 UTC +00:00,
+            order_id: 1,
+            payment_type_id: 1,
+            customer_id: 1>] 
 
-
-
+- method chaining - 
 
 
 

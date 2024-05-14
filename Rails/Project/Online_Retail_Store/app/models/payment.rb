@@ -5,4 +5,7 @@ class Payment < ApplicationRecord
 
   validates :date, presence: true
   validates :status, presence: true
+
+  enum status: [:paid, :refund_initiated, :pending]
+
 end
