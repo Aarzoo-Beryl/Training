@@ -1106,7 +1106,135 @@ HOW TO FETCH QUERIES---------------
             payment_type_id: 1,
             customer_id: 1>] 
 
-- method chaining - 
+-  find or build new object - used to find the object of present and if not then create it
+        - find_or_create_by - checks if the attribute exists or not
+                            - find_or_create_by! used to raise error/exception if the newly created record is invalid
+                            3.3.1 :020 > Customer.find_or_create_by(name: "Tanmay")
+                              Customer Load (0.3ms)  SELECT "customers".* FROM "customers" WHERE "customers"."name" = $1 LIMIT $2  [["name", "Tanmay"], ["LIMIT", 1]]
+                              TRANSACTION (0.2ms)  BEGIN
+                              Customer Exists? (0.7ms)  SELECT 1 AS one FROM "customers" WHERE "customers"."email" IS NULL LIMIT $1  [["LIMIT", 1]]
+                              TRANSACTION (0.3ms)  COMMIT
+                            => 
+                            #<Customer:0x00007f63f1e17808
+                            id: nil,
+                            name: "Tanmay",
+                            phone_number: nil,
+                            email: nil,
+                            created_at: nil,
+                            updated_at: nil> 
+
+                            3.3.1 :021 > Customer.find_or_create_by!(name: "Ladoo")
+                              Customer Load (0.4ms)  SELECT "customers".* FROM "customers" WHERE "customers"."name" = $1 LIMIT $2  [["name", "Ladoo"], ["LIMIT", 1]]
+                              TRANSACTION (0.2ms)  BEGIN
+                              Customer Exists? (0.9ms)  SELECT 1 AS one FROM "customers" WHERE "customers"."email" IS NULL LIMIT $1  [["LIMIT", 1]]
+                              TRANSACTION (0.4ms)  ROLLBACK
+                            (irb):21:in `<main>': Validation failed: Phone number can't be blank, Email can't be blank (ActiveRecord::RecordInvalid)
+        - find_or_initialize_by - works same as above but instead of calling create method it calls new method
+                            3.3.1 :022 > Customer.find_or_initialize_by(name: "Ladoo")
+                              Customer Load (0.4ms)  SELECT "customers".* FROM "customers" WHERE "customers"."name" = $1 LIMIT $2  [["name", "Ladoo"], ["LIMIT", 1]]
+                            => 
+                            #<Customer:0x00007f63f21bb540
+                            id: nil,
+                            name: "Ladoo",
+                            phone_number: nil,
+                            email: nil,
+                            created_at: nil,
+                            updated_at: nil> 
+
+
+- find_by_sql - allows you to specify your own query in the form of the string
+                3.3.1 :001 > Customer.find_by_sql("SELECT name FROM customers LIMIT 1")
+                  Customer Load (5.1ms)  SELECT name FROM customers LIMIT 1
+                => [#<Customer:0x00007f522ff9b590 id: nil, name: "Aarzoo">] 
+
+- select_all -  3.3.1 :006 > Customer.connection.select_all("SELECT name,id FROM customers WHERE id > 1").to_a
+                  (1.1ms)  SELECT name,id FROM customers WHERE id > 1
+                => 
+                [{"name"=>"Abhishek", "id"=>2},
+                {"name"=>"Piyush", "id"=>4},
+                {"name"=>"Vijay", "id"=>5}] 
+
+- pluck - used to select  particular column specified in it 
+        - directly converts the result into array,unlike select
+        - ifyou want ot specify limit then specify limit first and then pluck method - Class.limit().pluck()
+                3.3.1 :007 > Customer.where("id >1").pluck(:name,:phone_number)
+                  Customer Pluck (0.4ms)  SELECT "customers"."name", "customers"."phone_number" FROM "customers" WHERE (id >1)
+                => 
+                [["Abhishek", "1234123400"],
+                ["Piyush", "1230023400"],
+                ["Vijay", "1230023999"]] 
+
+- pick - used to pick the values of the named columns
+       - its a short hand for relation.limit(1).pluck(*column_names).first
+       - it matches the first occurence that satisfies the query
+        3.3.1 :008 > Customer.where("id >1").pick(:name,:phone_number)
+          Customer Pluck (0.7ms)  SELECT "customers"."name", "customers"."phone_number" FROM "customers" WHERE (id >1) LIMIT $1  [["LIMIT", 1]]
+        => ["Abhishek", "1234123400"]
+
+- existence of object - 
+      - any? - 
+              3.3.1 :001 > Order.any?
+                Order Exists? (4.5ms)  SELECT 1 AS one FROM "orders" WHERE (customer_id > 1) LIMIT $1  [["LIMIT", 1]]
+              => true 
+
+      - many? - 
+              3.3.1 :002 > Order.many?
+                Order Count (3.3ms)  SELECT COUNT(*) FROM (SELECT 1 AS one FROM "orders" WHERE (customer_id > 1) LIMIT $1) subquery_for_count  [["LIMIT", 2]]
+              => true 
+
+      - exists? - 
+              3.3.1 :004 > Order.exists?(id: 1)
+                Order Exists? (0.7ms)  SELECT 1 AS one FROM "orders" WHERE (customer_id > 1) AND "orders"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+              => false 
+
+- calculations - 
+      - count - 
+              3.3.1 :003 > Order.count
+                Order Count (0.5ms)  SELECT COUNT(*) FROM "orders" WHERE (customer_id > 1)
+              => 2 
+
+      - average - 
+              3.3.1 :005 > Product.average("price")
+                Product Average (4.2ms)  SELECT AVG("products"."price") FROM "products"
+              => 0.55833333333333333e5 
+
+      - minimum - 
+              3.3.1 :008 > Product.minimum("price")
+                Product Minimum (0.8ms)  SELECT MIN("products"."price") FROM "products"
+              => 2500 
+
+      - maximum -
+              3.3.1 :009 > Product.maximum("price")
+                Product Maximum (1.2ms)  SELECT MAX("products"."price") FROM "products"
+              => 82500 
+
+- explain - explain show the query works
+              3.3.1 :010 > Order.joins(:customer).explain
+                Order Load (3.9ms)  SELECT "orders".* FROM "orders" INNER JOIN "customers" ON "customers"."id" = "orders"."customer_id" WHERE (customer_id > 1)
+              => 
+              EXPLAIN SELECT "orders".* FROM "orders" INNER JOIN "customers" ON "customers"."id" = "orders"."customer_id" WHERE (customer_id > 1)
+                                            QUERY PLAN
+              ------------------------------------------------------------------------
+              Hash Join  (cost=22.38..40.40 rows=200 width=108)
+                Hash Cond: (orders.customer_id = customers.id)
+                ->  Seq Scan on orders  (cost=0.00..17.50 rows=200 width=108)
+                      Filter: (customer_id > 1)
+                ->  Hash  (cost=15.50..15.50 rows=550 width=8)
+                      ->  Seq Scan on customers  (cost=0.00..15.50 rows=550 width=8)
+              (6 rows)
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
