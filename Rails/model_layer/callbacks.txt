@@ -13,4 +13,20 @@ LIFE CYCLE OF ACTIVE RECORD OBJECT -
 CALLBACKS - refers to feature of ruby on rails that allow you to trigger methods at specific points in an object's lifecycle
           - useful for executing code when certain events occur to a model 
           - helps to add triggers related to lifecycle of your model in a clean and organized manner
-    - registration - to effectively use callbacks 
+    
+    - registration - to effectively use callbacks , the callback need to be registered first within you models
+                   - can be registered in various ways , each method provide a different approach in organizing your code
+          
+          - MACRO-STYLE class method - 
+                   - this refers to defining callbacks as methods on the model
+                   - and then register them using macro_style class methods/ call type (like before_create)
+
+          - INLINE blocks - 
+                   - if the block is short , you can directly write it in a block 
+
+          - PROCS - 
+                   - proc can be used to encapsulate the callback logic
+
+          - CUSTOM - 
+                   - separate class can be defined for callback for more complex logic
+                   
