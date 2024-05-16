@@ -1,0 +1,16 @@
+CALLBACKS---------------
+
+
+LIFE CYCLE OF ACTIVE RECORD OBJECT - 
+          - refers to sequence of states and transitions that the object undergoes from the moment it is instantiated until its destroyed
+          - lifecycle stages - 
+                             - instantiated
+                             - validation
+                             - saving 
+                             - updating
+                             - destroying
+
+CALLBACKS - refers to feature of ruby on rails that allow you to trigger methods at specific points in an object's lifecycle
+          - useful for executing code when certain events occur to a model 
+          - helps to add triggers related to lifecycle of your model in a clean and organized manner
+    - registration - to effectively use callbacks 
