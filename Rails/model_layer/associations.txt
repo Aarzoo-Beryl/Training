@@ -231,3 +231,69 @@ TYPES OF ASSOCIATIONS -
                     - eg3 - belongs_to :product, -> (price){ where("price>0", price)  }
 
             Options
+
+
+has_many - 
+            Methods - it automatically generates several methods to help you work with that association
+                  - collection - returns a relation of all the associated objects
+                               - if no associated object returns an empty relation
+                               - eg - products = seller.products
+                  - collection<<(object, ...) - adds one or more objects to the collection by setting the foreign key to the primary key of the calling method
+                               - eg - seller.product << product1
+                  - collection.delete(object, ...) - removes one or more objects from the collection by setting their foreign keys to null
+                               - object will be destroyed if they are associated with dependent: :destroy and deleted if dependent: :delete_all
+                               - eg - seller.books.delete(@product1)
+                  - collection.destroy(object, ...) - removes one or more object from the collection by removing one or more objects from the collection by running destroy on each
+                               - object will be removed from database ignoring the dependent option
+                               - eg - seller.product.destroy(@product1) 
+                  - collection=(objects) - makes collection contain only the supplied object by adding and deleting as appropriate
+                               - changes are made to database
+                               - eg - seller.products = (@product1,@product2)
+                  - collection_singular_ids - returns an array of the ids of the objects in the collection
+                               - eg - product_ids = seller.product_ids
+                  - collection_singular_ids=(ids) - makes the collection contain only the objects identified by supplied primary key values(adding and deleting as appropriate)
+                               - changes are made to database
+                               - eg -  seller = Seller.find(1)
+                                       seller.product_ids = [1,2,3]
+                  - collection.clear - removes all objects from the collection according to the strategy specified by the dependent option
+                               - if no option specified, follows the default strategy
+                               - for has_many , default strategy is to set the foreign key to null
+                               - eg - seller.products.clear
+                               object will be deleted if associated with dependent: :destroy or dependent_destroy_async 
+                  - collection.empty? - returns true if the collection does not contain any associate objects
+                               - eg - seller.products.empty?
+                  - collection.size - returns number of objects in the collection
+                               - eg - seller.products.size
+                  - collection.find(...) - method find object within the collection table
+                               - eg - product = seller.product.find(1)
+                  - collection.where(...) - finds the object from the collection based on the condition specified 
+                               - objects are lazily loaded i.e. only queried when accessed
+                               - eg - products = seller.products.where("price > ?" , 2500) 
+                  - collection.exists?(...) = checks whether an object exists in the collection based on the condition specified
+                               - eg - products = seller.products.exists?("price > ?" , 2500) 
+                  - collection.build(attributes = {}) - returns a single or array of new objects of the associated types 
+                               - allows you to set up a new associated object that will be linked to the parent object
+                               - creates a new object with the given attributes in the collection but does not save it to the database
+                               - eg - new_product = seller.products.build(name: "New Product", price: 3000)
+                  - collection.create(attributes = {}) - instantiates the new objects for the given collection with specified attributes same as build method
+                               - sets a new instantiated object that will be linked to the parent object
+                               - once the instantiated objects passes the validation checks, the object is saved to the database
+                               - eg - new_product = seller.products.create(name: "New Product", price: 3000)
+                  - collection.create!(attributes = {}) - does same as create method but raises error if the record is invalid
+                               - eg - new_product = seller.products.create!(name: "New Product", price: 3000)
+                  - collection.reload - returns a relation of all the associated objects by forcing a database read
+                               - if no associated objects , return empty relation
+                               - eg - products = seller.products.reload
+            Scope - second argument scope can be passed, which is essentially a set of conditions or operations that customize the query used to retrieve associated objects.
+                  - this can be particularly useful when you want to filter, order, or customize the retrieval of associated records based on certain criteria.
+                    - where - has_many :products, -> (price){ where("price>0", price)  }
+                    - extending - has_many :addresses , extending: :orders
+                    - group - seller.products.group(:category)
+                    - includes - seller.products.includes(:category)
+                    - limit - seller.products.limit(5)
+                    - offset - seller.products.offset(5)
+                    - order - seller.products.order(price: :desc)
+                    - readonly - seller.products.readonly
+                    - select - seller.products.select(:category).distinct
+                    - distinct - has_many :products
+
