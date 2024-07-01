@@ -413,7 +413,90 @@ ASSOCIATION SCOPING USING THE ASSOCIATION OWNER -
         - example -   has_one :customer, through: :order, disable_joins: true ,->(payment) { where status: "paid")}
     
 
+SINGLE TABLE INHERITANCE - it is a technique used to allow multiple models to be stored in a single database table while maintaining the ability to have different behaviors and methods for each model 
+        - useful when you want to share common fields and behavior between different models but a;so need specific behavior for each model
+        - pros - code reusability , polymorphism and flexibility
+        - cons - complex in large datasets as subclasses increase to a great extent
+        - example - 3.3.1 :001 > Person.all
+                      Person Load (0.4ms)  SELECT "people".* FROM "people" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                    => [] 
+                    3.3.1 :002 > User.all
+                      User Load (0.4ms)  SELECT "people".* FROM "people" WHERE "people"."type" = $1 /* loading for pp */ LIMIT $2  [["type", "User"], ["LIMIT", 11]]
+                    => [] 
+                    3.3.1 :003 > Admin.all
+                      Admin Load (0.3ms)  SELECT "people".* FROM "people" WHERE "people"."type" = $1 /* loading for pp */ LIMIT $2  [["type", "Admin"], ["LIMIT", 11]]
+                    => [] 
+                    3.3.1 :004 > a = Admin.create(name:'Aarzoo', age:21 )
+                      TRANSACTION (0.1ms)  BEGIN
+                      Admin Create (1.0ms)  INSERT INTO "people" ("name", "age", "type", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Aarzoo"], ["age", "21"], ["type", "Admin"], ["created_at", "2024-07-01 10:46:43.568564"], ["updated_at", "2024-07-01 10:46:43.568564"]]
+                      TRANSACTION (1.0ms)  COMMIT
+                    => 
+                    #<Admin:0x00007f690cad4248
+                    ... 
+                    3.3.1 :005 > a = User.create(name:'Abhishek', age:22 )
+                      TRANSACTION (0.1ms)  BEGIN
+                      User Create (0.6ms)  INSERT INTO "people" ("name", "age", "type", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Abhishek"], ["age", "22"], ["type", "User"], ["created_at", "2024-07-01 10:47:09.519808"], ["updated_at", "2024-07-01 10:47:09.519808"]]
+                      TRANSACTION (1.2ms)  COMMIT
+                    => 
+                    #<User:0x00007f690cc79508
+                    ... 
+                    3.3.1 :006 > People.all
+                    (irb):6:in `<main>': uninitialized constant People (NameError)
 
+                    People.all
+                    ^^^^^^
+                    3.3.1 :007 > Person.all
+                      Person Load (0.6ms)  SELECT "people".* FROM "people" /* loading for pp */ LIMIT $1  [["LIMIT", 11]]
+                    => 
+                    [#<Admin:0x00007f691357ab60
+                      id: 1,
+                      name: "Aarzoo",
+                      age: "21",
+                      type: "Admin",
+                      created_at: Mon, 01 Jul 2024 10:46:43.568564000 UTC +00:00,
+                      updated_at: Mon, 01 Jul 2024 10:46:43.568564000 UTC +00:00>,
+                    #<User:0x00007f691357a8e0
+                      id: 2,
+                      name: "Abhishek",
+                      age: "22",
+                      type: "User",
+                      created_at: Mon, 01 Jul 2024 10:47:09.519808000 UTC +00:00,
+                      updated_at: Mon, 01 Jul 2024 10:47:09.519808000 UTC +00:00>] 
+                    3.3.1 :008 > User.all
+                      User Load (0.6ms)  SELECT "people".* FROM "people" WHERE "people"."type" = $1 /* loading for pp */ LIMIT $2  [["type", "User"], ["LIMIT", 11]]
+                    => 
+                    [#<User:0x00007f6913578ae0
+                      id: 2,
+                      name: "Abhishek",
+                      age: "22",
+                      type: "User",
+                      created_at: Mon, 01 Jul 2024 10:47:09.519808000 UTC +00:00,
+                      updated_at: Mon, 01 Jul 2024 10:47:09.519808000 UTC +00:00>] 
+                    3.3.1 :009 > Admin.all
+                      Admin Load (0.7ms)  SELECT "people".* FROM "people" WHERE "people"."type" = $1 /* loading for pp */ LIMIT $2  [["type", "Admin"], ["LIMIT", 11]]
+                    => 
+                    [#<Admin:0x00007f69135789a0
+                      id: 1,
+                      name: "Aarzoo",
+                      age: "21",
+                      type: "Admin",
+                      created_at: Mon, 01 Jul 2024 10:46:43.568564000 UTC +00:00,
+                      updated_at: Mon, 01 Jul 2024 10:46:43.568564000 UTC +00:00>] 
+
+
+
+DELEGATED TYPES - this solves the problem of STI becoming bloated with many unused attributes
+        - instead of having one table with all the attributes for different subclasses, we can separate the specific attributes into their own tables while still sharing the common attributes in the single table
+        - steps - 
+              1. generate models and migrations
+              2. create a new concern file to be included in sub models and as delegated_type in main model 
+              3. include the module in models 
+              4. run migrations
+              5. instantiate an object as - # Example in Rails console
+                                            product = Product.new(name: "Laptop", description: "High-performance laptop", price: 1500)
+                                            product.build_productable(type: "Electronic", brand: "ExampleBrand", model: "Model X", warranty: 2)
+                                            product.save
+                                        #not working for my case
 
 
 
