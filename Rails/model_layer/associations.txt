@@ -233,7 +233,13 @@ TYPES OF ASSOCIATIONS -
             Options
 
 
-has_many - 
+has_many - creates one to many relationship with another model
+         - this association states that the other class will have a foreign key that refers to the instance of this class
+         - saving of object - when an object is assigned, that object is automatically saved (in order to update its foreign key)
+                            - if multiple objects assigned in same line, all are saved
+                            - if object fails validations specified, statement return false i.e. not saved  
+                            - if parent object not saved then the child object are not saved when added(all associated objects will automatically be saved upon saving the parent object)
+
             Methods - it automatically generates several methods to help you work with that association
                   - collection - returns a relation of all the associated objects
                                - if no associated object returns an empty relation
@@ -242,7 +248,7 @@ has_many -
                                - eg - seller.product << product1
                   - collection.delete(object, ...) - removes one or more objects from the collection by setting their foreign keys to null
                                - object will be destroyed if they are associated with dependent: :destroy and deleted if dependent: :delete_all
-                               - eg - seller.books.delete(@product1)
+                               - eg - seller.products.delete(@product1)
                   - collection.destroy(object, ...) - removes one or more object from the collection by removing one or more objects from the collection by running destroy on each
                                - object will be removed from database ignoring the dependent option
                                - eg - seller.product.destroy(@product1) 
@@ -296,4 +302,124 @@ has_many -
                     - readonly - seller.products.readonly
                     - select - seller.products.select(:category).distinct
                     - distinct - has_many :products
+
+
+has_and_belongs_to_many - creates a many to many relationship with another model
+                        - this uses an intermediate join table that contains foreign keys referencing each of the models involved
+                        - saving object - saved automatically to update the join table
+                                        - if you assign multiple object in one statement , all will be saved
+                                        - if object fails validations specified, statement return false i.e. not saved  
+                                        - if parent object not saved then the child object are not saved when added(all associated objects will automatically be saved upon saving the parent object)
+
+            Methods - it automatically generates several methods to help you work with that association
+                  - collection - returns a relation of all the associated objects
+                               - if no associated object returns an empty relation
+                               - eg - products = order.products
+                  - collection<<(object, ...) - adds one or more objects to the collection by setting the foreign key to the primary key of the calling method
+                               - eg - order.products << product1
+                  - collection.delete(object, ...) - removes one or more objects from the collection by setting their foreign keys to null
+                               - object will be destroyed if they are associated with dependent: :destroy and deleted if dependent: :delete_all
+                               - eg - order.products.delete(@product1)
+                  - collection.destroy(object, ...) - removes one or more object from the collection by removing one or more objects from the collection by running destroy on each
+                               - object will be removed from database ignoring the dependent option
+                               - eg - order.product.destroy(@product1) 
+                  - collection=(objects) - makes collection contain only the supplied object by adding and deleting as appropriate
+                               - changes are made to database
+                               - eg - order.products = (@product1,@product2)
+                  - collection_singular_ids - returns an array of the ids of the objects in the collection
+                               - eg - product_ids = seller.product_ids
+                  - collection_singular_ids=(ids) - makes the collection contain only the objects identified by supplied primary key values(adding and deleting as appropriate)
+                               - changes are made to database
+                               - eg -  order = Order.find(1)
+                                       order.product_ids = [1,2,3]
+                  - collection.clear - removes all objects from the collection by deleting the rows from the joining table
+                               - this does not destroy the associated object
+                               - eg - order.products.clear
+                               object will be deleted if associated with dependent: :destroy or dependent_destroy_async 
+                  - collection.empty? - returns true if the collection does not contain any associate objects
+                               - eg - order.products.empty?
+                  - collection.size - returns number of objects in the collection
+                               - eg -  order.products.size
+                  - collection.find(...) - method find object within the collection table
+                               - eg - product =  order.product.find(1)
+                  - collection.where(...) - finds the object from the collection based on the condition specified 
+                               - objects are lazily loaded i.e. only queried when accessed
+                               - eg - products =  order.products.where("price > ?" , 2500) 
+                  - collection.exists?(...) = checks whether an object exists in the collection based on the condition specified
+                               - eg - products =  order.products.exists?("price > ?" , 2500) 
+                  - collection.build(attributes = {}) - returns a single or array of new objects of the associated types 
+                               - allows you to set up a new associated object that will be linked to the parent object
+                               - creates a new object with the given attributes in the collection but does not save it to the database
+                               - eg - new_product =  order.products.build(name: "New Product", price: 3000)
+                  - collection.create(attributes = {}) - instantiates the new objects for the given collection with specified attributes same as build method
+                               - sets a new instantiated object that will be linked to the parent object
+                               - once the instantiated objects passes the validation checks, the object is saved to the database
+                               - eg - new_product =  order.products.create(name: "New Product", price: 3000)
+                  - collection.create!(attributes = {}) - does same as create method but raises error if the record is invalid
+                               - eg - new_product =  order.products.create!(name: "New Product", price: 3000)
+                  - collection.reload - returns a relation of all the associated objects by forcing a database read
+                               - if no associated objects , return empty relation
+                               - eg - products =  order.products.reload
+            Scope - second argument scope can be passed, which is essentially a set of conditions or operations that customize the query used to retrieve associated objects.
+                  - this can be particularly useful when you want to filter, order, or customize the retrieval of associated records based on certain criteria.
+                    - where - has_and_belongs_to_many :products, -> (price){ where("price>0", price)  }
+                    - extending - has_and_belongs_to_many :addresses , extending: :orders
+                    - group -  order.products.group(:category)
+                    - includes -  order.products.includes(:category)
+                    - limit -  order.products.limit(5)
+                    - offset -  order.products.offset(5)
+                    - order -  order.products.order(price: :desc)
+                    - readonly -  order.products.readonly
+                    - select -  order.products.select(:category).distinct
+                    - distinct - has_and_belongs_to_many :products
+
+ASSOCIATION CALLBACKS - allows you to perform actions at specific period in the life cycle of associated objects
+            - before_add - triggered just before an object is added
+                    - eg - has_many :products, before_add: :check_if_bill_exists 
+            - after_add - triggered just after the object is added
+                                - eg - has_many :products, after_add: :recalculate_total_bill 
+            - before_remove - triggered just before an object is removed
+                                - eg - has_many :products, before_remove: :check_if_bill_exists 
+            - after_remove - triggered just after an object is removed
+                                - eg - has_many :products, after_remove: :recalculate_total_bill
+
+
+ASSOCIATION EXTENSION - we can add our custom association methods too
+            - eg- module FindRecentExtension
+                    def find_recent
+                      where("created_at > ?", 5.days.ago)
+                    end
+                  end
+            - how to use the extension in context of associations in Rails - 
+                  - proxy_association.owner - returns the object that the association is a part of 
+                        - eg - order = Order.find(1)
+                               products = order.products
+                               owner = products.proxy_association.owner
+                               #here the owner will the instance of the order class
+                  - proxy_association.reflection - returns the reflection object that describes the association which contain the metadata about the associations such as type and options
+                        - eg - order = Order.find(1)
+                               products = order.products
+                               reflection = products.proxy_association.reflection
+                               #metadata - 
+                               puts reflection.macro        #:has_and_belongs_to_many
+                               puts reflection.name         #:products
+                  - proxy_association.target - returns the associated object for the belong_to or has_one , or the collection of associated objects for has_many or has_and_belongs_to_many
+                        - eg - target = order.products.proxy_association.target
+
+
+ASSOCIATION SCOPING USING THE ASSOCIATION OWNER - 
+        - passing owner as single argument - the owner is passed to the cope block enabling you to write custom query logic based on owners attribute/Methods
+        - preloading limitation - associations can't be preloaded because scope block expects an instance of owner which is ot available during preloading
+        - example -   has_one :customer, through: :order, disable_joins: true ,->(payment) { where status: "paid")}
+    
+
+
+
+
+
+
+
+
+
+
 
