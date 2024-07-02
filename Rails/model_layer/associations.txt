@@ -385,6 +385,11 @@ ASSOCIATION CALLBACKS - allows you to perform actions at specific period in the 
 
 
 ASSOCIATION EXTENSION - we can add our custom association methods too
+            - PROXY ASSOCIATION - intermediatories between ActiveRecord models and database
+                                - when we call method on associations, we actually interact with proxy objects
+                                - they handle the logic for querying, creating, and modifying associated records
+                                - it provides a powerful and flexible way to interact with the associated records, handling the underlying database for us
+                                - all the methods that come under any type of association are a part of it
             - eg- module FindRecentExtension
                     def find_recent
                       where("created_at > ?", 5.days.ago)
@@ -487,16 +492,25 @@ SINGLE TABLE INHERITANCE - it is a technique used to allow multiple models to be
 
 DELEGATED TYPES - this solves the problem of STI becoming bloated with many unused attributes
         - instead of having one table with all the attributes for different subclasses, we can separate the specific attributes into their own tables while still sharing the common attributes in the single table
+        - these are advance version of polymorphic association
+        - allows us to give control of certain attributes to a separate model and table, rather than storing type and id like traditional polymorphism
+        - this approach allows each type of associated objects to have its own table and set of attributes , resulting in cleaner and maintainable code
         - steps - 
               1. generate models and migrations
               2. create a new concern file to be included in sub models and as delegated_type in main model 
               3. include the module in models 
               4. run migrations
               5. instantiate an object as - # Example in Rails console
-                                            product = Product.new(name: "Laptop", description: "High-performance laptop", price: 1500)
-                                            product.build_productable(type: "Electronic", brand: "ExampleBrand", model: "Model X", warranty: 2)
-                                            product.save
-                                        #not working for my case
+                          3.3.1 :010 > credit_card_payment = CreditCard.create(card_number: "1234 5678 9012 3456", cardholder_name: "John Doe")
+                          3.3.1 :011 > payment = Payment.create(amount: 100.00, payable: credit_card_payment)
+                            TRANSACTION (0.2ms)  BEGIN
+                            CreditCard Create (1.0ms)  INSERT INTO "credit_cards" ("card_number", "cardholder_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["card_number", "1234 5678 9012 3456"], ["cardholder_name", "John Doe"], ["created_at", "2024-07-02 10:51:50.601317"], ["updated_at", "2024-07-02 10:51:50.601317"]]
+                            TRANSACTION (1.5ms)  COMMIT
+                            TRANSACTION (0.2ms)  BEGIN
+                            Payment Create (1.3ms)  INSERT INTO "payments" ("amount", "payable_type", "payable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["amount", "100.0"], ["payable_type", "CreditCard"], ["payable_id", 2], ["created_at", "2024-07-02 10:51:50.628142"], ["updated_at", "2024-07-02 10:51:50.628142"]]
+                            TRANSACTION (2.7ms)  COMMIT
+                          => 
+                          #<Payment:0x00007f5d1d001578
 
 
 
