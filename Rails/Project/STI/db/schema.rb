@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_111004) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_02_104653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,10 +22,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_111004) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "credit_cards", force: :cascade do |t|
+    t.string "card_number"
+    t.string "cardholder_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "electronics", force: :cascade do |t|
     t.string "brand"
     t.string "model"
     t.integer "warranty"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "payable_type"
+    t.bigint "payable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payable_type", "payable_id"], name: "index_payments_on_payable"
+  end
+
+  create_table "paypals", force: :cascade do |t|
+    t.string "paypal_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
