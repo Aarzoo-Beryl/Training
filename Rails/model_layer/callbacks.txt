@@ -4,11 +4,11 @@ CALLBACKS---------------
 LIFE CYCLE OF ACTIVE RECORD OBJECT - 
           - refers to sequence of states and transitions that the object undergoes from the moment it is instantiated until its destroyed
           - lifecycle stages - 
-                             - instantiated
-                             - validation
-                             - saving 
-                             - updating
-                             - destroying
+                    - instantiated
+                    - validation
+                    - saving 
+                    - updating
+                    - destroying
 
 CALLBACKS - refers to feature of ruby on rails that allow you to trigger methods at specific points in an object's lifecycle
           - useful for executing code when certain events occur to a model 
@@ -16,6 +16,10 @@ CALLBACKS - refers to feature of ruby on rails that allow you to trigger methods
     
     - registration - to effectively use callbacks , the callback need to be registered first within you models
                    - can be registered in various ways , each method provide a different approach in organizing your code
+                   - can also be registered to fire only at certain lifecycle events, allowing complete control over when and in what context your callbacks are triggered 
+                   - these certain lifecycle events are specified using "on:" after the callback methods
+                   - example - before_validation :name.empty? , on: :create
+                        or   - before_validation :name.empty? , on: [:create, :update]
           
           - MACRO-STYLE class method - 
                    - this refers to defining callbacks as methods on the model
@@ -30,3 +34,175 @@ CALLBACKS - refers to feature of ruby on rails that allow you to trigger methods
           - CUSTOM - 
                    - separate class can be defined for callback for more complex logic
                    
+    problematic approach - 
+          1. calling update/save directly inside a callback can trigger the same callback infinitely
+          2. also if a callback fails and transaction is rolled back; changes made by update/save might persist
+          eg -  class Person < ApplicationRecord
+                  validates :name, :age, presence: true
+
+                  before_validation :check_age
+
+                  def check_age
+                    update(age: 18)
+                  end
+                end
+    safe approach - 
+          1. instead you should assign values to the models attributes directly within 'before_create' or 'before_update' 
+          2.this way changes will be picked up when the model is eventually saved, without causing any side effects
+          eg -  class User < Person
+                  validates :name, :age, presence: true
+
+                  before_validation :check_age
+
+                  def check_age
+                    update(age: 18)
+                  end
+                end 
+          # this first checks the value of self.status
+          # if it already has a value , does nothing
+          # if value == nil/false, it assigns it as 18.
+
+TYPES OF CALLBACKS - 
+    (in order of execution)
+
+    - CREATING AN OBJECT - 
+          - before_validation - triggered before the specified validations of the module are performed
+                    eg -  class Customer < ApplicationRecord
+                            has_many :addresses,  validate: true
+                            has_many :review, inverse_of: :customer, validate: true
+                            has_many :orders
+                            has_many :payments, through: :bill
+
+                            validates :name, presence: true
+                            validates :phone_number, presence: true
+                            validates :email, presence: true, uniqueness: true
+
+                            before_validation :check_name, on: [:create, :update]
+
+                            private
+                              def check_name
+                                if name.blank?
+                                  puts "name is blank"
+                                end
+                              end
+                          end
+
+          - after_validation - triggered after the specified validations of the module are performed
+                    eg -  class Customer < ApplicationRecord
+                            has_many :addresses,  validate: true
+                            has_many :review, inverse_of: :customer, validate: true
+                            has_many :orders
+                            has_many :payments, through: :bill
+
+                            validates :name, presence: true
+                            validates :phone_number, presence: true
+                            validates :email, presence: true, uniqueness: true
+
+                            before_validation :check_name, on: [:create, :update]
+
+                            after_validation :check_phone_number
+
+                            private
+                              def check_name
+                                if name.blank?
+                                  puts "name is blank"
+                                end
+                              end
+
+                              def check_phone_number
+                                @a = self.phone_number
+                                puts "ensure your phone number is #{@a} "
+                              end
+                          end
+
+          - before_save - triggered before the object is save in the database
+                    eg - 
+          - around_save - triggered when the object is being save in the database
+                    eg - 
+          - before_create - triggered before the object is created in the database
+                    eg - 
+          - around_create - triggered when the object is being created in the database
+                    eg - 
+          - after_create - triggered after the object is created in the database
+                    eg - 
+          - after_save - triggered after the object is save in the database
+                    eg - 
+          - after_commit/after_rollback - triggered if the transaction is completed/rollback
+                    eg - 
+
+    - UPDATING AN OBJECT - 
+          - before_validation - triggered before the specified validations of the module are performed
+                    eg -  class Customer < ApplicationRecord
+                            has_many :addresses,  validate: true
+                            has_many :review, inverse_of: :customer, validate: true
+                            has_many :orders
+                            has_many :payments, through: :bill
+
+                            validates :name, presence: true
+                            validates :phone_number, presence: true
+                            validates :email, presence: true, uniqueness: true
+
+                            before_validation :check_name, on: [:create, :update]
+
+                            private
+                              def check_name
+                                if name.blank?
+                                  puts "name is blank"
+                                end
+                              end
+                          end
+          - after_validation - triggered after the specified validations of the module are performed
+                    eg -  class Customer < ApplicationRecord
+                            has_many :addresses,  validate: true
+                            has_many :review, inverse_of: :customer, validate: true
+                            has_many :orders
+                            has_many :payments, through: :bill
+
+                            validates :name, presence: true
+                            validates :phone_number, presence: true
+                            validates :email, presence: true, uniqueness: true
+
+                            before_validation :check_name, on: [:create, :update]
+
+                            after_validation :check_phone_number
+
+                            private
+                              def check_name
+                                if name.blank?
+                                  puts "name is blank"
+                                end
+                              end
+
+                              def check_phone_number
+                                @a = self.phone_number
+                                puts "ensure your phone number is #{@a} "
+                              end
+                          end
+          - before_save - triggered before the object is save in the database
+                    eg - 
+          - around_save - triggered when the object is being save in the database
+                    eg - 
+          - before_update - triggered before the object is created in the database
+                    eg - 
+          - around_update - triggered when the object is being created in the database
+                    eg - 
+          - after_update - triggered after the object is created in the database
+                    eg - 
+          - after_save -  triggered after the object is save in the database
+                    eg - 
+          - after_commit/after_rollback - triggered if the transaction is completed/rollback
+                    eg - 
+
+    - DESTROYING AN OBJECT - 
+          - before_destroy - triggered before the object is created in the database
+                    eg - 
+          - around_destroy - triggered when the object is being created in the database
+                    eg - 
+          - after_destroy - triggered after the object is created in the database
+                    eg - 
+          - after_commit/after_rollback - triggered if the transaction is completed/rollback
+                    eg - 
+
+    Note - 
+          1. if exception occurs in an after_save, transaction will be rolled back and the data will not be persisted in the database
+          2. execution of after_commit ensures that the transaction has already completed and data has persisted to database
