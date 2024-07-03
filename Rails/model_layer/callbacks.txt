@@ -574,7 +574,7 @@ TYPES OF CALLBACKS -
                                   TRANSACTION (2.3ms)  COMMIT
                                 The transaction was successfully committed for PaymentType Emi
                                 => true        
-                                   
+
           - after_update - triggered after the object is created in the database
                     eg -  class PaymentType < ApplicationRecord
                             has_many :payments, validate: true
@@ -703,13 +703,59 @@ TYPES OF CALLBACKS -
 
     - DESTROYING AN OBJECT - 
           - before_destroy - triggered before the object is created in the database
-                    
           - around_destroy - triggered when the object is being created in the database
-                   
           - after_destroy - triggered after the object is created in the database
-                    
           - after_commit/after_rollback - triggered if the transaction is completed/rollback
                     
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            after_commit :commit_info
+                            after_rollback :rollback_info
+
+                            before_destroy :deletion_start
+                            around_destroy :destruction_cycle
+                            after_destroy :deletion_info
+                            private
+                              def commit_info
+                                puts("The transaction was successfully committed for PaymentType #{self.title}")
+                              end
+                              def rollback_info
+                                puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                              end
+                              def deletion_start
+                                puts("deletion is specified for #{self.title} PaymentType ")
+                              end
+                              def destruction_cycle
+                                  puts("around deletion : before deletion the the object")
+                                  yield
+                                  puts("around deletion : after deletion the the object")
+                              end
+                              def deletion_info
+                                puts("the object specified was successfully deleted from the database")
+                              end
+                          end
+
+                    practice -  3.3.1 :001 > PaymentType.last.destroy
+                                  PaymentType Load (0.4ms)  SELECT "payment_types".* FROM "payment_types" ORDER BY "payment_types"."id" DESC LIMIT $1  [["LIMIT", 1]]
+                                deletion is specified for Emi PaymentType 
+                                around deletion : before deletion the the object
+                                  TRANSACTION (0.2ms)  BEGIN
+                                  PaymentType Destroy (1.4ms)  DELETE FROM "payment_types" WHERE "payment_types"."id" = $1  [["id", 10]]
+                                around deletion : after deletion the the object
+                                the object specified was successfully deleted from the database
+                                  TRANSACTION (1.2ms)  COMMIT
+                                The transaction was successfully committed for PaymentType Emi
+                                => 
+                                #<PaymentType:0x00007f2c1562ce40
+                                id: 10,
+                                title: "Emi",
+                                description: "allows to pay in monthly installments",
+                                created_at: Wed, 03 Jul 2024 06:45:31.682087000 UTC +00:00,
+                                updated_at: Wed, 03 Jul 2024 06:55:35.873890000 UTC +00:00> 
+
 
     Note - 
           1. if exception occurs in an after_save, transaction will be rolled back and the data will not be persisted in the database

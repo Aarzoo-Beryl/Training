@@ -14,6 +14,9 @@ class PaymentType < ApplicationRecord
   around_update :lifecycle_info_update
   after_update :updation_info
 
+  before_destroy :deletion_start
+  around_destroy :destruction_cycle
+  after_destroy :deletion_info
   private
      def capitalize_title
        title.capitalize! if title.present?
@@ -39,5 +42,16 @@ class PaymentType < ApplicationRecord
      end
      def updation_info
        puts("The object with id:#{self.id} was successfully updated")
+     end
+     def deletion_start
+       puts("deletion is specified for #{self.title} PaymentType ")
+     end
+     def destruction_cycle
+         puts("around deletion : before deletion the the object")
+         yield
+         puts("around deletion : after deletion the the object")
+     end
+     def deletion_info
+       puts("the object specified was successfully deleted from the database")
      end
 end
