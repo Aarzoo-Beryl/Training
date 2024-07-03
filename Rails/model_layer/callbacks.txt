@@ -830,3 +830,40 @@ TYPES OF CALLBACKS -
                                   you have touched the object with id: 1
                                     TRANSACTION (1.8ms)  COMMIT
                                   => true 
+
+RUNNING CALLBACKS - querying methods that trigger callback
+    Basic - methods that trigger all kind of callbacks
+          1.create  - creates a new object and saves it to database, returns where object passes validations or not
+          2.create! - does same but raises error if validations not passed
+          3.destroy - deletes object from database, tells where object was successfully deleted or not
+          4.destroy! - does same but raises error if the object was not deleted successfully
+          5.destroy_all - deletes all the objects that match the condition and returns the affected objects
+          6.destroy_by - deletes the objects that match the condition and returns the affected objects
+          7.save - saves the object or changes made to it to the database , return if the object was successfully saved or not
+          8.save! - does same but raises error when object not saved successfully
+          9.save(validate: false) - same as "save" but turns the validations of
+          10.save!(validate: false) - same as "save!" but turns the validations of
+          11.toggle! - counter-switches the value of a boolean attribute and saves it to database directly [turns false to true and wise versa]
+          12.touch - updates the updated_at/updated_on timestamp of the object
+          13.update_attribute - used to update and save a specific attribute of the object, returns if update was successful or not
+          14.update - used to update and save a specific as well as multiple attributes of the object, returns if update was successful or not 
+          15.update! - does same but raises error if updation was unsuccessful
+          16.valid - checks if the object is valid or not 
+
+    Additional for after_find - 
+          1.all - retrieves and displays all the records of a table
+          2.first - retrieves and displays the first records of a table
+          3.find - finds and displays a record with the particular id mentioned
+          4.find_by_* - finds and displays a record by particular attribute
+          5.find_by_*! - same but raises error if object not found
+          6.find_by_sql - finds and displays a record based on the sql statement specified
+          7.last - retrieves and displays the last records of a table
+
+    after_initialize - triggered every time a new object of a class is initialized
+
+
+
+
+
+
+
