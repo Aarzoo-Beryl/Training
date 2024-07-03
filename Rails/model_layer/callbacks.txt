@@ -1025,8 +1025,68 @@ RELATIONAL CALLBACKS - callbacks can be defined to work through model relationsh
                                     updated_at: Wed, 03 Jul 2024 10:40:05.020566000 UTC +00:00> 
 
 
+ASSOCIATION CALLBACKS - triggered by events in the life cycle of a collection
+                      - rails passe the object being added or removed to the call back
+                      - callbacks can be stacked by passing them as arrays 
+        - 4 callbacks - 
+              - before_add - trigger just before the object is added to the collection
+              - after_add - trigger just after the object is added to the collection
+              - before_remove - trigger just before the object is removed from the collection
+              - after_remove - trigger just after the object is removed from the collection
+        - eg -  class User < ApplicationRecord
+                  has_many :posts, inverse_of: :user, dependent: :destroy, before_add: :before_add_post, after_add: :after_add_post, before_remove: :before_remove_post, after_remove: :after_remove_post
+                  has_many :friendships, inverse_of: :user
+                  has_many :comments, as: :commentable, dependent: :destroy, inverse_of: :user
+                  has_many :likes, as: :likeable, dependent: :destroy, inverse_of: :user
+                  has_many :notifications, as: :notifiable
 
 
+                  def before_add_post(post)
+                    puts "About to add post #{post.id} to user #{self.id}"
+                  end
 
+                  def after_add_post(post)
+                    puts "Added post #{post.id} to user #{self.id}"
+                  end
+
+                  def before_remove_post(post)
+                    puts "About to remove post #{post.id} from user #{self.id}"
+                  end
+
+                  def after_remove_post(post)
+                    puts "Removed post #{post.id} from user #{self.id}"
+                  end
+                end
+
+        - practice -  3.3.1 :016 > user.posts.create(content: "good platform!", image: "new_post3.jpg")
+                      About to add post  to user 6
+                        TRANSACTION (0.4ms)  BEGIN
+                        Post Create (1.7ms)  INSERT INTO "posts" ("user_id", "content", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["user_id", 6], ["content", "good platform!"], ["image", "new_post3.jpg"], ["created_at", "2024-07-03 12:49:12.057390"], ["updated_at", "2024-07-03 12:49:12.057390"]]
+                      Added post 18 to user 6
+                        TRANSACTION (1.8ms)  COMMIT
+                      => 
+                      #<Post:0x00007ff41cfe11a0
+                      id: 18,
+                      user_id: 6,
+                      content: "good platform!",
+                      image: "new_post3.jpg",
+                      created_at: Wed, 03 Jul 2024 12:49:12.057390000 UTC +00:00,
+                      updated_at: Wed, 03 Jul 2024 12:49:12.057390000 UTC +00:00> 
+                   -  3.3.1 :014 > user.posts.destroy(post)
+                      About to remove post 17 from user 6
+                        TRANSACTION (0.2ms)  BEGIN
+                        Comment Load (0.4ms)  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2  [["commentable_id", 17], ["commentable_type", "Post"]]
+                        Like Load (0.4ms)  SELECT "likes".* FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 17], ["likeable_type", "Post"]]
+                        Post Destroy (0.4ms)  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 17]]
+                      Removed post 17 from user 6
+                        TRANSACTION (1.7ms)  COMMIT
+                      => 
+                      [#<Post:0x00007ff41cfe8d60
+                        id: 17,
+                        user_id: 6,
+                        content: "good platform!",
+                        image: "new_post3.jpg",
+                        created_at: Wed, 03 Jul 2024 12:41:14.010620000 UTC +00:00,
+                        updated_at: Wed, 03 Jul 2024 12:41:14.010620000 UTC +00:00>] 
 
 
