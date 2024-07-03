@@ -9,9 +9,8 @@ class Customer < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   before_validation :check_name, on: [:create, :update]
-
   after_validation :check_phone_number
-
+  before_save :ensure_details
   private
     def check_name
       if name.blank?
@@ -20,7 +19,21 @@ class Customer < ApplicationRecord
     end
 
     def check_phone_number
-      @a = self.phone_number
-      puts "ensure your phone number is #{@a} "
+      if phone_number.length > 0
+        @a = self.phone_number
+        puts "ensure your phone number is #{@a} "
+      end
+    end
+
+    def ensure_details
+      if name.blank?
+        puts("name: not mentioned")
+      end
+      if phone_number.blank?
+        puts("phone_number: not mentioned")
+      end
+      if email.blank?
+        puts("email: not mentioned")
+      end
     end
 end
