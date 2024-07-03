@@ -27,6 +27,6 @@ class Product < ApplicationRecord
       puts("around save : after save")
     end
     def saved_info
-      puts("the object was successfullt saved")
+      puts("the object was successfully saved")
     end
 end

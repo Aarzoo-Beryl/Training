@@ -195,11 +195,93 @@ TYPES OF CALLBACKS -
                                 => true 
 
           - before_create - triggered before the object is created in the database
-                    eg - 
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            before_create :capitalize_title
+
+                            private
+                              def capitalize_title
+                                title.capitalize! if title.present?
+                              end
+                          end
+                    practice -  3.3.1 :006 > p = PaymentType.create(title: "paypal",description:"used for international payments mostly")
+                                  TRANSACTION (0.2ms)  BEGIN
+                                  PaymentType Create (0.9ms)  INSERT INTO "payment_types" ("title", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Paypal"], ["description", "used for international payments mostly"], ["created_at", "2024-07-03 06:30:08.823577"], ["updated_at", "2024-07-03 06:30:08.823577"]]
+                                  TRANSACTION (1.5ms)  COMMIT
+                                => 
+                                #<PaymentType:0x00007ff09a086870
+                                ... 
+                                3.3.1 :007 > p.title
+                                => "Paypal" 
+
           - around_create - triggered when the object is being created in the database
-                    eg - 
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            before_create :capitalize_title
+                            around_create :lifecycle_info
+                            after_create :confirmation_info
+                            private
+                              def capitalize_title
+                                title.capitalize! if title.present?
+                              end
+                              def lifecycle_info
+                                  puts("around create : before create")
+                                  yield
+                                  puts("around create : after create")
+                              end
+                              def confirmation_info
+                                puts("Payment type was successfully created")
+                              end
+                          end
+                    practice -  3.3.1 :011 > p = PaymentType.create(title: "cash on delivery",description:"physical payment method")
+                                around create : before create
+                                  TRANSACTION (0.2ms)  BEGIN
+                                  PaymentType Create (1.0ms)  INSERT INTO "payment_types" ("title", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Cash on delivery"], ["description", "physical payment method"], ["created_at", "2024-07-03 06:36:05.926327"], ["updated_at", "2024-07-03 06:36:05.926327"]]
+                                around create : after create
+                                Payment type was successfully created
+                                  TRANSACTION (1.1ms)  COMMIT
+                                => 
+                                #<PaymentType:0x00007ff099ce8560
+
+
           - after_create - triggered after the object is created in the database
-                    eg - 
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            before_create :capitalize_title
+                            around_create :lifecycle_info
+                            after_create :confirmation_info
+                            private
+                              def capitalize_title
+                                title.capitalize! if title.present?
+                              end
+                              def lifecycle_info
+                                  puts("around create : before create")
+                                  yield
+                                  puts("around create : after create")
+                              end
+                              def confirmation_info
+                                puts("Payment type was successfully created")
+                              end
+                          end
+                    practice -  3.3.1 :011 > p = PaymentType.create(title: "cash on delivery",description:"physical payment method")
+                                around create : before create
+                                  TRANSACTION (0.2ms)  BEGIN
+                                  PaymentType Create (1.0ms)  INSERT INTO "payment_types" ("title", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Cash on delivery"], ["description", "physical payment method"], ["created_at", "2024-07-03 06:36:05.926327"], ["updated_at", "2024-07-03 06:36:05.926327"]]
+                                around create : after create
+                                Payment type was successfully created
+                                  TRANSACTION (1.1ms)  COMMIT
+                                => 
+                                #<PaymentType:0x00007ff099ce8560
+                                
           - after_save - triggered after the object is save in the database
                     eg - class Product < ApplicationRecord
                             belongs_to :brand , inverse_of: :products, validate: true
