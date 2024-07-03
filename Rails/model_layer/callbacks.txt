@@ -281,7 +281,7 @@ TYPES OF CALLBACKS -
                                   TRANSACTION (1.1ms)  COMMIT
                                 => 
                                 #<PaymentType:0x00007ff099ce8560
-                                
+
           - after_save - triggered after the object is save in the database
                     eg - class Product < ApplicationRecord
                             belongs_to :brand , inverse_of: :products, validate: true
@@ -333,7 +333,34 @@ TYPES OF CALLBACKS -
                                   TRANSACTION (3.2ms)  COMMIT
                                 => true 
           - after_commit/after_rollback - triggered if the transaction is completed/rollback
-                    eg - 
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            after_commit :commit_info
+                            after_rollback :rollback_info
+
+                            private
+                              
+                              def commit_info
+                                puts("The transaction was successfully committed for PaymentType #{self.title}")
+                              end
+                              def rollback_info
+                                puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                              end
+                          end
+                    practice -  3.3.1 :016 > a = PaymentType.create(title:"EMI", description:"methodtopay in installments")
+                                around create : before create
+                                  TRANSACTION (0.2ms)  BEGIN
+                                  PaymentType Create (1.1ms)  INSERT INTO "payment_types" ("title", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Emi"], ["description", "methodtopay in installments"], ["created_at", "2024-07-03 06:45:31.682087"], ["updated_at", "2024-07-03 06:45:31.682087"]]
+                                around create : after create
+                                Payment type was successfully created
+                                  TRANSACTION (1.9ms)  COMMIT
+                                The transaction was successfully committed for PaymentType Emi
+                                => 
+                                #<PaymentType:0x00007ff09a08eac0
+
 
     - UPDATING AN OBJECT - 
           - before_validation - triggered before the specified validations of the module are performed
@@ -511,7 +538,33 @@ TYPES OF CALLBACKS -
                                   TRANSACTION (3.2ms)  COMMIT
                                 => true 
           - after_commit/after_rollback - triggered if the transaction is completed/rollback
-                    eg - 
+                    eg -   class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            after_commit :commit_info
+                            after_rollback :rollback_info
+
+                            private
+                              
+                              def commit_info
+                                puts("The transaction was successfully committed for PaymentType #{self.title}")
+                              end
+                              def rollback_info
+                                puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                              end
+                          end
+                    practice -  3.3.1 :016 > a = PaymentType.create(title:"EMI", description:"methodtopay in installments")
+                                around create : before create
+                                  TRANSACTION (0.2ms)  BEGIN
+                                  PaymentType Create (1.1ms)  INSERT INTO "payment_types" ("title", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Emi"], ["description", "methodtopay in installments"], ["created_at", "2024-07-03 06:45:31.682087"], ["updated_at", "2024-07-03 06:45:31.682087"]]
+                                around create : after create
+                                Payment type was successfully created
+                                  TRANSACTION (1.9ms)  COMMIT
+                                The transaction was successfully committed for PaymentType Emi
+                                => 
+                                #<PaymentType:0x00007ff09a08eac0
 
     - DESTROYING AN OBJECT - 
           - before_destroy - triggered before the object is created in the database
