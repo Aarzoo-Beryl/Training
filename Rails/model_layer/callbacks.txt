@@ -760,3 +760,73 @@ TYPES OF CALLBACKS -
     Note - 
           1. if exception occurs in an after_save, transaction will be rolled back and the data will not be persisted in the database
           2. execution of after_commit ensures that the transaction has already completed and data has persisted to database
+
+
+    OTHER CALLBACKS - 
+          - after_initialize - triggered after an object is initialized
+                             - can be called directly using new or when a record is loaded from the database
+                             - useful for avoiding the need to directly override the ActiveRecord initialize method, because it allows you to add initialization logic without affecting the core initialization process of ActiveRecord
+                             - has no other counter parts like before, around, etc.
+                      eg -  class Brand < ApplicationRecord
+                              has_many :products, dependent: :destroy
+
+                              validates :title, presence: true
+
+                              after_initialize :log_initialize
+
+                              private
+                                def log_initialize
+                                  puts("you have initialized an new object")
+                                end
+                            end
+                      practice -  3.3.1 :001 > b = Brand.new
+                                  you have initialized an new object
+                                  => #<Brand:0x00007f250895b0a8 id: nil, title: nil, description: nil, created_at: nil, updated_at: nil> 
+
+          - after_find - triggered after loading an object from database
+                       - called before initialize if both are mentioned
+                       - has no counter parts like before, around, etc.
+                      eg -  class Brand < ApplicationRecord
+                              has_many :products, dependent: :destroy
+
+                              validates :title, presence: true
+
+                              after_find :log_found
+
+                              private
+                                def log_found
+                                  puts("you have found a new object with id: #{self.id}")
+                                end
+                            end
+                      practice -  3.3.1 :002 > Brand.find(1)
+                                    Brand Load (0.4ms)  SELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  you have found a new object with id: 1
+                                  you have initialized an new object
+                                  => 
+                                  #<Brand:0x00007f25080d9880
+                                  id: 1,
+                                  title: "puma",
+                                  description: "logo of cheetah",
+                                  created_at: Fri, 10 May 2024 04:50:16.699633000 UTC +00:00,
+                                  updated_at: Fri, 10 May 2024 04:50:16.699633000 UTC +00:00> 
+
+          - after_touch - called after an object has been touched 
+                        - can be used along with belongs_to
+                      eg -  class Brand < ApplicationRecord
+                              has_many :products, dependent: :destroy
+
+                              validates :title, presence: true
+
+                              after_touch :log_touched
+
+                              private
+                                def log_touched
+                                  puts("you have touched the object with id: #{self.id}")
+                                end
+                            end
+                      practice -  3.3.1 :004 > b.touch
+                                    TRANSACTION (0.3ms)  BEGIN
+                                    Brand Update (1.2ms)  UPDATE "brands" SET "updated_at" = $1 WHERE "brands"."id" = $2  [["updated_at", "2024-07-03 07:26:47.357580"], ["id", 1]]
+                                  you have touched the object with id: 1
+                                    TRANSACTION (1.8ms)  COMMIT
+                                  => true 
