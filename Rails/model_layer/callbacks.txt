@@ -482,11 +482,146 @@ TYPES OF CALLBACKS -
                                   TRANSACTION (3.2ms)  COMMIT
                                 => true 
           - before_update - triggered before the object is created in the database
-                    eg - 
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            after_commit :commit_info
+                            after_rollback :rollback_info
+
+                            before_update :capitalize_title
+                            around_update :lifecycle_info_update
+                            after_update :updation_info
+
+                            private
+                              def capitalize_title
+                                title.capitalize! if title.present?
+                              end
+                              def commit_info
+                                puts("The transaction was successfully committed for PaymentType #{self.title}")
+                              end
+                              def rollback_info
+                                puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                              end
+                              def lifecycle_info_update
+                                  puts("around update : before update")
+                                  yield
+                                  puts("around update : after update")
+                              end
+                              def updation_info
+                                puts("The object with id:#{self.id} was successfully updated")
+                              end
+                          end
+                    practice -  3.3.1 :001 > a = PaymentType.last
+                                  PaymentType Load (0.4ms)  SELECT "payment_types".* FROM "payment_types" ORDER BY "payment_types"."id" DESC LIMIT $1  [["LIMIT", 1]]
+                                => 
+                                #<PaymentType:0x00007f1f0ada35b0
+                                ... 
+                                3.3.1 :002 > a.update(description:"allows to pay in monthly installments")
+                                around update : before update
+                                  TRANSACTION (0.3ms)  BEGIN
+                                  PaymentType Update (1.2ms)  UPDATE "payment_types" SET "description" = $1, "updated_at" = $2 WHERE "payment_types"."id" = $3  [["description", "allows to pay in monthly installments"], ["updated_at", "2024-07-03 06:55:35.873890"], ["id", 10]]
+                                around update : after update
+                                The object with id:10 was successfully updated
+                                  TRANSACTION (2.3ms)  COMMIT
+                                The transaction was successfully committed for PaymentType Emi
+                                => true 
+
           - around_update - triggered when the object is being created in the database
-                    eg - 
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            after_commit :commit_info
+                            after_rollback :rollback_info
+
+                            before_update :capitalize_title
+                            around_update :lifecycle_info_update
+                            after_update :updation_info
+
+                            private
+                              def capitalize_title
+                                title.capitalize! if title.present?
+                              end
+                              def commit_info
+                                puts("The transaction was successfully committed for PaymentType #{self.title}")
+                              end
+                              def rollback_info
+                                puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                              end
+                              def lifecycle_info_update
+                                  puts("around update : before update")
+                                  yield
+                                  puts("around update : after update")
+                              end
+                              def updation_info
+                                puts("The object with id:#{self.id} was successfully updated")
+                              end
+                          end
+                    practice -  3.3.1 :001 > a = PaymentType.last
+                                  PaymentType Load (0.4ms)  SELECT "payment_types".* FROM "payment_types" ORDER BY "payment_types"."id" DESC LIMIT $1  [["LIMIT", 1]]
+                                => 
+                                #<PaymentType:0x00007f1f0ada35b0
+                                ... 
+                                3.3.1 :002 > a.update(description:"allows to pay in monthly installments")
+                                around update : before update
+                                  TRANSACTION (0.3ms)  BEGIN
+                                  PaymentType Update (1.2ms)  UPDATE "payment_types" SET "description" = $1, "updated_at" = $2 WHERE "payment_types"."id" = $3  [["description", "allows to pay in monthly installments"], ["updated_at", "2024-07-03 06:55:35.873890"], ["id", 10]]
+                                around update : after update
+                                The object with id:10 was successfully updated
+                                  TRANSACTION (2.3ms)  COMMIT
+                                The transaction was successfully committed for PaymentType Emi
+                                => true        
+                                   
           - after_update - triggered after the object is created in the database
-                    eg - 
+                    eg -  class PaymentType < ApplicationRecord
+                            has_many :payments, validate: true
+
+                            validates :title, presence: true
+
+                            after_commit :commit_info
+                            after_rollback :rollback_info
+
+                            before_update :capitalize_title
+                            around_update :lifecycle_info_update
+                            after_update :updation_info
+
+                            private
+                              def capitalize_title
+                                title.capitalize! if title.present?
+                              end
+                              def commit_info
+                                puts("The transaction was successfully committed for PaymentType #{self.title}")
+                              end
+                              def rollback_info
+                                puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                              end
+                              def lifecycle_info_update
+                                  puts("around update : before update")
+                                  yield
+                                  puts("around update : after update")
+                              end
+                              def updation_info
+                                puts("The object with id:#{self.id} was successfully updated")
+                              end
+                          end
+                    practice -  3.3.1 :001 > a = PaymentType.last
+                                  PaymentType Load (0.4ms)  SELECT "payment_types".* FROM "payment_types" ORDER BY "payment_types"."id" DESC LIMIT $1  [["LIMIT", 1]]
+                                => 
+                                #<PaymentType:0x00007f1f0ada35b0
+                                ... 
+                                3.3.1 :002 > a.update(description:"allows to pay in monthly installments")
+                                around update : before update
+                                  TRANSACTION (0.3ms)  BEGIN
+                                  PaymentType Update (1.2ms)  UPDATE "payment_types" SET "description" = $1, "updated_at" = $2 WHERE "payment_types"."id" = $3  [["description", "allows to pay in monthly installments"], ["updated_at", "2024-07-03 06:55:35.873890"], ["id", 10]]
+                                around update : after update
+                                The object with id:10 was successfully updated
+                                  TRANSACTION (2.3ms)  COMMIT
+                                The transaction was successfully committed for PaymentType Emi
+                                => true 
+
           - after_save -  triggered after the object is save in the database
                     eg -  class Product < ApplicationRecord
                             belongs_to :brand , inverse_of: :products, validate: true
@@ -568,13 +703,13 @@ TYPES OF CALLBACKS -
 
     - DESTROYING AN OBJECT - 
           - before_destroy - triggered before the object is created in the database
-                    eg - 
+                    
           - around_destroy - triggered when the object is being created in the database
-                    eg - 
+                   
           - after_destroy - triggered after the object is created in the database
-                    eg - 
+                    
           - after_commit/after_rollback - triggered if the transaction is completed/rollback
-                    eg - 
+                    
 
     Note - 
           1. if exception occurs in an after_save, transaction will be rolled back and the data will not be persisted in the database
