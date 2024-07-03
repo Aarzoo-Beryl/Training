@@ -33,12 +33,18 @@ class PaymentType < ApplicationRecord
        puts("The transaction was successfully committed for PaymentType #{self.title}")
      end
      def rollback_info
-       puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+       puts("The transaction was rolled back because of : #{self.errors.full_messages.join(',')}")
      end
      def lifecycle_info_update
          puts("around update : before update")
          yield
          puts("around update : after update")
+     # rescue ActiveRecord::Rollback
+     #    puts "Payment processing aborted due to some_condition"
+     #    # Optionally re-raise or handle the error further
+     #    # raise ActiveRecord::Rollback  # Re-raise to let Rails handle it
+     #    throw :abort  # Re-throw :abort to halt further execution
+
      end
      def updation_info
        puts("The object with id:#{self.id} was successfully updated")

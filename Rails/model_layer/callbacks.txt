@@ -863,7 +863,7 @@ RUNNING CALLBACKS - querying methods that trigger callback
 
 SKIPPING CALLBACKS - refers to methods that never trigger callback methods
                    - these methods don't instantiate a model and hence callbacks are not triggered
-                   
+
           1.decrement! - decreases the value of specified attribute by 1, saves the record 
           2.decrement_counter - automatically decreases the value of the specified counter by 1 in the database
           3.delete - remove record from database by its  primary key 
@@ -882,6 +882,149 @@ SKIPPING CALLBACKS - refers to methods that never trigger callback methods
           16.upsert - insert a record if it doesn't exists or updates if it does 
           17.upsert_all - inserts multiple records if they don't exists and updates them if they do exist
           18.delete_by - deletes records that match certain condition
+
+HALTING EXECUTION -
+          - all the validations, callbacks and actual database operations are organized into a sequence or "chain"
+          - also when we register new callbacks for our models they will be queued for execution
+          - this chain is handled within a transaction i.e. either these actions will be complete successfully or in case of issue, everything gets rolled back to maintain data consistency
+                                                  ||
+                                                  \/
+          - if you want to intensionally stop this chain from continuing , use 'throw :abort' in your callback
+          - this causes rails to immediately further execution of the chain
+          - useful when some condition isn't met and you want to prevent the database operation from proceeding
+
+    NOTE - 
+          1.any exception that is not ActiveRecord::Rollback or ActiveRecord::RecordInvalid, will be re raised after the callback chain is halted 
+            also this may break code that doesn't except methods like save and update (which manually try to return true ot false to raise an exception) 
+          2.if any other exception occurs during this chain of actions , Rails typically re-raises that exception after halting the execution of the chain 
+            however if ActiveRecord::RecordNotDestroyed is raised within after_destroy, before_destroy or around_destroy callback, it will not be raised again and destroy method will just return false
+
+    without throw :abort - eg - class PaymentType < ApplicationRecord
+                                  has_many :payments, validate: true
+
+                                  validates :title, presence: true
+
+                                  after_commit :commit_info
+                                  after_rollback :rollback_info
+
+                                  before_update :capitalize_title
+                                  around_update :lifecycle_info_update
+                                  after_update :updation_info
+
+                                  private
+                                    def capitalize_title
+                                      title.capitalize! if title.present?
+                                    end
+                                    def commit_info
+                                      puts("The transaction was successfully committed for PaymentType #{self.title}")
+                                    end
+                                    def rollback_info
+                                      puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                                    end
+                                    def lifecycle_info_update
+                                        puts("around update : before update")
+                                        yield
+                                        puts("around update : after update")
+                                    end
+                                    def updation_info
+                                      puts("The object with id:#{self.id} was successfully updated")
+                                    end
+                                end
+                          practice -  3.3.1 :001 > a = PaymentType.last
+                                        PaymentType Load (0.4ms)  SELECT "payment_types".* FROM "payment_types" ORDER BY "payment_types"."id" DESC LIMIT $1  [["LIMIT", 1]]
+                                      => 
+                                      #<PaymentType:0x00007f1f0ada35b0
+                                      ... 
+                                      3.3.1 :002 > a.update(description:"allows to pay in monthly installments")
+                                      around update : before update
+                                        TRANSACTION (0.3ms)  BEGIN
+                                        PaymentType Update (1.2ms)  UPDATE "payment_types" SET "description" = $1, "updated_at" = $2 WHERE "payment_types"."id" = $3  [["description", "allows to pay in monthly installments"], ["updated_at", "2024-07-03 06:55:35.873890"], ["id", 10]]
+                                      around update : after update
+                                      The object with id:10 was successfully updated
+                                        TRANSACTION (2.3ms)  COMMIT
+                                      The transaction was successfully committed for PaymentType Emi
+                                      => true 
+
+    with throw :abort - eg -  class PaymentType < ApplicationRecord
+                                has_many :payments, validate: true
+
+                                validates :title, presence: true
+
+                                after_commit :commit_info
+                                after_rollback :rollback_info
+
+                                before_update :capitalize_title
+                                around_update :lifecycle_info_update
+                                after_update :updation_info
+
+                                private
+                                  def capitalize_title
+                                    title.capitalize! if title.present?
+                                  end
+                                  def commit_info
+                                    puts("The transaction was successfully committed for PaymentType #{self.title}")
+                                  end
+                                  def rollback_info
+                                    puts("The transaction was rolled back because of : #{self.error.full_messages.join(',')}")
+                                  end
+                                  def lifecycle_info_update
+                                      puts("around update : before update")
+                                      yield
+                                      puts("around update : after update")
+                                  end
+                                  def updation_info
+                                    puts("The object with id:#{self.id} was successfully updated")
+                                  end
+                              end
+                       # practice - unable to process halts
+
+RELATIONAL CALLBACKS - callbacks can be defined to work through model relationships 
+                     - this allows actions in one model to trigger callbacks in associated models
+                        eg -  class User < ApplicationRecord
+                                has_many :posts, inverse_of: :user,  dependent: :destroy
+
+                                after_destroy :destroy_info
+
+                                private
+                                  def destroy_info
+                                    puts("post related to user #{self.name} is destroyed")
+                                  end
+                              end
+                              class Post < ApplicationRecord
+                                belongs_to :user, inverse_of: :posts
+                                has_many :comments, as: :commentable, dependent: :destroy
+                                has_many :likes, as: :likeable, dependent: :destroy
+                                has_many :notifications, as: :notifiable
+
+
+                              end
+                        practice -  3.3.1 :207 > User.last.destroy
+                                      User Load (0.3ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1  [["LIMIT", 1]]
+                                      TRANSACTION (0.2ms)  BEGIN
+                                      Post Load (0.5ms)  SELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1  [["user_id", 5]]
+                                      Comment Load (0.3ms)  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2  [["commentable_id", 9], ["commentable_type", "Post"]]
+                                      Like Load (0.6ms)  SELECT "likes".* FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 9], ["likeable_type", "Post"]]
+                                      Post Destroy (0.4ms)  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 9]]
+                                      Comment Load (0.4ms)  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2  [["commentable_id", 10], ["commentable_type", "Post"]]
+                                      Like Load (0.3ms)  SELECT "likes".* FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 10], ["likeable_type", "Post"]]
+                                      Post Destroy (0.4ms)  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 10]]
+                                      User Destroy (0.6ms)  DELETE FROM "users" WHERE "users"."id" = $1  [["id", 5]]
+                                    post related to user Rahul Singh is destroyed
+                                      TRANSACTION (1.3ms)  COMMIT
+                                    => 
+                                    #<User:0x00007f653f9e5b28
+                                    id: 5,
+                                    username: "rahul_singh",
+                                    name: "Rahul Singh",
+                                    phone_number: "9876543102",
+                                    email: "rahul.singh@example.com",
+                                    password: "[FILTERED]",
+                                    location: "Kolkata",
+                                    profile_picture: "rahul_singh.jpg",
+                                    created_at: Wed, 03 Jul 2024 10:40:05.020566000 UTC +00:00,
+                                    updated_at: Wed, 03 Jul 2024 10:40:05.020566000 UTC +00:00> 
+
+
 
 
 
