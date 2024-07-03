@@ -86,39 +86,114 @@ TYPES OF CALLBACKS -
                                 end
                               end
                           end
+                    practice - 3.3.1 :003 > b = Customer.new
+                                => #<Customer:0x00007f80178ad5d8 id: nil, name: nil, phone_number: nil, email: nil, created_at: nil, updated_at: nil> 
+                                3.3.1 :004 > b.valid?
+                                name is blank
+                                  Customer Exists? (0.5ms)  SELECT 1 AS one FROM "customers" WHERE "customers"."email" IS NULL LIMIT $1  [["LIMIT", 1]]
+                                ensure your phone number is  
+                                => false 
+
 
           - after_validation - triggered after the specified validations of the module are performed
-                    eg -  class Customer < ApplicationRecord
-                            has_many :addresses,  validate: true
-                            has_many :review, inverse_of: :customer, validate: true
-                            has_many :orders
-                            has_many :payments, through: :bill
+                    eg -  class Seller < ApplicationRecord
+                            has_many :products, dependent: :destroy
 
-                            validates :name, presence: true
+                            validates :name, presence: true, format: {with: /\A[a-zA-z]}
                             validates :phone_number, presence: true
                             validates :email, presence: true, uniqueness: true
 
-                            before_validation :check_name, on: [:create, :update]
-
-                            after_validation :check_phone_number
+                            after_validation :log_errors
 
                             private
-                              def check_name
-                                if name.blank?
-                                  puts "name is blank"
+                              def log_errors
+                                if errors.any?
+                                  puts("validation was unsuccessful because:#{errors.full_messages.join(',')}")
                                 end
                               end
 
-                              def check_phone_number
-                                @a = self.phone_number
-                                puts "ensure your phone number is #{@a} "
+                          end
+
+                    practice -  3.3.1 :023 > s.name= "harish"
+                                => "harish" 
+                                3.3.1 :024 > s.valid?
+                                  Seller Exists? (0.6ms)  SELECT 1 AS one FROM "sellers" WHERE "sellers"."email" IS NULL LIMIT $1  [["LIMIT", 1]]
+                                validation was unsuccessful because:Phone number can't be blank,Email can't be blank
+                                => false 
+ 
+
+          - before_save - triggered before the object is save in the database
+                    eg -  class Product < ApplicationRecord
+                            belongs_to :brand , inverse_of: :products, validate: true
+                            belongs_to :category, inverse_of: :products, validate: true, touch: true
+                            belongs_to :seller, inverse_of: :products, validate: true
+                            has_many :reviews
+                            has_and_belongs_to_many :orders
+
+
+
+                            validates :name, presence: true
+                            validates :description, presence: true
+                            validates :price, presence: true, numericality: true
+
+
+                            before_save :set_default_price
+
+                            private
+                              def set_default_price
+                                self.price ||= 0
+                                puts("as the price of the product was not mentioned it was taken as zero by default")
                               end
                           end
 
-          - before_save - triggered before the object is save in the database
-                    eg - 
+
           - around_save - triggered when the object is being save in the database
-                    eg - 
+                    eg -  class Product < ApplicationRecord
+                            belongs_to :brand , inverse_of: :products, validate: true
+                            belongs_to :category, inverse_of: :products, validate: true, touch: true
+                            belongs_to :seller, inverse_of: :products, validate: true
+                            has_many :reviews
+                            has_and_belongs_to_many :orders
+
+
+
+                            validates :name, presence: true
+                            validates :description, presence: true
+                            validates :price, presence: true, numericality: true
+
+
+                            before_save :set_default_price
+                            around_save :log_activity
+
+                            private
+                              def set_default_price
+                                self.price ||= 0
+                                puts("as the price of the product was not mentioned it was taken as zero by default")
+                              end
+                              def log_activity
+                                puts("around save : before save")
+                                yield
+                                puts("around save : after save")
+                              end
+                          end
+                    practice -  3.3.1 :006 > p = Product.new( id: 4,name: "Mouse",description: "Computer accessory",price: 2000,brand_id: 1,seller_id: 1,category_id: 1)
+                                => 
+                                #<Product:0x00007fdbc4c7ecd0
+                                ... 
+                                3.3.1 :007 > p.save
+                                  TRANSACTION (0.3ms)  BEGIN
+                                  Brand Load (0.4ms)  SELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Category Load (0.4ms)  SELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Seller Load (0.3ms)  SELECT "sellers".* FROM "sellers" WHERE "sellers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                as the price of the product was not mentioned it was taken as zero by default
+                                around save : before save
+                                  Product Create (1.0ms)  INSERT INTO "products" ("id", "name", "description", "price", "created_at", "updated_at", "brand_id", "seller_id", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["id", 4], ["name", "Mouse"], ["description", "Computer accessory"], ["price", 2000], ["created_at", "2024-07-03 06:12:13.318960"], ["updated_at", "2024-07-03 06:12:13.318960"], ["brand_id", 1], ["seller_id", 1], ["category_id", 1]]
+                                around save : after save
+                                the object was successfully saved
+                                  Category Update (0.4ms)  UPDATE "categories" SET "updated_at" = $1 WHERE "categories"."id" = $2  [["updated_at", "2024-07-03 06:12:13.322275"], ["id", 1]]
+                                  TRANSACTION (3.2ms)  COMMIT
+                                => true 
+
           - before_create - triggered before the object is created in the database
                     eg - 
           - around_create - triggered when the object is being created in the database
@@ -126,7 +201,55 @@ TYPES OF CALLBACKS -
           - after_create - triggered after the object is created in the database
                     eg - 
           - after_save - triggered after the object is save in the database
-                    eg - 
+                    eg - class Product < ApplicationRecord
+                            belongs_to :brand , inverse_of: :products, validate: true
+                            belongs_to :category, inverse_of: :products, validate: true, touch: true
+                            belongs_to :seller, inverse_of: :products, validate: true
+                            has_many :reviews
+                            has_and_belongs_to_many :orders
+
+
+
+                            validates :name, presence: true
+                            validates :description, presence: true
+                            validates :price, presence: true, numericality: true
+
+
+                            before_save :set_default_price
+                            around_save :log_activity
+                            after_save :clear_cache
+
+                            private
+                              def set_default_price
+                                self.price ||= 0
+                                puts("as the price of the product was not mentioned it was taken as zero by default")
+                              end
+                              def log_activity
+                                puts("around save : before save")
+                                yield
+                                puts("around save : after save")
+                              end
+                              def clear_cache
+                                CacheService.clear_product_cache(self)
+                              end
+                          end
+                    practice -  3.3.1 :006 > p = Product.new( id: 4,name: "Mouse",description: "Computer accessory",price: 2000,brand_id: 1,seller_id: 1,category_id: 1)
+                                => 
+                                #<Product:0x00007fdbc4c7ecd0
+                                ... 
+                                3.3.1 :007 > p.save
+                                  TRANSACTION (0.3ms)  BEGIN
+                                  Brand Load (0.4ms)  SELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Category Load (0.4ms)  SELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Seller Load (0.3ms)  SELECT "sellers".* FROM "sellers" WHERE "sellers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                as the price of the product was not mentioned it was taken as zero by default
+                                around save : before save
+                                  Product Create (1.0ms)  INSERT INTO "products" ("id", "name", "description", "price", "created_at", "updated_at", "brand_id", "seller_id", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["id", 4], ["name", "Mouse"], ["description", "Computer accessory"], ["price", 2000], ["created_at", "2024-07-03 06:12:13.318960"], ["updated_at", "2024-07-03 06:12:13.318960"], ["brand_id", 1], ["seller_id", 1], ["category_id", 1]]
+                                around save : after save
+                                the object was successfully saved
+                                  Category Update (0.4ms)  UPDATE "categories" SET "updated_at" = $1 WHERE "categories"."id" = $2  [["updated_at", "2024-07-03 06:12:13.322275"], ["id", 1]]
+                                  TRANSACTION (3.2ms)  COMMIT
+                                => true 
           - after_commit/after_rollback - triggered if the transaction is completed/rollback
                     eg - 
 
@@ -151,6 +274,7 @@ TYPES OF CALLBACKS -
                                 end
                               end
                           end
+
           - after_validation - triggered after the specified validations of the module are performed
                     eg -  class Customer < ApplicationRecord
                             has_many :addresses,  validate: true
@@ -179,9 +303,75 @@ TYPES OF CALLBACKS -
                               end
                           end
           - before_save - triggered before the object is save in the database
-                    eg - 
+                    eg - class Product < ApplicationRecord
+                            belongs_to :brand , inverse_of: :products, validate: true
+                            belongs_to :category, inverse_of: :products, validate: true, touch: true
+                            belongs_to :seller, inverse_of: :products, validate: true
+                            has_many :reviews
+                            has_and_belongs_to_many :orders
+
+
+
+                            validates :name, presence: true
+                            validates :description, presence: true
+                            validates :price, presence: true, numericality: true
+
+
+                            before_save :set_default_price
+
+                            private
+                              def set_default_price
+                                self.price ||= 0
+                                puts("as the price of the product was not mentioned it was taken as zero by default")
+                              end
+                          end
+
           - around_save - triggered when the object is being save in the database
-                    eg - 
+                    eg -  class Product < ApplicationRecord
+                            belongs_to :brand , inverse_of: :products, validate: true
+                            belongs_to :category, inverse_of: :products, validate: true, touch: true
+                            belongs_to :seller, inverse_of: :products, validate: true
+                            has_many :reviews
+                            has_and_belongs_to_many :orders
+
+
+
+                            validates :name, presence: true
+                            validates :description, presence: true
+                            validates :price, presence: true, numericality: true
+
+
+                            before_save :set_default_price
+                            around_save :log_activity
+
+                            private
+                              def set_default_price
+                                self.price ||= 0
+                                puts("as the price of the product was not mentioned it was taken as zero by default")
+                              end
+                              def log_activity
+                                puts("around save : before save")
+                                yield
+                                puts("around save : after save")
+                              end
+                          end
+                    practice -  3.3.1 :006 > p = Product.new( id: 4,name: "Mouse",description: "Computer accessory",price: 2000,brand_id: 1,seller_id: 1,category_id: 1)
+                                => 
+                                #<Product:0x00007fdbc4c7ecd0
+                                ... 
+                                3.3.1 :007 > p.save
+                                  TRANSACTION (0.3ms)  BEGIN
+                                  Brand Load (0.4ms)  SELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Category Load (0.4ms)  SELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Seller Load (0.3ms)  SELECT "sellers".* FROM "sellers" WHERE "sellers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                as the price of the product was not mentioned it was taken as zero by default
+                                around save : before save
+                                  Product Create (1.0ms)  INSERT INTO "products" ("id", "name", "description", "price", "created_at", "updated_at", "brand_id", "seller_id", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["id", 4], ["name", "Mouse"], ["description", "Computer accessory"], ["price", 2000], ["created_at", "2024-07-03 06:12:13.318960"], ["updated_at", "2024-07-03 06:12:13.318960"], ["brand_id", 1], ["seller_id", 1], ["category_id", 1]]
+                                around save : after save
+                                the object was successfully saved
+                                  Category Update (0.4ms)  UPDATE "categories" SET "updated_at" = $1 WHERE "categories"."id" = $2  [["updated_at", "2024-07-03 06:12:13.322275"], ["id", 1]]
+                                  TRANSACTION (3.2ms)  COMMIT
+                                => true 
           - before_update - triggered before the object is created in the database
                     eg - 
           - around_update - triggered when the object is being created in the database
@@ -189,7 +379,55 @@ TYPES OF CALLBACKS -
           - after_update - triggered after the object is created in the database
                     eg - 
           - after_save -  triggered after the object is save in the database
-                    eg - 
+                    eg -  class Product < ApplicationRecord
+                            belongs_to :brand , inverse_of: :products, validate: true
+                            belongs_to :category, inverse_of: :products, validate: true, touch: true
+                            belongs_to :seller, inverse_of: :products, validate: true
+                            has_many :reviews
+                            has_and_belongs_to_many :orders
+
+
+
+                            validates :name, presence: true
+                            validates :description, presence: true
+                            validates :price, presence: true, numericality: true
+
+
+                            before_save :set_default_price
+                            around_save :log_activity
+                            after_save :clear_cache
+
+                            private
+                              def set_default_price
+                                self.price ||= 0
+                                puts("as the price of the product was not mentioned it was taken as zero by default")
+                              end
+                              def log_activity
+                                puts("around save : before save")
+                                yield
+                                puts("around save : after save")
+                              end
+                              def clear_cache
+                                CacheService.clear_product_cache(self)
+                              end
+                          end
+                    practice -  3.3.1 :006 > p = Product.new( id: 4,name: "Mouse",description: "Computer accessory",price: 2000,brand_id: 1,seller_id: 1,category_id: 1)
+                                => 
+                                #<Product:0x00007fdbc4c7ecd0
+                                ... 
+                                3.3.1 :007 > p.save
+                                  TRANSACTION (0.3ms)  BEGIN
+                                  Brand Load (0.4ms)  SELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Category Load (0.4ms)  SELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                  Seller Load (0.3ms)  SELECT "sellers".* FROM "sellers" WHERE "sellers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+                                as the price of the product was not mentioned it was taken as zero by default
+                                around save : before save
+                                  Product Create (1.0ms)  INSERT INTO "products" ("id", "name", "description", "price", "created_at", "updated_at", "brand_id", "seller_id", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["id", 4], ["name", "Mouse"], ["description", "Computer accessory"], ["price", 2000], ["created_at", "2024-07-03 06:12:13.318960"], ["updated_at", "2024-07-03 06:12:13.318960"], ["brand_id", 1], ["seller_id", 1], ["category_id", 1]]
+                                around save : after save
+                                the object was successfully saved
+                                  Category Update (0.4ms)  UPDATE "categories" SET "updated_at" = $1 WHERE "categories"."id" = $2  [["updated_at", "2024-07-03 06:12:13.322275"], ["id", 1]]
+                                  TRANSACTION (3.2ms)  COMMIT
+                                => true 
           - after_commit/after_rollback - triggered if the transaction is completed/rollback
                     eg - 
 
