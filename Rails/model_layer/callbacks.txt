@@ -861,7 +861,27 @@ RUNNING CALLBACKS - querying methods that trigger callback
 
     after_initialize - triggered every time a new object of a class is initialized
 
-
+SKIPPING CALLBACKS - refers to methods that never trigger callback methods
+                   - these methods don't instantiate a model and hence callbacks are not triggered
+                   
+          1.decrement! - decreases the value of specified attribute by 1, saves the record 
+          2.decrement_counter - automatically decreases the value of the specified counter by 1 in the database
+          3.delete - remove record from database by its  primary key 
+          4.delete_all - deletes all records matching the condition 
+          5.increment! - increases the value specified attribute by 1 and saves the record
+          6.increment_counter - automatically increases the value of specified counter by 1 in the database  
+          7.insert - used to add new record into the database and returns primary key of the newly inserted object 
+          8.insert! - similar to above but raises exception if the insert fails  
+          9.insert_all -inserts multiple records into the database in a single query  
+          10.insert_all! - does same but raises error if exception occurs 
+          11.touch_all - updates the updated_at timestamp of all the records matching the condition 
+          12.update_column - updates a single attribute in the database 
+          13.update_columns - updates multiple attributes in the database
+          14.update_all - updates the attributes of all the records matching the condition
+          15.update_counters - automatically updates the counters of the specified attribute for all the records matching the conditions
+          16.upsert - insert a record if it doesn't exists or updates if it does 
+          17.upsert_all - inserts multiple records if they don't exists and updates them if they do exist
+          18.delete_by - deletes records that match certain condition
 
 
 
