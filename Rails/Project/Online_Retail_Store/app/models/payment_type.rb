@@ -3,14 +3,14 @@ class PaymentType < ApplicationRecord
 
   validates :title, presence: true
 
-  before_create :capitalize_title
+  before_create :capitalize_title, if: :title_present
   around_create :lifecycle_info_create
   after_create :confirmation_info
 
   after_commit :commit_info
   after_rollback :rollback_info
 
-  before_update :capitalize_title
+  before_update :capitalize_title ,if: Proc.new {|payment_type| title.present?} ,unless: Proc.new {|payment_type| title.empty?}
   around_update :lifecycle_info_update
   after_update :updation_info
 
@@ -19,7 +19,7 @@ class PaymentType < ApplicationRecord
   after_destroy :deletion_info
   private
      def capitalize_title
-       title.capitalize! if title.present?
+       title.capitalize!
      end
      def lifecycle_info_create
          puts("around create : before create")
@@ -59,5 +59,8 @@ class PaymentType < ApplicationRecord
      end
      def deletion_info
        puts("the object specified was successfully deleted from the database")
+     end
+     def title_present
+       return title.present
      end
 end

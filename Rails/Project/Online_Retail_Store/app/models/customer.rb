@@ -8,7 +8,7 @@ class Customer < ApplicationRecord
   validates :phone_number, presence: true
   validates :email, presence: true, uniqueness: true
 
-  before_validation :check_name, on: [:create, :update]
+  before_validation :check_name, on: [:create, :update], if: [:phone_number_valid, Proc.new {|customer| customer.age >= 18}]
   after_validation :check_phone_number
   before_save :ensure_details
   private
@@ -35,5 +35,8 @@ class Customer < ApplicationRecord
       if email.blank?
         puts("email: not mentioned")
       end
+    end
+    def phone_number_valid
+      phone_number.to_i
     end
 end

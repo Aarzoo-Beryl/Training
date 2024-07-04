@@ -55,7 +55,7 @@ CALLBACKS - refers to feature of ruby on rails that allow you to trigger methods
                   before_validation :check_age
 
                   def check_age
-                    update(age: 18)
+                    self.age = 18
                   end
                 end 
           # this first checks the value of self.status
@@ -1089,4 +1089,129 @@ ASSOCIATION CALLBACKS - triggered by events in the life cycle of a collection
                         created_at: Wed, 03 Jul 2024 12:41:14.010620000 UTC +00:00,
                         updated_at: Wed, 03 Jul 2024 12:41:14.010620000 UTC +00:00>] 
 
+CONDITIONAL CALLBACKS - allows to control under what specific condition the callbacks are triggered
+      - :if and :unless with symbol - allows to write the symbol as the name of the method to be called 
+                      - in :if, callback wont be executed if the symbol return false
+                      - in :unless, callback wont be executed if the symbol return true
+                      - eg -  class PaymentType < ApplicationRecord
+                                has_many :payments, validate: true
+
+                                validates :title, presence: true
+
+                                before_create :capitalize_title, if: :title_present
+
+                                private
+                                  def capitalize_title
+                                    title.capitalize! 
+                                  end
+
+                                  def title_present
+                                    return title.present
+                                  end
+                              end
+
+      - :if and :unless with Proc - associates the :if and :unless with a Proc object
+                      - best suited when writing short validation methods , usually one liners
+                      - eg -    class Customer < ApplicationRecord
+                                  has_many :addresses,  validate: true
+                                  has_many :review, inverse_of: :customer, validate: true
+                                  has_many :orders
+                                  has_many :payments, through: :bill
+
+                                  validates :name, presence: true
+                                  validates :phone_number, presence: true
+                                  validates :email, presence: true, uniqueness: true
+
+                                  before_validation :check_name, on: [:create, :update], if: Proc.new {|customer| customer.age >= 18}
+
+                                  private
+                                    def check_name
+                                      if name.blank?
+                                        puts "name is blank"
+                                      end
+                                    end
+                                end
+
+      - multiple callback conditions - procs to symbols are passed as an array 
+                      - eg -  class Customer < ApplicationRecord
+                                has_many :addresses,  validate: true
+                                has_many :review, inverse_of: :customer, validate: true
+                                has_many :orders
+                                has_many :payments, through: :bill
+
+                                validates :name, presence: true
+                                validates :phone_number, presence: true
+                                validates :email, presence: true, uniqueness: true
+
+                                before_validation :check_name, on: [:create, :update], if: [:phone_number_valid, Proc.new {|customer| customer.age >= 18}]
+
+                                private
+                                  def check_name
+                                    if name.blank?
+                                      puts "name is blank"
+                                    end
+                                  end
+                                  def phone_number_valid
+                                    phone_number.to_i
+                                  end
+                              end
+      - using both :if and :unless - when using both, the callbacks are trigger when if conditions are true and none of the unless ones are true
+                        - eg -  class PaymentType < ApplicationRecord
+                                  has_many :payments, validate: true
+
+                                  validates :title, presence: true
+
+                                  before_create :capitalize_title if: :title_present
+                                  around_create :lifecycle_info_create
+                                  after_create :confirmation_info
+
+                                  after_commit :commit_info
+                                  after_rollback :rollback_info
+
+                                  before_update :capitalize_title ,if: Proc.new {|payment_type| title.present?} ,unless: Proc.new {|payment_type| title.empty?}
+                                
+                                  private
+                                    def capitalize_title
+                                      title.capitalize!
+                                    end
+                                end
+
+
+CALLBACK CLASSES - used when some callbacks are required to be reused by other models 
+                 - making classes of callback methods help us to encapsulate them in order to reuse them
+                 - makes code easier to maintain and and more modular
+                 - steps - 
+                      1. make the class of the callback methods you want to encapsulate in a single class
+                      2. change config path to -  config.autoload_paths += %W(#{config.root}/lib)
+                      3. use callback in the model you want like - after_destroy FileDestroyCallback.new 
+                 - eg - class FileDestroyerCallback
+                          def after_destroy(file)
+                            if File.exist?(file.filepath)
+                              File.delete(file.filepath)
+                            end
+                            puts("The file was successfully destroyed")
+                          end
+                        end
+
+                        class Brand < ApplicationRecord
+                          has_many :products, dependent: :destroy
+
+                          validates :title, presence: true
+
+                          after_initialize :log_initialize
+                          after_find :log_found
+                          after_touch :log_touched
+                          after_destroy FileDestroyerCallback.new
+                          
+                          private
+                            def log_initialize
+                              puts("you have initialized an new object")
+                            end
+                            def log_found
+                              puts("you have found a new object with id: #{self.id}")
+                            end
+                            def log_touched
+                              puts("you have touched the object with id: #{self.id}")
+                            end
+                        end
 

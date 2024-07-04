@@ -6,6 +6,7 @@ class Brand < ApplicationRecord
   after_initialize :log_initialize
   after_find :log_found
   after_touch :log_touched
+  after_destroy FileDestroyerCallback.new
 
   private
     def log_initialize

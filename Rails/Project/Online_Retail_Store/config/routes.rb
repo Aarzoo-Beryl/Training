@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
-  root 'home#home_page'
+  root 'home#index'
 
 
   controls = [:address, :brand, :category, :customer, :order, :payment, :payment_type, :product, :review, :seller]
   controls.each do |controller|
     resources controller do
       member do
-        
+
         get :destroy
       end
     end
