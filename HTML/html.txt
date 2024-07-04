@@ -146,7 +146,49 @@ HTML COMMENTS - help to comment on defferent elements
                                     -->
               - hide inline content - <p> Hello this is <!-- aarzoo --></p>
 
+HTML COLORS - colors are specified with predefined color names or with RGB,HEX,RGBA,HSL or HSLA values
+              - color names - red,blue,green,black,white,gray,silver
+              - can be used to define color of background, text, border,etc.
+              - color names are not case sensitive
+    RGB - stands for red,green and blue
+        - each defines the intensity of colora between 0-255
+        - 0 is the lowest intensity(dark side) and 255 is the highest intensity (light side)
+        - (255,0,0)- red, (0,255,0)- green, (0,0,255)- blue
+        - (255,255,255)- white, (0,0,0)- black, (128,128,128)- gray
+        - for shades of gray keep value of rgb equal
+    RGBA - same as RGB but with an extra value for opacity
+        - 0 is fully transparent and 1 is fully opaque
+        - (255,0,0,0.5)- red with 50% opacity
+    HEX - hexadecimal color values
+        - 3 digit hex - #rgb
+        - 6 digit hex - #rrggbb
+        - 8 digit hex - #rrggbbaa
+        - #ff0000 - red, #00ff00 - green, #0000ff- blue
+        - #ffffff - white, #000000 - black, #808080 - gray
+    HSL - stands for hue,saturation and lightness
+        - hue - defines the color(0-red,120-green,240-blue)
+        - saturation - defines the intensity of the color(0% shades of gray, 100% full color)
+        - lightness - defines the brightness of the color(0% black, 100% white)
+        - 0 is the lowest intensity(dark side) and 100 is the highest intensity 
+        - (0,100,50)- red, (120,100,50)- green,(240,100,50)
+        - (0,0,0)- black, (0,0,100)- white,
+    HSLA - same as HSL but with an extra value for opacity
+        - 0 is fully transparent and 1 is fully opaque
+        - (0,100,50,0.5)- red with 50% opacity
+        - (120,100,50,0.5)- green with 50% opacity
+        - (240,100,50,0.5)- blue with 50% opacity
+        - (0,0,0,0.5)- black with 50% opacity
+        - (0,0,100,0.5)- white with 50% opacity
+        - (0,0,50,0.5)- gray with 50% opacity
 
+HTML STYLE(CSS) - helps to define styling of the elements of the document
+        - can be used to define color,font size,font family,background color,etc.
+        - can be used to define the style of the element in the HTML document
+        - css- cascading style sheets (cascading- means style applied to parent will be child element within parent )
+    Specifying css - 
+        1.Inline - inside the element itself(<p style="color:blue">....</p>)
+        2.Internal - inside the head of the document(<style>....</style>)[specified in <head>]
+        3.External - in a separate file(.css) and linked to the document(<link rel="stylesheet" href=" ">)[inside <head>]
 
 
 
