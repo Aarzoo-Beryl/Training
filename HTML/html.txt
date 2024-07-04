@@ -97,6 +97,56 @@ HTML STYLES - <style> - used to add style to an element
                 - font-weight - defines font weight
                 - text-align - defines text alignment
 
+HTML TEXT FORMATTING - contain several elements for definning texts with special meaning
+      Formatting Elements - 
+                - <b>	Defines bold text
+                - <strong>	Defines important text(apprears as bold)
+                - <em>	Defines emphasized text (screen reader will pronounce with emphasis,looks italic)
+                - <i>	Defines a part of text in an alternate voice or mood
+                - <small>	Defines smaller text
+                - <sub>	Defines subscripted text
+                - <sup>	Defines superscripted text
+                - <ins>	Defines inserted text(underline)
+                - <del>	Defines deleted text
+                - <mark>	Defines marked/highlighted text 
+
+HTML QUOTATION AND CITATION ELEMENTS - 
+      - <abbr> - Defines an abbreviation or acronym
+               - helps to give useful info to web-browser, translation systema nd search engine
+               - <abbr title="World Health Organization">WHO</abbr>
+               - when title used as an attribute inside, it causes to display of full form when mouse hovers above it
+      - <address> -	Defines contact information for the author/owner of a document
+               - this info can be email address, URL, physical address, phone number, contact details,etc.
+               - text is rendered in italic and browser always adds a line before and after the element
+      - <bdo>	- Defines the text direction
+               - used to override the direction of the current direction of the text
+               - <bdo dir="rtl">abcdef</bdo>
+                 o/p - fedcba (changes direction from right to left) 
+      - <blockquote> -	Defines a section that is quoted from another source
+               - text is indented on the left and right sides
+               - <blockquote cite="https://www.w3schools.com">content</blockquote>
+      - <cite> -	Defines the title of a work
+               - text is rendered in italic
+               - <cite>the titanic</cite>
+      - <q> -	Defines a short inline quotation
+               - text is rendered in quotation marks
+               - <q>the titanic</q>
+                 o/p - "the titanic"
+
+HTML COMMENTS - help to comment on defferent elements
+              - <!-- comment --> - used to add comments to the HTML source code
+              - the data inside it is not visible on the web browserbut it helps to structure the docuent better
+              - it is useful for future reference and for other developers to understand the code
+              - it is also useful for debugging the code
+              - can be used to hide the content temporarily
+              - multiline commit -  <!--
+                                    this is 
+                                    a multiline 
+                                    comment
+                                    -->
+              - hide inline content - <p> Hello this is <!-- aarzoo --></p>
+
+
 
 
 
