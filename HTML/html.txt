@@ -1,0 +1,71 @@
+--------------------------------------------HTML-----------------------------------------------------
+
+HTML - refers to Hyper Text Markup Language 
+     - the standard markup language for creating Web pages
+     - HTML describes the structure of Web pages using markup
+     - HTML elements are the building blocks of HTML pages
+
+WEB BROWSER - pupose - to read and display HTML documents
+            - doesn't display the HTML tags rather used them to determine how to display the content 
+
+SAVING - extension - .html or .htm
+       - encoding - UTF-8
+
+BASIC - 
+      - all documents must start with <!DOCTYPE HTML>
+      - html documents must begin with <html> and end with </html>
+      - visible parts must be in <body>.......</body>
+
+    Basic tags - 
+      - <!DOCTYPE HTML> - declares that the document is a HTML 5 document
+                        - not case sensitive
+      - <html> - root element of the webpage 
+      - <head> - contains meta information about the document
+      - <title> - the title of the document
+      - <body> - contains the visible part of the page
+      - <h1> - heading
+      - <p> - paragraph
+      - <br> - line break
+      - <a> - anchor
+      - <img> - image
+
+    To view source code - eithrt CTRL+U or right-click+"view source code"
+    To inspect HTML element - right-click+"inspect"
+
+HTML ELEMENTS - refers to everything from start tag to end tag
+              - tell the browser how to display the content
+              - HTML elements usually come in pairs like <p>...</p>
+              - the first tag is the start tag, the second tag is the end tag
+              - the content is placed between the start and end tags
+              - HTML elements are also called tags
+              - elements can be nested i.e. an element can futher contain more elements
+              - case insensitive i.e. <p> and <P> means same
+              - empty elements - elements without a content i.e. <br> or <img>
+              - self-closing tags - <br> or <img>
+              - never skip ending tags
+
+HTML ATTRIBUTES - all elements can have attributes except the empty ones
+                - attributes provide additional information about the element
+                - attributes are always specified in the start tag
+                - attributes usually come in name/value pairs like name="value"
+      Basic attributes - 
+                - src - specifies the URL of the image
+                - alt - specifies an alternate text for an image
+                - href - specifies the URL of the page the link goes to
+                - title - specifies extra information about an element
+                - width - specifies the width of an image
+                - height - specifies the height of an image
+                - class - specifies one or more class names for an element
+                - lang - used to declare the language of web page
+                - style - used to add styles to an element
+      Suggestions - 
+                - use lowercase attribute names
+                - use double quotes to delimit attribute values, can use single qoutes too
+                - use the attribute name only once per start tag
+
+
+
+
+
+
+
