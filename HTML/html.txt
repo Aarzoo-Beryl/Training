@@ -63,6 +63,40 @@ HTML ATTRIBUTES - all elements can have attributes except the empty ones
                 - use double quotes to delimit attribute values, can use single qoutes too
                 - use the attribute name only once per start tag
 
+HTML HEADING - refers to titles or subtitles that you want to display on webpage
+             - <h1> to <h6> - six levels of headings
+             - <h1> is the highest level and <h6> is the lowest level
+    IMPORTANCE - search engine use heading to index the structure and content of your webpage
+               - headings are used to specify the structure of the page  
+    ATTRIBUTES - <style> - and css properties hel change how the heading looks
+
+HTML PARAGRAPHS - defined by <p>
+                - <p>...</p> - start and end tags
+                - <p> - self-closing tag
+                - a paragraph always starts from a new line and browser automatically adds some white spaces(margins) before and after paragraph
+                - if adding additional white spaces and lines , browser automatically reoves them and displays the content inside as single paragraph without reserving them
+                - to display the white spaces and lines as it is, use <pre>...</pre> instead of <p>...</p>
+                - <pre>...</pre> - preserves all white spaces and lines as it is (solves poem problem)
+    Horizontal rule - <hr> - defines the thematic break
+                - used to separate content or define a change
+                - <hr> - self-closing tag (empty tag)
+                - used to add a horizontal line
+    Line break  - <br> defines taht the line breaks here nd content after it start from a new line
+                - <br> - self-closing tag (empty tag)
+                - used to add a line break without starting a new line
+
+HTML STYLES - <style> - used to add style to an element
+                - it is an attribute used inside different tags that contain text to be displayed
+                - contails different css properties and their values which enhance the look of the content
+                - syntax - < tagname style="property:value;">
+      CSS properties - 
+                - background-color - defines background color
+                - color - defines text color
+                - font-family - defines font family
+                - font-size - defines font size
+                - font-weight - defines font weight
+                - text-align - defines text alignment
+
 
 
 
