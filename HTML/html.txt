@@ -189,7 +189,81 @@ HTML STYLE(CSS) - helps to define styling of the elements of the document
         1.Inline - inside the element itself(<p style="color:blue">....</p>)
         2.Internal - inside the head of the document(<style>....</style>)[specified in <head>]
         3.External - in a separate file(.css) and linked to the document(<link rel="stylesheet" href=" ">)[inside <head>]
+  
+HTML LINKS - allows user to  click their way from page to page
+        - can be used to link to another document,another part of the same document,or send email
+        - link can be image,text,button or any other element
+        - link can be internal or external
+        - syntax - <a href="url"> text</a>        #text will be visible on the browser
+        - href - stands for hypertext reference
+        - url - stands for uniform resource locator
+        - url can be absolute(full web address) or relative(without https://www part)
+    target attribute - by default new pagewill be visible in the current web browser
+        - target attribute can be used inside <a> tochange this default behaviour
+        - target attribute can have following values
+                - _self - default value
+                - _blank - new page will be visible in new tab
+                - _parent - new page will be visible in parent frame
+                - _top - new page will be visible in top frame
+    links can be - 
+        - image - <a href=""><img src=""></a>
+        - button - <a href=""><button>text</button></a> or js can be used as <button onclick="document.location='default'">txt</button>
+        - email address - <a href="mailto:abc@xyz.com">Send mail</a>
+        - titles - <a href="" tilte="">abc</a>
+    link colors - 
+        - defaults - 
+                - a:link - blue and underlined text
+                - a:visited - purple and underlined text
+                - a:hover - red and underlined text
+                - a:active - yellow and underlined text
+        - custom styling using css - 
+                eg - <style>
+                        a:link {
+                        color: green;
+                        background-color: transparent;
+                        text-decoration: none;
+                        }
 
+                        a:visited {
+                        color: pink;
+                        background-color: transparent;
+                        text-decoration: none;
+                        }
+
+                        a:hover {
+                        color: red;
+                        background-color: transparent;
+                        text-decoration: underline;
+                        }
+
+                        a:active {
+                        color: yellow;
+                        background-color: transparent;
+                        text-decoration: underline;
+                        }
+                     </style>
+
+        - changing for link as button - 
+                eg - <style>
+                        a:link, a:visited {
+                        background-color: #f44336;
+                        color: white;
+                        padding: 15px 25px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        }
+
+                        a:hover, a:active {
+                        background-color: red;
+                        }
+                     </style>
+
+    bookmark in html - useful when webpage is very long
+        - <a href="#top">Back to top</a>
+        - first create bookmark - <h2 id="C4">Chapter-4</h2>
+        - then use <a href="#C4">Chapter-4</a> to link to that particular section of the page
+        - <a href="#C4">Chapter-4</a> - this is called anchor
 
 
 
