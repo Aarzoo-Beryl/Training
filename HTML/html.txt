@@ -452,3 +452,162 @@ HTML TABLE - used to display data in tabular format
 											<col span="2">
 											<col span="3" style="visibility: collapse">
 										</colgroup>
+
+HTML LISTS - allows you to group a set of related items in a list
+		Types of lists - 
+					 	- ordered - list is marked with some number/alphabets/roman number
+											- defined by <ol> and list items are defined by <li>
+											- list items can be numbered using "type" attribute [ eg - type="1",type="a",type="A",type="I",type="i"]
+											- list items can be numbered using "start" attribute [ eg - start="5"](used when you dont want to start from 1 which is default behaviour)
+											- list items can be numbered using "reversed" attribute inside <ol>(without value)
+											- nested list - <ol>
+																				<li>item1</li>
+																				<li>item2
+																					<ol>
+																						<li>item1</li>
+																						<li>item2</li>
+																					</ol>
+																				</li>
+																			</ol>
+						- unordered - list marked with some sort of shape
+											- defined by <ul> and list items are defined by <li>
+											- list items can be numbered using "type" attribute [ values can be - desc,circle,square,none]
+											- for horizontal list (typically used for navigation menu) style it using "float:right/left" inside <li>
+											- nested list - <ul>
+																				<li>item1</li>
+																				<li>item2	
+																					<ul>
+																						<li>item1</li>
+																						<li>item2</li>
+																					</ul>
+																				</li>
+																			</ul>
+						- description - consists of lists of terms with their descriptions
+											- defined by <dl> and list items are defined by <dt> [term] and <dd> [description]
+
+HTML BLOCK AND INLINE - every element has a default display value depending upon what typw of element it is 
+		Two most common -
+						- block - takes up the full width available and starts on a new line
+											- <p>,<div>,<h1>..<h6>,<address>,<footer>,<main>,<section>,<form>,<nav>,<article>,<table>,<ol>,<ul>,<li>,<dl>,<dt>,<dd>,<noscript>,<fieldset>,<header>,<canvas>,<hr>,<pre>,<video>,<blockquote>,<aside>
+											- <span> is used to group inline elements
+						- inline - takes up only as much width as required and does not start on a new line
+											- <a>,<abbr>,<acronym>,<b>,<bdo>,<big>,<br>,<button>,<cite>,<code>,<dfn>,<em>,<i>,<img>,<input>,<kbd>,<label>,<map>,<object>,<output>,<q>,<samp>,<script>,<select>,<small>,<span>,<strong>,<sub>,<sup>,<textarea>,<time>,<tt>,<var>
+											- <div> is used to group block elements
+
+HTML DIV ELEMENT - ofter used as container for all other elements
+						- <div> is a block element and often used to group section of webpage together 
+						- <div> is used to group block elements
+						- has norequired attribute but style,class,id
+						- when used together with css can be used to design a block of content
+						- if you have div element thats not 100% wide you can align it to center using "margin:auto" in css
+		Multiple div elements - we can have as many div elements as we desired
+						- for horizontal devision i.e. one on the top of other use <div> only
+						- for vertical devision i.e. one beside other we have several methods - 
+											- float - not originally meant to align div but can be used 
+															- allows element to float to left/right/center
+															- eg -  <style>
+																			.mycontainer {
+																				width:100%;
+																				overflow:auto;
+																			}
+																			.mycontainer div {
+																				width:33%;
+																				float:left;
+																			}
+																			</style>
+											- inline-block - it means to chenge div's default block property to inline
+											    		- no longer allow element to add line break and will be displayed side by side
+															- eg -  <style>
+																			.mycontainer {
+																				width:100%;
+																				overflow:auto;
+																				}
+																			.mycontainer div {
+																				width:33%;
+																				display:inline-block;
+																				}
+																			</style>
+											- flexbox - it is a new way to lay out elements in a container
+															- CSS Flexbox Layout module was interduced to make it easier to design flexible responsive layouts without using float and postioning
+															- it is a one-dimensional layout model, only horizontal or vertical direction is supported
+															- to make this method work, sorround <div> with other <div> and give it a status as flex container
+															- eg -  <!DOCTYPE html>
+																			<html>
+																			<head>
+																			<style>
+																			.mycontainer {
+																				display: flex;
+																			}
+																			.mycontainer > div {
+																				width:33%;
+																			}
+																			</style>
+																			</head>
+																			<body>
+
+																			<h1>Flexbox Example</h1>
+
+																			<p>Align three DIV elements side by side.</p>
+
+																			<div class="mycontainer">
+
+																				<div style="background-color:#FFF4A3;">
+																					<h2>London</h2>
+																				</div>
+																				
+																				<div style="background-color:#FFC0C7;">
+																					<h2>Oslo</h2>
+																				</div>
+																				
+																				<div style="background-color:#D9EEE1;">
+																					<h2>Rome</h2>
+																				</div>
+
+																			</div>
+																			</body>
+																			</html>
+											- grid - offers grid based output layout system with rows and columns
+											- it is a two-dimensional layout model, both horizontal and vertical direction is supported
+											- almost same as flex but has ability to define more than one row and position each rows individually
+											- to make this method work, sorround <div> with other <div> and give it a status as grid container ad also specify width of each column
+											- eg -  <!DOCTYPE html>
+															<html>
+															<head>
+															<style>
+															.grid-container {
+																display: grid;
+																grid-template-columns: 33% 33% 33%;
+															}
+															</style>
+															</head>
+															<body>
+
+															<h1>Grid Example</h1>
+
+															<p>Align three DIV elements side by side.</p>
+
+															<div class="grid-container">
+
+															<div style="background-color:#FFF4A3;">
+																<h2>London</h2>
+																<p>London is the capital city of England.</p>
+																<p>London has over 13 million inhabitants.</p>
+															</div>
+
+															<div style="background-color:#FFC0C7;">
+																<h2>Oslo</h2>
+																<p>Oslo is the capital city of Norway.</p>
+																<p>Oslo has over 600.000 inhabitants.</p>
+															</div>
+
+															<div style="background-color:#D9EEE1;">
+																<h2>Rome</h2>
+																<p>Rome is the capital city of Italy.</p>
+																<p>Rome has almost 3 million inhabitants.</p>
+															</div>
+
+															</div>
+
+															</body>
+															</html>
+
