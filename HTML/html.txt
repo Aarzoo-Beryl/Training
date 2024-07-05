@@ -265,7 +265,94 @@ HTML LINKS - allows user to  click their way from page to page
         - then use <a href="#C4">Chapter-4</a> to link to that particular section of the page
         - <a href="#C4">Chapter-4</a> - this is called anchor
 
+HTML IMAGES - helps to improve the design and apprearance of the webpages 
+						- <img src="image.jpg" alt="image" width="500" height="500">
+						- src - source of the image
+						- alt - alternative text - if image is not available then this text will be displayed
+						- width and height - size of the image(should use style method instead as it prevents any change due to  embedded or internal stylesheet)
+						- to point to image on other server use absolute url
+						- to point to image on same server use relative url
+						- to point to image on same server but in different folder use relative url with folder name
+						- can put animated gifs alsousing the same command
+						- image floating - refers to alignment and wrapping of image with respect to text (<img src="image.gif" alt="image" style="flaot:right">)
+		Image Maps - allows you to create clickable areas in image
+			      - defined by <map>
+						- <area> tag defines the clickable area as well as its shape
+						- main idea - to perform different action upon clicking different part of the image
+						- eg - <img src="workplace.jpg" alt="Workplace" usemap="#workmap">
 
+									<map name="workmap">
+										<area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+										<area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+										<area shape="circle" coords="337,300,44" alt="Coffee" href="coffee.htm">
+									</map>
+						- the usemap value starts with "#" followed by the name of the map
+						- here the shape attribute represents the shape of the object being marked (rect - rectangle,circle - circle,poly - polygon,default - entire region)
+						- coords - coordinates of the shape
+						         - in rect, coords are the extreme points of the diagonal
+										 - in circle, coords are the center and radius of the circle
+										 - in polygon, coords are the points of the polygon(different points on the shape are selected and straightline contianing joining them forms the desired shape)
+						- image map and js - 
+						         - clickable area can also trigger some js function
+										 - eg - <map name="workmap">
+										 					<area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.png" onclick="func()">
+														</map>
+														<script>
+															function func(){
+																alert("hello");
+															}
+														</script>
+		Image Background - used to set image as background on element and entire page
+		        - on element - use <style> and add css property "background-image" to it(eg - <p style="background-image: url('img_girl.jpg');">)
+												 - can also specify the element in <style> inside <head>(<style>
+																																									p {
+																																										background-image: url('img_girl.jpg');
+																																									}
+																																									</style>)
+						- on entire page - specify the same in <body> 
+												 - eg - <style>
+																body {
+																	background-image: url('img_girl.jpg');
+																}
+																</style>
+						- background repeat - by default, if the size of image is smaller than the size of the element thent he image will repeat itself until it covers the entire element
+												 - to prevent this, use "background-repeat" property in css and put its value to "no repeat"
+												 - if you want tot cover element fully with the image and maintain the aspect ratio of the image - set background-size property to "cover"
+												 - if you want to make sure entire element is always covered with image - set background-attachment to "fixed"
+												 - if you want to strech the image to fully cover the element - set background-size property to "100%100%"
+						- <picture> element - allows youto specify different images for different screen sizes
+						             - it gives developer more flexibility in specifying resources
+												 - contains one or more <source> element (each specifying to different images through "srcset")
+												 - this source element allows browser to select the most appropriate image according to the current view or device
+												 - souce also contains a "media" attribute that defines when this source image is to be choosen for display
+												 - contains one <img> element just before closing the </picture> to add default behaviour when either none of the source works
+												 - eg - <picture>
+																	<source media="(min-width: 650px)" srcset="img_food.jpg">
+																	<source media="(min-width: 465px)" srcset="img_car.jpg">
+																	<img src="img_girl.jpg">
+																</picture>
+												 - when to use - 
+												 			- bandwidth - when using smal scren its unneccessary to load large image
+																					- browser will use the first source with the matching attribute value
+															- format support - allow to specify any format that the browser can support
 
+HTML FAVICON - refers to the small image displayed next to the title int he titlebar of the browser
+						- typically the website logo
+						- can be added in 2 ways
+												- using <link> element in <head>(eg - <link rel="icon" href="favicon.ico">)
+												- using <meta> element in <head>(eg - <meta name="msapplication-TileColor" content="#da532c">)
+						- favicon can be create at - www.favicon.cc 
+						- can be either saved in the root directory or in images forled in root directory
+						- can be of any format - .ico, .png, .gif, .jpg
+						- can be of any size - but recommended size is 16x16 pixels
 
+HTML PAGE TITLE - every webpage should have a title that describe the meaning of the webpage
+						- can be added using <title> element in <head>
+						- can be used to set the title of the tab or page in the browser
+						- shown in web browsers title bar
+						- importance - 
+												1. important for search engine optimization(SEO)[i.e. its text is used by search engine algo to decide the order when listing the pages in search result]
+												2. used by browser to display the title of the page in the tab
+												3. provides title for the page when added to favourites
+						- must be accurate and meaningful
 
