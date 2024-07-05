@@ -611,3 +611,80 @@ HTML DIV ELEMENT - ofter used as container for all other elements
 															</body>
 															</html>
 
+HTML CLASSES - used to specify class for an html element
+						 - often used to point to a class anme in style sheets
+						 - can be used to style different elements
+						 - can be used by any html element
+						 - syntax - specified with ".class_name" and properties are defined in {}
+						 - access - <element_name class="class_name">
+						 - eg - <!DOCTYPE html>
+										<html>
+										<head>
+										<style>
+										.city {
+											background-color: tomato;
+											color: white;
+											padding: 10px;
+										}
+										</style>
+										</head>
+										<body>
+										<h2 class="city">London</h2>
+										<p>London is the capital of England.</p>
+										</body>
+										</html>
+						 - same class can be used by different html elements 
+						 - if you want to specify different classes in same element then separate them with " " like <element_name class="name1 name2">  
+						 - also used by javascript to perform task on certain elements based on the class they use
+						 - js can access elements with a specific class name by using getElementsByClassName() method - eg -
+						                <script>
+														function myFunction() {
+															var x = document.getElementsByClassName("city");
+															for (var i = 0; i < x.length; i++) {
+																x[i].style.display = "none";
+															}
+														}
+														</script> 
+
+HTML ID - used to specify unique id for an HTML element
+				- cannot have more than 1 element with same id i.e. must be unique
+				- used t point to a specific style declaration in the stylesheet
+				- different from class , as class can be accessed by any no of elment but thats not the case here
+				- syntax - specified with "#" and properties are defined in {}
+				- access - <element_name id="id_name">
+				- eg -  <!DOCTYPE html>
+								<html>
+								<head>
+								<style>
+								#myHeader {
+									background-color: lightblue;
+									color: black;
+									padding: 40px;
+									text-align: center;
+								}
+								</style>
+								</head>
+								<body>
+
+								<h1 id="myHeader">My Header</h1>
+
+								</body>
+								</html>
+		Class name rules - 
+				- case sensitive
+				- must not start with number
+				- can contain letters, numbers, hyphens, underscores
+				- must not contain whitespaces, spaces,tabs ,etc.
+				- must not contain any special characters
+				- must not contain any symbols
+		bookmark with id - allows user to jump to specific part of webpage 
+		    - useful when page very long
+				- first create book mark and then add link to it
+				- eg - <h2 id="C4">Chapter 4</h2>
+							 <a href="#C4">Jump to Chapter 4</a>
+		Using id in JS - js can access element based on id by getElementsById()
+				- eg -  <script>
+								function displayResult() {
+									document.getElementById("myHeader").innerHTML = "Have a nice day!";
+								}
+								</script>
