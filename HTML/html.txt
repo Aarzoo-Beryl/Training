@@ -356,3 +356,99 @@ HTML PAGE TITLE - every webpage should have a title that describe the meaning of
 												3. provides title for the page when added to favourites
 						- must be accurate and meaningful
 
+HTML TABLE - used to display data in tabular format
+						- can be added using <table> element
+						- contains <tr> element to define the table row
+						- contains <td> element to define the table data
+						- contains <th> element to define the table header
+						- contains <thead> element to define the table header
+						- contains <tbody> element to define the table body
+						- contains <tfoot> element to define the table footer
+						- contains <caption> element to define the table caption
+						- eg - <!DOCTYPE html>
+										<html>
+										<style>
+										table, th, td {
+											border:1px solid black;
+										}
+										</style>
+										<body>
+										<table>
+												<caption>Employee Information</caption>
+												<colgroup>
+													<col style="background-color: #f2f7d2;">
+													<col style="background-color: #e6f7e6;">
+												</colgroup>
+												<thead>
+													<tr>
+														<th>ID</th>
+														<th>Name</th>
+														<th>Department</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>1</td>
+														<td>Alice</td>
+														<td>Engineering</td>
+													</tr>
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="3">End of Employee Information</td>
+													</tr>
+												</tfoot>
+											</table>
+										</body>
+										</html>
+		Table Border - to add border to the table css border properties are used on table,th and td 
+						- eg -  table,th,td{
+											border:1px solid black;
+										} 
+						- to avoid double borders use border-collapse: collapse
+						- for round borders - add css property border-radius: 2px blue 
+						- if you collapse border after applying radius then also the border will remain square
+						- if you dont want the outer boder just do onlt for th and td
+						- styling - 
+								 - border-style - used to set what type of border you want(values: dotted,dashed,solid,double,grove,rigid,inset,outset,none,hidden)
+								 - border-width - used to set the width of the border
+								 - border-color - used to set the color of the border
+		Table Size - can have different sizes for diff column, row, or entire column
+						- use style attribute - width and height
+						- width - given in %(as to what % of the parent element's width)
+						- height - given in px(given for each row)
+		Table Header - tables can have header for each column/row or for many col/row
+						- for vertical tab headers - define 1st column of every row as <th>
+						- for horizontal tab headers - define 1st full row as <th>
+						- alignment - default(bold and  center), can be changed through css text-align:left/right
+						- header for mltiple columns - use colspan on <th> with value-> no of columns to be merged
+		Table Caption - ads caption that serves are heading for entire table using <caption> just after <table>
+						- caption can be aligned using css text-align
+		Padding and Spacing - refers to modify different spaces in the table
+						- padding - space between content and border (default:0)
+						          - change by css using padding:123px
+											- different paddings - [padding-top,padding-bottom,padding-left,padding-right]
+						- spacing - space between cells(default:0)
+											- can be specified inside <table> using border-spacing:20px
+						- colspan - used on <th> or <td> to merge columns (using collspan:"no.of columns to be merged")
+						- rowspan - used on <th> or <td> to merge rows (using rowspan:"no.of rows to be merged")[specified incolumn from where merging is to be started]
+		Table Styling - refers to styling ofthe table elements
+						- zebra strips - when you want to color every other row use selector - :nth-child(even/odd)
+											- for vertical specify it as td:nth-child() for horizontal as tr:nth-child()
+											- for combining and using overlapping effect specify both and inside user RGBA colors
+						- horizontal divider - specifying border only at the bottom , do "border-bottom: 1px blue" inside <tr>
+						- vertical divider - specifying border only at the left , do "border-left"
+						- hover highlighte - for highligting row when mouse hovers above it , use :hover on <tr> as tr:hover{background-color:pink}
+		Table colgroup - used to style columns by grouping them together
+						- <colgroup> should be used as container tag for col specification and each group is specified using <col>
+						- <colgroup> specified after <table> just after the <caption> if it exists
+						- has attributes where "span" specifies no of adjusent columns which are grouped together and "style" specifies what specification that group will have
+						- <colgroup> can contain multiple <col> statements
+						- css properties available for this - [width,visibility,background,border]
+						- when you want to skip some rows and specify the afterward ones , just specify the span attribute for the columns to be skipped
+						- when you wish to hide certain columns use "visibility: collapse"
+						- eg - <table>
+										<colgroup>
+											<col span="2">
+											<col span="3" style="visibility: collapse">
+										</colgroup>
