@@ -1,0 +1,329 @@
+<html>
+	<head>
+		<title>Bliss Bazaar</title>
+		<style>
+			/**header**/
+			.header{
+				width:1300px;
+				height:100px;
+				float:left;
+				border-top:2px
+				solid rgba(5, 101, 102, 1);
+				border-bottom:2px solid rgba(5, 101, 102, 1);
+				background:#FFF;
+			}
+			.sign ul{
+				list-style:none;
+				margin:0px;
+				padding-right: 20px;
+				padding-top: 25px
+			}
+			.sign ul li{
+				list-style:none;
+				font-family:arial;
+				font-size:18px;
+				padding:2px 0px;
+				margin:5px 0px;
+				float:left;
+				font-weight:bold;
+				border-right:1px solid #000;
+			}
+			.sign ul li a{
+				padding:5px 10px;
+				border-radius:3px;
+				margin:2px 5px 5px;
+				text-decoration:none;
+				color:#FFF;
+				background:rgba(5, 101, 102, 1);
+			}
+			.sign ul li a:hover{
+				color:#FFF;
+				background:#0dbcb5;
+			}
+			.header-left{
+				width:250px;
+				float:left;
+			}
+			.header-right{
+				width:1050px;
+				height:40px;
+				float:left;
+			}
+			.search{
+				width:470px;
+				float:left;
+				padding-left:250px;
+				padding-top:30px;
+			}
+			.sign{
+				width:250px;
+				float:left ;
+				margin:10px;
+			}
+
+			/**menu**/
+			.navbar {
+        background-color: rgba(5, 101, 102, 1);
+        overflow: hidden;
+      }
+      .navbar a {
+        float: left;
+        display: block;
+        color: #fff;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 15px;
+      }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        /* Dropdown menu */
+
+
+				.menu {
+				    width: 1280px;
+				    height: 50px;
+				    margin: 0px ;
+				    padding:0px 10px;
+					float:left;
+					background:rgba(5, 101, 102, 1);
+				    border-radius:2px
+				}
+				#navbar li,
+				#navbar li a {
+				    background: rgba(5, 101, 102, 1);
+				    float: left;
+				    position: relative
+				}
+
+				#navbar li,
+				#navbar li a,
+				.menu {
+				    position: relative
+				}
+
+				#navbar li a,
+				#navbar ul li a {
+				    font-weight: 700;
+				    font-style: italic
+				}
+				#navbar,
+				#navbar ul {
+				    list-style: none;
+				    margin: 0;
+				    padding: 0;
+				}
+				#navbar {
+				    height: 45px;
+				    left: 0;
+				    overflow: hidden;
+				    top: 0
+				}
+				#navbar li a {
+				    color: #fff;
+				    display: block;
+				    font-size: 13px;
+				    height: 45px;
+				    line-height: 40px;
+				    padding: 0 25px;
+				    text-decoration: none;
+				}
+				#navbar li:first-child a {
+				    padding-left: 35px
+				}
+				#navbar li ul li:first-child a {
+				    background-image: none;
+				    padding-left: 10px
+				}
+				#navbar li.pad {
+				    display: block;
+				    height: 45px;
+				    width: 35px
+				}
+				#navbar ul,
+				#navbar ul li {
+				    width: 180px
+				}
+				#navbar ul {
+				    height: auto;
+				    padding: 10px 2px;
+				}
+				#navbar ul li a {
+				    background: 0 0;
+				    line-height: 20px;
+				    width: 180px;
+				    font-size: 12px;
+				    padding: 3px 15px;
+				    height: auto
+				}
+				#navbar:hover {
+				    height: 350px
+				}
+				#navbar a:hover,
+				#navbar li:hover>a {
+				    color: #000;
+				}
+
+			/**body**/
+			.product{
+				display: grid;
+				height: auto;
+			  grid-template-columns: 33% 33% 33%;
+			}
+
+			/**footer**/
+			.footer{
+				margin:0px;
+				display: grid;
+				grid-template-columns: 60% 40%;
+				padding-bottom: -5px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="home_style.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+	</head>
+	<body>
+		<div class="main">
+
+		<!----- Start Header (or) Menu ------>
+		<div class="header">
+			<div class="header-left">
+		    <a href="#" target="_blank">
+		      <img src="images/logo.png" align = "center" class="loggocomlogo" height="100" width="250"/>
+		    </a>
+		  </div>
+			<div class="header-right">
+		  	<div class="search">
+		  		<a href="home.html"><input type="text" class="form" placeholder="Search Product"><img src="images/search.png" alt="search images" height="25" width="25" /></a>
+		      </div>
+		      <div class="sign">
+		        <ul>
+		          <li><a href="sign_in.html">Sign In</a></li>
+		          <li style="border-right:none;"><a href="signup.html">Sign Up</a></li>
+		        </ul>
+		      </div>
+		    </div>
+		</div>
+<!--dropdown menu -->
+		<div class="menu">
+			<ul id="navbar">
+		   	<li><a href="#!">Home</a>
+					<ul>
+						<li><a href="#!">Affiliates</a></li>
+						<li><a href="#!">Complaint</a></li>
+		        <li><a href="#!">Careers</a></li>
+		        <li><a href="#!">Blogs</a></li>
+					</ul>
+				</li>
+		   	<li><a href="#">Men</a>
+					<ul>
+						<li><a href="#!"> Clothes</a></li>
+						<li><a href="#!">Shoes</a></li>
+		        <li><a href="#!">Accessories</a></li>
+		        <li><a href="#!">Bags</a></li>
+					</ul>
+				 </li>
+		        <li><a href="#">Women</a>
+					<ul>
+						<li><a href="#!"> Clothes</a></li>
+						<li><a href="#!">Shoes</a></li>
+		        <li><a href="#!">Accessories</a></li>
+		        <li><a href="#!">Bags</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Kids</a>
+					<ul>
+						<li><a href="#!">Clothes</a></li>
+						<li><a href="#!">Shoes</a></li>
+		        <li><a href="#!">Accessories</a></li>
+		        <li><a href="#!">Bags</a></li>
+					</ul>
+				</li>
+			   <li><a href="#">Furniture</a>
+					<ul>
+						<li><a href="#!">Sofa Set</a></li>
+						<li><a href="#!">Bed</a></li>
+		        <li><a href="#!">Couch</a></li>
+		        <li><a href="#!">Dressing</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Home Improvement</a>
+					<ul>
+						<li><a href="#!">Cleaning Tools</a></li>
+						<li><a href="#!">Cookware</a></li>
+		        <li><a href="#!">Grocery</a></li>
+		        <li><a href="#!">Appliances</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- body  -->
+		<img src="images/intro1.jpg" alt="sale information" width="100%" height="500px">
+		<br><br>
+		<div class="content">
+		<h1 align="center">Shope By Catergories</h1><hr style="border:2px solid rgba(5, 101, 102, 1)">
+		<br><br><br>
+		    <div class="product" align="center">
+		        <div>
+			        <img src="images/accesories.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Accessories</a></h3>
+						</div>
+						<div>
+							<img src="images/shoes.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Shoes</a></h3>
+						</div>
+						<div>
+							<img src="images/jewellery.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Jewellery</a></h3>
+		        </div>
+		    </div>
+				<div class="product" align="center">
+		        <div>
+			        <img src="images/bedsheets.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Bedsheets</a></h3>
+						</div>
+						<div>
+							<img src="images/bags.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Bags</a></h3>
+						</div>
+						<div>
+							<img src="images/furniture.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Furniture</a></h3>
+		        </div>
+		    </div>
+				<div class="product" align="center">
+						<div>
+							<img src="images/jeans.jpg" width="270" height="200">
+							<h3><a href="" class="btn">Shop Jeans</a></h3>
+						</div>
+						<div>
+							<img src="images/shirts.jpg" width="270" height="200">
+							<h3><a href="" class="btn">Shop Shirts</a></h3>
+						</div>
+						<div>
+							<img src="images/pajamas.jpg" width="270" height="200">
+							<h3><a href="" class="btn">Shop Pajamas</a></h3>
+						</div>
+				</div>
+		</div>
+		<br><br><br><br>
+		<!--footer-->
+		<div class="footer">
+			<div style="background-color:rgba(5, 101, 102, 1); color:#fff;padding-left: 10px;padding-right: 10px">
+		    	<h4 align=left style="font-size:20px;">About Us</h4>
+					Welcome to Bliss Bazaar, your ultimate destination for a delightful shopping experience! At Bliss Bazaar, we believe in bringing joy to our customers through a carefully curated selection of products that cater to all your needs and desires.<br>
+			</div>
+			<div style="background-color:rgba(5, 101, 102, 0.2);color:#000;padding-left: 10px;padding-right: 10px;">
+					<h4 align=left style="font-size:20px;">Who We Are</h4>
+					Bliss Bazaar is a passionate team of enthusiasts dedicated to providing high-quality, unique, and trendy products.<br>
+			</div>
+			</div>
+			<div style="background-color:rgba(5, 101, 102, 0.2);color:#000;padding-left: 10px;">
+				<h2 align=left style="font-size:24px;">Contact Us</h2>
+				<a href="mailto:aarzoo@berylsystems.com">mail - blissbazaar@example.com</a>
+			</div>
+
+	</body>
+</html>
