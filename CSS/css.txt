@@ -1,0 +1,116 @@
+----------------------------------------------- CSS ---------------------------------------------------------
+
+CSS - cascading style sheets
+    - describes how html elements are to be displayed on the screen
+    - can control layout of multiple pages all at once
+    - external style sheets must be stored with extention - .css
+    - problem solver - provides style tags for html(which was not designed for Formatting)
+    - syntax - h1{color:blue;}
+              # here h1 is the selector(element for which style is to be described)
+              # {} contains the style desciption and is called declaration block
+
+CSS SELECTOR - used to find or select the element you want to style
+    - Categories - 
+             - simple selector - selects item based on id,name,class
+             - combination selector - select element based on a specific relationship between them
+             - pseudo class selector - select element based on a certain state
+             - pseudo element selector - select element based on a specific part of the element
+             - attribute selector - select element based on an attribute or attribute value
+    - Basic element selector - 
+             - id selector - uses id attribute to specify an HTML element
+                           - as id is unique for one page => used to specify style for specific element
+                           - syntax - #para1{} 
+             - class selector - selects element with specified class attribute
+                           - syntax - .center{}
+                           - to join two classes or specify more in detail - p.center{}
+                           - to specify two class in one - <p class="center para1">
+             - universal selector - to select all element in HTML
+                           - syntax - *{}
+             - grouping selector -  used to group two or more elements having same styling
+                           - syntax - h1,h2,h3{}
+
+ADDING CSS - 
+            - inline - inside the element itself using style attribute
+            - internal - style tag is added inside the head tag
+            - external - style tag is added inside the head tag and the style sheet is stored in a separate
+    - Multiple Stylesheets - if property of one single element is specified at different positions, then one read at last will be used
+            - if <style> then <link> in head - link will be used and vice versa
+            - order of priority - inline > external/internal > broswer default
+
+CSS COMMENTS - starts with /* and ends with */
+
+CSS COLOR - colors are specified with predefined color names or with RGB,HEX,RGBA,HSL or HSLA values
+              - color names - red,blue,green,black,white,gray,silver
+              - can be used to define color of background, text, border,etc.
+              - color names are not case sensitive
+              - to set background-color -> background-color:#ffffff
+              - to set text color -> color:#ffffff
+              - to set border color -> border-color:#ffffff
+
+    RGB - stands for red,green and blue
+        - each defines the intensity of colora between 0-255
+        - 0 is the lowest intensity(dark side) and 255 is the highest intensity (light side)
+        - (255,0,0)- red, (0,255,0)- green, (0,0,255)- blue
+        - (255,255,255)- white, (0,0,0)- black, (128,128,128)- gray
+        - for shades of gray keep value of rgb equal
+    RGBA - same as RGB but with an extra value for opacity
+        - 0 is fully transparent and 1 is fully opaque
+        - (255,0,0,0.5)- red with 50% opacity
+    HEX - hexadecimal color values
+        - 3 digit hex - #rgb
+        - 6 digit hex - #rrggbb
+        - 8 digit hex - #rrggbbaa
+        - #ff0000 - red, #00ff00 - green, #0000ff- blue
+        - #ffffff - white, #000000 - black, #808080 - gray
+    HSL - stands for hue,saturation and lightness
+        - hue - defines the color(0-red,120-green,240-blue)
+        - saturation - defines the intensity of the color(0% shades of gray, 100% full color)
+        - lightness - defines the brightness of the color(0% black, 100% white)
+        - 0 is the lowest intensity(dark side) and 100 is the highest intensity 
+        - (0,100,50)- red, (120,100,50)- green,(240,100,50)
+        - (0,0,0)- black, (0,0,100)- white,
+    HSLA - same as HSL but with an extra value for opacity
+        - 0 is fully transparent and 1 is fully opaque
+        - (0,100,50,0.5)- red with 50% opacity
+        - (120,100,50,0.5)- green with 50% opacity
+        - (240,100,50,0.5)- blue with 50% opacity
+        - (0,0,0,0.5)- black with 50% opacity
+        - (0,0,100,0.5)- white with 50% opacity
+        - (0,0,50,0.5)- gray with 50% opacity
+
+CSS BACKGROUND - used to add background effects for an element 
+      - background-color - used to set background color
+                         - for transparency effect use RGBA/HSLA colors
+                         - eg - background-color:#123fff
+      - background-image - used to set background image
+                         - by default image is repeated both horizontally and vertically untill ir covers the entire element
+                         - eg - background-image:url("image.jpg")
+      - background-repeat - used to set how background image is repeated
+                         - default - both horizontally and vertically untill ir covers the entire element
+                         - for only horizontally - backgorund-repeat: repeat-x;
+                         - for only vertically - background-repeat: repeat-y;
+                         - for no repeat - background-repeat: no-repeat;
+      - background-position - used to set position of background image
+                         - default - top left
+                         - eg - background-position: center center;
+      - background-attachment - used to set if background image is fixed or scrolls with page
+                         - default - scroll
+                         - eg - background-attachment: fixed/scroll;
+      - background-size - used to set size of background image
+                         - default - auto
+                         - eg - background-size: 100px 100px;
+      - background-origin - determines the start point of the image
+                         - default - padding box(from padding edge)
+                         - other values - border-box(starts from border edge) and content-box(starts from content edge of the element)
+                         - eg - background-origin: border-box/content-box/padding-box;
+      - background shorthand - rather than writing all the commands seprately we can write everything in one line only
+                         - eg - background: url("image.jpg") no-repeat center center/100px fixed;
+                         - order of specifying attributes - 
+                                    - background-color
+                                    - background-image
+                                    - background-position
+                                    - background-size
+                                    - background-repeat
+                                    - background-attachment
+                                    - background-origin
+
