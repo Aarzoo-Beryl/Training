@@ -176,3 +176,36 @@ CSS HEIGHT, WIDTH - used to set hight and width of the element
             if both width and maax-width are specified and width > max-width, then max-width will be used 
             [similarly for min-width, max-height and min-height]
 
+BOX MODEL - all HTML elements can be considered as boxes
+            - used when talking about design and layout
+            - it is essentially a box that wraps arounds every html element
+            - it consists of margins, borders, padding and the actual content
+            - refers to specifying the parameters of the element
+                eg - div{
+                  width: 300px;
+                  height: 300px;
+                  border:  2px;
+                  padding: 20px;
+                  margin: 50px;
+                }
+      - model - 
+            _____________________________________________________
+            |          margin                                   |
+            |   ___________________________________________     |
+            |   |         border                           |    |
+            |   |  _____________________________________   |    |
+            |   |  |            padding                 |  |    |
+            |   |  |    ____________________________    |  |    |
+            |   |  |    |        content            |   |  |    |
+            |   |  |    |___________________________|   |  |    |
+            |   |  |____________________________________|  |    |
+            |   |__________________________________________|    |
+            |___________________________________________________|
+            - content - the content of the element
+            - padding - clears an area around the content
+            - border - a border that goes around the padding and content
+            - margin - clears an area outside the border
+      - height and width calculation - used to determine the actual width and height of the element
+            - actual width is calculated as - [width + padding-right + padding-left + border-right + border-left]
+            - actual height is calculated as - [height + padding-top + padding-bottom + border-top + border-bottom]
+
