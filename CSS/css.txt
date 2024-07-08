@@ -114,3 +114,65 @@ CSS BACKGROUND - used to add background effects for an element
                                     - background-attachment
                                     - background-origin
 
+CSS BORDERS - allows to specify the style,width and color of an element border
+      - border-style - used to set border style
+                     - values can be from [dotted,dashed,solid,double,groove,rigid,inset,outset,none,hidden]
+                     - for mixed border, you can specify it as -> border-style: top right bottom left;
+                     - if two values specified - a and b  [a->top and bottom, b->reight and left]
+                     - if three values specified - a,b,c [a->top,b->right and left,c->bottom]
+      - border-width - specifies width of the border (can be specified in px or as thin/medium/thick)
+                     - for specific border width, you can specify it as -> border-style: top right bottom left;
+      - border-color - used to specify color for borders
+                     - for specific border color, you can specify it as -> border-style: top right bottom left
+                     - values can be -> names,hex,rgb,hsl and for transparency - rgba and hsla can be used
+      - border-sides - used for specifying properties for particular sides
+                     - eg - border-top-style , border-right-width,etc.
+      - border-radius - used to set border radius
+                     - border-radius: 10px;
+      - border shorthand - rather than writing all the commands seprately we can write everything in one
+                     - specify it in order - width style color
+                     - eg - border: 2px solid #123fff;
+
+CSS MARGINS - used to create space around the elements outside of any defined borders
+            - for individual sides - we can use -> margin-top,margin-left,margin-right,margin-bottom
+            - values can be -> auto(browser calculates), length(specified in px),%(% of width of container,inherit(from parent element))
+      - shorthand - for mixed margin, you can specify it as -> margin: top right bottom left;
+                  - if two values specified - a and b  [a->top and bottom, b->reight and left]
+                  - if three values specified - a,b,c [a->top,b->right and left,c->bottom]
+      - auto value - used to horizontally center the element in its container
+                  - element will then take the width specified and the rest will be split equally between left and right margins
+      - collapse - top and bottom margins are sometimes collapsed into a single margin that is equal to the largest of the two margins
+                  - this is done to prevent overlapping of elements
+                  - eg - if you have two divs with top and bottom margins and they are placed one after another
+
+CSS PADDING - use to create space around an elements content, inside of any defined borders
+            - for individual sides - we can use -> padding-top,padding-left,padding-right,padding-bottom
+            - values can be -> length(specified in px),%(% of width of container,inherit(from parent element))
+      - shorthand - for mixed padding, you can specify it as -> padding: top right bottom left;
+                  - if two values specified - a and b  [a->top and bottom, b->reight and left]
+                  - if three values specified - a,b,c [a->top,b->right and left,c->bottom]
+      - padding and element width - specified the with of the element's content area
+                  - the content area is the portion inside the padding border and margins of the element
+                  - if widthis specified then the padding will be added to it to calculate the total width of the element
+                    eg -  div{
+                            width: 300px;
+                            padding: 20px;
+                          } 
+                          # here the total width will be 300+20+20
+                  - to make sure the total width is not changed - use box-sizing property(this causes it to retain the total width i.e. if padding increases, the content width will decrease)
+                    eg -  div{
+                            width: 300px;
+                            padding: 20px;
+                            box-sizing: border-box;
+                            }
+                            # here the total width will be 300px
+
+CSS HEIGHT, WIDTH - used to set hight and width of the element
+            - doesn't include padding,borders or margin
+            - sets height and width of the area inside the padding,border and margin
+      - max-width - used to set max width of the element
+            - can be specified in length,%or none(default)
+            - used to improve browser handeling
+            if both width and maax-width are specified and width > max-width, then max-width will be used 
+            [similarly for min-width, max-height and min-height]
+
