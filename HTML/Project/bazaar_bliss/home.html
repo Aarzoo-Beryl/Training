@@ -5,6 +5,11 @@
 		<style>
 
 			/**header**/
+			.main{
+					display: grid;
+					height: auto;
+					grid-template-columns: 20% 55% 25%;
+			}
 			.header{
 				width:1300px;
 				height:100px;
@@ -43,28 +48,40 @@
 				background:#0dbcb5;
 			}
 			.header-left{
-				width:250px;
+				width:20%;
 				float:left;
 			}
 			.header-right{
-				width:1050px;
+				width:70%;
 				height:40px;
 				float:left;
 			}
-			.search{
-				width:370px;
-				float:left;
-				padding-left:250px;
-				padding-top:30px;
+			input[type=text]{
+				margin: 35px 35px 10px 10px;
+				width:20%;
+			  box-sizing: border-box;
+			  border: 2px solid #ccf;
+			  border-radius: 10px;
+			  font-size: 16px;
+			  background-image: url('searchicon.png');
+			  background-position: 70px 50px;
+			  background-repeat: no-repeat;
+				padding: 10px 200px 12px 10px;
+			  transition: width 0.4s ease-in-out;
+			}
+
+			input[type=text]:focus {
+			  width: 100%;
+				border-color: rgba(5, 101, 102);
 			}
 			.sign{
-				width:350px;
+				width:100%;
 				float:left ;
-				margin:10px;
+				margin- top:20px;
 			}
 
 			/*dropdown*/
-			
+
 			.drop ul {
 			  list-style-type: none;
 			  margin: 5px;
@@ -156,19 +173,20 @@
 		</style>
 	</head>
 	<body>
-		<div class="main">
 
 		<!----- Start Header (or) Menu ------>
 		<div class="header">
+			<div class="main">
 			<div class="header-left">
 		    <a href="#" target="_blank">
 		      <img src="images/logo.png" align = "center" class="loggocomlogo" height="100" width="250"/>
 		    </a>
 		  </div>
 			<div class="header-right">
-		  	<div class="search">
-		  		<a href="home.html"><input type="text" class="form" placeholder="Search Product"><img src="images/search.png" alt="search images" height="25" width="25" /></a>
-		      </div>
+					<form>
+					  <input type="text" name="search" placeholder="Search..">
+					</form>
+				</div>
 		      <div class="sign">
 		        <ul>
 		          <li><a href="sign_in.html">Sign In</a></li>
@@ -177,8 +195,8 @@
 		        </ul>
 
 		      </div>
-		    </div>
 		</div>
+	</div>
 <!--dropdown menu -->
 <div class="drop">
   <ul style="	background:rgba(5, 101, 102, 0.8);">
