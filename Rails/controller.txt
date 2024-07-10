@@ -1,0 +1,102 @@
+<--------------------------------------Action Controller------------------------------------------------>
+
+Controller - acts as as a middleman between the models (data) and views (presentation).
+    - Role in MVC:
+        - refers to "c" in the MVC architecture
+        - handles the request and response of the application
+
+    - Request Handling:
+        - browser decides to which controller the request should be sent
+        - it receives the request from the user
+        - processes the request
+        - sends the response to the user
+
+    - Fetching and Saving Data:
+        - controller is responsible for fetching and saving data
+        - it interacts with the model to fetch data from the database
+        - it saves or update data to the model which turn saves or updates it to the database
+
+    - Rendering Views:
+        - after getting the necessary data  
+        - controller is responsible for rendering views
+        - it renders the view based on the request
+        - it passes the data to the views
+
+    - Naming Convention:
+        - controller name must be with pluralized last words (e.g., ClientsController instead of ClientController)
+        - this naming convention helps in using default route generators (like resources) without extra configurations
+        - models are named in singular form (e.g., Client)
+
+    - Methods and Actions:
+        - controllers are Ruby classes that inherit from ApplicationController, which in turn inherits from ActionController::Base
+        - methods in controllers correspond to actions. For example, a request to /clients/new will call the new method in ClientsController
+        - methods like "new" can create instance variables (e.g., @client = Client.new) to be used in views
+        - if a method is empty, Rails will render the corresponding view (e.g., new.html.erb) by default
+        - only public methods can be called as actions others should be marked as private or protected
+        - some method names are reserved by Action Controller,using these as action names can cause errors
+
+Parameters - can be of two types basically
+
+    - Query String - sent as a part of url 
+        - everything in url after "?"
+        - used in GET request
+        - can be accessed using params[:attribute]
+
+    - POST Data - sent as a part of request body
+        - used in POST request
+        - called POST data as can only be sent on the form of HTTP POST request
+        - eg - creating new client by filling out a form
+
+    - Array paramenters - 
+        - put key name and empty "[]"
+          eg - GET clients? id[]=1& id[]=2& id[]=3
+
+    - Hash paramenters - 
+        - when we fill a form and the values are passed to model as 
+          { "name" => "Acme", "phone" => "12345", "address" => { "postcode" => "12345", "city" => "Carrot City" } }
+
+    - JSON paramenters - 
+        - in rails handeling parameters in Json format , some automatic processes and configurations take place that simplify how you access these parameters within your controller
+        - Automatic Paramter Passing - when you pass a JSON object to a controller action, Rails will automatically convert the JSON into a Ruby hash 
+                and assign it to the params hash
+                eg - if you sen the Json content - { "company": { "name": "acme", "address": "123 Carrot Street" } }
+                     then ccontroller will receive params[:company] as { "name" => "acme", "address" => "123 Carrot Street" }
+
+        - Wrap Parameters - wrap_parameters can automatically wrap your parameters with a root element based on your controller's name
+                to call wrap parameter directly in your controller ,  either use ->wrap_parameters :company, format: [:json] or enable it in config/initializers/wrap_parameters.rb as
+                ActiveSupport.on_load(:action_controller) do
+                  wrap_parameters format: [:json]
+                end
+
+    - Routing paramenters - params hash contains :controller and :action keys
+        - should instead use methods controller_name and action_name to access them
+        - any other parameter associcated will also be available
+        - eg - get '/clients/:status', to: 'clients#index', foo: 'bar'
+          # when a user visits /clients/active:
+            - :status parameter in the URL (/clients/:status) will be captured => params[:status] will be "active"
+            - rails will set params[:controller] to "clients" and params[:action] to "index"
+            - any extra parameters specified in the route (like foo: 'bar') will also be added to the params hash => params[:foo] = "bar"
+            - to access them do variable = params[:action]
+
+    - Composite key paramenters - contains multiple values in one parameter
+        - now in this we need to be able to access each value and pass them to Active Record
+        - we can use extact_value method for this
+        - fro urls like /book/4_2 keys ["4","2"] can be accessed as id=params.extact_value(:id)
+
+    - Strong paramenters - helps tosecurely handle mass asignment of parameters preventing accidently or maliciously modifying sesitive data
+        - to use strong parameters we need to use the permit method
+        - eg - params.permit(:name, :email, :phone)
+        - this will allow only the specified parameters to be passed to the model
+        - to allow all parameters we can use params.permit!
+        - to allow only the specified parameters and their children we can use params.permit(:name,:email, :phone, :address => [:postcode, :city])
+    - Default URL option - this refers to setting of global parameter for the url generation by defining a method callled default_url_options in your control
+        - this method returns hash with desired defaults , whose keys must be symbols 
+        - these options will beused as a starting point when generatinf urls, so its possible they'll be overridden by the options assed to url_for calls
+        - when we define default_url_options in ApplicationController as -
+            def default_url_options(options = {})
+            { locale: I18n.locale }
+            end
+          these defaults will be used for all URL generations
+        - this method can also be defined in a specific controller in which case it only affects the urls generated however
+
+
