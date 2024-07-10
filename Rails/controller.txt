@@ -292,3 +292,26 @@ SESSIONS - application has a sessiona for each used in whichyou store small amou
             end
           end                 -->
 
+Cookies - application can store small amountsof data on the client - called -cookies that persist across request and even sessions
+        - these can be easily accessed to cookies via the cookie method(much like session)
+        - cookies are stored on the client and are not secure
+    - Setting a cookie -info is stored to be remerbered on future visits
+        - cookies[:reviewer_name] = "Aarzoo"
+    - Reading a cookie - accessing the info stored in it 
+        - cookies[:reviewer_name]
+    - deleting a cookie - can be deleted when no longer needed
+        - cookies.delete(:reviewer_name)
+    - Usage - 
+        - autofill - @comment = Comment.new(author: cookies[:commenter_name])
+        - save comment and remember later - if params[:remember_name]
+                                              cookies[:commenter_name] = @comment.author
+                                            else
+                                              cookies.delete(:commenter_name)
+                                            end
+    - Signed cookie - rails can add a signature to cookies to ensure they haven't been tampered with
+                    - if someone tamperes  it rails will know and ignore it
+    - Encrypted cookie - rails can encrypt cookies so that info can't be read by anyone, even if they have access to cookie data
+    - Special handling for complex data - 
+        - default serialization - rails uses JSON to store data in cookies i.e. saome types of data will be converted to strings
+                    - cookies.encrypted[:expiration_date] = Date.tomorrow 
+        - manual serialization - if need to store more complex data types youll need to convert them manually 
