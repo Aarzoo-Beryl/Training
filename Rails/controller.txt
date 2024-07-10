@@ -84,7 +84,48 @@ Implementing create method - once users input is taken using html form, you need
           - if the user input is valid, it will be saved into the database and the user will be redirected to the show page
           - if the user input is invalid, it will be rendered again to the new page
 
+Implementing edit method - it is almost identical to the show method but is used to display a single object with particualr id  and display it on the page
+          - only diff. is that show method is not editable
+          - can be done like - 
+                def edit
+                  @user = User.find(params[:id])
+                end
+          - this method will be called to display data on the screen to be modified by the user
+          - it will be called when the user clicks on the edit button
 
+Implementing update method - this method will be called after the edit method, when the changes made by the user needs to be updated in the database
+          - it is similar to create and will be used to update the existing users in the database
+          - can be done like -
+                def update
+                  @user = User.find(params[:id])
+                  if @user.update(user_params)
+                    redirect_to @user
+                  else
+                    render 'edit'
+                  end
+                end
+          - this method will be called when the user clicks on the update button
+          - if the user input is valid, it will be saved into the database and the user will be redirected to the show page
+          - if the user input is invalid, it will be rendered again to the edit page
+          - update method is similar to the save used by create but instead of creating a new row in the db, it overrights the attributes of the existing row
+
+Implementing delete method - used to display the record used is attempting to delete and the final delition will be made by destroy methods only
+          - doen't trigger any callbacks or validations
+          - can be done like -
+                def delete
+                  @user = User.find(params[:id])
+                end      
+
+Implementing destroy method - used to delete a record from database 
+          - it triggers callbacks and well as checks validations like dependent 
+          - can be done like -
+                  def destroy
+                    @user = User.find(params[:id])
+                    @user.destroy
+                    redirect_to users_path
+                  end
+          - this method will be called when the user clicks on the delete button
+          - it will delete the record from the database and redirect the user to the index page
 
 
 
