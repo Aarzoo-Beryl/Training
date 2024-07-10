@@ -35,6 +35,76 @@ Controller - acts as as a middleman between the models (data) and views (present
         - only public methods can be called as actions others should be marked as private or protected
         - some method names are reserved by Action Controller,using these as action names can cause errors
 
+Creating a controller - 
+        - $ rails generate controller User
+        - this will create a controller named UserController in the app/controllers directory
+        - name should be capital and singular
+        - this command does the following work - 
+                - creates file called user_controller.rb
+                - this file inherits from ActionController::Base class
+        - you can define any no of methods in the controller
+
+Implementing list method - list method provied you with all the books present in the database
+        - can be done simply like - 
+              def list
+                @users = user.all
+              end
+        - this tells the rails to search the books table and store each row it finds in the instance object
+
+Implemention show method - displays further details on a single user
+        - can be done like -  
+              def show
+                @user = User.find(params[:id])
+              end
+        - this tells the rails to search the books table and store each row it finds in the instance
+        - tells rails to find only the book with the specified with id 
+
+Implementing new Method - allows rails to know that you want to create a new object
+          - can be done like -
+                def new
+                  @user = User.new
+                end
+          - above method will be called when you display a page to the user to take user inputs
+
+Implementing create method - once users input is taken using html form, you need to create a record into the database
+          - can be done like -
+                def create
+                  @user = User.new(user_params)
+                  if @user.save
+                    redirect_to @user
+                  else
+                    render 'new'
+                  end
+                end
+                def user_params
+                  params.require(:books).permit(:name, :phone_number, :email, :username,:password, :location, :profile_picture)
+                end
+          - above method will be called when you submit the form to the server
+          - user_params is a method that is used to filter the user input fields 
+          - if the user input is valid, it will be saved into the database and the user will be redirected to the show page
+          - if the user input is invalid, it will be rendered again to the new page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Parameters - can be of two types basically
 
     - Query String - sent as a part of url 
