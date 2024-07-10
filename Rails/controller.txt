@@ -127,25 +127,6 @@ Implementing destroy method - used to delete a record from database
           - this method will be called when the user clicks on the delete button
           - it will delete the record from the database and redirect the user to the index page
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Parameters - can be of two types basically
 
     - Query String - sent as a part of url 
@@ -210,4 +191,104 @@ Parameters - can be of two types basically
           these defaults will be used for all URL generations
         - this method can also be defined in a specific controller in which case it only affects the urls generated however
 
+SESSIONS - application has a sessiona for each used in whichyou store small amount of data that will be persisted between requests
+        - session is only available in the controller and the view and can use one of the several different storage mechanisms
+        - when the user first visits the ste , rails create a new session for them
+        - data is stored in session to rememberthings about the user, like their ID or their shopping cart items
+        - the session data persists across multiple pages as the user navigates your site i.e. data will not be lost when user moves from one page to other
+        - session expires when the user logouts , rails clear the session data
+    
+    - Storage mechanisms - 
+        - cookie_store - stores session data on the client in a cookie(default)
+                - it is lightweight, adn doesn't need server side storage
+                - limites of 4kb data , all sata is sent with every request
+                - data is signed and encrypted , making it tamper proof
+                - with a custom key , initialized as - Rails.application.config.session_store :cookie_store, key: '_your_app_session'
+                - setting domain for the sessioan cookie - Rails.application.config.session_store :cookie_store, key: '_your_app_session', domain: ".example.com"
+        - cache_store - stores session data in a cache
+                - can use existing cches setup and no additional administration
+                - session is short lived and might dissappear any time
+                - initialized as - Rails.application.config.session_store :cache_store
+        - mem_cache_store - stores session data in a memcached cluster
+                - not recommended anymore , consider Cache  store instead
+
+        - activerecord_store - stores data in database table
+                - can store large amounts of data
+                - requires additional setup and might  be slower than other options
+        - custom_store - can use cutome store or the one provided by a third-party gem
+   
+    - Accessing and Managing Sessions - 
+        - sessions in rails works as hash , we can store, retrieve and delete data using key-value pairs
+<--session needed -- Example: Storing a User ID in the Session
+          class LoginsController < ApplicationController
+            def create
+              if user = User.authenticate(params[:username], params[:password])
+                session[:current_user_id] = user.id
+                redirect_to root_url
+              end
+            end
+          end
+        - Example: Retrieving a User from the Session
+          class ApplicationController < ActionController::Base
+            private
+              def current_user
+                @_current_user ||= session[:current_user_id] && User.find_by(id: session[:current_user_id])
+              end
+          end
+        - Example: Deleting Data from the Session
+          class LoginsController < ApplicationController
+            def destroy
+              session.delete(:current_user_id)
+              @_current_user = nil
+              redirect_to root_url, status: :see_other
+            end
+          end
+        - Example: Resetting the Entire Session
+          class LoginsController < ApplicationController
+            def destroy
+              reset_session
+              redirect_to root_url, status: :see_other
+            end
+          end
+
+    - Flash messages - this is the part of the session used to pass temporary messages between actions 
+        - these are cleared once displayes 
+        - can be used to display success or error messages
+        - can be used to display messages to the user after an action is completed
+        - Example: Setting a Flash Message on Logout
+          class LoginsController < ApplicationController
+            def destroy
+              session.delete(:current_user_id)
+              flash[:notice] = "You have successfully logged out."
+              redirect_to root_url, status: :see_other
+            end
+          end
+        - Example: Displaying Flash Messages in the View
+          <html>
+            <body>
+              <% flash.each do |name, msg| %>
+                <%= content_tag :div, msg, class: name %>
+              <% end %>
+              <!-- more content -->
+            </body>
+          </html>
+        - Example: Using flash.now for Same-Request Messages
+          class ClientsController < ApplicationController
+            def create
+              @client = Client.new(client_params)
+              if @client.save
+                # Success logic here
+              else
+                flash.now[:error] = "Could not save client"
+                render action: "new"
+              end
+            end
+          end
+        - Example: Using flash.keep to Persist Flash Messages Across Redirects
+          class MainController < ApplicationController
+            def index
+              flash.keep
+              redirect_to users_url
+            end
+          end                 -->
 
