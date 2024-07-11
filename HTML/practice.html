@@ -1,11 +1,88 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="description" content="Online Retail Store">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Practice</title>
+		<link rel="stylesheet" href="style.css">
+		<style>
+		p{
+			color: blue;
+		}
+		</style>
 	</head>
 	<body>
+		<!-- formatting -->
 		<p><b><i>hello</i></b><sub>!oops</sub><sup>Its me</sup></p>
+		<small>hi again</small>
+		<mark> You are worthy</mark>
+		<del> World knows nothing about you</del>
+		<ins> Stay happy</ins>
+		<!-- qoutation -->
+		<<blockquote > its a blockquote text</blockquote>
+		<q> bag</q>
+		<abbr title="talk  to you later" >ttl</abbr>
+		<address>h.no.234556</address>
+		<cite>The mount everest</cite>
+		<bdo dir="rtl"> bidirectional text</bdo>
+		<!-- styling css -->
+		<p style="background-color: red;">uff</p>
+		<!-- image map -->
+		<img src="images.jpg" usemap="#workmap">
+		<map name="workmap">
+			<area shape="rectangle" coords="87,141,41,49"alt="img" href="abc.html">
+		</map><br>
+		<!-- iframes -->
+		<iframe src="Project/bazaar_bliss/home.html" height="200" width=100% title="Iframe Example"></iframe>
+		<!-- javascript -->
+		<button type="button" onclick="document.getElementById('demo').innerHTML = Date()">
+		Click me to display Date and Time.</button>
 
+		<p id="demo"></p>
+		<form action="/submit" method="POST">
+			 <!-- Input -->
+			 <label for="name">Name:</label>
+			 <input type="text" id="name" name="name" required><br><br>
 
+			 <!-- Select with optgroup and option -->
+			 <label for="fruit">Favorite Fruit:</label>
+			 <select id="fruit" name="fruit">
+					 <optgroup label="Citrus">
+							 <option value="orange">Orange</option>
+							 <option value="lemon">Lemon</option>
+					 </optgroup>
+					 <optgroup label="Berries">
+							 <option value="strawberry">Strawberry</option>
+							 <option value="blueberry">Blueberry</option>
+					 </optgroup>
+			 </select><br><br>
+
+			 <!-- Textarea -->
+			 <label for="comments">Comments:</label>
+			 <textarea id="comments" name="comments" rows="3" cols="30"></textarea><br><br>
+
+			 <!-- Button -->
+			 <button type="submit">Submit</button><br><br>
+
+			 <!-- Fieldset with legend -->
+			 <fieldset>
+					 <legend>Personal Information</legend>
+					 <label for="age">Age:</label>
+					 <input type="number" id="age" name="age"><br><br>
+			 </fieldset><br><br>
+
+			 <!-- Datalist -->
+			 <label for="country">Country:</label>
+			 <input list="countries" id="country" name="country">
+			 <datalist id="countries">
+					 <option value="USA">
+					 <option value="Canada">
+					 <option value="Mexico">
+			 </datalist><br><br>
+
+			 <!-- Output -->
+			 <label for="result">Result:</label>
+			 <output id="result" name="result">0</output><br><br>
+	 </form>
 	</body>
 </html>
