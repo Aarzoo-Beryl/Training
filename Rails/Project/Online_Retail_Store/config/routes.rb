@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
+  root 'home#home_page'
 
 
   controls = [:address, :brand, :category, :customer, :order, :payment, :payment_type, :product, :review, :seller]

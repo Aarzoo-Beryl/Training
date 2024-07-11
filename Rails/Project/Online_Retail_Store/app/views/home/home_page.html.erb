@@ -1,15 +1,324 @@
-<div>
-  <h1 align='center'>HOME PAGE</h1><hr>
-  <ul>
-    <li><%= link_to('Addresses',{controller:"address",action:"index"})%></li>
-    <li><%= link_to('Brands',{controller:"brand",action:"index"})%></li>
-    <li><%= link_to('Categories',{controller:"category",action:"index"})%></li>
-    <li><%= link_to('Customers',{controller:"customer",action:"index"})%></li>
-    <li><%= link_to('Order',{controller:"order",action:"index"})%></li>
-    <li><%= link_to('Payments',{controller:"payment",action:"index"})%></li>
-    <li><%= link_to('Payment Types',{controller:"payment_type",action:"index"})%></li>
-    <li><%= link_to('Products',{controller:"product",action:"index"})%></li>
-    <li><%= link_to('Reviews',{controller:"review",action:"index"})%></li>
-    <li><%= link_to('Sellers',{controller:"seller",action:"index"})%></li>
-  </ul>
+<html>
+	<head>
+		<title>Bliss Bazaar</title>
+		<link rel="icon" type="image/x-icon" href="/images/favicon.png">
+		<style>
+
+			/**header**/
+			.main{
+					display: grid;
+					height: auto;
+					grid-template-columns: 20% 55% 25%;
+			}
+			.header{
+				width:1300px;
+				height:100px;
+				float:left;
+				border-bottom:2px solid rgba(5, 101, 102, 1);
+				background:#FFF;
+				position: -webkit-sticky;
+				position:sticky;
+			  top: 0;
+			}
+
+			/*login*/
+			.sign ul{
+				list-style:none;
+				margin:0px;
+				padding-right: 20px;
+				padding-top: 25px
+			}
+			.sign ul li{
+				list-style:none;
+				font-family:arial;
+				font-size:18px;
+				padding:2px 0px;
+				margin:5px 0px;
+				float:left;
+				font-weight:bold;
+				border-right:1px solid #000;
+			}
+			.sign ul li a{
+				padding:5px 10px;
+				border-radius:3px;
+				margin:2px 5px 5px;
+				text-decoration:none;
+				color:#FFF;
+				background:rgba(5, 101, 102, 1);
+			}
+			.sign ul li a:hover{
+				color:#FFF;
+				background:#0dbcb5;
+			}
+			.header-left{
+				width:20%;
+				float:left;
+			}
+			.header-right{
+				width:70%;
+				height:40px;
+				float:left;
+			}
+			input[type=text]{
+				margin: 35px 35px 10px 10px;
+				width:20%;
+			  box-sizing: border-box;
+			  border: 2px solid #ccf;
+			  border-radius: 10px;
+			  font-size: 16px;
+			  background-image: url('searchicon.png');
+			  background-position: 70px 50px;
+			  background-repeat: no-repeat;
+				padding: 10px 200px 12px 10px;
+			  transition: width 0.4s ease-in-out;
+			}
+
+			input[type=text]:focus {
+			  width: 100%;
+				border-color: rgba(5, 101, 102);
+			}
+			.sign{
+				width:100%;
+				float:left ;
+				margin- top:20px;
+			}
+
+			/*dropdown*/
+
+			.drop ul {
+			  list-style-type: none;
+			  margin: 5px;
+			  padding: 5px;
+			  background-color: rgba(5, 101, 102);
+				overflow: auto;
+			}
+
+			.drop li {
+			  float: left;
+				padding: auto;
+				min-width:120px;
+			}
+
+			.drop li a, .dropbtn {
+			  display: inline-block;
+			  color: white;
+			  text-align: center;
+			  padding: 14px 26px;
+				text-decoration: none;
+			}
+
+			.drop	li a:hover,.dropdown:hover .dropbtn {
+				background-color: #dff;
+				color:rgba(5, 101, 102);
+			}
+
+			.drop li.dropdown {
+			  display: inline-block;
+			}
+
+			.dropdown-content {
+			  display: none;
+			  position:fixed;
+			  background-color:rgba(5, 101, 102) ;
+				width: inherit;
+				color: #000;
+				max-width: 180px;
+			  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			  z-index: 1;
+			}
+
+			 .dropdown-content a {
+			  color: black;
+			  padding: 12px 12px;
+			  text-decoration: none;
+			  display: block;
+			  text-align: left;
+			}
+
+			 .dropdown-content a:hover {background-color: #f1f1f1;}
+
+			 .dropdown:hover .dropdown-content {
+			  display: block;
+			}
+			/**body**/
+			.btn{
+				width:30px;
+				color:#000
+				padding:5px 10px;
+				border: 10px;
+				border-radius:3px;
+				margin:2px 5px 5px;
+				text-decoration:none;
+				background:rgba(5, 101, 102, 0.2);
+			}
+			.btn:hover{
+				color:#fff;
+				background:rgba(5, 101, 102, 0.8);
+			}
+			.product{
+				display: grid;
+				height: auto;
+
+			  grid-template-columns: 33% 33% 33%;
+			}
+			.product_show{
+				margin: 40px;
+				padding:2px;
+				border:2px dotted rgba(5, 101, 102, 0.6);
+			}
+			/**footer**/
+			.footer{
+				margin:0px;
+				display: grid;
+				grid-template-columns: 60% 40%;
+				padding-bottom: -5px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!----- Start Header (or) Menu ------>
+		<div class="header">
+			<div class="main">
+			<div class="header-left">
+		    <a href="#" target="_blank">
+		      <img src="/images/logo.png" align = "center" class="loggocomlogo" height="100" width="250"/>
+		    </a>
+		  </div>
+			<div class="header-right">
+					<form>
+					  <input type="text" name="search" placeholder="Search..">
+					</form>
+				</div>
+		      <div class="sign">
+		        <ul>
+		          <li><a href="sign_in.html">Sign In</a></li>
+		          <li style="border-right:none;"><a href="signup.html">Sign Up</a><li>
+							<li style="padding-left:10px;padding-top:0px; border:none;"><img src="/images/profile.png" valign= "top" height=30px width=30px></li>
+		        </ul>
+
+		      </div>
+		</div>
+	</div>
+<!--dropdown menu -->
+<div class="drop">
+  <ul style="	background:rgba(5, 101, 102, 0.8);">
+    <li><a href="#home">Home</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropbtn">Men</a>
+      <div class="dropdown-content">
+        <a href="#">Clothes</a>
+        <a href="#">Shoes</a>
+        <a href="#">Accessories</a>
+        <a href="#">Bags</a>
+      </div>
+    </li>
+		<li class="dropdown">
+			<a href="#" class="dropbtn">Women</a>
+			<div class="dropdown-content">
+				<a href="#">Clothes</a>
+				<a href="#">Shoes</a>
+				<a href="#">Accessories</a>
+				<a href="#">Bags</a>
+			</div>
+		</li>
+		<li class="dropdown">
+			<a href="#" class="dropbtn">Kids</a>
+			<div class="dropdown-content">
+				<a href="#">Clothes</a>
+				<a href="#">Shoes</a>
+				<a href="#">Accessories</a>
+				<a href="#">Bags</a>
+			</div>
+		</li>
+		<li class="dropdown">
+			<a href="#" class="dropbtn">Furniture</a>
+			<div class="dropdown-content">
+				<a href="#">Sofa Set</a>
+				<a href="#">Bed</a>
+				<a href="#">Couch</a>
+				<a href="#">Dressing</a>
+			</div>
+		</li>
+		<li class="dropdown">
+			<a href="#" class="dropbtn">Home Improvement</a>
+			<div class="dropdown-content">
+				<a href="#">Cleaning Tools</a>
+				<a href="#">Cookware</a>
+				<a href="#">Grocery</a>
+				<a href="#">Appliances</a>
+			</div>
+		</li>
+		<li><a href="cart.html" align="center" valign="middle" style="padding-left:250px;padding-top:5px; color:#fff;">Cart
+			<img src="/images/cart.png" alt="Image" style="width:40px; height:40px;vertical-align: middle;"></a>
+		</li>
+	</ul>
 </div>
+		<!-- body  -->
+		<a href="#"><img src="/images/intro1.jpg" alt="sale information" width="100%" height="500px"></a>
+		<br><br>
+		<div class="content" >
+		<h1 align="center">Shope By Catergories</h1><hr style="border:2px solid rgba(5, 101, 102, 1)">
+		<br><br><br>
+		    <div class="product" align="center">
+		        <div class="product_show"><br>
+			        <img src="/images/accesories.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Accessories</a></h3>
+						</div>
+						<div class="product_show"><br>
+							<img src="/images/shoes.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Shoes</a></h3>
+						</div>
+						<div class="product_show"><br>
+							<img src="/images/jewellery.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Jewellery</a></h3>
+		        </div>
+		    </div>
+				<div class="product" align="center">
+		        <div class="product_show"><br>
+			        <img src="/images/bedsheets.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Bedsheets</a></h3>
+						</div>
+						<div class="product_show"><br>
+							<img src="/images/bags.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Bags</a></h3>
+						</div>
+						<div class="product_show"><br>
+							<img src="/images/furniture.jpg" width="270" height="200">
+			        <h3><a href="" class="btn">Shop Furniture</a></h3>
+		        </div class="product_show">
+		    </div>
+				<div class="product" align="center">
+						<div class="product_show"><br>
+							<img src="/images/jeans.jpg" width="270" height="200">
+							<h3><a href="" class="btn">Shop Jeans</a></h3>
+						</div>
+						<div class="product_show"><br>
+							<img src="/images/shirts.jpg" width="270" height="200">
+							<h3><a href="" class="btn">Shop Shirts</a></h3>
+						</div>
+						<div class="product_show"><br>
+							<img src="/images/pajamas.jpg" width="270" height="200">
+							<h3><a href="" class="btn" >Shop Pajamas</a></h3>
+						</div>
+				</div>
+		</div>
+		<br><br>
+		<!--footer-->
+		<div class="footer">
+			<div style="background-color:rgba(5, 101, 102, 1); color:#fff;padding-left: 10px;padding-right: 10px">
+		    	<h4 align=left style="font-size:20px;">About Us</h4>
+					Welcome to Bliss Bazaar, your ultimate destination for a delightful shopping experience! At Bliss Bazaar, we believe in bringing joy to our customers through a carefully curated selection of products that cater to all your needs and desires.<br>
+			</div>
+			<div style="background-color:rgba(5, 101, 102, 0.2);color:#000;padding-left: 10px;padding-right: 10px;">
+					<h4 align=left style="font-size:20px;">Who We Are</h4>
+					Bliss Bazaar is a passionate team of enthusiasts dedicated to providing high-quality, unique, and trendy products.<br>
+			</div>
+			</div>
+			<div style="background-color:rgba(5, 101, 102, 0.2);color:#000;padding-left: 10px;">
+				<h2 align=left style="font-size:24px;padding-top:10px;">Contact Us</h2>
+				<a href="mailto:aarzoo@berylsystems.com" style="text-decoration:none; color:rgba(5, 101, 102);padding-left:150px;padding-bottom:20px; "><b>mail - blissbazaar@example.com</b></a>
+			</div>
+
+	</body>
+</html>
