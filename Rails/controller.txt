@@ -315,3 +315,26 @@ Cookies - application can store small amountsof data on the client - called -coo
         - default serialization - rails uses JSON to store data in cookies i.e. saome types of data will be converted to strings
                     - cookies.encrypted[:expiration_date] = Date.tomorrow 
         - manual serialization - if need to store more complex data types youll need to convert them manually 
+
+FILTERS - these are methods that run before , after or arounf a controller action
+        - helps us to manage repetitive tasks lie checking if a user is logged in or cleaning up resources
+
+    - before filters - run before the action is executed
+        - eg - when we want to check if a  user is logged in before allowing them to access parts of your file
+        - syntax - before_action :method_to_be_executed
+        - to skip filter for particular actions - skip_before_action :method_to_be_executed, only [:new,:create]
+
+    - after filters - run after the action is executed
+        - eg - when we want to clean up resources after an action is executed
+        - syntax - after_action :method_to_be_executed
+        - to skip filter for particular actions - skip_after_action :method_to_be_executed, only[:new,:create]
+
+    - around filters - run before and after the action is executed
+        - around filters are useful when you need to do something before and after an action
+        - syntax - around_action :method_to_be_executed
+        - to skip filter for particular actions - skip_around_action :method_to_be_executed, only[:new,:create]
+
+
+
+
+

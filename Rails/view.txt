@@ -1,0 +1,48 @@
+<-----------------------------------------------------------------Views------------------------------------------------------------>
+
+
+VIEWS - controller selects which view should render the response 
+      - this involves calling specific method or rendering a template  associcated with the action
+      - views are stored in app/views directory
+      - views are rendered by calling render method on controller
+      - if a praticular page is required,controller instruct rails  to render a view which further involoves - 
+              - rails can wrap the main content of a view within a layout(likefooter or header which is common among different pages)
+              - rails can also render a partial view which is a small piece of view that can be reused
+      - controller fetches data from the model and passes it to view 
+      - this data is made accessible within the view scope , allowing it to dynamically generate content based on data provided 
+
+CREATING RESPONSES - from controllers point of view, there are three ways to create an HTTP response:
+    - Rendering by default - creating full response to send back to the browser
+              - by default, controller in rails automatically render views with names that correspond to valid routes
+              - if no view is found, rails will look for a template with the same name as the controller action
+              - eg - controller - UsersController
+                   - routes - resources :users
+                   - views - books/index.html.erb
+                   # this automatically renders index page and display it on your screen
+              - this specifies that if we dont have to render somethinf explicitly at the end of controller action, rails will automatically look for action_name.html.erb template in the controller's views and render it
+              - whatever you want ot display on it can be added as html or ruby code
+
+    - Render - it allows to render views customization
+              - in order to render view within the same controller - render "action_name" or render :action_name
+              - in order to render view from another controller - render "controller_name/action_name" or render template: "controller_name/action_name"
+              - other ways to write - 
+                            - render :action_name
+                            - render action: :edit
+                            - render "edit"
+                            - render action: "edit"
+                            - render "books/edit"
+                            - render template: "books/edit"
+              - using render with inline - allows to render erb without calling for a proper view
+                syntax - render inline: "ruby code"
+                # this should not be used unless for very specific reason as makes difficult for other developers to understand the code, instead seperate erb should be used
+              - render plain - allows you to send simple un
+
+
+
+
+
+
+
+
+    - redirect_to - 
+    - head -
