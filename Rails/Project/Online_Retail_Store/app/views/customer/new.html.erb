@@ -1,2 +1,106 @@
-<h1>Customer#new</h1>
-<p>Find me in app/views/customer/new.html.erb</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Bliss Bazaar</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.png">
+		<style>
+			*{
+				font-size: 24px;
+				font-family: cursive;
+			}
+			.header{
+				width:1300px;
+				height:100px;
+				float:left;
+				border-top:2px
+				solid rgba(5, 101, 102, 1);
+				border-bottom:2px solid rgba(5, 101, 102, 1);
+				background:#FFF;
+				position: -webkit-sticky;
+				position:sticky;
+			  top: 0;
+			}
+			.body{
+				background-color: rgba(5, 101, 102, 1);
+			}
+			.partition{
+				display: grid;
+				height: auto;
+				grid-template-columns: 10% 50% 10% 30%;
+			}
+			table{
+				color: #fff;
+				border-spacing: 10px;
+			}
+			td,th{
+				padding: 10px;
+			}
+			.sign{
+				padding:5px 10px;
+				border-radius:3px;
+				margin:2px 5px 5px;
+				text-decoration:none;
+				background:rgba(5, 101, 102, 0.1);
+			}
+			.sign:hover{
+				color:#FFF;
+				background:rgba(5, 101, 102, 0.5);
+			}
+		</style>
+</head>
+<body>
+		<div class="header">
+			<%= link_to("/home/home_page") do %>
+			 <%= image_tag("/images/logo.png", class: "loggocomlogo", height: 100, width: 250) %>
+			<% end %>
+		</div>
+		<br><br>
+    <h2 align="center" style="background-color:rgba(5, 101, 102, 0.2);font-size: 25px;">Signup</h2>
+		<div class="partition">
+			<div></div>
+		<div class="body">
+			<br><br>
+		<table class="table" align="center" >
+    <form action="/signup" method="post">
+			<tr>
+        <div>
+            <td><label for="fullname">Full Name</label></td>
+            <td><input type="text" id="fullname" name="fullname" required></td>
+        </div>
+			</tr>
+			<tr>
+        <div>
+            <td><label for="email">Email</label></td>
+            <td><input type="email" id="email" name="email" required></td>
+        </div>
+				</tr>
+				<tr>
+        <div>
+            <td><label for="username">Username</label></td>
+            <td><input type="text" id="username" name="username" required><td>
+        </div>
+				</tr>
+				<tr>
+        <div>
+            <td><label for="password">Password</label></td>
+            <td><input type="password" id="password" name="password" required></td>
+        </div>
+				</tr>
+				<tr>
+					<td></td>
+        <div>
+					<td align="right"><input class="sign" type="submit" value="Sign Up"></td>
+        </div>
+    </form>
+		</table>
+	</div>
+	<div></div>
+    <div>
+        <p align="center" style="background-color:rgba(5, 101, 102, 0.2);height: 400px ;background-position: left top"><br><br>Already have an account?<br><br><br> <a class = "sign" href="sign_in.html">Sign In</a></p>
+    </div>
+		<br><br>
+	</div>
+</body>
+</html>

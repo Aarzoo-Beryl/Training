@@ -36,15 +36,15 @@ class CustomerController < ApplicationController
     end
   end
 
-  def delete
-    @customer=Customer.find(params[:id])
-  end
-
-  def destroy
-    @customer=Customer.find(params[:id])
-    @customer.destroy
-    redirect_to(customers_path)
-  end
+  # def delete
+  #   @customer=Customer.find(params[:id])
+  # end
+	#
+  # def destroy
+  #   @customer=Customer.find(params[:id])
+  #   @customer.destroy
+  #   redirect_to(customers_path)
+  # end
 
   # private
   #   def customer_params

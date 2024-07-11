@@ -4,14 +4,14 @@ Rails.application.routes.draw do
 
 
   controls = [:address, :brand, :category, :customer, :order, :payment, :payment_type, :product, :review, :seller]
-  controls.each do |controller|
-    resources controller do
-      member do
-
-        get :destroy
-      end
-    end
-  end
+  # controls.each do |controller|
+  #   resources controller do
+  #     member do
+	#
+  #       get :destroy
+  #     end
+  #   end
+  # end
 
   get ':controller(/:action(/:id))'
 
